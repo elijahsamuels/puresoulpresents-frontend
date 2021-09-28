@@ -7,9 +7,6 @@ import Mailer from "../components/mailerEmailJS";
 export function Contact() {
     return (
         <div className="userDetails">
-            <br /><Link to="/">Home </Link>
-            <br /><Link to="/userlist">User List</Link>
-            <br /><Link to="/userdetails">User Details</Link>
             <Mailer />
         </div>
     );

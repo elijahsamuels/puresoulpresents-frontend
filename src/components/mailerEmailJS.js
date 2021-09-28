@@ -31,30 +31,30 @@ const Mailer = () => {
 
                 <label>Name</label>
                 <br/>
-                <input type="text" name="name" autocomplete="off"/>
+                <input type="text" name="name" autoComplete="off"/>
                 <br/>
 
                 <label>Email</label>
                 <br/>
-                <input type="text" name="user_email" autocomplete="off"/>
+                <input type="text" name="user_email" autoComplete="off"/>
                 <br/>
 
                 <label>Phone</label>
                 <br/>
-                <input type="text" name="user_phone" autocomplete="off"/>
+                <input type="text" name="user_phone" autoComplete="off"/>
                 <br/>
 
                 <label>Event Date</label>
                 <br/>
-                <input type="date" name="event_date" autocomplete="off"/>
+                <input type="date" name="event_date" autoComplete="off"/>
                 <br/>
 
                 <label>Message</label>
                 <br/>
-                <textarea name="message" rows="4" autocomplete="off"/>
+                <textarea name="message" rows="4" autoComplete="off"/>
                 <br/>
 
-                <input type="submit" value="Send Email" onclick={sendEmail}/>
+                <input type="submit" value="Send Email" onClick={sendEmail}/>
 
             </form>
         </div>

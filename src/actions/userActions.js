@@ -1,21 +1,21 @@
 // import React from "react";
 // import { useEffect, useState } from "react";
 
-const puresoulAPIkey2 = process.env.REACT_APP_PURESOULAPIKEY2;
-const Airtable = require('airtable');
-const base = new Airtable({apiKey: puresoulAPIkey2}).base(puresoulAPI);
+// const puresoulAPIkey2 = process.env.REACT_APP_PURESOULAPIKEY2;
+// const Airtable = require('airtable');
+// const base = new Airtable({apiKey: puresoulAPIkey2}).base(puresoulAPI);
 
 require("dotenv").config();
 
 // const utf8 = require("utf8");
 // const fetch = require("node-fetch");
-const airtableURL = "https://api.airtable.com/v0/";
-const puresoulAPI = process.env.REACT_APP_PURESOULAPI;
-const musiciansTable = process.env.REACT_APP_MUSICIANS_TABLE;
-const datesTable = "ALL%20DATES?";
-const puresoulAPIkey = process.env.REACT_APP_PURESOULAPIKEY;
-const allPureSoulPresentsMuisicians = `${airtableURL}${puresoulAPI}${musiciansTable}${puresoulAPIkey}`;
-const allPureSoulPresentsDates = `${airtableURL}${puresoulAPI}${datesTable}${puresoulAPIkey}`;
+// const airtableURL = "https://api.airtable.com/v0/";
+// const puresoulAPI = process.env.REACT_APP_PURESOULAPI;
+// const musiciansTable = process.env.REACT_APP_MUSICIANS_TABLE;
+// const datesTable = "ALL%20DATES?";
+// const puresoulAPIkey = process.env.REACT_APP_PURESOULAPIKEY;
+// const allPureSoulPresentsMuisicians = `${airtableURL}${puresoulAPI}${musiciansTable}${puresoulAPIkey}`;
+// const allPureSoulPresentsDates = `${airtableURL}${puresoulAPI}${datesTable}${puresoulAPIkey}`;
 
 // const [localUsers, setlocalUsers] = useState(null);
 
@@ -47,15 +47,15 @@ const allPureSoulPresentsDates = `${airtableURL}${puresoulAPI}${datesTable}${pur
 //   .catch((error) => console.log(error));
 // }
 
-export const getAllMusicianData = () => {
-    return (dispatch) => {
-        dispatch({ type: "LOADING" });
-        fetch(`${allPureSoulPresentsMuisicians}`)
-            .then((response) => response.json())
-            .then((data) => dispatch({ type: "SET_USERS". data}))
-            .catch((error) => console.log(error));
-    };
-};
+// export const getAllMusicianData = () => {
+//     return (dispatch) => {
+//         dispatch({ type: "LOADING" });
+//         fetch(`${allPureSoulPresentsMuisicians}`)
+//             .then((response) => response.json())
+//             .then((data) => dispatch({ type: "SET_USERS". data}))
+//             .catch((error) => console.log(error));
+//     };
+// };
 
 
 // export const fetchUsers = () => {

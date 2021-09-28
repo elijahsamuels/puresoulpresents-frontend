@@ -12,10 +12,8 @@ import { getAllMusicianData } from "../actions/userActions";
 export function UserDetails() {
     return (
         <div className="userDetails">
-            <Link to="/">Home </Link><br />
-            <Link to="/userlist">User List</Link>
 
-            <h2>User Card: </h2>
+            <h1>User Details: </h1>
             <UserPhoto />
             <UserInfo />
             <ContactInfo />
