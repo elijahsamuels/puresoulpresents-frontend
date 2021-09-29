@@ -1,6 +1,6 @@
 import React from "react";
 
-export function PaymentInfo() {
+function PaymentInfo() {
   return (
     <div className="userDetails">
       <h3>Payment Information</h3>

@@ -1,6 +1,6 @@
 import React from "react";
 
-export function StaffInfo() {
+function StaffInfo() {
   return (
     <div className="userDetails">
       <h3>Staff Info</h3>

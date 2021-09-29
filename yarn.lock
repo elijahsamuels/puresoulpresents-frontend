@@ -7271,8 +7271,8 @@
     "strip-json-comments" "~2.0.1"
 
 "react-dev-utils@^5.0.2":
-  "integrity" "sha512-Mvs6ofsc2xTjeZIrMaIfbXfsPVrbdVy/cVqq6SAacnqfMlcBpDuivhWZ1ODGeJ8HgmyWTLH971PYjj/EPCDVAw=="
-  "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-5.0.3.tgz"
+  "integrity" "sha512-d2FbKvYe4XAQx5gjHBoWG+ADqC3fGZzjb7i9vxd/Y5xfLkBGtQyX7aOb8lBRQPYUhjngiD3d49LevjY1stUR0Q=="
+  "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-5.0.2.tgz"
   "version" "5.0.3"
   dependencies:
     "address" "1.0.3"

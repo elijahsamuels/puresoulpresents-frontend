@@ -11,9 +11,7 @@ import usersReducer from "./reducers/usersReducer";
 require("dotenv").config();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-    usersReducer,
-    composeEnhancers(applyMiddleware(thunk))
+const store = createStore( usersReducer, composeEnhancers(applyMiddleware(thunk) )
 );
 
 ReactDOM.render(

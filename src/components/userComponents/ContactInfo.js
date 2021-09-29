@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAllMusicianData } from "../../actions/userActions";
+import { fetchMusicianData } from "../../actions/userActions";
 
 
-export function ContactInfo() {
+function ContactInfo() {
   return (
     <div className="userDetails">
       <h3>Contact</h3>
@@ -40,4 +40,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {getAllMusicianData})( ContactInfo);
+export default connect(mapStateToProps, {fetchMusicianData})(ContactInfo);

@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import userSamplePhoto from "../images/puresoulpresents.png";
+// import { Link } from "react-router-dom";
+// import userSamplePhoto from "../images/puresoulpresents.png";
 
 export function Index() {
   return (

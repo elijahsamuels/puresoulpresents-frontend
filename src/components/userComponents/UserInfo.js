@@ -1,6 +1,6 @@
 import React from "react";
 
-export function UserInfo() {
+const UserInfo = () => {
   return (
     <div className="userDetails">
       <h3>User Information</h3>
@@ -16,10 +16,10 @@ export function UserInfo() {
         </label>
       </p>
       <p>
-        <a href="${userGigList}">User Gig List</a>
+        <a href="userGigList">User Gig List</a>
       </p>
       <p>
-        <a href="${editUserDetails}">Edit User Details</a>
+        <a href="editUserDetails">Edit User Details</a>
       </p>
     </div>
   );

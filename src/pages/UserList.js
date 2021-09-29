@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getAllMusicianData } from "../actions/userActions";
-
+import { useDispatch } from "react-redux";
+// import { Link } from "r  eact-router-dom";
+import { fetchMusicianData } from "../actions/userActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -19,8 +19,13 @@ const useStyles = makeStyles({
   // },
 });
 
-export function UserList() {
+export function UserList () {
+  const dispatch = useDispatch()
   const classes = useStyles();
+  // const dispatch = useDispatch()
+  
+  // console.log("props: ", props)
+  // console.log("fetchMusicianData: ", fetchMusicianData())
 
   const userTernary = (userData, missingItem) => {
     return userData.localItem
@@ -30,7 +35,7 @@ export function UserList() {
 
   const userName = (userData) => {
     let missingItem = "Name";
-    console.log(userData)
+    // console.log(userData)
     userData.localItem = userData.first_name + " " + userData.last_name;
     return Object.values(userTernary(userData, missingItem));
   };
@@ -137,25 +142,25 @@ export function UserList() {
       items.push("Email");
     }
 
-    // if (!Array.isArray(userInstrument(userData)[0])) {
-    //   items.push("Instrument");
-    // }
+    if (!Array.isArray(userInstrument(userData)[0])) {
+      items.push("Instrument");
+    }
 
-    // if (typeof userCity(userData)[0] !== "string") {
-    //   items.push("City");
-    // }
+    if (typeof userCity(userData)[0] !== "string") {
+      items.push("City");
+    }
 
-    // if (typeof userBio(userData)[0] !== "string") {
-    //   items.push("Bio");
-    // }
+    if (typeof userBio(userData)[0] !== "string") {
+      items.push("Bio");
+    }
 
-    // if (userW9URL(userData).props.href === undefined) {
-    //   items.push("W9");
-    // }
+    if (userW9URL(userData).props.href === undefined) {
+      items.push("W9");
+    }
 
-    // if (userHeadshot(userData).props.src.includes("userSamplePhoto")) {
-    //   items.push("Headshot");
-    // }
+    if (userHeadshot(userData).props.src.includes("userSamplePhoto")) {
+      items.push("Headshot");
+    }
 
     if (items.length > 0) {
       let missingItemsList = items.map((item) => <li>{item}</li>);
@@ -200,18 +205,20 @@ export function UserList() {
   // }
 
   const [localUsers, setlocalUsers] = useState(null);
-
+  
   useEffect(() => {
-    fetch("http://localhost:3000/users/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    // .then((response) => console.log(response.json()))
-      .then((response) => response.json())
-      // .then((promiseResponse) => console.log(promiseResponse));
-      .then((promiseResponse) => setlocalUsers(promiseResponse));
+    setlocalUsers(dispatch(fetchMusicianData()))
+    console.log("from useEffect: ", setlocalUsers(fetchMusicianData()))
+    // fetch("http://localhost:3000/users/", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    // // .then((response) => console.log(response.json()))
+    //   .then((response) => response.json())
+    //   // .then((promiseResponse) => console.log(promiseResponse));
+    //   .then((promiseResponse) => setlocalUsers(promiseResponse));
 
     //     fetch("http://localhost:3000/users/")
     //     .then((response) => response.json())
@@ -241,9 +248,11 @@ export function UserList() {
   //   // console.log(setPageUsers());
   //   // setPageUsers();
   // };
+  // {console.log(props)}
 
   return (
     <div className="userList">
+
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
 
@@ -306,6 +315,9 @@ export function UserList() {
             </TableRow>
           </TableHead>
           <TableBody key={"tableBody"} id={"tableBody"}>
+
+            {localUsers && console.log("localUsers: ", localUsers)}
+
             {localUsers && localUsers.map((user) => (
                 <TableRow key={"userRow_" + user.id} id={"userRow_" + user.id}>
                   <TableCell
@@ -341,11 +353,39 @@ export function UserList() {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading,
-    users: state.users,
+    loading: state.loading, 
+    users: state.data
   };
 };
 
-export default connect(mapStateToProps, { getAllMusicianData })(UserList);
+// connects to reducer
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     // fetchMusicianData: (data) => dispatch({type: 'SET_USERS', data})
+//   }
+// }
+
+export default connect(mapStateToProps)(UserList);
+// export default connect(mapStateToProps, { fetchMusicianData })(UserList);
+
+
+// // connects to store
+// function mapStateToProps( combineReducers ) {
+//   return {
+//     posts: combineReducers.postsReducer.posts
+//   }
+// }
+
+// // connects to reducer
+// function mapDispatchToProps ( dispatch ) {
+//   return {
+//     addPost: post => dispatch(addPost(post))
+//   }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
+
+
+
 
 

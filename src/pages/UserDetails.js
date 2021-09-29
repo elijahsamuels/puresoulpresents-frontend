@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { UserPhoto } from "../components/userPhoto";
-import { StaffInfo } from "../components/userdata/staffInfo";
-import { ContactInfo } from "../components/userdata/contactInfo";
-import { TaxInfo } from "../components/userdata/taxInfo";
-import { UserInfo } from "../components/userdata/userInfo";
-import { PaymentInfo } from "../components/userdata/paymentInfo";
-import { getAllMusicianData } from "../actions/userActions";
+// import { Link } from "react-router-dom";
+import UserPhoto from "../components/UserPhoto";
+import StaffInfo from "../components/userComponents/StaffInfo";
+import ContactInfo from "../components/userComponents/ContactInfo";
+import TaxInfo from "../components/userComponents/TaxInfo";
+import UserInfo from "../components/userComponents/UserInfo";
+import PaymentInfo from "../components/userComponents/PaymentInfo";
+import { fetchMusicianData } from "../actions/userActions";
 
 export function UserDetails() {
     return (
@@ -20,7 +20,7 @@ export function UserDetails() {
             <TaxInfo />
             <StaffInfo />
             <PaymentInfo />
-            {/* {getAllMusicianData()} */}
+            {/* {fetchMusicianData()} */}
         </div>
     );
 }
@@ -38,4 +38,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {getAllMusicianData})( UserDetails);
+export default connect(mapStateToProps, {fetchMusicianData})( UserDetails);

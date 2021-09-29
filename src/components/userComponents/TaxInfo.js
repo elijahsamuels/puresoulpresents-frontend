@@ -1,6 +1,6 @@
 import React from "react";
 
-export function TaxInfo() {
+function TaxInfo() {
   return (
     <div className="userDetails">
       <h3>Tax Information</h3>

@@ -1,11 +1,44 @@
-// import React from "react";
-// import { useEffect, useState } from "react";
-
-// const puresoulAPIkey2 = process.env.REACT_APP_PURESOULAPIKEY2;
-// const Airtable = require('airtable');
-// const base = new Airtable({apiKey: puresoulAPIkey2}).base(puresoulAPI);
-
 require("dotenv").config();
+
+// export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
+
+export function fetchMusicianData () {
+  
+  return (dispatch) => {
+  fetch("http://localhost:3000/users")
+  // .then((response) => console.log("from actions: ", response.json()))
+  .then((response) => response.json())
+  // .then((data) => console.log("data: ", data ))
+  .then((data) => dispatch( data ))
+  // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
+  .catch((error) => console.log(error));
+  }
+    // dispatch({ type: "LOADING" });
+
+      // .then((data) => dispatch({ type: "SET_USERS", payload: data }));
+
+
+    // return fetch("http://localhost:3000/users/", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    // // .then((response) => console.log(response.json()))
+    //   .then((response) => response.json())
+    //   // .then((promiseResponse) => console.log(promiseResponse));
+    //   .then((promiseResponse) => dispatch({type: "GET", payload: promiseResponse}));
+
+
+
+      // .then((response) => console.log(response.json()))
+      // .then((promiseResponse) => setlocalUsers(promiseResponse));
+      
+      // .then((response) => response.json())
+      // .then((payload) => dispatch({ type: "SET_USERS", payload }));
+  // };
+// };
+};
 
 // const utf8 = require("utf8");
 // const fetch = require("node-fetch");
@@ -20,7 +53,7 @@ require("dotenv").config();
 // const [localUsers, setlocalUsers] = useState(null);
 
 // useEffect(() => {
-//     base('ROSTER').select({ 
+//     base('ROSTER').select({
 //         maxRecords: 200, // Selecting N records in Roster Only:
 //         pageSize: 20,
 //         view: "Roster Only"
@@ -32,7 +65,7 @@ require("dotenv").config();
 //     }
 //     )}, []);
 
-// async function getAllMusicianData() {
+// async function fetchMusicianData() {
 //     await fetch(`${allPureSoulPresentsMuisicians}`)
 //     .then((response) => response.json())
 //     .then(json => console.log(json))
@@ -40,14 +73,14 @@ require("dotenv").config();
 //   }
 
 // THIS WORKS, but not really right
-// export const getAllMusicianData = () => {
+// export const fetchMusicianData = () => {
 //   return fetch(`${allPureSoulPresentsMuisicians}`)
 //   .then((response) => response.json())
 //   .then(json => console.log(json))
 //   .catch((error) => console.log(error));
 // }
 
-// export const getAllMusicianData = () => {
+// export const fetchMusicianData = () => {
 //     return (dispatch) => {
 //         dispatch({ type: "LOADING" });
 //         fetch(`${allPureSoulPresentsMuisicians}`)
@@ -56,7 +89,6 @@ require("dotenv").config();
 //             .catch((error) => console.log(error));
 //     };
 // };
-
 
 // export const fetchUsers = () => {
 //   return (dispatch) => {
@@ -94,5 +126,3 @@ require("dotenv").config();
 //     return err;
 //   }
 // }
-
-// export default getAllMusicianData();
