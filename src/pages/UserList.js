@@ -22,10 +22,9 @@ const useStyles = makeStyles({
 export function UserList () {
   const dispatch = useDispatch()
   const classes = useStyles();
-  // const dispatch = useDispatch()
   
-  // console.log("props: ", props)
-  // console.log("fetchMusicianData: ", fetchMusicianData())
+  // console.log("dispatch: ", dispatch)
+  // console.log("fetchMusicianData: ", dispatch(fetchMusicianData()))
 
   const userTernary = (userData, missingItem) => {
     return userData.localItem
@@ -86,7 +85,7 @@ export function UserList () {
   };
 
   const userHeadshot = (userData) => {
-    let missingItem = "Headshot";
+    // let missingItem = "Headshot";
 
     if (userData["Headshot"]) {
       userData.localItem = userData["Headshot"][0].url;
@@ -201,50 +200,38 @@ export function UserList () {
   //         document.write('<a href="mailto:' + '?subject=' + subject + '&body=' + body + '>' + 'Click here to send email as well' + '<'+'/a>');
   // }
   // const emailUserAboutMissingData = (userData) => {
-  //     missingData(userData)
-  // }
+    //     missingData(userData)
 
-  const [localUsers, setlocalUsers] = useState(null);
-  
-  useEffect(() => {
-    setlocalUsers(dispatch(fetchMusicianData()))
-    console.log("from useEffect: ", setlocalUsers(fetchMusicianData()))
-    // fetch("http://localhost:3000/users/", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    // // .then((response) => console.log(response.json()))
-    //   .then((response) => response.json())
-    //   // .then((promiseResponse) => console.log(promiseResponse));
-    //   .then((promiseResponse) => setlocalUsers(promiseResponse));
+    const [localUsers, setLocalUsers] = useState(null);
+    
+    useEffect(() => {
 
-    //     fetch("http://localhost:3000/users/")
-    //     .then((response) => response.json())
-    //     .then((data) => console.log("data: ", setlocalUsers(data)));
-    //     // .then((payload) => console.log({ type: "SET_USERS", payload }));
+      fetch("http://localhost:3000/users")
+      .then((response) => response.json())
+      .then((payload) => setLocalUsers(payload) )
+      .catch((error) => console.log(error));
 
-    //     // .then((payload) => dispatch({ type: "SET_USERS", payload }));
-    //     // .then((data) => console.log(data));
+      console.log("useEffect has run successfully")
 
-    //     //   .then(
-    //     //     function page(records, fetchNextPage) {
-    //     //       // This function (`page`) will get called for each page of records.
-    //     //       setlocalUsers(records);
-    //     //     },
-    //     //     function done(err) {
-    //     //       if (err) {
-    //     //         console.error(err);
-    //     //         return;
-    //     //       }
-    //     //     }
-    //     //   );
-  }, []);
-
-
-  // const handleClick = () => {
-  //   console.log("clicked!");
+      // dispatch(fetchMusicianData())
+      // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
+      // setLocalUsers(dispatch(fetchMusicianData()));
+      // setLocalUsers(fetchMusicianData());
+      // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
+      // setLocalUsers([dispatch(fetchMusicianData())])
+      // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS 
+      // setLocalUsers([{
+      //   first_name: "John",
+      //   last_name: "Doe",
+      //   phone: "1234567890",
+      //   email: "john@doe.com",
+      //   city: "London",
+      // }])
+    }, []);
+    
+              
+              // const handleClick = () => {
+                //   console.log("clicked!");
   //   // console.log(setPageUsers());
   //   // setPageUsers();
   // };
@@ -268,22 +255,12 @@ export function UserList () {
           sx={{ minWidth: 650 }}
           size="small"
         >
-          <TableHead key={"tableHead"} id={"tableHead"}>
+          <TableHead key={"table_head"} id={"table_head"}>
             <TableRow key={"tableRow"} id={"tableRow"}>
-              <TableCell
-                key={"allgood"}
-                id={"allgood"}
-                align="left"
-                width="10%"
-              >
+              <TableCell key={"allgood"} id={"allgood"} align="left" width="10%">
                 All Good?
               </TableCell>
-              <TableCell
-                key={"firstname"}
-                id={"firstname"}
-                align="center"
-                width="10%"
-              >
+              <TableCell key={"firstname"} id={"firstname"} align="center" width="10%">
                 Name
               </TableCell>
               <TableCell key={"phone"} id={"phone"} align="center" width="10%">
@@ -292,12 +269,7 @@ export function UserList () {
               <TableCell key={"email"} id={"email"} align="center" width="10%">
                 Email
               </TableCell>
-              <TableCell
-                key={"instrument"}
-                id={"instrument"}
-                align="center"
-                width="10%"
-              >
+              <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
                 Instrument
               </TableCell>
               <TableCell key={"city"} id={"city"} align="center" width="10%">
@@ -314,15 +286,16 @@ export function UserList () {
               </TableCell>
             </TableRow>
           </TableHead>
-          <TableBody key={"tableBody"} id={"tableBody"}>
+          <TableBody key={"table_body"} id={"table_body"}>
 
-            {localUsers && console.log("localUsers: ", localUsers)}
+            {/* {localUsers && console.log("localUsers: ", localUsers)} */}
 
             {localUsers && localUsers.map((user) => (
-                <TableRow key={"userRow_" + user.id} id={"userRow_" + user.id}>
+              <TableRow key={"user_row_"+user.id } id={"user_row_"+user.id }>
+              {/* {console.log("user: ", user)} */}
                   <TableCell
-                    key={"userMissingData_" + user.id}
-                    id={"userMissingData_" + user.id}
+                    key={"user_missingData_" + user.id}
+                    // id={"userMissingData_" + user.id}
                     align="left"
                   >
                     {missingData(user)}
@@ -330,14 +303,14 @@ export function UserList () {
                     {/* {sendUserEmailAboutMissingData(user.fields)} */}
                     {/* <button onclick={sendUserEmailAboutMissingData(user)}>Send Email</button> */}
                   </TableCell>
-                  <TableCell align="center">{userName(user)}</TableCell>
-                  <TableCell align="center">{userPhone(user)}</TableCell>
-                  <TableCell align="center">{userEmail(user)}</TableCell>
-                  <TableCell align="center">{userInstrument(user)}</TableCell>
-                  <TableCell align="center">{userCity(user)}</TableCell>
-                  <TableCell align="center" width="" height="10">{userBio(user)}</TableCell>
-                  <TableCell align="center">{userW9URL(user)}</TableCell>
-                  <TableCell align="center">
+                  <TableCell align="center" id={"user_name_" + user.id} key={"user_name_" + user.id} >{userName(user)}</TableCell>
+                  <TableCell align="center" id={"user_phone_" + user.id} key={"user_phone_" + user.id} >{userPhone(user)}</TableCell>
+                  <TableCell align="center" id={"user_email_" + user.id} key={"user_email_" + user.id} >{userEmail(user)}</TableCell>
+                  <TableCell align="center" id={"user_instrument_" + user.id} key={"user_instrument_" + user.id} >{userInstrument(user)}</TableCell>
+                  <TableCell align="center" id={"user_city_" + user.id} key={"user_city_" + user.id} >{userCity(user)}</TableCell>
+                  <TableCell align="center" id={"user_bio_" + user.id} key={"user_bio_" + user.id}  width="" height="10">{userBio(user)}</TableCell>
+                  <TableCell align="center" id={"user_w9url_" + user.id} key={"user_w9url_" + user.id} >{userW9URL(user)}</TableCell>
+                  <TableCell align="center" id={"user_headshot_" + user.id} key={"user_headshot_" + user.id} >
                     {userHeadshot(user)}
                     <br />
                     {userHeadshotThumbnails(user)}
@@ -354,7 +327,7 @@ export function UserList () {
 const mapStateToProps = (state) => {
   return {
     loading: state.loading, 
-    users: state.data
+    users: state.users
   };
 };
 
@@ -367,25 +340,3 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(UserList);
 // export default connect(mapStateToProps, { fetchMusicianData })(UserList);
-
-
-// // connects to store
-// function mapStateToProps( combineReducers ) {
-//   return {
-//     posts: combineReducers.postsReducer.posts
-//   }
-// }
-
-// // connects to reducer
-// function mapDispatchToProps ( dispatch ) {
-//   return {
-//     addPost: post => dispatch(addPost(post))
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
-
-
-
-
-

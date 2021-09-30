@@ -1,44 +1,49 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 // export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
 
-export function fetchMusicianData () {
-  
-  return (dispatch) => {
-  fetch("http://localhost:3000/users")
-  // .then((response) => console.log("from actions: ", response.json()))
-  .then((response) => response.json())
-  // .then((data) => console.log("data: ", data ))
-  .then((data) => dispatch( data ))
-  // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
-  .catch((error) => console.log(error));
-  }
-    // dispatch({ type: "LOADING" });
-
-      // .then((data) => dispatch({ type: "SET_USERS", payload: data }));
-
-
-    // return fetch("http://localhost:3000/users/", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    // // .then((response) => console.log(response.json()))
-    //   .then((response) => response.json())
-    //   // .then((promiseResponse) => console.log(promiseResponse));
-    //   .then((promiseResponse) => dispatch({type: "GET", payload: promiseResponse}));
-
-
-
-      // .then((response) => console.log(response.json()))
-      // .then((promiseResponse) => setlocalUsers(promiseResponse));
-      
-      // .then((response) => response.json())
-      // .then((payload) => dispatch({ type: "SET_USERS", payload }));
+export function fetchMusicianData() {
+  // return (dispatch) => {
+    fetch("http://localhost:3000/users")
+      // .then((response) => console.log("from actions: ", response.json()))
+      .then((response) => response.json())
+      .then((payload) => payload )
+      // .then((payload) => dispatch({ type: "SET_USERS", payload }))
+      // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
+      .catch((error) => console.log(error));
   // };
-// };
-};
+
+
+
+
+
+
+
+
+
+
+
+  // .then((data) => dispatch({ type: "SET_USERS", payload: data }));
+
+  // return fetch("http://localhost:3000/users/", {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // })
+  // // .then((response) => console.log(response.json()))
+  //   .then((response) => response.json())
+  //   // .then((promiseResponse) => console.log(promiseResponse));
+  //   .then((promiseResponse) => dispatch({type: "GET", payload: promiseResponse}));
+
+  // .then((response) => console.log(response.json()))
+  // .then((promiseResponse) => setlocalUsers(promiseResponse));
+
+  // .then((response) => response.json())
+  // .then((payload) => dispatch({ type: "SET_USERS", payload }));
+  // };
+  // };
+}
 
 // const utf8 = require("utf8");
 // const fetch = require("node-fetch");

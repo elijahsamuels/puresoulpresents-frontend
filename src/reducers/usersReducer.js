@@ -20,8 +20,11 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case "SET_USERS":
-      console.log("SET_USERS: ", state)
-      return { ...state, loading: false, users: [...state.users, action.payload] }
+      // console.log("state: ",  state.users)
+      // console.log("action.payload: ", state.users)
+      // return { ...state, loading: false, users: state.users }
+      console.log("action.payload: ", action.payload)
+      return { ...state, loading: false, users: action.payload }
 
     // case "ADD_USER":
     //     return { ...state, users: [...state.users, action.user] };
