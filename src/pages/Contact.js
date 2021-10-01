@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { fetchMusicianData } from "../actions/userActions";
 import Mailer from "../components/mailerEmailJS";
 
-export function Contact() {
+function Contact() {
     return (
         <div className="userDetails">
             <Mailer />

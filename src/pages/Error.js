@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ErrorPage() {
+function ErrorPage() {
   return (
     <div>
       <strong>Oh no! There seems to be a problem with this page.</strong>

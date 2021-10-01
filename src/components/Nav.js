@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import userSamplePhoto from "../images/puresoulpresents.png";
 
-export function Nav() {
+function Nav() {
   return (
     <div className="userDetails">
       <Link to="/">
@@ -12,8 +12,8 @@ export function Nav() {
       {" - "}
       <Link to="/userlist">User List</Link>
       {" - "}
-      <Link to="/userdetails">User Details</Link>
-      {" - "}
+      {/* <Link to="/userdetails">User Details</Link>
+      {" - "} */}
       <Link to="/contact">Contact</Link>
     </div>
   );

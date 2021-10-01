@@ -7,19 +7,19 @@ import ContactInfo from "../components/userComponents/ContactInfo";
 import TaxInfo from "../components/userComponents/TaxInfo";
 import UserInfo from "../components/userComponents/UserInfo";
 import PaymentInfo from "../components/userComponents/PaymentInfo";
-import { fetchMusicianData } from "../actions/userActions";
+// import { fetchMusicianData } from "../actions/userActions";
 
-export function UserDetails() {
+function UserDetails() {
     return (
         <div className="userDetails">
 
             <h1>User Details: </h1>
-            <UserPhoto />
+            {/* <UserPhoto /> */}
             <UserInfo />
-            <ContactInfo />
-            <TaxInfo />
+            {/* <ContactInfo /> */}
+            {/* <TaxInfo />
             <StaffInfo />
-            <PaymentInfo />
+            <PaymentInfo /> */}
             {/* {fetchMusicianData()} */}
         </div>
     );
@@ -38,4 +38,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {fetchMusicianData})( UserDetails);
+export default connect(mapStateToProps)( UserDetails);

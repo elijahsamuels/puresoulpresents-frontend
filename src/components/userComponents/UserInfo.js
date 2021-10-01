@@ -1,18 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { editUser } from "../../../src/actions/userActions";
 
 const UserInfo = () => {
+
+  // console.log("localUser: ", localUser)
+  const [localUser, setLocalUser] = useState({
+
+
+    // first_name: localUser.first_name,
+    // last_name: localUser.last_name,
+    // email: localUser.email,
+    // phone: localUser.phone,
+  });
+
+  const handleChange = (event) => {
+    setLocalUser({
+      ...localUser,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  useEffect(() => {
+    // fetch(`http://localhost:3000/users/${user.id}`)
+    // .then((response) => response.json())
+    // .then((payload) => setLocalUser(payload) )
+    // .catch((error) => console.log(error));
+
+    // console.log("editUser has run successfully")
+    // dispatch(fetchMusicianData())
+    // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
+    // setLocalUsers(dispatch(fetchMusicianData()));
+    // setLocalUsers(fetchMusicianData());
+    // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
+    // setLocalUsers([dispatch(fetchMusicianData())])
+    // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS
+    // setLocalUser({
+    //   first_name: "John",
+    //   last_name: "Doe",
+    //   phone: "1234567890",
+    //   email: "john@doe.com",
+    //   city: "London",
+    // })
+  }, []);
+
   return (
     <div className="userDetails">
+      {/* {console.log("localUser: ", localUser)} */}
+      {/* {localUser && localUser} */}
+
       <h3>User Information</h3>
       <p>
         <label>
           First Name
-          <input name="first_name" placeholder="First Name" />
+          <input
+            name="first_name"
+            placeholder="First Name"
+            value={localUser.first_name}
+            onChange={handleChange}
+            
+            />
         </label>
 
         <label>
           Last Name
-          <input name="last_name" placeholder="Last Name" />
+          <input
+            name="last_name"
+            placeholder="Last Name"
+            value={localUser.last_name}
+            onChange={handleChange}
+          />
         </label>
       </p>
       <p>
@@ -23,6 +80,22 @@ const UserInfo = () => {
       </p>
     </div>
   );
-}
+};
 
-export default UserInfo;
+const mapStateToProps = (state) => {
+  console.log("state: ", state);
+  return {
+    loading: state.loading,
+    localUser: state.user,
+  };
+};
+
+// connects to reducer
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     // fetchMusicianData: (data) => dispatch({type: 'SET_USERS', data})
+//   }
+// }
+
+export default connect(mapStateToProps, {editUser})(UserInfo);
+// export default connect(mapStateToProps, { fetchMusicianData })(UserList);

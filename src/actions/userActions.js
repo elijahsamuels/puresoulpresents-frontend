@@ -4,46 +4,68 @@
 
 export function fetchMusicianData() {
   // return (dispatch) => {
-    fetch("http://localhost:3000/users")
-      // .then((response) => console.log("from actions: ", response.json()))
-      .then((response) => response.json())
-      .then((payload) => payload )
-      // .then((payload) => dispatch({ type: "SET_USERS", payload }))
-      // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
-      .catch((error) => console.log(error));
-  // };
-
-
-
-
-
-
-
-
-
-
-
-  // .then((data) => dispatch({ type: "SET_USERS", payload: data }));
-
-  // return fetch("http://localhost:3000/users/", {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // })
-  // // .then((response) => console.log(response.json()))
-  //   .then((response) => response.json())
-  //   // .then((promiseResponse) => console.log(promiseResponse));
-  //   .then((promiseResponse) => dispatch({type: "GET", payload: promiseResponse}));
-
-  // .then((response) => console.log(response.json()))
-  // .then((promiseResponse) => setlocalUsers(promiseResponse));
-
-  // .then((response) => response.json())
-  // .then((payload) => dispatch({ type: "SET_USERS", payload }));
-  // };
+  fetch("http://localhost:3000/users")
+    // .then((response) => console.log("from actions: ", response.json()))
+    .then((response) => response.json())
+    .then((payload) => payload)
+    // .then((payload) => dispatch({ type: "SET_USERS", payload }))
+    // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
+    .catch((error) => console.log(error));
   // };
 }
+
+export const editUser = (user) => {
+  return (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    fetch(`/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user }),
+    })
+      .then((response) => {
+        if (response.ok === false) {
+          throw dispatch({
+            type: "ERROR",
+            payload: "ERROR: Unable to save edits.",
+          });
+        }
+        return response.json();
+      })
+      .then((data) => {
+        dispatch({ type: "EDIT_USER", payload: data });
+        dispatch({ type: "LOADING", payload: false });
+        dispatch({ type: "ERROR", payload: null });
+      })
+      .catch((err) => {
+        dispatch({ type: "LOADING", payload: false });
+        dispatch({ type: "ERROR", payload: err.message });
+      });
+  };
+};
+
+// .then((data) => dispatch({ type: "SET_USERS", payload: data }));
+
+// return fetch("http://localhost:3000/users/", {
+//   method: "GET",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// })
+// // .then((response) => console.log(response.json()))
+//   .then((response) => response.json())
+//   // .then((promiseResponse) => console.log(promiseResponse));
+//   .then((promiseResponse) => dispatch({type: "GET", payload: promiseResponse}));
+
+// .then((response) => console.log(response.json()))
+// .then((promiseResponse) => setlocalUsers(promiseResponse));
+
+// .then((response) => response.json())
+// .then((payload) => dispatch({ type: "SET_USERS", payload }));
+// };
+// };
 
 // const utf8 = require("utf8");
 // const fetch = require("node-fetch");
@@ -76,58 +98,3 @@ export function fetchMusicianData() {
 //     .then(json => console.log(json))
 //     .catch((error) => console.log(error));
 //   }
-
-// THIS WORKS, but not really right
-// export const fetchMusicianData = () => {
-//   return fetch(`${allPureSoulPresentsMuisicians}`)
-//   .then((response) => response.json())
-//   .then(json => console.log(json))
-//   .catch((error) => console.log(error));
-// }
-
-// export const fetchMusicianData = () => {
-//     return (dispatch) => {
-//         dispatch({ type: "LOADING" });
-//         fetch(`${allPureSoulPresentsMuisicians}`)
-//             .then((response) => response.json())
-//             .then((data) => dispatch({ type: "SET_USERS". data}))
-//             .catch((error) => console.log(error));
-//     };
-// };
-
-// export const fetchUsers = () => {
-//   return (dispatch) => {
-//     dispatch({ type: "LOADING" });
-//     fetch("/users")
-//       .then((response) => response.json())
-//       .then((payload) => dispatch({ type: "SET_USERS", payload }));
-//   };
-// };
-
-// async function getAllPureSoulPresentsMusicians() {
-//   return () => {
-//     await fetch(allPureSoulPresentsMuisicians)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         return data;
-//       });
-//   };
-// }
-
-// export async function getAllPureSoulPresentsMusicians() {
-//   try {
-//     let musiciansList = await fetch(allPureSoulPresentsMuisicians)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         return data;
-//       });
-//     // .then(data => console.log(data));
-//     // console.log(musiciansList.records[0])
-//     // console.log(musiciansList.records[0].fields.Headshot)
-//     // console.log(musiciansList.records[0].fields.Headshot[0].thumbnails.full)
-//     return musiciansList();
-//   } catch (err) {
-//     console.log(err);
-//     return err;
-//   }
-// }

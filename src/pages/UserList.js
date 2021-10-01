@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 // import { Link } from "r  eact-router-dom";
 import { fetchMusicianData } from "../actions/userActions";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from '@material-ui/core/Button';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
   // },
 });
 
-export function UserList () {
+function UserList () {
   const dispatch = useDispatch()
   const classes = useStyles();
   
@@ -30,6 +31,21 @@ export function UserList () {
     return userData.localItem
       ? { true: userData.localItem }
       : { false: <font color="red">Missing {missingItem}</font> };
+  };
+
+  const editUser = (userData) => {
+    // console.log(userData)
+    userData.localItem = userData.id;
+    let editUserLink = "user/"+userData.id+"/edit";
+    return <Button variant="contained" size="small" disableElevation href={editUserLink} onClick={() => {
+      handleClick();
+    }}>
+      Edit
+    </Button>;
+  };
+
+  const handleClick = () => {
+    // alert("userData.id: ", userData.id)
   };
 
   const userName = (userData) => {
@@ -161,12 +177,18 @@ export function UserList () {
       items.push("Headshot");
     }
 
-    if (items.length > 0) {
-      let missingItemsList = items.map((item) => <li>{item}</li>);
-      return <font color="red">Items Missing: {missingItemsList}</font>;
-    } else {
-      return <font color="green">Good</font>;
-    }
+    // if (items.length > 0) {
+    //   let missingItemsList = items.map((item) => 
+    //   <li 
+    //     // id={"user_" + (item + "_" + userData.id).toLowerCase()} 
+    //     // key={"user_" + (item + "_" + userData.id).toLowerCase()}
+    //     >
+    //       {item}
+    //   </li>);
+    //   return <font color="red">Items Missing: {missingItemsList}</font>;
+    // } else {
+    //   return <font color="green">Good</font>;
+    // }
   };
 
   // const sendUserEmailAboutMissingData = (userData) => {
@@ -260,6 +282,9 @@ export function UserList () {
               <TableCell key={"allgood"} id={"allgood"} align="left" width="10%">
                 All Good?
               </TableCell>
+              <TableCell key={"edit_user"} id={"edit_user"} align="center" width="10%">
+                Edit
+              </TableCell>
               <TableCell key={"firstname"} id={"firstname"} align="center" width="10%">
                 Name
               </TableCell>
@@ -295,7 +320,7 @@ export function UserList () {
               {/* {console.log("user: ", user)} */}
                   <TableCell
                     key={"user_missingData_" + user.id}
-                    // id={"userMissingData_" + user.id}
+                    id={"userMissingData_" + user.id}
                     align="left"
                   >
                     {missingData(user)}
@@ -303,6 +328,7 @@ export function UserList () {
                     {/* {sendUserEmailAboutMissingData(user.fields)} */}
                     {/* <button onclick={sendUserEmailAboutMissingData(user)}>Send Email</button> */}
                   </TableCell>
+                  <TableCell align="center" id={"edit_user_" + user.id} key={"edit_user_" + user.id} >{editUser(user)}</TableCell>
                   <TableCell align="center" id={"user_name_" + user.id} key={"user_name_" + user.id} >{userName(user)}</TableCell>
                   <TableCell align="center" id={"user_phone_" + user.id} key={"user_phone_" + user.id} >{userPhone(user)}</TableCell>
                   <TableCell align="center" id={"user_email_" + user.id} key={"user_email_" + user.id} >{userEmail(user)}</TableCell>
