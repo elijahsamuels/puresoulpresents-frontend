@@ -177,18 +177,18 @@ function UserList () {
       items.push("Headshot");
     }
 
-    // if (items.length > 0) {
-    //   let missingItemsList = items.map((item) => 
-    //   <li 
-    //     // id={"user_" + (item + "_" + userData.id).toLowerCase()} 
-    //     // key={"user_" + (item + "_" + userData.id).toLowerCase()}
-    //     >
-    //       {item}
-    //   </li>);
-    //   return <font color="red">Items Missing: {missingItemsList}</font>;
-    // } else {
-    //   return <font color="green">Good</font>;
-    // }
+    if (items.length > 0) {
+      let missingItemsList = items.map((item) => 
+      <li 
+        id={"user_" + (item + "_" + userData.id).toLowerCase()} 
+        key={"user_" + (item + "_" + userData.id).toLowerCase()}
+        >
+          {item}
+      </li>);
+      return <font color="red">Items Missing: {missingItemsList}</font>;
+    } else {
+      return <font color="green">Good</font>;
+    }
   };
 
   // const sendUserEmailAboutMissingData = (userData) => {
