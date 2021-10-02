@@ -30,7 +30,7 @@ function UserList () {
   const userTernary = (userData, missingItem) => {
     return userData.localItem
       ? { true: userData.localItem }
-      : { false: <font color="red">Missing {missingItem}</font> };
+      : { false: <font color="red" key={"items_missing_for_user_" + userData.id}>Missing {missingItem}</font> };
   };
 
   const editUser = (userData) => {
