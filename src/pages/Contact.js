@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
-import { fetchMusicianData } from "../actions/userActions";
+import { fetchUsersList } from "../actions/userActions";
 import Mailer from "../components/mailerEmailJS";
 
 function Contact() {
@@ -22,4 +22,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {fetchMusicianData})( Contact);
+export default connect(mapStateToProps, {fetchUsersList})( Contact);

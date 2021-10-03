@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
-// import { Link } from "r  eact-router-dom";
-import { fetchMusicianData } from "../actions/userActions";
+// import { Link } from "react-router-dom";
+import { fetchUsersList } from "../actions/userActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Table from "@material-ui/core/Table";
@@ -20,12 +20,10 @@ const useStyles = makeStyles({
   // },
 });
 
-function UserList () {
+function UserList (props) {
   const dispatch = useDispatch()
   const classes = useStyles();
-  
-  // console.log("dispatch: ", dispatch)
-  // console.log("fetchMusicianData: ", dispatch(fetchMusicianData()))
+
 
   const userTernary = (userData, missingItem) => {
     return userData.localItem
@@ -36,16 +34,24 @@ function UserList () {
   const editUser = (userData) => {
     // console.log(userData)
     userData.localItem = userData.id;
-    let editUserLink = "user/"+userData.id+"/edit";
-    return <Button variant="contained" size="small" disableElevation href={editUserLink} onClick={() => {
-      handleClick();
-    }}>
-      Edit
-    </Button>;
+    let editUserLink = "user/" + userData.id;
+    return (
+      <Button
+        variant="contained"
+        size="small"
+        disableElevation
+        href={editUserLink}
+        onClick={() => {
+          handleClick(userData);
+        }}
+      >
+        Edit
+      </Button>
+    );
   };
 
-  const handleClick = () => {
-    // alert("userData.id: ", userData.id)
+  const handleClick = (userData) => {
+    console.log("userData.id: ", userData.id)
   };
 
   const userName = (userData) => {
@@ -226,21 +232,29 @@ function UserList () {
 
     const [localUsers, setLocalUsers] = useState(null);
     
-    useEffect(() => {
 
-      fetch("http://localhost:3000/users")
-      .then((response) => response.json())
-      .then((payload) => setLocalUsers(payload) )
-      .catch((error) => console.log(error));
+    useEffect(() => {
+      // console.log("props.fetchUsersList(): ", props.fetchUsersList())
+      setLocalUsers(props.fetchUsersList())
+
+      // setLocalUsers(dispatch(fetchUsersList()))
+      // let theList = 
+      // console.log("theList: ", theList)
+      // setLocalUsers()
+
+      // fetch("http://localhost:3000/users")
+      // .then((response) => response.json())
+      // .then((payload) => setLocalUsers(payload) )
+      // .catch((error) => console.log(error));
 
       console.log("useEffect has run successfully")
 
-      // dispatch(fetchMusicianData())
-      // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
-      // setLocalUsers(dispatch(fetchMusicianData()));
-      // setLocalUsers(fetchMusicianData());
-      // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
-      // setLocalUsers([dispatch(fetchMusicianData())])
+      // dispatch(fetchUsersList())
+      // console.log("thing:", setLocalUsers(dispatch(fetchUsersList())))
+      // setLocalUsers(dispatch(fetchUsersList()));
+      // setLocalUsers(fetchUsersList());
+      // console.log("thing:", setLocalUsers(dispatch(fetchUsersList())))
+      // setLocalUsers([dispatch(fetchUsersList())])
       // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS 
       // setLocalUsers([{
       //   first_name: "John",
@@ -257,10 +271,10 @@ function UserList () {
   //   // console.log(setPageUsers());
   //   // setPageUsers();
   // };
-  // {console.log(props)}
 
   return (
     <div className="userList">
+      {console.log("props.users: ", props.users)}
 
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
@@ -279,13 +293,28 @@ function UserList () {
         >
           <TableHead key={"table_head"} id={"table_head"}>
             <TableRow key={"tableRow"} id={"tableRow"}>
-              <TableCell key={"allgood"} id={"allgood"} align="left" width="10%">
+              <TableCell
+                key={"allgood"}
+                id={"allgood"}
+                align="left"
+                width="10%"
+              >
                 All Good?
               </TableCell>
-              <TableCell key={"edit_user"} id={"edit_user"} align="center" width="10%">
+              <TableCell
+                key={"edit_user"}
+                id={"edit_user"}
+                align="center"
+                width="10%"
+              >
                 Edit
               </TableCell>
-              <TableCell key={"firstname"} id={"firstname"} align="center" width="10%">
+              <TableCell
+                key={"firstname"}
+                id={"firstname"}
+                align="center"
+                width="10%"
+              >
                 Name
               </TableCell>
               <TableCell key={"phone"} id={"phone"} align="center" width="10%">
@@ -294,7 +323,12 @@ function UserList () {
               <TableCell key={"email"} id={"email"} align="center" width="10%">
                 Email
               </TableCell>
-              <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
+              <TableCell
+                key={"instrument"}
+                id={"instrument"}
+                align="center"
+                width="10%"
+              >
                 Instrument
               </TableCell>
               <TableCell key={"city"} id={"city"} align="center" width="10%">
@@ -312,12 +346,15 @@ function UserList () {
             </TableRow>
           </TableHead>
           <TableBody key={"table_body"} id={"table_body"}>
-
             {/* {localUsers && console.log("localUsers: ", localUsers)} */}
 
-            {localUsers && localUsers.map((user) => (
-              <TableRow key={"user_row_"+user.id } id={"user_row_"+user.id }>
-              {/* {console.log("user: ", user)} */}
+            {localUsers &&
+              localUsers.map((user) => (
+                <TableRow
+                  // key={"user_row_" + user.id}
+                  id={"user_row_" + user.id}
+                >
+                  {/* {console.log("user: ", user)} */}
                   <TableCell
                     key={"user_missingData_" + user.id}
                     id={"userMissingData_" + user.id}
@@ -328,15 +365,69 @@ function UserList () {
                     {/* {sendUserEmailAboutMissingData(user.fields)} */}
                     {/* <button onclick={sendUserEmailAboutMissingData(user)}>Send Email</button> */}
                   </TableCell>
-                  <TableCell align="center" id={"edit_user_" + user.id} key={"edit_user_" + user.id} >{editUser(user)}</TableCell>
-                  <TableCell align="center" id={"user_name_" + user.id} key={"user_name_" + user.id} >{userName(user)}</TableCell>
-                  <TableCell align="center" id={"user_phone_" + user.id} key={"user_phone_" + user.id} >{userPhone(user)}</TableCell>
-                  <TableCell align="center" id={"user_email_" + user.id} key={"user_email_" + user.id} >{userEmail(user)}</TableCell>
-                  <TableCell align="center" id={"user_instrument_" + user.id} key={"user_instrument_" + user.id} >{userInstrument(user)}</TableCell>
-                  <TableCell align="center" id={"user_city_" + user.id} key={"user_city_" + user.id} >{userCity(user)}</TableCell>
-                  <TableCell align="center" id={"user_bio_" + user.id} key={"user_bio_" + user.id}  width="" height="10">{userBio(user)}</TableCell>
-                  <TableCell align="center" id={"user_w9url_" + user.id} key={"user_w9url_" + user.id} >{userW9URL(user)}</TableCell>
-                  <TableCell align="center" id={"user_headshot_" + user.id} key={"user_headshot_" + user.id} >
+                  <TableCell
+                    align="center"
+                    id={"edit_user_" + user.id}
+                    key={"edit_user_" + user.id}
+                  >
+                    {editUser(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_name_" + user.id}
+                    key={"user_name_" + user.id}
+                  >
+                    {userName(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_phone_" + user.id}
+                    key={"user_phone_" + user.id}
+                  >
+                    {userPhone(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_email_" + user.id}
+                    key={"user_email_" + user.id}
+                  >
+                    {userEmail(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_instrument_" + user.id}
+                    key={"user_instrument_" + user.id}
+                  >
+                    {userInstrument(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_city_" + user.id}
+                    key={"user_city_" + user.id}
+                  >
+                    {userCity(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_bio_" + user.id}
+                    key={"user_bio_" + user.id}
+                    width=""
+                    height="10"
+                  >
+                    {userBio(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_w9url_" + user.id}
+                    key={"user_w9url_" + user.id}
+                  >
+                    {userW9URL(user)}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    id={"user_headshot_" + user.id}
+                    key={"user_headshot_" + user.id}
+                  >
                     {userHeadshot(user)}
                     <br />
                     {userHeadshotThumbnails(user)}
@@ -351,6 +442,7 @@ function UserList () {
 }
 
 const mapStateToProps = (state) => {
+  // console.log(state)
   return {
     loading: state.loading, 
     users: state.users
@@ -360,9 +452,9 @@ const mapStateToProps = (state) => {
 // connects to reducer
 // const mapDispatchToProps = (dispatch) => {
 //   return {
-//     // fetchMusicianData: (data) => dispatch({type: 'SET_USERS', data})
+//     // fetchUsersList: (data) => dispatch({type: 'SET_USERS', data})
 //   }
 // }
 
-export default connect(mapStateToProps)(UserList);
-// export default connect(mapStateToProps, { fetchMusicianData })(UserList);
+export default connect(mapStateToProps, {fetchUsersList})(UserList);
+// export default connect(mapStateToProps, { fetchUsersList })(UserList);

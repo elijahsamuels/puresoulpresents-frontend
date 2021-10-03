@@ -1,20 +1,58 @@
+
+
+// Action creator
+
 // require("dotenv").config();
 
 // export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
 
-export function fetchMusicianData() {
-  // return (dispatch) => {
-  fetch("http://localhost:3000/users")
-    // .then((response) => console.log("from actions: ", response.json()))
-    .then((response) => response.json())
-    .then((payload) => payload)
-    // .then((payload) => dispatch({ type: "SET_USERS", payload }))
-    // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
-    .catch((error) => console.log(error));
-  // };
-}
+export const fetchUsersList = () => {
+  // Return an action
+  return (dispatch) => {
+    fetch("http://localhost:3000/users")
+      // .then((response) => console.log("from actions: ", response.json()))
+      .then((response) => response.json())
+      // .then((payload) => payload)
+      .then((data) => dispatch({ type: "SET_USERS", users: data }))
+      // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
+      .catch((error) => console.log(error));
+  };
+};
 
-export const editUser = (user) => {
+// export function fetchUserData() {
+//   // return (dispatch) => {
+//   fetch("http://localhost:3000/users")
+//     .then((response) => response.json())
+//     .then((payload) => payload)
+//     .catch((error) => console.log(error));
+//   // };
+// }
+
+export const fetchUserData = (id) => {
+  return (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    fetch(`/users/${id}`)
+      .then((response) => {
+        if (response.ok === false) {
+          throw dispatch({
+            type: "ERROR",
+            payload: "could not find the data for that resource",
+          });
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // dispatch(obtainUser(data));
+        dispatch({ type: "LOADING", payload: false });
+      })
+      .catch((error) => {
+        dispatch({ type: "LOADING", payload: false });
+        dispatch({ type: "ERROR", payload: error.message });
+      });
+  };
+};
+
+export function editUser(user) {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
     fetch(`/users/${user.id}`, {
@@ -44,7 +82,7 @@ export const editUser = (user) => {
         dispatch({ type: "ERROR", payload: err.message });
       });
   };
-};
+}
 
 // .then((data) => dispatch({ type: "SET_USERS", payload: data }));
 
@@ -92,7 +130,7 @@ export const editUser = (user) => {
 //     }
 //     )}, []);
 
-// async function fetchMusicianData() {
+// async function fetchUsersList() {
 //     await fetch(`${allPureSoulPresentsMuisicians}`)
 //     .then((response) => response.json())
 //     .then(json => console.log(json))

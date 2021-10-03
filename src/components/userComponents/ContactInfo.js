@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchMusicianData } from "../../actions/userActions";
+import { fetchUserData, editUser } from "../../actions/userActions";
 
 
-function ContactInfo() {
+function ContactInfo(props) {
+  
+  
   return (
     <div className="userDetails">
+    {console.log("props: ", props)}
       <h3>Contact</h3>
       <p>
         <label>
@@ -34,10 +37,9 @@ function ContactInfo() {
 // export default ContactInfo;
 const mapStateToProps = (state) => {
   return {
-      loading: state.loading,
-      users: state.users,
+    loading: state.loading,
+    users: state.users,
   };
 };
 
-
-export default connect(mapStateToProps, {fetchMusicianData})(ContactInfo);
+export default connect(mapStateToProps, {fetchUserData, editUser})(ContactInfo);

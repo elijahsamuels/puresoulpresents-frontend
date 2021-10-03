@@ -1,13 +1,22 @@
+import { combineReducers } from 'redux'
+
 const initialState = {
   loading: true,
   user: {},
   users: [
     {
-      // first_name: "John",
-      // last_name: "Doe",
-      // phone: "1234567890",
-      // email: "john@doe.com",
-      // city: "London",
+      first_name: "JohnTEST",
+      last_name: "DoeTEST",
+      phone: "1234567890",
+      email: "johndoe@TEST.com",
+      city: "LondonTEST",
+    },
+    {
+      first_name: "JaneTEST",
+      last_name: "DoeTEST",
+      phone: "0987654321",
+      email: "janedoe@TEST.com",
+      city: "BrisbaneTEST",
     },
   ],
   // showUser: {},
@@ -15,17 +24,14 @@ const initialState = {
   error: false,
 };
 
+
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOADING":
       return { ...state, loading: true };
 
     case "SET_USERS":
-      return { ...state, loading: false, users: action.payload };
-    // console.log("state: ",  state.users)
-    // console.log("action.payload: ", state.users)
-    // return { ...state, loading: false, users: state.users }
-    // console.log("action.payload: ", action.payload)
+      return { ...state, loading: false, users: action.users };
 
     case "EDIT_USER":
       return { ...state, loading: false, user: action.data };
@@ -41,10 +47,16 @@ const usersReducer = (state = initialState, action) => {
     //     return { ...state, currentUser: null };
     // case "CURRENT_USER":
     //     return { ...state, currentUser: action.data };
-    
+
     default:
       return state;
   }
 };
+
+
+// combineReducers({ 
+//   users: initialState.users,
+//   selectedUser: usersReducer,
+// })
 
 export default usersReducer;

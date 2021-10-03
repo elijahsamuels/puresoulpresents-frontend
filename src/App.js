@@ -18,7 +18,7 @@ function App() {
             <Nav />
                 <Switch>
                     <Route exact path="/" component={Index} />
-                    <Route exact path="/user/:id/edit" component={UserDetails} />
+                    <Route exact path="/user/:id/" component={UserDetails} />
                     <Route exact path="/userlist" component={UserList} />
                     <Route exact path="/contact" component={Contact} />
                     <Route component={ErrorPage} />

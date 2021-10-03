@@ -7,7 +7,7 @@ import ContactInfo from "../components/userComponents/ContactInfo";
 import TaxInfo from "../components/userComponents/TaxInfo";
 import UserInfo from "../components/userComponents/UserInfo";
 import PaymentInfo from "../components/userComponents/PaymentInfo";
-// import { fetchMusicianData } from "../actions/userActions";
+import { fetchUserData } from "../actions/userActions";
 
 function UserDetails() {
     return (
@@ -20,7 +20,7 @@ function UserDetails() {
             {/* <TaxInfo />
             <StaffInfo />
             <PaymentInfo /> */}
-            {/* {fetchMusicianData()} */}
+            {/* {fetchUsersList()} */}
         </div>
     );
 }
@@ -37,5 +37,9 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    fetchUserDataHandler: data => dispatch(fetchUserData(data))
+})
 
-export default connect(mapStateToProps)( UserDetails);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);

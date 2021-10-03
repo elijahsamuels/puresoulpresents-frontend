@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { editUser } from "../../../src/actions/userActions";
+import Button from "@material-ui/core/Button";
+import { editUser, fetchUserData } from "../../../src/actions/userActions";
 
 const UserInfo = () => {
-
   // console.log("localUser: ", localUser)
   const [localUser, setLocalUser] = useState({
-
-
     // first_name: localUser.first_name,
     // last_name: localUser.last_name,
     // email: localUser.email,
@@ -15,25 +13,15 @@ const UserInfo = () => {
   });
 
   const handleChange = (event) => {
-    setLocalUser({
-      ...localUser,
-      [event.target.name]: event.target.value,
-    });
+    // setLocalUser({
+    //   ...localUser,
+    //   [event.target.name]: event.target.value,
+    // });
   };
 
-  useEffect(() => {
-    // fetch(`http://localhost:3000/users/${user.id}`)
-    // .then((response) => response.json())
-    // .then((payload) => setLocalUser(payload) )
-    // .catch((error) => console.log(error));
+  useEffect((props) => {
 
-    // console.log("editUser has run successfully")
-    // dispatch(fetchMusicianData())
-    // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
-    // setLocalUsers(dispatch(fetchMusicianData()));
-    // setLocalUsers(fetchMusicianData());
-    // console.log("thing:", setLocalUsers(dispatch(fetchMusicianData())))
-    // setLocalUsers([dispatch(fetchMusicianData())])
+    // setLocalUser(props)
     // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS
     // setLocalUser({
     //   first_name: "John",
@@ -58,8 +46,7 @@ const UserInfo = () => {
             placeholder="First Name"
             value={localUser.first_name}
             onChange={handleChange}
-            
-            />
+          />
         </label>
 
         <label>
@@ -73,10 +60,7 @@ const UserInfo = () => {
         </label>
       </p>
       <p>
-        <a href="userGigList">User Gig List</a>
-      </p>
-      <p>
-        <a href="editUserDetails">Edit User Details</a>
+        <button href="userGigList">User Gig List</button>
       </p>
     </div>
   );
@@ -93,9 +77,14 @@ const mapStateToProps = (state) => {
 // connects to reducer
 // const mapDispatchToProps = (dispatch) => {
 //   return {
-//     // fetchMusicianData: (data) => dispatch({type: 'SET_USERS', data})
+//     // fetchUsersList: (data) => dispatch({type: 'SET_USERS', data})
 //   }
 // }
 
-export default connect(mapStateToProps, {editUser})(UserInfo);
-// export default connect(mapStateToProps, { fetchMusicianData })(UserList);
+const mapDispatchToProps = (dispatch) => ({
+  fetchUserDataHandler: (data) => dispatch(fetchUserData(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+
+// export default connect(mapStateToProps, {fetchUserData})(UserInfo);
