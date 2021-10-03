@@ -5,6 +5,7 @@ const initialState = {
   user: {},
   users: [
     {
+      id: 123,
       first_name: "JohnTEST",
       last_name: "DoeTEST",
       phone: "1234567890",
@@ -12,6 +13,7 @@ const initialState = {
       city: "LondonTEST",
     },
     {
+      id: 456,
       first_name: "JaneTEST",
       last_name: "DoeTEST",
       phone: "0987654321",

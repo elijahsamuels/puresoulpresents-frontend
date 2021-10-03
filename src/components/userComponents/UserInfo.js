@@ -3,14 +3,8 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { editUser, fetchUserData } from "../../../src/actions/userActions";
 
-const UserInfo = () => {
-  // console.log("localUser: ", localUser)
-  const [localUser, setLocalUser] = useState({
-    // first_name: localUser.first_name,
-    // last_name: localUser.last_name,
-    // email: localUser.email,
-    // phone: localUser.phone,
-  });
+const UserInfo = (props) => {
+  console.log("props: ", props)
 
   const handleChange = (event) => {
     // setLocalUser({
@@ -18,10 +12,10 @@ const UserInfo = () => {
     //   [event.target.name]: event.target.value,
     // });
   };
+  const [localUser, setLocalUser] = useState(null);
 
-  useEffect((props) => {
-
-    // setLocalUser(props)
+  useEffect(() => {
+    setLocalUser(props.fetchUserData())
     // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS
     // setLocalUser({
     //   first_name: "John",
@@ -44,7 +38,7 @@ const UserInfo = () => {
           <input
             name="first_name"
             placeholder="First Name"
-            value={localUser.first_name}
+            value={props.first_name}
             onChange={handleChange}
           />
         </label>
@@ -54,7 +48,7 @@ const UserInfo = () => {
           <input
             name="last_name"
             placeholder="Last Name"
-            value={localUser.last_name}
+            value={props.last_name}
             onChange={handleChange}
           />
         </label>
@@ -67,7 +61,7 @@ const UserInfo = () => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("state: ", state);
+  // console.log("state: ", state);
   return {
     loading: state.loading,
     localUser: state.user,
@@ -81,10 +75,10 @@ const mapStateToProps = (state) => {
 //   }
 // }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchUserDataHandler: (data) => dispatch(fetchUserData(data)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchUserDataHandler: (data) => dispatch(fetchUserData(data)),
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+export default connect(mapStateToProps, { fetchUserData })(UserInfo);
 
 // export default connect(mapStateToProps, {fetchUserData})(UserInfo);

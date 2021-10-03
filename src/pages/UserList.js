@@ -232,7 +232,6 @@ function UserList (props) {
 
     const [localUsers, setLocalUsers] = useState(null);
     
-
     useEffect(() => {
       // console.log("props.fetchUsersList(): ", props.fetchUsersList())
       setLocalUsers(props.fetchUsersList())
@@ -249,12 +248,6 @@ function UserList (props) {
 
       console.log("useEffect has run successfully")
 
-      // dispatch(fetchUsersList())
-      // console.log("thing:", setLocalUsers(dispatch(fetchUsersList())))
-      // setLocalUsers(dispatch(fetchUsersList()));
-      // setLocalUsers(fetchUsersList());
-      // console.log("thing:", setLocalUsers(dispatch(fetchUsersList())))
-      // setLocalUsers([dispatch(fetchUsersList())])
       // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS 
       // setLocalUsers([{
       //   first_name: "John",
@@ -274,7 +267,7 @@ function UserList (props) {
 
   return (
     <div className="userList">
-      {console.log("props.users: ", props.users)}
+      {/* {console.log("props.users: ", props.users)} */}
 
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
@@ -346,15 +339,12 @@ function UserList (props) {
             </TableRow>
           </TableHead>
           <TableBody key={"table_body"} id={"table_body"}>
-            {/* {localUsers && console.log("localUsers: ", localUsers)} */}
 
-            {localUsers &&
-              localUsers.map((user) => (
-                <TableRow
-                  // key={"user_row_" + user.id}
-                  id={"user_row_" + user.id}
-                >
-                  {/* {console.log("user: ", user)} */}
+            {props.users.map((user) => (
+              <TableRow
+              key={"user_row_" + user.id}
+              id={"user_row_" + user.id}
+              >
                   <TableCell
                     key={"user_missingData_" + user.id}
                     id={"userMissingData_" + user.id}
@@ -442,7 +432,6 @@ function UserList (props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
     loading: state.loading, 
     users: state.users
@@ -457,4 +446,3 @@ const mapStateToProps = (state) => {
 // }
 
 export default connect(mapStateToProps, {fetchUsersList})(UserList);
-// export default connect(mapStateToProps, { fetchUsersList })(UserList);
