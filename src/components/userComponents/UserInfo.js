@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import { editUser, fetchUserData } from "../../../src/actions/userActions";
 
 const UserInfo = (props) => {
-  console.log("props: ", props)
+  // console.log("props: ", props)
 
   const handleChange = (event) => {
     // setLocalUser({
@@ -14,8 +14,14 @@ const UserInfo = (props) => {
   };
   const [localUser, setLocalUser] = useState(null);
 
+  props.fetchUserData()
+  console.log("fetchUserData props: ", props)
+
   useEffect(() => {
+    // console.log("props.user: ", props.user)
+
     setLocalUser(props.fetchUserData())
+
     // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS
     // setLocalUser({
     //   first_name: "John",
@@ -29,7 +35,6 @@ const UserInfo = (props) => {
   return (
     <div className="userDetails">
       {/* {console.log("localUser: ", localUser)} */}
-      {/* {localUser && localUser} */}
 
       <h3>User Information</h3>
       <p>
@@ -64,7 +69,7 @@ const mapStateToProps = (state) => {
   // console.log("state: ", state);
   return {
     loading: state.loading,
-    localUser: state.user,
+    user: state.user,
   };
 };
 

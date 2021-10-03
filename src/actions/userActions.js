@@ -30,8 +30,9 @@ export const fetchUsersList = () => {
 
 export const fetchUserData = (id) => {
   return (dispatch) => {
-    dispatch({ type: "LOADING", payload: true });
-    fetch(`/users/${id}`)
+    // dispatch({ type: "LOADING", payload: true });
+    console.log("id from fetchUserData", id)
+    fetch(`http://localhost:3000/users/${id}`)
       .then((response) => {
         if (response.ok === false) {
           throw dispatch({
@@ -42,8 +43,8 @@ export const fetchUserData = (id) => {
         return response.json();
       })
       .then((data) => {
-        // dispatch(obtainUser(data));
-        dispatch({ type: "LOADING", payload: false });
+        console.log("data: ", data)
+        dispatch({ type: "SET_USER", user: data });
       })
       .catch((error) => {
         dispatch({ type: "LOADING", payload: false });

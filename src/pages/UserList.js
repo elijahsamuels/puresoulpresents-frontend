@@ -31,8 +31,7 @@ function UserList (props) {
       : { false: <font color="red" key={"items_missing_for_user_" + userData.id}>Missing {missingItem}</font> };
   };
 
-  const editUser = (userData) => {
-    // console.log(userData)
+  const editUserButton = (userData) => {
     userData.localItem = userData.id;
     let editUserLink = "user/" + userData.id;
     return (
@@ -56,7 +55,6 @@ function UserList (props) {
 
   const userName = (userData) => {
     let missingItem = "Name";
-    // console.log(userData)
     userData.localItem = userData.first_name + " " + userData.last_name;
     return Object.values(userTernary(userData, missingItem));
   };
@@ -186,8 +184,8 @@ function UserList (props) {
     if (items.length > 0) {
       let missingItemsList = items.map((item) => 
       <li 
-        id={"user_" + (item + "_" + userData.id).toLowerCase()} 
-        key={"user_" + (item + "_" + userData.id).toLowerCase()}
+        id={"user_" + (userData.id + "_" + item).toLowerCase()} 
+        key={"user_" + (userData.id + "_" + item).toLowerCase()}
         >
           {item}
       </li>);
@@ -235,6 +233,7 @@ function UserList (props) {
     useEffect(() => {
       // console.log("props.fetchUsersList(): ", props.fetchUsersList())
       setLocalUsers(props.fetchUsersList())
+      console.log("useEffect has run successfully")
 
       // setLocalUsers(dispatch(fetchUsersList()))
       // let theList = 
@@ -246,16 +245,6 @@ function UserList (props) {
       // .then((payload) => setLocalUsers(payload) )
       // .catch((error) => console.log(error));
 
-      console.log("useEffect has run successfully")
-
-      // ************** setLocalUsers NEEDS AN ARRAY OF OBJECTS 
-      // setLocalUsers([{
-      //   first_name: "John",
-      //   last_name: "Doe",
-      //   phone: "1234567890",
-      //   email: "john@doe.com",
-      //   city: "London",
-      // }])
     }, []);
     
               
@@ -342,12 +331,12 @@ function UserList (props) {
 
             {props.users.map((user) => (
               <TableRow
-              key={"user_row_" + user.id}
-              id={"user_row_" + user.id}
+              key={"user_" + user.id + "_row"}
+              id={"user_" + user.id + "_row"}
               >
                   <TableCell
-                    key={"user_missingData_" + user.id}
-                    id={"userMissingData_" + user.id}
+                    key={"user_" + user.id + "_missingData"}
+                    id={"userM" + user.id + "_issingData"}
                     align="left"
                   >
                     {missingData(user)}
@@ -357,50 +346,50 @@ function UserList (props) {
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"edit_user_" + user.id}
-                    key={"edit_user_" + user.id}
+                    id={"edit_" + user.id + "_user"}
+                    key={"edit_" + user.id + "_user"}
                   >
-                    {editUser(user)}
+                    {editUserButton(user)}
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_name_" + user.id}
-                    key={"user_name_" + user.id}
+                    id={"user_" + user.id + "_name"}
+                    key={"user_" + user.id + "_name"}
                   >
                     {userName(user)}
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_phone_" + user.id}
-                    key={"user_phone_" + user.id}
+                    id={"user_" + user.id + "_phone"}
+                    key={"user_" + user.id + "_phone"}
                   >
                     {userPhone(user)}
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_email_" + user.id}
-                    key={"user_email_" + user.id}
+                    id={"user_" + user.id + "_email"}
+                    key={"user_" + user.id + "_email"}
                   >
                     {userEmail(user)}
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_instrument_" + user.id}
-                    key={"user_instrument_" + user.id}
+                    id={"user_" + user.id + "_instrument"}
+                    key={"user_" + user.id + "_instrument"}
                   >
                     {userInstrument(user)}
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_city_" + user.id}
-                    key={"user_city_" + user.id}
+                    id={"user_" + user.id + "_city"}
+                    key={"user_" + user.id + "_city"}
                   >
                     {userCity(user)}
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_bio_" + user.id}
-                    key={"user_bio_" + user.id}
+                    id={"user_" + user.id + "_bio"}
+                    key={"user_" + user.id + "_bio"}
                     width=""
                     height="10"
                   >
@@ -408,15 +397,15 @@ function UserList (props) {
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_w9url_" + user.id}
-                    key={"user_w9url_" + user.id}
+                    id={"user_" + user.id + "_w9url"}
+                    key={"user_" + user.id + "_w9url"}
                   >
                     {userW9URL(user)}
                   </TableCell>
                   <TableCell
                     align="center"
-                    id={"user_headshot_" + user.id}
-                    key={"user_headshot_" + user.id}
+                    id={"user_" + user.id + "_headshot"}
+                    key={"user_" + user.id + "_headshot"}
                   >
                     {userHeadshot(user)}
                     <br />
@@ -432,6 +421,7 @@ function UserList (props) {
 }
 
 const mapStateToProps = (state) => {
+  // console.log("state: ", state);
   return {
     loading: state.loading, 
     users: state.users

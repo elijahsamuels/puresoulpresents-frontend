@@ -35,6 +35,9 @@ const usersReducer = (state = initialState, action) => {
     case "SET_USERS":
       return { ...state, loading: false, users: action.users };
 
+    case "SET_USER":
+      return { ...state, loading: false, user: action.user };
+
     case "EDIT_USER":
       return { ...state, loading: false, user: action.data };
 
