@@ -6,30 +6,29 @@
 
 // export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
 
+// Fetch all user data
 export const fetchUsersList = () => {
-  // Return an action
   return (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
     fetch("http://localhost:3000/users")
-      // .then((response) => console.log("from actions: ", response.json()))
-      .then((response) => response.json())
-      // .then((payload) => payload)
-      .then((data) => dispatch({ type: "SET_USERS", users: data }))
-      // .then(responseData =>  dispatch({type: 'SET_USERS', users: responseData.data}))
-      .catch((error) => console.log(error));
+    // .then((response) => console.log("from actions: ", response.json()))
+    .then((response) => response.json())
+    .then((data) => dispatch({ type: "SET_USERS", users: data }))
+    .catch((error) => console.log(error));
   };
 };
 
+// Fetch a single user data
 export const fetchUserData = (userID) => {
-// console.log("from userActions, userID: ", userID)
   return (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
     fetch(`http://localhost:3000/users/${userID}`)
     .then((response) => response.json())
     .then((data) => dispatch({ type: "GET_USER", user: data }))
-    // .then((data) => console.log(data))
     .catch((error) => console.log(error));
+  }
 };
-    
-    // dispatch({ type: "LOADING", payload: true });
+  
     // fetch(`http://localhost:3000/users/6`)
       //   if (response.ok === false) {
       //     throw dispatch({
@@ -47,12 +46,11 @@ export const fetchUserData = (userID) => {
       //   dispatch({ type: "LOADING", payload: false });
       //   dispatch({ type: "ERROR", payload: error.message });
       // });
-};
 
 export function editUser(user) {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch(`/users/${user.id}`, {
+    fetch(`http://localhost:3000/users/${user.id}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -64,14 +62,14 @@ export function editUser(user) {
         if (response.ok === false) {
           throw dispatch({
             type: "ERROR",
-            payload: "ERROR: Unable to save edits.",
+            payload: "ERROR: Unable to save user edits.",
           });
         }
         return response.json();
       })
       .then((data) => {
-        dispatch({ type: "EDIT_USER", payload: data });
         dispatch({ type: "LOADING", payload: false });
+        dispatch({ type: "EDIT_USER", payload: data });
         dispatch({ type: "ERROR", payload: null });
       })
       .catch((err) => {
@@ -101,31 +99,6 @@ export function editUser(user) {
 // .then((payload) => dispatch({ type: "SET_USERS", payload }));
 // };
 // };
-
-// const utf8 = require("utf8");
-// const fetch = require("node-fetch");
-// const airtableURL = "https://api.airtable.com/v0/";
-// const puresoulAPI = process.env.REACT_APP_PURESOULAPI;
-// const musiciansTable = process.env.REACT_APP_MUSICIANS_TABLE;
-// const datesTable = "ALL%20DATES?";
-// const puresoulAPIkey = process.env.REACT_APP_PURESOULAPIKEY;
-// const allPureSoulPresentsMuisicians = `${airtableURL}${puresoulAPI}${musiciansTable}${puresoulAPIkey}`;
-// const allPureSoulPresentsDates = `${airtableURL}${puresoulAPI}${datesTable}${puresoulAPIkey}`;
-
-// const [localUsers, setlocalUsers] = useState(null);
-
-// useEffect(() => {
-//     base('ROSTER').select({
-//         maxRecords: 200, // Selecting N records in Roster Only:
-//         pageSize: 20,
-//         view: "Roster Only"
-//     }).eachPage(function page(records, fetchNextPage) {
-//         // This function (`page`) will get called for each page of records.
-//         setlocalUsers(records)
-//     }, function done(err) {
-//         if (err) { console.error(err`); return; }
-//     }
-//     )}, []);
 
 // async function fetchUsersList() {
 //     await fetch(`${allPureSoulPresentsMuisicians}`)

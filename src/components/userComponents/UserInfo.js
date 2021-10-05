@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-// import Button from "@material-ui/core/Button";
 import { fetchUserData } from "../../../src/actions/userActions";
 
 const UserInfo = (props) => {
@@ -47,10 +46,6 @@ const UserInfo = (props) => {
             onChange={handleChange}
           />
         </label>
-      </p>
-      <p>
-        <button href="userGigList">User Gig List</button>
-        <button href="userSaveEdits">Save</button>
       </p>
     </div>
   );

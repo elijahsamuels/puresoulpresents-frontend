@@ -49,13 +49,6 @@ function UserList (props) {
 
   const handleClick = (userID) => {
     props.fetchUserData(userID)
-
-    // fetch(`http://localhost:3000/users/${userID}`)
-    //   .then((response) => response.json())
-    //   .then((data) => console.log( data ))
-    //   .catch((error) => console.log(error));
-
-    // console.log("userData.id: ", userID)
   };
 
   const userName = (userData) => {
@@ -240,7 +233,14 @@ function UserList (props) {
     }, []);
 
   return (
-    <div className="userList">
+
+    (!!props.loading ?
+      // If the state is still loading
+      <div className="loading">
+          UGH! WE'RE LOADING!
+      </div>
+    : // If the state is not loading
+      <div className="userList">
 
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
@@ -402,7 +402,7 @@ function UserList (props) {
         </Table>
       </TableContainer>
     </div>
-  );
+  ))
 }
 
 const mapStateToProps = (state) => {
