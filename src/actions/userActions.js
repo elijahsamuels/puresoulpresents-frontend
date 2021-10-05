@@ -28,28 +28,31 @@ export const fetchUsersList = () => {
 //   // };
 // }
 
-export const fetchUserData = (id) => {
+export const fetchUserData = () => {
   return (dispatch) => {
     // dispatch({ type: "LOADING", payload: true });
-    console.log("id from fetchUserData", id)
-    fetch(`http://localhost:3000/users/${id}`)
-      .then((response) => {
-        if (response.ok === false) {
-          throw dispatch({
-            type: "ERROR",
-            payload: "could not find the data for that resource",
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("data: ", data)
-        dispatch({ type: "SET_USER", user: data });
-      })
-      .catch((error) => {
-        dispatch({ type: "LOADING", payload: false });
-        dispatch({ type: "ERROR", payload: error.message });
-      });
+    // fetch(`http://localhost:3000/users/${id}`)
+    fetch(`http://localhost:3000/users/6`)
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: "ASDF", user: data }))
+      .catch((error) => console.log(error));
+
+      //   if (response.ok === false) {
+      //     throw dispatch({
+      //       type: "ERROR",
+      //       payload: "could not find the data for that resource",
+      //     });
+      //   }
+      //   return response.json();
+      // })
+      // .then((data) => {
+      //   console.log("data: ", data)
+      //   dispatch({ type: "SET_USER", user: data });
+      // })
+      // .catch((error) => {
+      //   dispatch({ type: "LOADING", payload: false });
+      //   dispatch({ type: "ERROR", payload: error.message });
+      // });
   };
 };
 

@@ -1,8 +1,15 @@
-import { combineReducers } from 'redux'
+// import { combineReducers } from 'redux'
 
 const initialState = {
   loading: true,
-  user: {},
+  user: {
+    // id: 123,
+    // first_name: "JohnTEST",
+    // last_name: "DoeTEST",
+    // phone: "1234567890",
+    // email: "johndoe@TEST.com",
+    // city: "LondonTEST",
+  },
   users: [
     {
       id: 123,
@@ -35,7 +42,7 @@ const usersReducer = (state = initialState, action) => {
     case "SET_USERS":
       return { ...state, loading: false, users: action.users };
 
-    case "SET_USER":
+    case "ASDF":
       return { ...state, loading: false, user: action.user };
 
     case "EDIT_USER":

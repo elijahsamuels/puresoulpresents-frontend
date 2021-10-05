@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import { Link } from "react-router-dom";
 import { fetchUsersList } from "../actions/userActions";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,9 +21,8 @@ const useStyles = makeStyles({
 });
 
 function UserList (props) {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const classes = useStyles();
-
 
   const userTernary = (userData, missingItem) => {
     return userData.localItem
@@ -233,7 +232,7 @@ function UserList (props) {
     useEffect(() => {
       // console.log("props.fetchUsersList(): ", props.fetchUsersList())
       setLocalUsers(props.fetchUsersList())
-      console.log("useEffect has run successfully")
+      // console.log("UserList useEffect has run successfully")
 
       // setLocalUsers(dispatch(fetchUsersList()))
       // let theList = 
@@ -246,13 +245,6 @@ function UserList (props) {
       // .catch((error) => console.log(error));
 
     }, []);
-    
-              
-              // const handleClick = () => {
-                //   console.log("clicked!");
-  //   // console.log(setPageUsers());
-  //   // setPageUsers();
-  // };
 
   return (
     <div className="userList">

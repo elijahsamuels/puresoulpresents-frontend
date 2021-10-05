@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 import UserPhoto from "../components/UserPhoto";
@@ -9,13 +9,36 @@ import UserInfo from "../components/userComponents/UserInfo";
 import PaymentInfo from "../components/userComponents/PaymentInfo";
 import { fetchUserData } from "../actions/userActions";
 
-function UserDetails() {
+function UserDetails(props) {
+
+    const [localUser, setLocalUser] = useState(null);
+
+    useEffect(() => { 
+        setLocalUser(props.fetchUserData())
+        // console.log("props.fetchUserData():", props.fetchUserData())
+        // console.log("UserDetails useEffect has run successfully")
+
+        //     // {
+        //     //     id: 123,
+        //     //     first_name: "JohnTEST",
+        //     //     last_name: "DoeTEST",
+        //     //     phone: "1234567890",
+        //     //     email: "johndoe@TEST.com",
+        //     //     city: "LondonTEST",
+        //     //   },
+    }, [])
+
     return (
         <div className="userDetails">
 
             <h1>User Details: </h1>
+            {/* User name: {props.user.first_name} */}
+            {/* {console.log("In UserDetails, props.user: ", props.user)} */}
+            {/* {console.log("In UserDetails, props.user: ", props.user.first_name)} */}
+            
             {/* <UserPhoto /> */}
-            <UserInfo />
+            <UserInfo user={props.user} />
+            {/* {console.log("UserDetails props.user: ", props.user)} */}
             {/* <ContactInfo /> */}
             {/* <TaxInfo />
             <StaffInfo />
@@ -27,19 +50,18 @@ function UserDetails() {
 
 // *** include upload field for W9. ***
 
-// export default UserDetails;
-
-
 const mapStateToProps = (state) => {
+    // console.log("state: ", state)
   return {
       loading: state.loading,
       users: state.users,
-  };
+      user: state.user,
+};
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchUserDataHandler: data => dispatch(fetchUserData(data))
-})
+// const mapDispatchToProps = (dispatch) => ({
+//     fetchUserDataHandler: data => dispatch(fetchUserData(data))
+// })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);
+export default connect(mapStateToProps, { fetchUserData })(UserDetails);
