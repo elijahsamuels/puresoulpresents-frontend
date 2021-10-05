@@ -50,6 +50,7 @@ const UserInfo = (props) => {
       </p>
       <p>
         <button href="userGigList">User Gig List</button>
+        <button href="userSaveEdits">Save</button>
       </p>
     </div>
   );

@@ -13,44 +13,20 @@ function UserDetails(props) {
 
     const [localUser, setLocalUser] = useState(null);
 
-    console.log("props.user: ", props.user)
-
     useEffect(() => { 
-        // console.log("props in UserDetails: ", props.user.id)
         setLocalUser(props.fetchUserData(props.match.params.id))
-        // setLocalUser(props.fetchUserData())
     }, [])
-
-
-        // console.log("props.fetchUserData():", props.fetchUserData())
-        // console.log("UserDetails useEffect has run successfully")
-
-        //     // {
-        //     //     id: 123,
-        //     //     first_name: "JohnTEST",
-        //     //     last_name: "DoeTEST",
-        //     //     phone: "1234567890",
-        //     //     email: "johndoe@TEST.com",
-        //     //     city: "LondonTEST",
-        //     //   },
 
     return (
         <div className="userDetails">
 
-            <h1>User Details: </h1>
-            {/* User name: {props.user.first_name} */}
-            {/* {console.log("In UserDetails, props.user: ", props.user)} */}
-            {/* {console.log("In UserDetails, props.user: ", props.user.first_name)} */}
-            
-            {/* <UserPhoto /> */}
+            <h1>Details for {props.user.first_name} {props.user.last_name}</h1>
+            {/* <UserPhoto user={props.user} /> */}
             <UserInfo user={props.user} />
-            {console.log(props)}
-            {/* {console.log("UserDetails props.user: ", props.user)} */}
-            {/* <ContactInfo /> */}
-            {/* <TaxInfo />
-            <StaffInfo />
-            <PaymentInfo /> */}
-            {/* {fetchUsersList()} */}
+            {/* <ContactInfo user={props.user} /> */}
+            {/* <TaxInfo user={props.user} /> */}
+            {/* <StaffInfo user={props.user} /> */}
+            {/* <PaymentInfo user={props.user} /> */}
         </div>
     );
 }
