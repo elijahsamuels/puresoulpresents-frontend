@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 // import { useDispatch } from "react-redux";
 // import { Link } from "react-router-dom";
-import { fetchUsersList } from "../actions/userActions";
+import { fetchUserData , fetchUsersList } from "../actions/userActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Table from "@material-ui/core/Table";
@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 });
 
 function UserList (props) {
-  // const dispatch = useDispatch()
   const classes = useStyles();
 
   const userTernary = (userData, missingItem) => {
@@ -31,25 +30,32 @@ function UserList (props) {
   };
 
   const editUserButton = (userData) => {
-    userData.localItem = userData.id;
-    let editUserLink = "user/" + userData.id;
+    // userData.localItem = userData.id;
+    let editUserLink = "users/" + userData.id;
     return (
       <Button
         variant="contained"
         size="small"
         disableElevation
         href={editUserLink}
-        onClick={() => {
-          handleClick(userData);
-        }}
+        // onClick={() => {
+        //   handleClick(userData.id);
+        // }}
       >
         Edit
       </Button>
     );
   };
 
-  const handleClick = (userData) => {
-    console.log("userData.id: ", userData.id)
+  const handleClick = (userID) => {
+    props.fetchUserData(userID)
+
+    // fetch(`http://localhost:3000/users/${userID}`)
+    //   .then((response) => response.json())
+    //   .then((data) => console.log( data ))
+    //   .catch((error) => console.log(error));
+
+    // console.log("userData.id: ", userID)
   };
 
   const userName = (userData) => {
@@ -230,25 +236,11 @@ function UserList (props) {
     const [localUsers, setLocalUsers] = useState(null);
     
     useEffect(() => {
-      // console.log("props.fetchUsersList(): ", props.fetchUsersList())
       setLocalUsers(props.fetchUsersList())
-      // console.log("UserList useEffect has run successfully")
-
-      // setLocalUsers(dispatch(fetchUsersList()))
-      // let theList = 
-      // console.log("theList: ", theList)
-      // setLocalUsers()
-
-      // fetch("http://localhost:3000/users")
-      // .then((response) => response.json())
-      // .then((payload) => setLocalUsers(payload) )
-      // .catch((error) => console.log(error));
-
     }, []);
 
   return (
     <div className="userList">
-      {/* {console.log("props.users: ", props.users)} */}
 
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
@@ -342,6 +334,7 @@ function UserList (props) {
                     key={"edit_" + user.id + "_user"}
                   >
                     {editUserButton(user)}
+
                   </TableCell>
                   <TableCell
                     align="center"
@@ -413,18 +406,12 @@ function UserList (props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state: ", state);
+  console.log(state)
   return {
     loading: state.loading, 
-    users: state.users
+    users: state.users,
+    user: state.user,
   };
 };
 
-// connects to reducer
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     // fetchUsersList: (data) => dispatch({type: 'SET_USERS', data})
-//   }
-// }
-
-export default connect(mapStateToProps, {fetchUsersList})(UserList);
+export default connect(mapStateToProps, {fetchUsersList, fetchUserData})(UserList);

@@ -19,24 +19,18 @@ export const fetchUsersList = () => {
   };
 };
 
-// export function fetchUserData() {
-//   // return (dispatch) => {
-//   fetch("http://localhost:3000/users")
-//     .then((response) => response.json())
-//     .then((payload) => payload)
-//     .catch((error) => console.log(error));
-//   // };
-// }
-
-export const fetchUserData = () => {
+export const fetchUserData = (userID) => {
+// console.log("from userActions, userID: ", userID)
   return (dispatch) => {
+    fetch(`http://localhost:3000/users/${userID}`)
+    .then((response) => response.json())
+    .then((data) => dispatch({ type: "GET_USER", user: data }))
+    // .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+};
+    
     // dispatch({ type: "LOADING", payload: true });
-    // fetch(`http://localhost:3000/users/${id}`)
-    fetch(`http://localhost:3000/users/6`)
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: "ASDF", user: data }))
-      .catch((error) => console.log(error));
-
+    // fetch(`http://localhost:3000/users/6`)
       //   if (response.ok === false) {
       //     throw dispatch({
       //       type: "ERROR",
@@ -53,7 +47,6 @@ export const fetchUserData = () => {
       //   dispatch({ type: "LOADING", payload: false });
       //   dispatch({ type: "ERROR", payload: error.message });
       // });
-  };
 };
 
 export function editUser(user) {

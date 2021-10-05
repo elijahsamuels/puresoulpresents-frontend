@@ -13,8 +13,15 @@ function UserDetails(props) {
 
     const [localUser, setLocalUser] = useState(null);
 
+    console.log("props.user: ", props.user)
+
     useEffect(() => { 
-        setLocalUser(props.fetchUserData())
+        // console.log("props in UserDetails: ", props.user.id)
+        setLocalUser(props.fetchUserData(props.match.params.id))
+        // setLocalUser(props.fetchUserData())
+    }, [])
+
+
         // console.log("props.fetchUserData():", props.fetchUserData())
         // console.log("UserDetails useEffect has run successfully")
 
@@ -26,7 +33,6 @@ function UserDetails(props) {
         //     //     email: "johndoe@TEST.com",
         //     //     city: "LondonTEST",
         //     //   },
-    }, [])
 
     return (
         <div className="userDetails">
@@ -38,6 +44,7 @@ function UserDetails(props) {
             
             {/* <UserPhoto /> */}
             <UserInfo user={props.user} />
+            {console.log(props)}
             {/* {console.log("UserDetails props.user: ", props.user)} */}
             {/* <ContactInfo /> */}
             {/* <TaxInfo />
@@ -51,17 +58,12 @@ function UserDetails(props) {
 // *** include upload field for W9. ***
 
 const mapStateToProps = (state) => {
-    // console.log("state: ", state)
+    console.log("state: ", state)
   return {
       loading: state.loading,
       users: state.users,
       user: state.user,
 };
 };
-
-// const mapDispatchToProps = (dispatch) => ({
-//     fetchUserDataHandler: data => dispatch(fetchUserData(data))
-// })
-
 
 export default connect(mapStateToProps, { fetchUserData })(UserDetails);
