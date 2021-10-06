@@ -48,6 +48,7 @@ export const fetchUserData = (userID) => {
       // });
 
 export function editUser(user) {
+  console.log("userActions/editUser/user: ", user)
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
     fetch(`http://localhost:3000/users/${user.id}`, {
@@ -68,8 +69,8 @@ export function editUser(user) {
         return response.json();
       })
       .then((data) => {
-        dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "EDIT_USER", payload: data });
+        dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "ERROR", payload: null });
       })
       .catch((err) => {

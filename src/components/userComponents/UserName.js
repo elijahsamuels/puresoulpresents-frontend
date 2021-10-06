@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchUserData } from "../../../src/actions/userActions";
+import { fetchUserData } from "../../actions/userActions";
 
-const UserInfo = (props) => {
+const UserName = (props) => {
   
   useEffect(() => {
     setLocalUser(props.user);
-  }, [props.user]);
+
+  }, []);
 
   const [localUser, setLocalUser] = useState({
     first_name: props.user.first_name,
@@ -14,11 +15,13 @@ const UserInfo = (props) => {
   });
 
   const handleChange = (event) => {
+    // console.log(event.target.name,": ", event.target.value)
     setLocalUser({
       ...localUser,
       [event.target.name]: event.target.value,
     });
   };
+  // console.log("localUser: ", localUser)
 
   return (
     <div className="userDetails">
@@ -52,6 +55,7 @@ const UserInfo = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log("UserName state: ", state)
   return {
     loading: state.loading,
     users: state.users,
@@ -59,4 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUserData })(UserInfo);
+export default connect(mapStateToProps, { fetchUserData })(UserName);
