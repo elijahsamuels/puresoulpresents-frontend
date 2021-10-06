@@ -9,6 +9,7 @@ import UserInfo from "../components/userComponents/UserInfo";
 import PaymentInfo from "../components/userComponents/PaymentInfo";
 import { fetchUserData } from "../actions/userActions";
 import Button from "@material-ui/core/Button";
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 function UserDetails(props) {
@@ -19,12 +20,19 @@ function UserDetails(props) {
         setLocalUser(props.fetchUserData(props.match.params.id))
     }, [])
 
+    const handleSave = () => {
+
+    }
+
+
     return (
              (!!props.loading ?
                     
                 // If the state is still loading
                 <div className="loading">
                     UGH! WE'RE LOADING!
+                    <CircularProgress color="error" />
+
                 </div>
 
             : // If the state is not loading
@@ -44,7 +52,7 @@ function UserDetails(props) {
                         disableElevation
                         href="userGigList"
                         // onClick={() => {
-                        //   handleClick(userData.id);
+                        //   handleGigButton(userData.id);
                         // }}
                     >
                         User Gig List
@@ -53,10 +61,10 @@ function UserDetails(props) {
                         variant="contained"
                         size="small"
                         disableElevation
-                        href={"Save"}
-                        // onClick={() => {
-                        //   handleClick(userData.id);
-                        // }}
+                        // href={"Save"}
+                        onClick={() => {
+                          handleSave(props.user);
+                        }}
                     >
                         Save
                     </Button>

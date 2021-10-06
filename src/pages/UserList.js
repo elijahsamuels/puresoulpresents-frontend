@@ -13,6 +13,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import userSamplePhoto from "../images/userSamplePhoto.png";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles({
   // table: {
@@ -47,9 +48,9 @@ function UserList (props) {
     );
   };
 
-  const handleClick = (userID) => {
-    props.fetchUserData(userID)
-  };
+  // const handleClick = (userID) => {
+  //   props.fetchUserData(userID)
+  // };
 
   const userName = (userData) => {
     let missingItem = "Name";
@@ -238,6 +239,7 @@ function UserList (props) {
       // If the state is still loading
       <div className="loading">
           UGH! WE'RE LOADING!
+          <CircularProgress color="error" />
       </div>
     : // If the state is not loading
       <div className="userList">
