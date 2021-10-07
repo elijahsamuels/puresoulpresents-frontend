@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 // import { useDispatch } from "react-redux";
 // import { Link } from "react-router-dom";
-import { fetchUserData , fetchUsersList } from "../actions/userActions";
+import { fetchUserData, fetchUsersList } from "../actions/userActions";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -13,7 +13,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import userSamplePhoto from "../images/userSamplePhoto.png";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 const useStyles = makeStyles({
   // table: {
@@ -21,13 +21,19 @@ const useStyles = makeStyles({
   // },
 });
 
-function UserList (props) {
+function UserList(props) {
   const classes = useStyles();
 
   const userTernary = (userData, missingItem) => {
     return userData.localItem
       ? { true: userData.localItem }
-      : { false: <font color="red" key={"items_missing_for_user_" + userData.id}>Missing {missingItem}</font> };
+      : {
+          false: (
+            <font color="red" key={"items_missing_for_user_" + userData.id}>
+              Missing {missingItem}
+            </font>
+          ),
+        };
   };
 
   const editUserButton = (userData) => {
@@ -147,9 +153,9 @@ function UserList (props) {
   };
 
   const missingData = (userData) => {
-        // filter out user items that are undefined, and list those items. undefinded items are missing,
-        // once the list is generated, use this info to send user an email requesting that info.
-        
+    // filter out user items that are undefined, and list those items. undefinded items are missing,
+    // once the list is generated, use this info to send user an email requesting that info.
+
     let items = [];
 
     if (typeof userPhone(userData)[0] !== "string") {
@@ -181,13 +187,14 @@ function UserList (props) {
     }
 
     if (items.length > 0) {
-      let missingItemsList = items.map((item) => 
-      <li 
-        id={"user_" + (userData.id + "_" + item).toLowerCase()} 
-        key={"user_" + (userData.id + "_" + item).toLowerCase()}
+      let missingItemsList = items.map((item) => (
+        <li
+          id={"user_" + (userData.id + "_" + item).toLowerCase()}
+          key={"user_" + (userData.id + "_" + item).toLowerCase()}
         >
           {item}
-      </li>);
+        </li>
+      ));
       return <font color="red">Items Missing: {missingItemsList}</font>;
     } else {
       return <font color="green">Good</font>;
@@ -225,25 +232,23 @@ function UserList (props) {
   //         document.write('<a href="mailto:' + '?subject=' + subject + '&body=' + body + '>' + 'Click here to send email as well' + '<'+'/a>');
   // }
   // const emailUserAboutMissingData = (userData) => {
-    //     missingData(userData)
+  //     missingData(userData)
 
-    const [localUsers, setLocalUsers] = useState(null);
-    
-    useEffect(() => {
-      setLocalUsers(props.fetchUsersList())
-    }, []);
+  const [localUsers, setLocalUsers] = useState(null);
 
-  return (
+  useEffect(() => {
+    setLocalUsers(props.fetchUsersList());
+  }, []);
 
-    (!!props.loading ?
-      // If the state is still loading
-      <div className="loading">
-          UGH! WE'RE LOADING!
-          <CircularProgress color="error" />
-      </div>
-    : // If the state is not loading
-      <div className="userList">
-
+  return !!props.loading ? (
+    // If the state is still loading
+    <div className="loading">
+      UGH! WE'RE LOADING!
+      <CircularProgress color="error" />
+    </div>
+  ) : (
+    // If the state is not loading
+    <div className="userList">
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
 
@@ -314,106 +319,106 @@ function UserList (props) {
             </TableRow>
           </TableHead>
           <TableBody key={"table_body"} id={"table_body"}>
-
             {props.users.map((user) => (
               <TableRow
-              key={"user_" + user.id + "_row"}
-              id={"user_" + user.id + "_row"}
+                key={"user_" + user.id + "_row"}
+                id={"user_" + user.id + "_row"}
               >
-                  <TableCell
-                    key={"user_" + user.id + "_missingData"}
-                    id={"userM" + user.id + "_issingData"}
-                    align="left"
-                  >
-                    {missingData(user)}
-                    <br />
-                    {/* {sendUserEmailAboutMissingData(user.fields)} */}
-                    {/* <button onclick={sendUserEmailAboutMissingData(user)}>Send Email</button> */}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"edit_" + user.id + "_user"}
-                    key={"edit_" + user.id + "_user"}
-                  >
-                    {editUserButton(user)}
-
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_name"}
-                    key={"user_" + user.id + "_name"}
-                  >
-                    {userName(user)}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_phone"}
-                    key={"user_" + user.id + "_phone"}
-                  >
-                    {userPhone(user)}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_email"}
-                    key={"user_" + user.id + "_email"}
-                  >
-                    {userEmail(user)}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_instrument"}
-                    key={"user_" + user.id + "_instrument"}
-                  >
-                    {userInstrument(user)}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_city"}
-                    key={"user_" + user.id + "_city"}
-                  >
-                    {userCity(user)}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_bio"}
-                    key={"user_" + user.id + "_bio"}
-                    width=""
-                    height="10"
-                  >
-                    {userBio(user)}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_w9url"}
-                    key={"user_" + user.id + "_w9url"}
-                  >
-                    {userW9URL(user)}
-                  </TableCell>
-                  <TableCell
-                    align="center"
-                    id={"user_" + user.id + "_headshot"}
-                    key={"user_" + user.id + "_headshot"}
-                  >
-                    {userHeadshot(user)}
-                    <br />
-                    {userHeadshotThumbnails(user)}
-                  </TableCell>
-                </TableRow>
-              ))}
+                <TableCell
+                  key={"user_" + user.id + "_missingData"}
+                  id={"userM" + user.id + "_issingData"}
+                  align="left"
+                >
+                  {missingData(user)}
+                  <br />
+                  {/* {sendUserEmailAboutMissingData(user.fields)} */}
+                  {/* <button onclick={sendUserEmailAboutMissingData(user)}>Send Email</button> */}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"edit_" + user.id + "_user"}
+                  key={"edit_" + user.id + "_user"}
+                >
+                  {editUserButton(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_name"}
+                  key={"user_" + user.id + "_name"}
+                >
+                  {userName(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_phone"}
+                  key={"user_" + user.id + "_phone"}
+                >
+                  {userPhone(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_email"}
+                  key={"user_" + user.id + "_email"}
+                >
+                  {userEmail(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_instrument"}
+                  key={"user_" + user.id + "_instrument"}
+                >
+                  {userInstrument(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_city"}
+                  key={"user_" + user.id + "_city"}
+                >
+                  {userCity(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_bio"}
+                  key={"user_" + user.id + "_bio"}
+                  width=""
+                  height="10"
+                >
+                  {userBio(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_w9url"}
+                  key={"user_" + user.id + "_w9url"}
+                >
+                  {userW9URL(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_headshot"}
+                  key={"user_" + user.id + "_headshot"}
+                >
+                  {userHeadshot(user)}
+                  <br />
+                  {userHeadshotThumbnails(user)}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
     </div>
-  ))
+  );
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
+  console.log(state);
   return {
-    loading: state.loading, 
+    loading: state.loading,
     users: state.users,
     user: state.user,
   };
 };
 
-export default connect(mapStateToProps, {fetchUsersList, fetchUserData})(UserList);
+export default connect(mapStateToProps, { fetchUsersList, fetchUserData })(
+  UserList
+);

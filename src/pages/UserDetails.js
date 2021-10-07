@@ -13,8 +13,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 function UserDetails(props) {
   
-  const [localUser, setLocalUser] = useState(null);
-
+  const [localUser, setLocalUser] = useState({
+    ...props.user,
+  });
+  // const [localUser, setLocalUser] = useState({
+  //   props: props.fetchUserData(props.match.params.id)
+  // });
+  
   const handleSave = () => {
     editUser(props.user);
     // console.log('handleSave was triggered')
@@ -26,6 +31,11 @@ function UserDetails(props) {
     setLocalUser(props.fetchUserData(props.match.params.id));
   }, []);
   
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(event.target.value)
+  // }
+
   return !!props.loading ? (
     // If the state is still loading
     <div className="loading">
@@ -36,16 +46,22 @@ function UserDetails(props) {
     // If the state is not loading
     <div className="userDetails">
       <h1>
-        Details for {props.user.first_name} {props.user.last_name}
+        {/* Details for {localUser.first_name} {localUser.last_name} */}
       </h1>
+      {/* <form> */}
+
       {/* <UserPhoto user={props.user} /> */}
-      <UserName user={props.user} />
+      <UserName user={props.user} 
+      // handleSubmit={handleSubmit}
+       />
       {/* <ContactInfo user={props.user} /> */}
       {/* <TaxInfo user={props.user} /> */}
       {/* <StaffInfo user={props.user} /> */}
       {/* <PaymentInfo user={props.user} /> */}
       {/* *** include upload field for W9. *** */}
-      <div>
+      {/* <input type="submit" value="Save" />
+      </form> */}
+      {/* <div>
         <Button
           variant="contained"
           size="small"
@@ -68,7 +84,7 @@ function UserDetails(props) {
         >
           Save
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

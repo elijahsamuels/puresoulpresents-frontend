@@ -59,7 +59,7 @@ export function editUser(user) {
       },
       body: JSON.stringify({ user }),
     })
-      .then((response) => {
+      .then((response) => { 
         if (response.ok === false) {
           throw dispatch({
             type: "ERROR",
