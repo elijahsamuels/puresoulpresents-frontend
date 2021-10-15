@@ -30,36 +30,38 @@ function UserName2(props) {
   // },[]);
 
 
-  const onHandleSubmit = (data) => {
-    // Do something with the data
-    console.log("handleSubmit/Form data: ", data);
-  }
+  // const onHandleSubmit = (data) => {
+  //   // Do something with the data
+  //   console.log("handleSubmit/Form data: ", data);
+  // }
 
   return (
     <div className="userDetails">
       {/* <form onSubmit={handleSubmit(onHandleSubmit)}> */}
         <h3>User Information for {userFullName}</h3>
         
-        <Controller name="first_name" control={control} defaultValue={props.user.first_name} render={({ field }) => (
+        {/* <Controller name="first_name" control={control} defaultValue={props.user.first_name} render={({ field }) => ( */}
+        <Controller name="first_name" control={control} render={({ field }) => (
           <TextField 
             {...field} 
             label="First Name" 
             variant="outlined" 
+            size="small"
             error={!!errors.first_name}
             helperText={errors.first_name ? errors.first_name.message : ""}
           />
         )}/>
-        <Controller name="last_name" control={control} defaultValue={props.user.last_name} render={({ field }) => (
+        {/* <Controller name="last_name" control={control} defaultValue={props.user.last_name} render={({ field }) => ( */}
+        <Controller name="last_name" control={control} render={({ field }) => (
           <TextField 
           {...field} 
           label="Last Name" 
           variant="outlined" 
+          size="small"
           error={!!errors.last_name}
           helperText={errors.last_name ? errors.last_name.message : ""}
           />
           )}/>
-        <br />
-        <br />
         {/* <Controller name="email" control={control} defaultValue={props.user.email} render={({ field }) => (
           <TextField 
             {...field}

@@ -13,24 +13,28 @@ function UserContact (props) {
 
   return (
     <div className="userContact">
-      <h2>User Contact</h2>
+      <h3>User Contact</h3>
 
-      <Controller name="email" control={control} defaultValue={props.user.email} render={({ field }) => (
+      {/* <Controller name="email" control={control} defaultValue={props.user.email} render={({ field }) => ( */}
+      <Controller name="email" control={control} render={({ field }) => (
           <TextField 
             {...field}
             type="email"
             label="Email" 
             variant="outlined" 
+            size="small"
             error={!!errors.email}
             helperText={errors.email ? errors.email.message : ""}
           />
         )}/>
-        <Controller name="phone" control={control} defaultValue={props.user.phone} render={({ field }) => (
+        {/* <Controller name="phone" control={control} defaultValue={props.user.phone} render={({ field }) => ( */}
+        <Controller name="phone" control={control} render={({ field }) => (
           <TextField 
             {...field}
             type="phone"
             label="Phone" 
             variant="outlined" 
+            size="small"
             error={!!errors.phone}
             helperText={errors.phone ? errors.phone.message : ""}
           />

@@ -19,8 +19,12 @@ import * as yup from 'yup';
 const schema = yup.object().shape({
   first_name: yup.string().required("First name is required"),
   last_name: yup.string().required("Last name is required"),
-  email: yup.string().email().required("Email is required"),
-  phone: yup.number().min(9).required(),
+  email: yup.string().email("Must be a valid email address").required("Email is required"),
+  phone: yup.string()
+    .required()
+    .matches(/^[0-9]+$/, "Must be only digits")
+    .min(10, 'Must be exactly 10 digits')
+    .max(10, 'Must be exactly 10 digits')
 })
 
 function UserDetails(props) {
@@ -31,7 +35,7 @@ function UserDetails(props) {
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "onBlur",
-    // defaultValues: props.user,
+    defaultValues: props.user,
   });
 
   useEffect(() => {
