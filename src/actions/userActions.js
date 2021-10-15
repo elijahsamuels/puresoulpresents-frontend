@@ -1,9 +1,6 @@
-
-
 // Action creator
 
 // require("dotenv").config();
-
 // export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
 
 // Fetch all user data
@@ -19,16 +16,43 @@ export const fetchUsersList = () => {
 };
 
 // Fetch a single user data
+// export const fetchUserData = (userID) => {
+//   return (dispatch) => {
+//     dispatch({ type: "LOADING", payload: true });
+//     fetch(`http://localhost:3000/users/${userID}`)
+//     .then((response) => response.json())
+//     // .then(data => console.log(data))
+//     .then((data) => dispatch({ type: "GET_USER", user: data }))
+//     .catch((error) => console.log(error));
+//   }
+// };
+
+    // const fetchData = async () => {
+    //   await fetch(`http://localhost:3000/users/${props.match.params.id}`)
+    //   .then((response) => response.json())
+    //   .then((data) => setData(data))
+    //   .catch((error) => console.log(error))
+    // } 
+
+// Fetch a single user data with async/await
 export const fetchUserData = (userID) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch(`http://localhost:3000/users/${userID}`)
-    .then((response) => response.json())
-    .then((data) => dispatch({ type: "GET_USER", user: data }))
-    .catch((error) => console.log(error));
+    const response = await fetch(`http://localhost:3000/users/${userID}`)
+    const data = await response.json()
+    // console.log("userActions/fetchUserData data", data)
+    dispatch({ type: "GET_USER", user: data })
+    // .catch((error) => console.log(error));
   }
 };
-  
+
+// return async dispatch => {
+//   const response = await fetch("https://api.icndb.com/jokes/random");
+//   const joke = await response.json();
+//   dispatch({ type: "SET_JOKE", joke });
+// };
+
+
     // fetch(`http://localhost:3000/users/6`)
       //   if (response.ok === false) {
       //     throw dispatch({
@@ -69,11 +93,13 @@ export function editUser(user) {
         return response.json();
       })
       .then((data) => {
-        dispatch({ type: "EDIT_USER", payload: data });
+        dispatch({ type: "EDIT_USER", user: data });
         dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "ERROR", payload: null });
+        console.log("data: ", data)
       })
       .catch((err) => {
+        console.log("err: ", err)
         dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "ERROR", payload: err.message });
       });

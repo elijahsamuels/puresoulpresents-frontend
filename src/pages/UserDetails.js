@@ -1,97 +1,99 @@
-import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import UserPhoto from "../components/UserPhoto";
 import StaffInfo from "../components/userComponents/StaffInfo";
 import ContactInfo from "../components/userComponents/ContactInfo";
 import TaxInfo from "../components/userComponents/TaxInfo";
-import UserName from "../components/userComponents/UserName";
 import PaymentInfo from "../components/userComponents/PaymentInfo";
+// import UserName from "../components/userComponents/UserName";
+import UserName2 from "../components/userComponents/UserName2";
+// import UserName3 from "../components/userComponents/UserName3";
+import UserContact from "../components/userComponents/UserContact";
 import { fetchUserData, editUser } from "../actions/userActions";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useForm, FormProvider } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from 'yup';
+
+const schema = yup.object().shape({
+  first_name: yup.string().required("First name is required"),
+  last_name: yup.string().required("Last name is required"),
+  email: yup.string().email().required("Email is required"),
+  phone: yup.number().min(9).required(),
+})
 
 function UserDetails(props) {
-  
-  const [localUser, setLocalUser] = useState({
-    ...props.user,
-  });
-  // const [localUser, setLocalUser] = useState({
-  //   props: props.fetchUserData(props.match.params.id)
-  // });
-  
-  const handleSave = () => {
-    editUser(props.user);
-    // console.log('handleSave was triggered')
-    console.log("props.user: ", props.user);
-    // console.log("localUser: ", localUser);
-  };
-  
-  useEffect(() => {
-    setLocalUser(props.fetchUserData(props.match.params.id));
-  }, []);
-  
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(event.target.value)
-  // }
+  console.log("props.user:", props.user);
 
-  return !!props.loading ? (
-    // If the state is still loading
+  const [userData, setUserData] = useState(null);
+
+  const methods = useForm({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+    // defaultValues: props.user,
+  });
+
+  useEffect(() => {
+    const userid = props.match.params.id;
+    setUserData(props.fetchUserData(userid));
+
+    // const fetchData = async () => {
+    // }
+    // fetchData()
+
+    // const userData = async () => {
+    //   await props.fetchUserData(userid)
+    // }
+
+    // const userID = props.match.params.id
+    // const fetchData = async () => {
+    //   await fetch(`http://localhost:3000/users/${userID}`)
+    //   .then((response) => response.json())
+    //   .then((data) => setUserData(data))
+    //   .catch((error) => console.log(error))
+    // }
+    // fetchData()
+
+    // const userID = props.match.params.id;
+    // props.fetchUserData(userID);
+    // setUserData(props.user);
+    // console.log("props.fetchUserData(userid):", props.fetchUserData(userID));
+
+    // setUserData(props.fetchUserData(props.match.params.id))
+  }, []);
+
+  const onHandleSubmit = (data) => {
+    // Do something with the data
+    console.log("handleSubmit/Form data: ", data);
+  }
+
+  return !!props.user ? (
+    // If data is loaded
+    <div className="userDetails">
+      <h1>
+        Details for {props.user.first_name} {props.user.last_name}
+      </h1>
+
+      <FormProvider {...methods }>
+        <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
+          <UserName2 preloadedValues={props.user} />
+          <UserContact preloadedValues={props.user} />
+          <input type="submit" />
+        </form>
+      </FormProvider>
+    </div>
+  ) : (
+    // If the data is still loading
     <div className="loading">
       UGH! WE'RE LOADING!
       <CircularProgress color="error" />
     </div>
-  ) : (
-    // If the state is not loading
-    <div className="userDetails">
-      <h1>
-        {/* Details for {localUser.first_name} {localUser.last_name} */}
-      </h1>
-      {/* <form> */}
-
-      {/* <UserPhoto user={props.user} /> */}
-      <UserName user={props.user} 
-      // handleSubmit={handleSubmit}
-       />
-      {/* <ContactInfo user={props.user} /> */}
-      {/* <TaxInfo user={props.user} /> */}
-      {/* <StaffInfo user={props.user} /> */}
-      {/* <PaymentInfo user={props.user} /> */}
-      {/* *** include upload field for W9. *** */}
-      {/* <input type="submit" value="Save" />
-      </form> */}
-      {/* <div>
-        <Button
-          variant="contained"
-          size="small"
-          disableElevation
-          // href="userGigList"
-          // onClick={() => {
-          //   handleGigButton(userData.id);
-          // }}
-        >
-          User Gig List
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          disableElevation
-          // href={"Save"}
-          onClick={() => {
-            handleSave(props.user);
-          }}
-        >
-          Save
-        </Button>
-      </div> */}
-    </div>
   );
 }
 
-
 const mapStateToProps = (state) => {
-  console.log("UserDetails state: ", state);
+  // console.log("state: ",state)
   return {
     loading: state.loading,
     users: state.users,

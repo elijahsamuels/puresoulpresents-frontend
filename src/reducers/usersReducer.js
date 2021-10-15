@@ -3,12 +3,12 @@
 const initialState = {
   loading: true,
   user: {
-    // id: 123,
-    // first_name: "JohnTEST",
-    // last_name: "DoeTEST",
-    // phone: "1234567890",
-    // email: "johndoe@TEST.com",
-    // city: "LondonTEST",
+    id: 123,
+    first_name: "JohnTEST",
+    last_name: "DoeTEST",
+    phone: "1234567890",
+    email: "johndoe@TEST.com",
+    city: "LondonTEST",
   },
   users: [
     {
@@ -43,6 +43,8 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, loading: false, users: action.users };
 
     case "GET_USER":
+      // console.log("action.user:", action.user)
+      // console.log("state:", state)
       return { ...state, loading: false, user: action.user };
 
     case "EDIT_USER":

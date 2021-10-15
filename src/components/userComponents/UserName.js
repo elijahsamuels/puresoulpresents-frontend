@@ -8,7 +8,7 @@ const UserName = (props) => {
   }, []);
 
   const [localUser, setLocalUser] = useState({
-    ...props.user,
+    // ...props.user,
     // first_name: props.user.first_name,
     // last_name: props.user.last_name,
   });
