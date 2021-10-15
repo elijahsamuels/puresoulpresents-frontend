@@ -12,6 +12,8 @@ import UserContact from "../components/userComponents/UserContact";
 import { fetchUserData, editUser } from "../actions/userActions";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@mui/material/CircularProgress";
+import SaveIcon from '@mui/icons-material/Save';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
@@ -83,7 +85,18 @@ function UserDetails(props) {
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
           <UserName2 preloadedValues={props.user} />
           <UserContact preloadedValues={props.user} />
-          <input type="submit" />
+          {/* <input type="submit" /> */}
+          <LoadingButton
+            color="primary"
+            // onClick={handleClick}
+            loadingPosition="start"
+            startIcon={<SaveIcon />}
+            variant="contained"
+            type="submit"
+          >
+            Save
+          </LoadingButton>
+
         </form>
       </FormProvider>
     </div>
