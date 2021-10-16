@@ -84,7 +84,6 @@ export function editUser(user) {
       body: JSON.stringify({ user }),
     })
       .then((response) => { 
-        console.log("1st .then (response):", response)
         if (response.ok === false) {
           throw dispatch({
             type: "ERROR",
@@ -94,14 +93,12 @@ export function editUser(user) {
         return response.json();
       })
       .then((user) => {
-        console.log("user: ", user)
         dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "ERROR", payload: null });
         dispatch({ type: "EDIT_USER", user: user });
       })
       .catch((err) => {
-        console.log("err: ", err)
-        // dispatch({ type: "LOADING", payload: false });
+        dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "ERROR", payload: err.message });
       });
   };

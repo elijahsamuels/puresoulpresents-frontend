@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUserData, editUser } from "../../actions/userActions";
-import { useForm, Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 
-function UserContact (props) {
-  // console.log("UserContact props.user:", props.user);
+function UserContact () {
 
-  const { register, control, handleSubmit, setValue, formState: { errors }} = useFormContext({
-  });
+  const { control, formState: { errors }} = useFormContext();
 
   return (
     <div className="userContact">
@@ -49,6 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUserData, editUser })(
-  UserContact
-);
+export default connect(mapStateToProps, { fetchUserData, editUser })(UserContact);

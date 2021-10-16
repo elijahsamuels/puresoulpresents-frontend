@@ -6,7 +6,7 @@ import ContactInfo from "../components/userComponents/ContactInfo";
 import TaxInfo from "../components/userComponents/TaxInfo";
 import PaymentInfo from "../components/userComponents/PaymentInfo";
 // import UserName from "../components/userComponents/UserName";
-import UserName2 from "../components/userComponents/UserName2";
+import UserName from "../components/userComponents/UserName";
 // import UserName3 from "../components/userComponents/UserName3";
 import UserContact from "../components/userComponents/UserContact";
 import { fetchUserData, editUser } from "../actions/userActions";
@@ -65,7 +65,7 @@ function UserDetails(props) {
 
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          <UserName2 />
+          <UserName />
           <UserContact />
           <LoadingButton
             color="primary"
