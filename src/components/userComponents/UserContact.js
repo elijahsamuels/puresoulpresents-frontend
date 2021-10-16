@@ -26,7 +26,6 @@ function UserContact () {
         <Controller name="phone" control={control} render={({ field }) => (
           <TextField 
             {...field}
-            type="phone"
             label="Phone" 
             variant="outlined" 
             size="small"

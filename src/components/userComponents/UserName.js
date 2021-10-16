@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField';
 function UserName(props) {
   // console.log("UserName preloadedValues: ", preloadedValues);
   // console.log("UserName props.user: ", props.user);
-  const userFullName = `${props.user.first_name} ${props.user.last_name}`;
 
   const { register, watch, reset, control, handleSubmit, setValue, formState: { errors }} = useFormContext({
     defaultValues: props.user
@@ -39,7 +38,6 @@ function UserName(props) {
   return (
     <div className="userDetails">
       {/* <form onSubmit={handleSubmit(onHandleSubmit)}> */}
-        <h3>User Information for {userFullName}</h3>
         
         {/* <Controller name="first_name" control={control} defaultValue={props.user.first_name} render={({ field }) => ( */}
         <Controller name="first_name" control={control} render={({ field }) => (
