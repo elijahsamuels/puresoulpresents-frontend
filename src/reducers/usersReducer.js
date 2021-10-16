@@ -8,7 +8,11 @@ const initialState = {
     last_name: "DoeTEST",
     phone: "1234567890",
     email: "johndoe@TEST.com",
+    address1: "123 Boring St",
+    address2: "Apt 09876",
     city: "LondonTEST",
+    state: "AZ",
+    zip_code: "12345",
   },
   users: [
     {
