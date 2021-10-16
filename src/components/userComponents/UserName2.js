@@ -11,6 +11,7 @@ function UserName2(props) {
   const userFullName = `${props.user.first_name} ${props.user.last_name}`;
 
   const { register, watch, reset, control, handleSubmit, setValue, formState: { errors }} = useFormContext({
+    defaultValues: props.user
     });
     // console.log("watch(first_name):", watch("first_name"))
 
@@ -44,15 +45,18 @@ function UserName2(props) {
         <Controller name="first_name" control={control} render={({ field }) => (
           <TextField 
             {...field} 
-            label="First Name" 
+            label="First Name"
             variant="outlined" 
             size="small"
             error={!!errors.first_name}
             helperText={errors.first_name ? errors.first_name.message : ""}
-          />
+            />
         )}/>
+
+        
         {/* <Controller name="last_name" control={control} defaultValue={props.user.last_name} render={({ field }) => ( */}
         <Controller name="last_name" control={control} render={({ field }) => (
+          // console.log(field),
           <TextField 
           {...field} 
           label="Last Name" 

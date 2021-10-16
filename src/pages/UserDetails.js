@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import UserPhoto from "../components/UserPhoto";
 import StaffInfo from "../components/userComponents/StaffInfo";
 import ContactInfo from "../components/userComponents/ContactInfo";
@@ -10,7 +10,7 @@ import UserName2 from "../components/userComponents/UserName2";
 // import UserName3 from "../components/userComponents/UserName3";
 import UserContact from "../components/userComponents/UserContact";
 import { fetchUserData, editUser } from "../actions/userActions";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import SaveIcon from '@mui/icons-material/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -23,25 +23,30 @@ const schema = yup.object().shape({
   last_name: yup.string().required("Last name is required"),
   email: yup.string().email("Must be a valid email address").required("Email is required"),
   phone: yup.string()
-    .required()
-    .matches(/^[0-9]+$/, "Must be only digits")
-    .min(10, 'Must be exactly 10 digits')
-    .max(10, 'Must be exactly 10 digits')
+  .required("Phone number is required")
+  .matches(/^[0-9]+$/, "Must be only digits")
+  .min(10, 'Must be exactly 10 digits')
+  .max(10, 'Must be exactly 10 digits')
 })
 
 function UserDetails(props) {
-  console.log("props.user:", props.user);
-
+  const userid = props.match.params.id;
   const [userData, setUserData] = useState(null);
+  // console.log("props.user:", props.user);
 
   const methods = useForm({
     resolver: yupResolver(schema),
-    mode: "onBlur",
-    defaultValues: props.user,
+    mode: "onChange",
+        defaultValues: useMemo(() => {
+      return props.user;
+    }, [props])
+
+    // defaultValues: props.user,
   });
+  
+  // console.log(userData)
 
   useEffect(() => {
-    const userid = props.match.params.id;
     setUserData(props.fetchUserData(userid));
 
     // const fetchData = async () => {
@@ -65,10 +70,36 @@ function UserDetails(props) {
     // props.fetchUserData(userID);
     // setUserData(props.user);
     // console.log("props.fetchUserData(userid):", props.fetchUserData(userID));
-
     // setUserData(props.fetchUserData(props.match.params.id))
   }, []);
 
+  useEffect(() => {
+    methods.reset(props.user);
+  }, [props.user]);
+
+
+  // useEffect(() => {
+  //   if (userData) {
+  //     methods.setValue([{ first_name: userData.first_name }, { phone: userData.phone }]);
+  //   }
+  // }, []);
+
+
+
+    //   // effect runs on component mount
+    //   useEffect(() => {
+    //     // simulate async api call with set timeout
+    //     setTimeout(() => setUser({ title: 'Mr', firstName: 'Frank', lastName: 'Murphy' }), 1000);
+    // }, []);
+
+    // effect runs when user state is updated
+    // useEffect(() => {
+    //     // reset form with user data
+    //     if (userData) {
+    //       methods.reset(userData);
+    //     }
+    //     }, [userData]);
+    
   const onHandleSubmit = (data) => {
     // Do something with the data
     console.log("handleSubmit/Form data: ", data);
@@ -83,12 +114,10 @@ function UserDetails(props) {
 
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          <UserName2 preloadedValues={props.user} />
-          <UserContact preloadedValues={props.user} />
-          {/* <input type="submit" /> */}
+          <UserName2 />
+          <UserContact />
           <LoadingButton
             color="primary"
-            // onClick={handleClick}
             loadingPosition="start"
             startIcon={<SaveIcon />}
             variant="contained"
@@ -110,7 +139,6 @@ function UserDetails(props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state: ",state)
   return {
     loading: state.loading,
     users: state.users,
