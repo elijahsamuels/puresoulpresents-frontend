@@ -56,6 +56,13 @@ function UserDetails(props) {
   const [userData, setUserData] = useState(null);
   // console.log("props.user:", props.user);
 
+  const lastUpdatedDateTime = () => {
+    let dateTime = props.user.updated_at
+    let lastUpdated = new Date(dateTime)
+    // console.log(`Last updated at ${new Date(dateTime)}`);
+    return <span>Last updated at {lastUpdated.toString()} </span>
+  }
+
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -100,6 +107,7 @@ function UserDetails(props) {
             Save
           </LoadingButton>
         </form>
+          {lastUpdatedDateTime()}
       </FormProvider>
     </div>
   ) : (

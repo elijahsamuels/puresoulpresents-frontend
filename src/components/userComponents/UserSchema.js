@@ -1,4 +1,3 @@
-import React from 'react'
 import * as yup from 'yup';
 
 export const schema = yup.object().shape({
@@ -30,14 +29,3 @@ export const schema = yup.object().shape({
     .min(5, 'Must be exactly 5 digits')
     .max(5, 'Must be exactly 5 digits'),
 })
-
-
-// function UserSchema() {
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
-
-// export default UserSchema

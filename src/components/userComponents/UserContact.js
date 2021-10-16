@@ -10,7 +10,6 @@ function UserContact () {
 
   return (
     <div className="userContact">
-      <h3>User Contact</h3>
 
       <Controller name="email" control={control} render={({ field }) => (
           <TextField 
