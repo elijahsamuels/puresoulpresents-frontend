@@ -1,6 +1,3 @@
-// Action creator
-
-// require("dotenv").config();
 // export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
 
 // Fetch all user data
@@ -14,6 +11,19 @@ export const fetchUsersList = () => {
     .catch((error) => console.log(error));
   };
 };
+
+// Fetch a single user data with async/await
+export const fetchUserData = (userID) => {
+  return async (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    const response = await fetch(`http://localhost:3000/users/${userID}`)
+    const data = await response.json()
+    // console.log("userActions/fetchUserData data", data)
+    dispatch({ type: "GET_USER", user: data })
+    // .catch((error) => console.log(error));
+  }
+};
+
 
 // Fetch a single user data
 // export const fetchUserData = (userID) => {
@@ -34,17 +44,7 @@ export const fetchUsersList = () => {
     //   .catch((error) => console.log(error))
     // } 
 
-// Fetch a single user data with async/await
-export const fetchUserData = (userID) => {
-  return async (dispatch) => {
-    dispatch({ type: "LOADING", payload: true });
-    const response = await fetch(`http://localhost:3000/users/${userID}`)
-    const data = await response.json()
-    // console.log("userActions/fetchUserData data", data)
-    dispatch({ type: "GET_USER", user: data })
-    // .catch((error) => console.log(error));
-  }
-};
+
 
 // return async dispatch => {
 //   const response = await fetch("https://api.icndb.com/jokes/random");
@@ -84,6 +84,7 @@ export function editUser(user) {
       body: JSON.stringify({ user }),
     })
       .then((response) => { 
+        console.log("1st .then (response):", response)
         if (response.ok === false) {
           throw dispatch({
             type: "ERROR",
@@ -92,15 +93,15 @@ export function editUser(user) {
         }
         return response.json();
       })
-      .then((data) => {
-        dispatch({ type: "EDIT_USER", user: data });
+      .then((user) => {
+        console.log("user: ", user)
         dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "ERROR", payload: null });
-        console.log("data: ", data)
+        dispatch({ type: "EDIT_USER", user: user });
       })
       .catch((err) => {
         console.log("err: ", err)
-        dispatch({ type: "LOADING", payload: false });
+        // dispatch({ type: "LOADING", payload: false });
         dispatch({ type: "ERROR", payload: err.message });
       });
   };

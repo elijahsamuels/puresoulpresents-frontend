@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUserData, editUser } from "../../actions/userActions";
 import { useForm, Controller, useFormContext } from "react-hook-form";
-// import { TextField } from "@material-ui/core";
 import TextField from '@mui/material/TextField';
 
 function UserContact (props) {
@@ -15,7 +14,6 @@ function UserContact (props) {
     <div className="userContact">
       <h3>User Contact</h3>
 
-      {/* <Controller name="email" control={control} defaultValue={props.user.email} render={({ field }) => ( */}
       <Controller name="email" control={control} render={({ field }) => (
           <TextField 
             {...field}
@@ -27,7 +25,6 @@ function UserContact (props) {
             helperText={errors.email ? errors.email.message : ""}
           />
         )}/>
-        {/* <Controller name="phone" control={control} defaultValue={props.user.phone} render={({ field }) => ( */}
         <Controller name="phone" control={control} render={({ field }) => (
           <TextField 
             {...field}

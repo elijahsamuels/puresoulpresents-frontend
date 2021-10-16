@@ -48,7 +48,7 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, loading: false, user: action.user };
 
     case "EDIT_USER":
-      return { ...state, loading: false, user: action.data };
+      return { ...state, loading: false, user: action.user };
 
     case "ERROR":
       return { ...state, error: action.data };

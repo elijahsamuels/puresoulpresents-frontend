@@ -37,72 +37,23 @@ function UserDetails(props) {
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
-        defaultValues: useMemo(() => {
+    defaultValues: useMemo(() => {
       return props.user;
     }, [props])
-
-    // defaultValues: props.user,
   });
   
-  // console.log(userData)
-
   useEffect(() => {
     setUserData(props.fetchUserData(userid));
-
-    // const fetchData = async () => {
-    // }
-    // fetchData()
-
-    // const userData = async () => {
-    //   await props.fetchUserData(userid)
-    // }
-
-    // const userID = props.match.params.id
-    // const fetchData = async () => {
-    //   await fetch(`http://localhost:3000/users/${userID}`)
-    //   .then((response) => response.json())
-    //   .then((data) => setUserData(data))
-    //   .catch((error) => console.log(error))
-    // }
-    // fetchData()
-
-    // const userID = props.match.params.id;
-    // props.fetchUserData(userID);
-    // setUserData(props.user);
-    // console.log("props.fetchUserData(userid):", props.fetchUserData(userID));
-    // setUserData(props.fetchUserData(props.match.params.id))
   }, []);
 
   useEffect(() => {
     methods.reset(props.user);
   }, [props.user]);
-
-
-  // useEffect(() => {
-  //   if (userData) {
-  //     methods.setValue([{ first_name: userData.first_name }, { phone: userData.phone }]);
-  //   }
-  // }, []);
-
-
-
-    //   // effect runs on component mount
-    //   useEffect(() => {
-    //     // simulate async api call with set timeout
-    //     setTimeout(() => setUser({ title: 'Mr', firstName: 'Frank', lastName: 'Murphy' }), 1000);
-    // }, []);
-
-    // effect runs when user state is updated
-    // useEffect(() => {
-    //     // reset form with user data
-    //     if (userData) {
-    //       methods.reset(userData);
-    //     }
-    //     }, [userData]);
     
   const onHandleSubmit = (data) => {
     // Do something with the data
     console.log("handleSubmit/Form data: ", data);
+    props.editUser(data);
   }
 
   return !!props.user ? (
@@ -125,7 +76,6 @@ function UserDetails(props) {
           >
             Save
           </LoadingButton>
-
         </form>
       </FormProvider>
     </div>
