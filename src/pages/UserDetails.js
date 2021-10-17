@@ -5,6 +5,7 @@ import { schema } from "../components/userComponents/UserSchema";
 import UserName from "../components/userComponents/UserName";
 import UserContact from "../components/userComponents/UserContact";
 import UserAddress from "../components/userComponents/UserAddress";
+import UserBio from "../components/userComponents/UserBio";
 // import UserTaxInfo from "../components/userComponents/UserTaxInfo";
 import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
 
@@ -98,6 +99,7 @@ function UserDetails(props) {
           <br />
           <UserContact />
           <UserAddress />
+          <UserBio />
           <UserPaymentInfo />
           {/* <UserTaxInfo /> */}
           <br />

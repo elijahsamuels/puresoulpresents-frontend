@@ -18,7 +18,7 @@ A User can confirm an invitation to an event (0: invited, 1:accpeted, 2: decline
 - userBio
 - figure out how to have empty strings be the default value
 - upload image
-- 
+- userPhoto
 - 
 
 
