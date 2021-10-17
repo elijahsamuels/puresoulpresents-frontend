@@ -17,8 +17,34 @@ A User can confirm an invitation to an event (0: invited, 1:accpeted, 2: decline
 - taxidName
 - userBio
 - figure out how to have empty strings be the default value
+
+- create a new user with the default properties of empty strings
+- create user in database
+- build create user form
+- add create user button
+
 - upload image
 - userPhoto
+- will probably have to use ActiveStorage along with AWS or GCS
+  https://guides.rubyonrails.org/active_storage_overview.html
+
+# TODOS - Talents (will be used for instruments, but later can be referred to for other skills)
+- generate the table
+- primary_talent
+- secondary_talent
+- other_talents (array of other selections)
+- 
+
+# TODOS - Cities
+- 
+- 
+- 
+- 
+
+# TODOS - Events
+- 
+- 
+- 
 - 
 
 

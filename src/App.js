@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserDetails from "./pages/UserDetails";
 import UserList from "./pages/UserList";
+import CreateUser from "./pages/CreateUser";
 import Contact from "./pages/Contact";
 import Index from "./pages/Index";
 import ErrorPage from "./pages/Error";
@@ -20,6 +21,7 @@ function App() {
                     <Route exact path="/" component={Index} />
                     <Route exact path="/users/:id/" component={UserDetails} />
                     <Route exact path="/userlist" component={UserList} />
+                    <Route exact path="/createuser" component={CreateUser} />
                     <Route exact path="/contact" component={Contact} />
                     <Route component={ErrorPage} />
                     {/* <Route exact path="/test" component={Test} /> */}

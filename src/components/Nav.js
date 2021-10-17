@@ -12,6 +12,8 @@ function Nav() {
       {" - "}
       <Link to="/userlist">User List</Link>
       {" - "}
+      <Link to="/createuser">Create New User</Link>
+      {" - "}
       {/* <Link to="/userdetails">User Details</Link>
       {" - "} */}
       <Link to="/contact">Contact</Link>
