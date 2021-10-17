@@ -24,6 +24,73 @@ export const fetchUserData = (userID) => {
   }
 };
 
+export function editUser(user) {
+  // console.log("userActions/editUser/user: ", user)
+  return (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    fetch(`http://localhost:3000/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user }),
+    })
+      .then((response) => { 
+        if (response.ok === false) {
+          throw dispatch({
+            type: "ERROR",
+            payload: "ERROR: Unable to save user edits.",
+          });
+        }
+        return response.json();
+      })
+      .then((user) => {
+        dispatch({ type: "LOADING", payload: false });
+        dispatch({ type: "ERROR", payload: null });
+        dispatch({ type: "EDIT_USER", user: user });
+      })
+      .catch((err) => {
+        dispatch({ type: "LOADING", payload: false });
+        dispatch({ type: "ERROR", payload: err.message });
+      });
+  };
+}
+
+// Create a new user
+export function createNewUser (newUserData) {
+  console.log("userActions/createNewUser/newUserData: ", newUserData)
+  return (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    fetch(`http://localhost:3000/users`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newUserData }),
+    })
+    .then((response) => { 
+      if (response.ok === false) {
+        throw dispatch({
+          type: "ERROR",
+          payload: "ERROR: Unable to save user edits.",
+        });
+      }
+      return response.json();
+    })
+    .then((user) => {
+      dispatch({ type: "LOADING", payload: false });
+      dispatch({ type: "ERROR", payload: null });
+      dispatch({ type: "ADD_USER", user: user });
+    })
+    .catch((err) => {
+      dispatch({ type: "LOADING", payload: false });
+      dispatch({ type: "ERROR", payload: err.message });
+    });
+  }
+}
+
 
 // Fetch a single user data
 // export const fetchUserData = (userID) => {
@@ -71,39 +138,6 @@ export const fetchUserData = (userID) => {
       //   dispatch({ type: "ERROR", payload: error.message });
       // });
 
-export function editUser(user) {
-  console.log("userActions/editUser/user: ", user)
-  return (dispatch) => {
-    dispatch({ type: "LOADING", payload: true });
-    fetch(`http://localhost:3000/users/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user }),
-    })
-      .then((response) => { 
-        if (response.ok === false) {
-          throw dispatch({
-            type: "ERROR",
-            payload: "ERROR: Unable to save user edits.",
-          });
-        }
-        return response.json();
-      })
-      .then((user) => {
-        dispatch({ type: "LOADING", payload: false });
-        dispatch({ type: "ERROR", payload: null });
-        dispatch({ type: "EDIT_USER", user: user });
-      })
-      .catch((err) => {
-        dispatch({ type: "LOADING", payload: false });
-        dispatch({ type: "ERROR", payload: err.message });
-      });
-  };
-}
-
 // .then((data) => dispatch({ type: "SET_USERS", payload: data }));
 
 // return fetch("http://localhost:3000/users/", {
@@ -124,10 +158,3 @@ export function editUser(user) {
 // .then((payload) => dispatch({ type: "SET_USERS", payload }));
 // };
 // };
-
-// async function fetchUsersList() {
-//     await fetch(`${allPureSoulPresentsMuisicians}`)
-//     .then((response) => response.json())
-//     .then(json => console.log(json))
-//     .catch((error) => console.log(error));
-//   }

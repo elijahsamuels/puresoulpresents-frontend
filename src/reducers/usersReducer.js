@@ -44,7 +44,6 @@ const initialState = {
   error: false,
 };
 
-
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOADING":
@@ -61,11 +60,11 @@ const usersReducer = (state = initialState, action) => {
     case "EDIT_USER":
       return { ...state, loading: false, user: action.user };
 
+    case "ADD_USER":
+        return { ...state, loading: false, users: [...state.users, action.user] };
+
     case "ERROR":
       return { ...state, error: action.data };
-
-    // case "ADD_USER":
-    //     return { ...state, users: [...state.users, action.user] };
     // case "SHOW_USER":
     //     return { ...state, showUser: action.data };
     // case "DELETE_USER":
@@ -77,11 +76,5 @@ const usersReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-
-// combineReducers({ 
-//   users: initialState.users,
-//   selectedUser: usersReducer,
-// })
 
 export default usersReducer;
