@@ -9,7 +9,7 @@ function UserContact () {
   const { control, formState: { errors }} = useFormContext();
 
   return (
-    <div className="userContact">
+    <div className="userContactDetails">
 
       <Controller name="email" control={control} render={({ field }) => (
           <TextField 

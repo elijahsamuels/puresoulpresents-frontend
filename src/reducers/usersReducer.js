@@ -13,6 +13,12 @@ const initialState = {
     city: "LondonTEST",
     state: "AZ",
     zip_code: "12345",
+    account_name: "12345",
+    ach_number: "12345",
+    tax_city: "Testville",
+    tax_state: "Testate",
+    tax_zip: "12345",
+    taxID: "111223333",
   },
   users: [
     {

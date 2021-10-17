@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
 import React, { useState, useEffect, useMemo } from "react";
 
+import { schema } from "../components/userComponents/UserSchema";
 import UserName from "../components/userComponents/UserName";
 import UserContact from "../components/userComponents/UserContact";
 import UserAddress from "../components/userComponents/UserAddress";
-import { schema } from "../components/userComponents/UserSchema";
+// import UserTaxInfo from "../components/userComponents/UserTaxInfo";
+import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
 
 import UserPhoto from "../components/UserPhoto";
 import StaffInfo from "../components/userComponents/StaffInfo";
-import TaxInfo from "../components/userComponents/TaxInfo";
-import PaymentInfo from "../components/userComponents/PaymentInfo";
 import { fetchUserData, editUser } from "../actions/userActions";
 
 // import Button from "@material-ui/core/Button";
@@ -95,8 +95,12 @@ function UserDetails(props) {
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
           <UserName />
+          <br />
           <UserContact />
           <UserAddress />
+          <UserPaymentInfo />
+          {/* <UserTaxInfo /> */}
+          <br />
           <LoadingButton
             color="primary"
             loadingPosition="start"

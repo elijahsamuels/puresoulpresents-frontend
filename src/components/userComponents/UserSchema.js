@@ -28,4 +28,10 @@ export const schema = yup.object().shape({
     .matches(/^[0-9]+$/, "Must be only digits")
     .min(5, 'Must be exactly 5 digits')
     .max(5, 'Must be exactly 5 digits'),
+  account_name: yup.string().optional("Please provide a valid account name"),
+  ach_number: yup.string(),
+  tax_city: yup.string(),
+  tax_state: yup.string(),
+  tax_zip: yup.string(),
+  taxID: yup.string(),
 })

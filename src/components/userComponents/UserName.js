@@ -36,7 +36,7 @@ function UserName(props) {
   // }
 
   return (
-    <div className="userDetails">
+    <div className="userNameDetails">
       {/* <form onSubmit={handleSubmit(onHandleSubmit)}> */}
         
         {/* <Controller name="first_name" control={control} defaultValue={props.user.first_name} render={({ field }) => ( */}
