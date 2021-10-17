@@ -71,4 +71,9 @@ export const schema = yup.object().shape({
     .optional()
     .notRequired()
     .nullable(),
+  bio: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
 });

@@ -19,6 +19,7 @@ const initialState = {
     tax_state: "",
     tax_zip: "",
     taxID: "",
+    bio: "",
   },
   users: [
     {
