@@ -46,6 +46,7 @@ function UserName(props) {
             label="First Name"
             variant="outlined" 
             size="small"
+            margin="dense"
             error={!!errors.first_name}
             helperText={errors.first_name ? errors.first_name.message : ""}
             />
@@ -60,6 +61,7 @@ function UserName(props) {
           label="Last Name" 
           variant="outlined" 
           size="small"
+          margin="dense"
           error={!!errors.last_name}
           helperText={errors.last_name ? errors.last_name.message : ""}
           />

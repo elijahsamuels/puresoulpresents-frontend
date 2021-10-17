@@ -2,14 +2,27 @@
 
 
 ### Use Postgresql database
-- Tables
-  Users
-  Instruments
-  Events
+#### Tables
+  Users (has_many instruments, has_many cities, has_many events)
+  Instruments (has_many users)
+  Events (has_many users)
+  Cities (has_many users)
 
 Event has_many Users
 A User can be invited to an event (has a user been invited: boolean)
 A User can confirm an invitation to an event (0: invited, 1:accpeted, 2: declined)
+
+
+# TODOS - UserDetails
+- taxidName
+- userBio
+- figure out how to have empty strings be the default value
+- upload image
+- 
+- 
+
+
+
 
 
 

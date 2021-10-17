@@ -21,6 +21,7 @@ function UserAddress () {
           label="Street Address" 
           variant="outlined" 
           size="small"
+          margin="dense"
           error={!!errors.address1}
           helperText={errors.address1 ? errors.address1.message : ""}
         />
@@ -32,6 +33,7 @@ function UserAddress () {
             label="Apt #" 
             variant="outlined" 
             size="small"
+            margin="dense"
             error={!!errors.address2}
             helperText={errors.address2 ? errors.address2.message : ""}
           />
@@ -43,6 +45,7 @@ function UserAddress () {
             label="City" 
             variant="outlined" 
             size="small"
+            margin="dense"
             error={!!errors.city}
             helperText={errors.city ? errors.city.message : ""}
           />
@@ -54,6 +57,7 @@ function UserAddress () {
             label="State"
             variant="outlined"
             size="small"
+            margin="dense"
             error={!!errors.state}
             helperText={errors.state ? errors.state.message : ""}
           />
@@ -65,6 +69,7 @@ function UserAddress () {
             label="Zip Code"
             variant="outlined"
             size="small"
+            margin="dense"
             error={!!errors.zip_code}
             helperText={errors.zip_code ? errors.zip_code.message : ""}
           />

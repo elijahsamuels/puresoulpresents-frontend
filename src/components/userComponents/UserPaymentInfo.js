@@ -21,6 +21,7 @@ function UserPaymentInfo(props) {
             variant="outlined"
             placeholder="Name on your account"
             size="small"
+            margin="dense"
             error={!!errors.account_name}
             helperText={errors.account_name ? errors.account_name.message : ""}
             />
@@ -33,6 +34,7 @@ function UserPaymentInfo(props) {
             placeholder="1234567"
             type="password"
             size="small"
+            margin="dense"
             error={!!errors.ach_number}
             helperText={errors.ach_number ? errors.ach_number.message : ""}
             />
@@ -46,6 +48,7 @@ function UserPaymentInfo(props) {
             placeholder="San Diego"
             type="text"
             size="small"
+            margin="dense"
             error={!!errors.tax_city}
             helperText={errors.tax_city ? errors.tax_city.message : ""}
             />
@@ -58,6 +61,7 @@ function UserPaymentInfo(props) {
             placeholder="CA"
             type="text"
             size="small"
+            margin="dense"
             error={!!errors.tax_state}
             helperText={errors.tax_state ? errors.tax_state.message : ""}
             />
@@ -70,6 +74,7 @@ function UserPaymentInfo(props) {
             placeholder="12345"
             type="text"
             size="small"
+            margin="dense"
             error={!!errors.tax_zip}
             helperText={errors.tax_zip ? errors.tax_zip.message : ""}
             />
@@ -82,6 +87,7 @@ function UserPaymentInfo(props) {
             placeholder="1234567"
             type="text"
             size="small"
+            margin="dense"
             error={!!errors.taxID}
             helperText={errors.taxID ? errors.taxID.message : ""}
             />

@@ -18,6 +18,7 @@ function UserContact () {
             label="Email" 
             variant="outlined" 
             size="small"
+            margin="dense"
             error={!!errors.email}
             helperText={errors.email ? errors.email.message : ""}
           />
@@ -28,6 +29,7 @@ function UserContact () {
             label="Phone" 
             variant="outlined" 
             size="small"
+            margin="dense"
             error={!!errors.phone}
             helperText={errors.phone ? errors.phone.message : ""}
           />
