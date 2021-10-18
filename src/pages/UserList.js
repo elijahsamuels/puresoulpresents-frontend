@@ -14,6 +14,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import userSamplePhoto from "../images/userSamplePhoto.png";
 import CircularProgress from "@mui/material/CircularProgress";
+import TextsmsIcon from '@mui/icons-material/Textsms';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const useStyles = makeStyles({
   // table: {
@@ -67,7 +69,31 @@ function UserList(props) {
   const userPhone = (userData) => {
     let missingItem = "Phone";
     userData.localItem = userData.phone;
-    return Object.values(userTernary(userData, missingItem));
+    let phoneNumber = userData.phone
+
+    const phoneUser = (phoneNumber) => {
+      return `tel:${phoneNumber}`;
+    };
+    const smsUser = (phoneNumber) => {
+      return `sms:${phoneNumber}`;
+    };
+
+    // TextsmsIcon
+    // PhoneIcon
+    if (userData.localItem) {
+      return <div>
+        {phoneNumber} 
+        <a href={phoneUser(phoneNumber)}>
+          <PhoneIcon />
+        </a>
+        {" "}
+        <a href={smsUser(phoneNumber)}>
+          <TextsmsIcon />
+        </a>
+      </div>
+    } else {
+      return Object.values(userTernary(userData, missingItem));
+    }
   };
 
   const userInstrument = (userData) => {
@@ -85,7 +111,12 @@ function UserList(props) {
   const userBio = (userData) => {
     let missingItem = "Bio";
     userData.localItem = userData.bio;
-    return Object.values(userTernary(userData, missingItem));
+    if (userData.localItem){
+      // eventually make this a modal or something to open a preview of the bio
+      return <font color="green">{missingItem}</font>
+    } else {
+      return Object.values(userTernary(userData, missingItem));
+    }
   };
 
   const userEmail = (userData) => {
