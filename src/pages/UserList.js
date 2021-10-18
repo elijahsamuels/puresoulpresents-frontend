@@ -16,6 +16,7 @@ import userSamplePhoto from "../images/userSamplePhoto.png";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextsmsIcon from '@mui/icons-material/Textsms';
 import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
 
 const useStyles = makeStyles({
   // table: {
@@ -56,10 +57,6 @@ function UserList(props) {
     );
   };
 
-  // const handleClick = (userID) => {
-  //   props.fetchUserData(userID)
-  // };
-
   const userName = (userData) => {
     let missingItem = "Name";
     userData.localItem = userData.first_name + " " + userData.last_name;
@@ -74,23 +71,22 @@ function UserList(props) {
     const phoneUser = (phoneNumber) => {
       return `tel:${phoneNumber}`;
     };
+
     const smsUser = (phoneNumber) => {
       return `sms:${phoneNumber}`;
     };
 
-    // TextsmsIcon
-    // PhoneIcon
     if (userData.localItem) {
       return <div>
-        {phoneNumber} 
-        <a href={phoneUser(phoneNumber)}>
-          <PhoneIcon />
-        </a>
-        {" "}
-        <a href={smsUser(phoneNumber)}>
-          <TextsmsIcon />
-        </a>
-      </div>
+          {phoneNumber} 
+          <a href={phoneUser(phoneNumber)}>
+            <PhoneIcon />
+          </a>
+          {" "}
+          <a href={smsUser(phoneNumber)}>
+            <TextsmsIcon />
+          </a>
+        </div>
     } else {
       return Object.values(userTernary(userData, missingItem));
     }
@@ -122,7 +118,22 @@ function UserList(props) {
   const userEmail = (userData) => {
     let missingItem = "Email";
     userData.localItem = userData.email;
-    return Object.values(userTernary(userData, missingItem));
+    let userEmail = userData.email;
+
+    const emailUser = (userEmail) => {
+      return `mailto:${userEmail}`;
+    };
+
+    if (userData.localItem) {
+      return <div>
+        {userEmail} 
+        <a href={emailUser(userEmail)}>
+          <EmailIcon />
+        </a>
+        </div>
+        } else  {
+      return Object.values(userTernary(userData, missingItem));
+    }
   };
 
   const userW9URL = (userData) => {
@@ -189,23 +200,24 @@ function UserList(props) {
 
     let items = [];
 
-    if (typeof userPhone(userData)[0] !== "string") {
+    if (userPhone(userData).props === undefined) {
       items.push("Phone");
     }
 
-    if (typeof userEmail(userData)[0] !== "string") {
+    if (userEmail(userData).props === undefined) {
       items.push("Email");
     }
-
+    
     if (!Array.isArray(userInstrument(userData)[0])) {
       items.push("Instrument");
     }
-
-    if (typeof userCity(userData)[0] !== "string") {
+    
+    if (userCity(userData) === undefined) {
       items.push("City");
     }
+    console.log(userEmail(userData).props)
 
-    if (typeof userBio(userData)[0] !== "string") {
+    if (userBio(userData).props === undefined) {
       items.push("Bio");
     }
 
