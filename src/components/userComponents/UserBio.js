@@ -18,7 +18,7 @@ function UserBio(props) {
             {...field} 
             label="Bio"
             variant="outlined" 
-            multiline="true"
+            multiline={true}
             minRows="4"
             maxRows="20"
             error={!!errors.bio}
