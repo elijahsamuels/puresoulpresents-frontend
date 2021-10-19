@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import { createNewUser } from "../actions/userActions";
 import UserName from "../components/userComponents/UserName";
 import UserContact from "../components/userComponents/UserContact";
+import UserAddress from "../components/userComponents/UserAddress";
+import UserBio from "../components/userComponents/UserBio";
+import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
+
 // import { schema } from "../components/userComponents/UserSchema";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -36,6 +40,9 @@ function CreateUser(props) {
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
           <UserName />       
           <UserContact />       
+          <UserAddress />       
+          <UserBio />       
+          <UserPaymentInfo />       
           <LoadingButton
             color="primary"
             loadingPosition="start"
