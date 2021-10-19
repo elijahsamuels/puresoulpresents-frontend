@@ -3,7 +3,7 @@
 const initialState = {
   loading: true,
   user: {
-    id: 123,
+    // id: 123,
     first_name: "",
     last_name: "",
     phone: "",

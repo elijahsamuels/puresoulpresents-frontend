@@ -50,7 +50,7 @@ function UserDetails(props) {
   const onHandleSubmit = (data) => {
     // Do something with the data
     console.log("handleSubmit/Form data: ", data);
-    // props.createUser(data);
+    props.editUser(data);
   }
 
   return !!props.user ? (

@@ -51,11 +51,8 @@ function UserName(props) {
             helperText={errors.first_name ? errors.first_name.message : ""}
             />
         )}/>
-
-        
         {/* <Controller name="last_name" control={control} defaultValue={props.user.last_name} render={({ field }) => ( */}
         <Controller name="last_name" control={control} render={({ field }) => (
-          // console.log(field),
           <TextField 
           {...field} 
           label="Last Name" 
@@ -66,6 +63,7 @@ function UserName(props) {
           helperText={errors.last_name ? errors.last_name.message : ""}
           />
           )}/>
+
         {/* <Controller name="email" control={control} defaultValue={props.user.email} render={({ field }) => (
           <TextField 
             {...field}
@@ -86,8 +84,6 @@ function UserName(props) {
             helperText={errors.phone ? errors.phone.message : ""}
           />
         )}/> */}
-        
-
 
         {/* <label htmlFor={"first_name"}>
           First Name 
@@ -131,7 +127,7 @@ function UserName(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("UserName state: ", state);
+  // console.log("UserName state: ", state);
   return {
     loading: state.loading,
     users: state.users,

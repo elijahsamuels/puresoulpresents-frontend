@@ -6,42 +6,36 @@ import UserName from "../components/userComponents/UserName";
 import { schema } from "../components/userComponents/UserSchema";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LoadingButton from '@mui/lab/LoadingButton';
+import TextField from '@mui/material/TextField';
 
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 function CreateUser(props) {
 
   // console.log(props)
   const methods = useForm({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-    defaultValues: useMemo(() => {
-      return props.user;
-    }, [props]),
+    // resolver: yupResolver(schema),
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+    }
   });
-
-  // useEffect(() => {
-  //   methods.reset(props.user);
-  // }, [props.user]);
   
-// console.log("props: ", props)
-// console.log("methods.watch('first_name' & 'last_name'): ", methods.watch('first_name' & 'last_name'));
-
   const onHandleSubmit = (data) => {
     // Do something with the data
     console.log("CreateUser/handleSubmit/Form data: ", data);
-    props.createUser(data);
+    // props.createUser(data);
   };
 
   return (
     <div className="createUser">
-      make me new!
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onHandleSubmit)}></form>
-        {console.log("within FormProvider data: ", onHandleSubmit)}
-        <UserName />
+        <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
+          <UserName />
+
         <br />
+        
         <LoadingButton
           color="primary"
           loadingPosition="start"
@@ -51,18 +45,21 @@ function CreateUser(props) {
         >
           Add User
         </LoadingButton>
+        </form>
       </FormProvider>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  console.log("CreateUser/state: ", state)
-  return {
-    loading: state.loading,
-    // users: state.users,
-    user: state.user,
-  };
-};
 
-export default connect(mapStateToProps, { createNewUser })(CreateUser);
+
+// const mapStateToProps = (state) => {
+//   console.log("CreateUser/state: ", state)
+//   return {
+//     loading: state.loading,
+//     // users: state.users,
+//     user: state.user,
+//   };
+// };
+
+export default connect(null, { createNewUser })(CreateUser);

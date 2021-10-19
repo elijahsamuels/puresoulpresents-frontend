@@ -78,7 +78,8 @@ function UserList(props) {
 
     if (userData.localItem) {
       return <div>
-          {phoneNumber} 
+          {phoneNumber}
+          <br />
           <a href={phoneUser(phoneNumber)}>
             <PhoneIcon />
           </a>
@@ -128,7 +129,7 @@ function UserList(props) {
       return <div>
         {userEmail} 
         <a href={emailUser(userEmail)}>
-          <EmailIcon />
+          <br /><EmailIcon />
         </a>
         </div>
         } else  {
@@ -208,14 +209,13 @@ function UserList(props) {
       items.push("Email");
     }
     
-    if (!Array.isArray(userInstrument(userData)[0])) {
+    if (userInstrument(userData).props === undefined) {
       items.push("Instrument");
     }
     
     if (userCity(userData) === undefined) {
       items.push("City");
     }
-    console.log(userEmail(userData).props)
 
     if (userBio(userData).props === undefined) {
       items.push("Bio");
@@ -238,7 +238,7 @@ function UserList(props) {
           {item}
         </li>
       ));
-      return <font color="red">Items Missing: {missingItemsList}</font>;
+      return <font color="red">Missing: {missingItemsList}</font>;
     } else {
       return <font color="green">Good</font>;
     }
