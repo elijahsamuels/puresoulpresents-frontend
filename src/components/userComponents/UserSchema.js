@@ -47,6 +47,11 @@ export const schema = yup.object().shape({
     .optional()
     .notRequired()
     .nullable(),
+  ach_routing_number: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
     // .when("account_name", {
     //   is: (value) => value.length,
     //   then: (rule) => rule.min(3),

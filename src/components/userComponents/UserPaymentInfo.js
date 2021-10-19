@@ -29,7 +29,7 @@ function UserPaymentInfo(props) {
         <Controller name="ach_number" control={control} render={({ field }) => (
           <TextField 
             {...field} 
-            label="ACH Routing Number"
+            label="Account Number"
             variant="outlined"
             placeholder="1234567"
             type="password"
@@ -37,6 +37,19 @@ function UserPaymentInfo(props) {
             margin="dense"
             error={!!errors.ach_number}
             helperText={errors.ach_number ? errors.ach_number.message : ""}
+            />
+        )}/>
+        <Controller name="ach_routing_number" control={control} render={({ field }) => (
+          <TextField 
+            {...field} 
+            label="ACH Routing Number"
+            variant="outlined"
+            placeholder="1234567"
+            type="password"
+            size="small"
+            margin="dense"
+            error={!!errors.ach_routing_number}
+            helperText={errors.ach_routing_number ? errors.ach_routing_number.message : ""}
             />
         )}/>
 
