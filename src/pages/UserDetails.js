@@ -31,6 +31,12 @@ function UserDetails(props) {
     return <span>Last updated at {lastUpdated.toString()} </span>
   }
 
+  const dateTimeUserCreated = () => {
+    let dateTime = props.user.created_at
+    let userCreated = new Date(dateTime)
+    return <span>{userFullName} was created at {userCreated.toString()} </span>
+  }
+
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -63,7 +69,6 @@ function UserDetails(props) {
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
           <UserName />
-          <br />
           <UserContact />
           <UserAddress />
           <UserBio />
@@ -81,7 +86,8 @@ function UserDetails(props) {
             Save
           </LoadingButton>
         </form>
-          {lastUpdatedDateTime()}
+          <div>{dateTimeUserCreated()}</div>
+          <div>{lastUpdatedDateTime()}</div>
       </FormProvider>
     </div>
   ) : (
