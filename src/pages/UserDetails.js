@@ -9,7 +9,7 @@ import UserBio from "../components/userComponents/UserBio";
 // import UserTaxInfo from "../components/userComponents/UserTaxInfo";
 import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
 
-import UserPhoto from "../components/UserPhoto";
+// import UserPhoto from "../components/userComponents/UserPhoto";
 import StaffInfo from "../components/userComponents/StaffInfo";
 import { fetchUserData, editUser } from "../actions/userActions";
 
@@ -68,6 +68,7 @@ function UserDetails(props) {
           <UserAddress />
           <UserBio />
           <UserPaymentInfo />
+          <StaffInfo />
           {/* <UserTaxInfo /> */}
           <br />
           <LoadingButton
