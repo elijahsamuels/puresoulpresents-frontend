@@ -58,37 +58,37 @@ export function editUser(user) {
 }
 
 // Create a new user
-export function createNewUser (newUserData) {
-  console.log("userActions/createNewUser/newUserData: ", newUserData)
+export function createNewUser (user) {
+  console.log("userActions/createNewUser/user: ", user)
   return (dispatch) => {
-    // dispatch({ type: "LOADING", payload: true });
+    dispatch({ type: "LOADING", payload: true });
     fetch(`http://localhost:3000/users`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ newUserData }),
+      body: JSON.stringify({ user }),
     })
     .then(response => console.log(response))
-    // .then((response) => { 
-    //   if (response.ok === false) {
-    //     throw dispatch({
-    //       type: "ERROR",
-    //       payload: "ERROR: Unable to save user edits.",
-    //     });
-    //   }
-    //   return response.json();
-    // })
-    // .then((user) => {
-    //   dispatch({ type: "LOADING", payload: false });
-    //   dispatch({ type: "ERROR", payload: null });
-    //   dispatch({ type: "ADD_USER", user: user });
-    // })
-    // .catch((err) => {
-    //   dispatch({ type: "LOADING", payload: false });
-    //   dispatch({ type: "ERROR", payload: err.message });
-    // });
+    .then((response) => { 
+      if (response.ok === false) {
+        throw dispatch({
+          type: "ERROR",
+          payload: "ERROR: Unable to save user edits.",
+        });
+      }
+      return response.json();
+    })
+    .then((user) => {
+      dispatch({ type: "LOADING", payload: false });
+      dispatch({ type: "ERROR", payload: null });
+      dispatch({ type: "ADD_USER", user: user });
+    })
+    .catch((err) => {
+      dispatch({ type: "LOADING", payload: false });
+      dispatch({ type: "ERROR", payload: err.message });
+    });
   }
 }
 
