@@ -53,7 +53,6 @@ function StaffInfo(props) {
           label="Rating"
           // labelId="user_staff_rating_label"
           id="user_staff_rating"
-
           variant="outlined"
           size="small"
           margin="dense"
@@ -73,38 +72,6 @@ function StaffInfo(props) {
         </Select>
         </span>
         )}/>
-
-{/* 
-      <p>
-        <label>
-          PureSoul Rating
-          <select name="user_staff_rating" placeholder="">
-            <option value="1">1. Great</option>
-            <option value="2">2. Good</option>
-            <option value="3">3. Ok</option>
-            <option value="4">4. Trainable</option>
-            <option value="5">5. Questionable</option>
-            <option value="6">6. Difficult</option>
-            <option value="7">7. Bad</option>
-            <option value="8">8. TBD</option>
-            <option value="9">9. Hidden - Doesn't want gigs</option>
-            <option value="0">0. Hidden - Blacklisted</option>
-          </select>
-        </label>
-      </p> */}
-
-      {/* <p>
-        <label>
-          Nickname
-          <input name="user_nickname" placeholder="Super Spy Sam" />
-        </label>
-      </p> */}
-      {/* <p>
-        <label>
-          Staff Notes
-          <textarea name="staff_notes" placeholder="Type here" />
-        </label>
-      </p> */}
     </div>
   );
 }

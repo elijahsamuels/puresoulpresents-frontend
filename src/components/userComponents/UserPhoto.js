@@ -1,5 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import userSamplePhoto from "../../images/userSamplePhoto.png";
+import { fetchUserData, editUser } from "../../actions/userActions";
+import { useForm, Controller, useFormContext } from "react-hook-form";
+// import { TextField } from "@material-ui/core";
+import TextField from '@mui/material/TextField';
 
 export function UserPhoto() {
 	return (
@@ -10,4 +15,14 @@ export function UserPhoto() {
 	);
 }
 
-export default UserPhoto;
+
+const mapStateToProps = (state) => {
+  // console.log("UserPhoto state: ", state);
+  return {
+    loading: state.loading,
+    users: state.users,
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, { fetchUserData, editUser })(UserPhoto);

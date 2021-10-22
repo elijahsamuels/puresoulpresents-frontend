@@ -8,9 +8,9 @@ import UserAddress from "../components/userComponents/UserAddress";
 import UserBio from "../components/userComponents/UserBio";
 // import UserTaxInfo from "../components/userComponents/UserTaxInfo";
 import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
-
-// import UserPhoto from "../components/userComponents/UserPhoto";
 import StaffInfo from "../components/userComponents/StaffInfo";
+
+import UserPhoto from "../components/userComponents/UserPhoto";
 import { fetchUserData, editUser } from "../actions/userActions";
 
 import CircularProgress from "@mui/material/CircularProgress";
@@ -68,13 +68,13 @@ function UserDetails(props) {
 
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
+          <UserPhoto />
           <UserName />
           <UserContact />
           <UserAddress />
           <UserBio />
           <UserPaymentInfo />
           <StaffInfo />
-          {/* <UserTaxInfo /> */}
           <br />
           <LoadingButton
             color="primary"
