@@ -15,11 +15,15 @@ const initialState = {
     zip_code: "",
     account_name: "",
     ach_number: "",
+    ach_routing_number: "",
     tax_city: "",
     tax_state: "",
     tax_zip: "",
     taxID: "",
     bio: "",
+    staff_notes: "",
+    nick_name: "",
+    user_staff_rating: "",
   },
   users: [
     {

@@ -19,10 +19,14 @@ export const schema = yup.object().shape({
     .max(10, "Must be exactly 10 digits"),
   address1: yup
     .string()
-    .optional("Please provide a valid address"),
+    .optional("Please provide a valid address")
+    .notRequired()
+    .nullable(),
   address2: yup
     .string()
-    .optional(),
+    .optional()
+    .notRequired()
+    .nullable(),
   city: yup
     .string()
     .required("City is required"),
@@ -77,6 +81,26 @@ export const schema = yup.object().shape({
     .notRequired()
     .nullable(),
   bio: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  nick_name: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  staff_notes: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  user_staff_rating: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  user_staff_rating_label: yup
     .string()
     .optional()
     .notRequired()
