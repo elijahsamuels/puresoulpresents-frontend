@@ -152,20 +152,18 @@ function UserList(props) {
     }
   };
 
-  const userHeadshot = (userData) => {
+  const userPhoto = (userData) => {
     // let missingItem = "Headshot";
 
     if (userData.photo) {
-      userData.localItem = userData.photo;
-      return (
-        <img src={`${userData.photo}`} alt="User" height="100" width="100" />
-      );
+      // userData.localItem = userData.photo;
+      return <img src={`${userData.photo}`} alt="User Photo" height="100" width="100" />
     } else {
-      return <img src={userSamplePhoto} alt="User" height="100" width="100" />;
+      return <img src={userSamplePhoto} alt="Default Image" height="100" width="100" />;
     }
   };
 
-  const userHeadshotThumbnails = (userData) => {
+  const userPhotoThumbnails = (userData) => {
     return userData["Headshot"] ? (
       <span>
         <a
@@ -225,8 +223,8 @@ function UserList(props) {
       items.push("W9");
     }
 
-    if (userHeadshot(userData).props.src.includes("userSamplePhoto")) {
-      items.push("Headshot");
+    if (userPhoto(userData).props.alt === "Default Image") {
+      items.push("Photo");
     }
 
     if (items.length > 0) {
@@ -440,9 +438,9 @@ function UserList(props) {
                   id={"user_" + user.id + "_headshot"}
                   key={"user_" + user.id + "_headshot"}
                 >
-                  {userHeadshot(user)}
+                  {userPhoto(user)}
                   <br />
-                  {userHeadshotThumbnails(user)}
+                  {userPhotoThumbnails(user)}
                 </TableCell>
               </TableRow>
             ))}
