@@ -155,13 +155,13 @@ function UserList(props) {
   const userHeadshot = (userData) => {
     // let missingItem = "Headshot";
 
-    if (userData["Headshot"]) {
-      userData.localItem = userData["Headshot"][0].url;
+    if (userData.photo) {
+      userData.localItem = userData.photo;
       return (
-        <img src={`${userData["Headshot"][0].url}`} alt="User" width="100" />
+        <img src={`${userData.photo}`} alt="User" height="100" width="100" />
       );
     } else {
-      return <img src={userSamplePhoto} alt="User" width="100" />;
+      return <img src={userSamplePhoto} alt="User" height="100" width="100" />;
     }
   };
 
