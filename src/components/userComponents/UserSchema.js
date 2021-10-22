@@ -105,4 +105,9 @@ export const schema = yup.object().shape({
     .optional()
     .notRequired()
     .nullable(),
+  photo: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
 });

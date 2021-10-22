@@ -24,6 +24,7 @@ const initialState = {
     staff_notes: "",
     nick_name: "",
     user_staff_rating: "",
+    photo: "",
   },
   users: [
     {
