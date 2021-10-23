@@ -17,6 +17,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import TextsmsIcon from '@mui/icons-material/Textsms';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import Tooltip from '@mui/material/Tooltip';
 
 const useStyles = makeStyles({
   // table: {
@@ -207,9 +208,9 @@ function UserList(props) {
       items.push("Email");
     }
     
-    if (userInstrument(userData).props === undefined) {
-      items.push("Instrument");
-    }
+    // if (userInstrument(userData).props === undefined) {
+    //   items.push("Instrument");
+    // }
     
     if (userCity(userData) === undefined) {
       items.push("City");
@@ -219,9 +220,9 @@ function UserList(props) {
       items.push("Bio");
     }
 
-    if (userW9URL(userData).props.href === undefined) {
-      items.push("W9");
-    }
+    // if (userW9URL(userData).props.href === undefined) {
+    //   items.push("W9");
+    // }
 
     if (userPhoto(userData).props.alt === "Default Image") {
       items.push("Photo");
@@ -242,6 +243,15 @@ function UserList(props) {
     }
   };
 
+  const hoverEvent = (bio) => {
+    if (bio !== null) {
+      console.log("bio yay")
+      // return <div>bio goes here</div>
+    } else {
+      console.log("bio NOPE")
+      // return <div>missing bio</div>
+      }
+  }
   // const sendUserEmailAboutMissingData = (userData) => {
   //   // console.log("missingData Func: ", missingData(userData).props.children[1] === "o")
   //   if (missingData(userData).props.children[1] === "o") {
@@ -355,7 +365,7 @@ function UserList(props) {
                 W9
               </TableCell>
               <TableCell key={"headshot"} id={"headshot"} align="center">
-                Headshot
+                <span>Headshot</span>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -424,7 +434,9 @@ function UserList(props) {
                   width=""
                   height="10"
                 >
-                  {userBio(user)}
+                  <Tooltip title={user.bio}>
+                    <span>{userBio(user)}</span>
+                  </Tooltip>
                 </TableCell>
                 <TableCell
                   align="center"
@@ -438,7 +450,7 @@ function UserList(props) {
                   id={"user_" + user.id + "_headshot"}
                   key={"user_" + user.id + "_headshot"}
                 >
-                  {userPhoto(user)}
+                  <span>{userPhoto(user)}</span>
                   <br />
                   {userPhotoThumbnails(user)}
                 </TableCell>
