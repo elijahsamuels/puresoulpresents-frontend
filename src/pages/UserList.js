@@ -117,6 +117,14 @@ function UserList(props) {
     }
   };
 
+  const userBioTooltip = (userData) => {
+    if (!!userData.bio) { 
+      return userData.bio
+    } else {
+      return "Bio is missing"
+    }
+  }
+
   const userEmail = (userData) => {
     let missingItem = "Email";
     userData.localItem = userData.email;
@@ -243,15 +251,6 @@ function UserList(props) {
     }
   };
 
-  const hoverEvent = (bio) => {
-    if (bio !== null) {
-      console.log("bio yay")
-      // return <div>bio goes here</div>
-    } else {
-      console.log("bio NOPE")
-      // return <div>missing bio</div>
-      }
-  }
   // const sendUserEmailAboutMissingData = (userData) => {
   //   // console.log("missingData Func: ", missingData(userData).props.children[1] === "o")
   //   if (missingData(userData).props.children[1] === "o") {
@@ -434,7 +433,7 @@ function UserList(props) {
                   width=""
                   height="10"
                 >
-                  <Tooltip title={user.bio}>
+                  <Tooltip title={userBioTooltip(user)}>
                     <span>{userBio(user)}</span>
                   </Tooltip>
                 </TableCell>
