@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import EventDetails from "./pages/EventDetails";
 import UserDetails from "./pages/UserDetails";
 import UserList from "./pages/UserList";
 import CreateUser from "./pages/CreateUser";
@@ -19,6 +20,7 @@ function App() {
             <Nav />
                 <Switch>
                     <Route exact path="/" component={Index} />
+                    <Route exact path="/events/:id/" component={EventDetails} />
                     <Route exact path="/users/:id/" component={UserDetails} />
                     <Route exact path="/userlist" component={UserList} />
                     <Route exact path="/createuser" component={CreateUser} />
