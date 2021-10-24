@@ -7,6 +7,7 @@ export const fetchUsersList = () => {
     fetch("http://localhost:3000/users")
     // .then((response) => console.log("from actions: ", response.json()))
     .then((response) => response.json())
+    // .then((data) => console.log("from actions: ", data))
     .then((data) => dispatch({ type: "SET_USERS", users: data }))
     .catch((error) => console.log(error));
   };

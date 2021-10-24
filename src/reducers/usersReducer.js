@@ -3,7 +3,7 @@
 const initialState = {
   loading: true,
   user: {
-    // id: 123,
+    id: 123,
     first_name: "",
     last_name: "",
     phone: "",
@@ -55,10 +55,11 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case "SET_USERS":
+      console.log("from usersReducer/SET_USERS", action.users)
       return { ...state, loading: false, users: action.users };
 
     case "GET_USER":
-      // console.log("action.user:", action.user)
+      console.log("action.user:", action.user)
       // console.log("state:", state)
       return { ...state, loading: false, user: action.user };
 

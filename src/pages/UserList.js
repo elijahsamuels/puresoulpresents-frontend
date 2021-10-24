@@ -28,6 +28,10 @@ const useStyles = makeStyles({
 function UserList(props) {
   const classes = useStyles();
 
+  // console.log("props: ", props.users.users);
+  // console.log("props.fetchUsersList: ", props.fetchUsersList());
+
+
   const userTernary = (userData, missingItem) => {
     return userData.localItem
       ? { true: userData.localItem }
@@ -368,8 +372,9 @@ function UserList(props) {
               </TableCell>
             </TableRow>
           </TableHead>
+            
           <TableBody key={"table_body"} id={"table_body"}>
-            {props.users.map((user) => (
+            {props.users.users.map((user) => (
               <TableRow
                 key={"user_" + user.id + "_row"}
                 id={"user_" + user.id + "_row"}
@@ -381,8 +386,6 @@ function UserList(props) {
                 >
                   {missingData(user)}
                   <br />
-                  {/* {sendUserEmailAboutMissingData(user.fields)} */}
-                  {/* <button onclick={sendUserEmailAboutMissingData(user)}>Send Email</button> */}
                 </TableCell>
                 <TableCell
                   align="center"
@@ -456,6 +459,7 @@ function UserList(props) {
               </TableRow>
             ))}
           </TableBody>
+          
         </Table>
       </TableContainer>
     </div>
@@ -463,7 +467,7 @@ function UserList(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log("state: ",state);
   return {
     loading: state.loading,
     users: state.users,
@@ -471,6 +475,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUsersList, fetchUserData })(
-  UserList
-);
+export default connect(mapStateToProps, { fetchUsersList, fetchUserData })(UserList);
