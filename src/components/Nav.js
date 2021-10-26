@@ -10,6 +10,8 @@ function Nav() {
        </Link>
       <Link to="/">Home </Link>
       {" - "}
+      <Link to="/eventlist">Event List</Link>
+      {" - "}
       <Link to="/userlist">User List</Link>
       {" - "}
       <Link to="/createuser">Create New User</Link>
