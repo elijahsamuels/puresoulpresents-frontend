@@ -6,10 +6,9 @@ import UserName from "../components/userComponents/UserName";
 import UserContact from "../components/userComponents/UserContact";
 import UserAddress from "../components/userComponents/UserAddress";
 import UserBio from "../components/userComponents/UserBio";
-// import UserTaxInfo from "../components/userComponents/UserTaxInfo";
+import UserTaxInfo from "../components/userComponents/UserTaxInfo";
 import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
 import StaffInfo from "../components/userComponents/StaffInfo";
-
 import UserPhoto from "../components/userComponents/UserPhoto";
 import { fetchUserData, editUser } from "../actions/userActions";
 
@@ -21,28 +20,29 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
 
 function UserDetails(props) {
-  const userFullName = `${props.user.first_name} ${props.user.last_name}`;
+  const userFullName = `${props.users.user.first_name} ${props.users.user.last_name}`;
   const userid = props.match.params.id;
   const [userData, setUserData] = useState(null);
 
   const lastUpdatedDateTime = () => {
-    let dateTime = props.user.updated_at
+    let dateTime = props.users.user.updated_at
     let lastUpdated = new Date(dateTime)
     return <span>Last updated at {lastUpdated.toString()} </span>
   }
 
   const dateTimeUserCreated = () => {
-    let dateTime = props.user.created_at
+    let dateTime = props.users.user.created_at
     let userCreated = new Date(dateTime)
     return <span>{userFullName} was created at {userCreated.toString()} </span>
   }
 
   const methods = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: "onBlur",
+    mode: "onSubmit",
     defaultValues: useMemo(() => {
-      return props.user;
-    }, [props])
+      return props.users.user;
+    }, [props.users.user])
   });
   
   useEffect(() => {
@@ -50,16 +50,16 @@ function UserDetails(props) {
   }, []);
 
   useEffect(() => {
-    methods.reset(props.user);
-  }, [props.user]);
-    
+    methods.reset(props.users.user);
+  }, [props.users.user]);
+
   const onHandleSubmit = (data) => {
     // Do something with the data
     console.log("handleSubmit/Form data: ", data);
     props.editUser(data);
   }
 
-  return !!props.user ? (
+  return !!props.users.user ? (
     // If data is loaded
     <div className="userDetails">
       <h1>
@@ -75,6 +75,7 @@ function UserDetails(props) {
           <UserBio />
           <UserPaymentInfo />
           <StaffInfo />
+          <UserTaxInfo />
           <br />
           <LoadingButton
             color="primary"
