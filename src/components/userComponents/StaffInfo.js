@@ -1,28 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchUserData, editUser } from "../../actions/userActions";
+import { Controller, useFormContext } from "react-hook-form";
 
-import { useForm, Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 
-
 function StaffInfo(props) {
 
   const { control, formState: { errors }} = useFormContext({
-    defaultValues: props.user
+    defaultValues: props.users.user
     });
 
   return (
     <div className="staffInfo">
-      <h3>PureSoul Notes</h3>
+      <h3>PureSoul Staff Notes</h3>
 
       <Controller name="staff_notes" control={control} render={({ field }) => (
           <TextField 
             {...field} 
-            label="Staff notes"
+            label="Staff Notes"
             variant="outlined" 
             multiline={true}
             margin="dense"

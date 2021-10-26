@@ -7,8 +7,8 @@ import TextField from '@mui/material/TextField';
 function UserBio(props) {
 
   const { control, formState: { errors }} = useFormContext({
-    defaultValues: props.user
-    });
+    defaultValues: props.users.user
+  });
 
   return (
     <div className="UserBio">
@@ -31,7 +31,7 @@ function UserBio(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("UserBio state: ", state);
+  // console.log("UserBio state: ", state);
   return {
     loading: state.loading,
     users: state.users,

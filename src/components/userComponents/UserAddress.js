@@ -6,9 +6,11 @@ import TextField from '@mui/material/TextField';
 // import Select from '@mui/material/Select';
 // import MenuItem from '@mui/material/MenuItem';
 
-function UserAddress () {
+function UserAddress (props) {
 
-  const { control, formState: { errors }} = useFormContext();
+  const { control, formState: { errors }} = useFormContext({
+    defaultValues: props.users.user,
+  });
 
   return (
     <div className="userContact">

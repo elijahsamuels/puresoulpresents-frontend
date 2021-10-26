@@ -4,9 +4,11 @@ import { fetchUserData, editUser } from "../../actions/userActions";
 import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 
-function UserContact () {
+function UserContact (props) {
 
-  const { control, formState: { errors }} = useFormContext();
+  const { control, formState: { errors }} = useFormContext({
+    defaultValues: props.users.user,
+  });
 
   return (
     <div className="userContactDetails">
