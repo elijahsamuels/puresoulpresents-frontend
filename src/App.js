@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import EventDetails from "./pages/EventDetails";
+import EventList from "./pages/EventList";
 import UserDetails from "./pages/UserDetails";
 import UserList from "./pages/UserList";
 import CreateUser from "./pages/CreateUser";
@@ -21,6 +22,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Index} />
                     <Route exact path="/events/:id/" component={EventDetails} />
+                    <Route exact path="/eventlist" component={EventList} />
                     <Route exact path="/users/:id/" component={UserDetails} />
                     <Route exact path="/userlist" component={UserList} />
                     <Route exact path="/createuser" component={CreateUser} />
