@@ -16,7 +16,7 @@ export const fetchEventData = (eventID) => {
     const response = await fetch(`http://localhost:3000/events/${eventID}`)
     const data = await response.json()
     dispatch({ type: "GET_EVENT", event: data })
-    // .catch((error) => console.log(error));
+    .catch((error) => console.log(error));
   }
 };
 

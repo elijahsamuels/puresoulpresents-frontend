@@ -2,30 +2,22 @@ const initialState = {
   loading: true,
   event: {
     // id: 123,
+    event_date: "",
     address1: "",
-    address2: "",
     city: "",
     state: "",
     zip_code: "",
+    end_time: "",
+    start_time: "",
+    load_in_time: "",
+    soundcheck_time: "",
+    total_amount: "",
+    deposit_amount: "",
+    balance_amount: "",
+    created_at: "",
+    updated_at: "",
   },
-  events: [
-    {
-      id: 123,
-      first_name: "JohnTEST",
-      last_name: "DoeTEST",
-      phone: "1234567890",
-      email: "johndoe@TEST.com",
-      city: "LondonTEST",
-    },
-    {
-      id: 456,
-      first_name: "JaneTEST",
-      last_name: "DoeTEST",
-      phone: "0987654321",
-      email: "janedoe@TEST.com",
-      city: "BrisbaneTEST",
-    },
-  ],
+  events: [],
   // showevent: {},
   // currentevent: null,
   error: false,
@@ -40,8 +32,6 @@ const eventsReducer = (state = initialState, action) => {
       return { ...state, loading: false, events: action.events };
 
     case "GET_EVENT":
-      // console.log("action.event:", action.event)
-      // console.log("state:", state)
       return { ...state, loading: false, event: action.event };
 
     case "EDIT_EVENT":
