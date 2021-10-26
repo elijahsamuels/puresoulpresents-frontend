@@ -16,6 +16,10 @@ const initialState = {
     account_name: "",
     ach_number: "",
     ach_routing_number: "",
+    tax_first_or_business_name: "",
+    tax_last_name: "",
+    tax_address1: "",
+    tax_address2: "",
     tax_city: "",
     tax_state: "",
     tax_zip: "",
@@ -55,12 +59,9 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case "SET_USERS":
-      console.log("from usersReducer/SET_USERS", action.users)
       return { ...state, loading: false, users: action.users };
 
     case "GET_USER":
-      console.log("action.user:", action.user)
-      // console.log("state:", state)
       return { ...state, loading: false, user: action.user };
 
     case "EDIT_USER":
