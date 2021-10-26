@@ -60,26 +60,6 @@ export const schema = yup.object().shape({
     //   is: (value) => value.length,
     //   then: (rule) => rule.min(3),
     // }),
-  tax_city: yup
-    .string()
-    .optional()
-    .notRequired()
-    .nullable(),
-  tax_state: yup
-    .string()
-    .optional()
-    .notRequired()
-    .nullable(),
-  tax_zip: yup
-    .string()
-    .optional()
-    .notRequired()
-    .nullable(),
-  taxID: yup
-    .string()
-    .optional()
-    .notRequired()
-    .nullable(),
   bio: yup
     .string()
     .optional()
@@ -110,4 +90,44 @@ export const schema = yup.object().shape({
     .optional()
     .notRequired()
     .nullable(),
-});
+  tax_first_or_business_name: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  tax_last_name: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  tax_address1: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  tax_address2: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  tax_city: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  tax_state: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  tax_zip: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  taxID: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  });
