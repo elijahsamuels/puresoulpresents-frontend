@@ -381,7 +381,7 @@ function UserList(props) {
               >
                 <TableCell
                   key={"user_" + user.id + "_missingData"}
-                  id={"userM" + user.id + "_issingData"}
+                  id={"user_" + user.id + "_missingData"}
                   align="left"
                 >
                   {missingData(user)}
