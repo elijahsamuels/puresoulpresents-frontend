@@ -40,21 +40,22 @@ function EventDetails(props) {
     resolver: yupResolver(schema),
     mode: "all",
     defaultValues: useMemo(() => {
-      return props.event;
+      return props;
     }, [props])
   });
+  console.log("EventDetails/props: ", props)
   
-  // useEffect(() => {
-  //   setUserData(props.fetchEventData(eventid));
-  // }, []);
+  useEffect(() => {
+    setEventData(props.fetchEventData(eventid));
+  }, []);
 
-  // useEffect(() => {
-  //   methods.reset(props.event);
-  // }, [props.event]);
+  useEffect(() => {
+    methods.reset(props.event);
+  }, [props.event]);
     
   const onHandleSubmit = (data) => {
     // Do something with the data
-    // console.log("handleSubmit/Form data: ", data);
+    console.log("handleSubmit/Form data: ", data);
     props.editEvent(data);
   }
 
@@ -67,14 +68,9 @@ function EventDetails(props) {
 
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          {/* <UserPhoto />
-          <UserName />
-          <UserContact />
-          <UserAddress />
-          <UserBio />
-          <UserPaymentInfo />
-          <StaffInfo />
-          <br /> */}
+
+
+
           <LoadingButton
             color="primary"
             loadingPosition="start"
@@ -102,7 +98,7 @@ const mapStateToProps = (state) => {
   return {
     loading: state.loading,
     users: state.users,
-    user: state.user,
+    event: state.events.event,
   };
 };
 
