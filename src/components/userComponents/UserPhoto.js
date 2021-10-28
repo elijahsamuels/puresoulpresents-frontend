@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import userSamplePhoto from "../../images/userSamplePhoto.png";
 import { fetchUserData, editUser } from "../../actions/userActions";
@@ -14,13 +14,14 @@ function UserPhoto(props) {
   
   const returnUserPhotoOrDefault = () => {
     // console.log("props.users.user:", props.users.user)
-  //   if (!!props.users.user.photo) {
-  //     return props.users.user.photo
-  //   } else {
-  //     return userSamplePhoto
-  //   }
+    if (!!props.users.user.photo) {
+      return props.users.user.photo
+    } else {
+      return userSamplePhoto
+    }
   }
-  
+
+
 	return (
 		<div className="userPhoto">
 			<h3>User Photo: {props.users.user.first_name}</h3>
