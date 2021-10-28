@@ -27,7 +27,7 @@ function EventDetails(props) {
   const lastUpdatedDateTime = () => {
     let dateTime = props.event.updated_at
     let lastUpdated = new Date(dateTime)
-    return <span>Last updated at {lastUpdated.toString()} </span>
+    return <div>Last updated at {lastUpdated.toString()} </div>
   }
 
   const dateTimeEventCreated = () => {
@@ -55,21 +55,68 @@ function EventDetails(props) {
     
   const onHandleSubmit = (data) => {
     // Do something with the data
-    console.log("handleSubmit/Form data: ", data);
+    // console.log("handleSubmit/Form data: ", data);
     props.editEvent(data);
   }
-
+  
   return !!props.event ? (
     // If data is loaded
     <div className="eventDetails">
-      <h1>
-        Details for TBD
-      </h1>
+      
+      <h3>
+        Overall Component
+      </h3>
+        <div>Event Type: {props.event.type}</div>
+        <div>Event Program: {props.event.program}</div>
+        <div>Event Date: {props.event.event_date}</div>
+
+      <h3>
+        Contact Component
+      </h3>
+        <div>Event Primary Contact First Name: {props.event.primary_contact_first_name}</div>
+        <div>Event Primary Contact Last Name: {props.event.primary_contact_last_name}</div>
+        <div>Event Primary Contact Phone: {props.event.primary_contact_phone}</div>
+        <div>Event Primary Contact Email: {props.event.primary_contact_email}</div>
+
+      <h3>
+        Location Component
+      </h3>
+        <div>Event Address: {props.event.address1}</div>
+        <div>Event City: {props.event.city}</div>
+        <div>Event State: {props.event.state}</div>
+        <div>Event Zip Code: {props.event.zip_code}</div>
+
+      <h3>
+        Times Component
+      </h3>
+        <div>Event Load in Time: {props.event.load_in_time}</div>
+        <div>Event Soundcheck Time: {props.event.soundcheck_time}</div>
+        <div>Event Doors Open Time: {props.event.doors_open_time}</div>
+        <div>Event Start Time: {props.event.start_time}</div>
+        <div>Event End Time: {props.event.end_time}</div>
+        <div>Event End Time: {props.event.soundcheck_complete_time}</div>
+
+      <h3>
+        Finances Component
+      </h3>
+        <div>Event Total Amount: {props.event.total_amount}</div>
+        <div>Event Deposit Amount: {props.event.deposit_amount}</div>
+        <div>Event Balance Amount: {props.event.balance_amount}</div>
+        <div>Event Invoice Sent: {props.event.invoice_sent}</div>
+        <div>Event Invoice Paid: {props.event.invoice_paid}</div>
+        <div>Event Invoice File: {props.event.invoice_file}</div>
+        <div>Event Hire Order Recevied: {props.event.hire_order_recevied}</div>
+        <div>Event Hire Order File: {props.event.hire_order_file}</div>
+        <div>Event Musician Invoices Sent: {props.event.musician_invoices_sent}</div>
+
+      <h3>
+        Musicians Component
+      </h3>
+        <div>Event Band Size: {props.event.band_size}</div>
+
 
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-
-
 
           <LoadingButton
             color="primary"
