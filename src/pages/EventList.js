@@ -72,7 +72,6 @@ function EventList(props) {
     return Object.values(eventTernary(eventData, missingItem));
   };
 
-
   const eventPaymentStatus = (eventData) => {
     let missingItem = "Payment";
 
@@ -83,6 +82,41 @@ function EventList(props) {
     }
   }
 
+  const eventBandSize = (eventData) => {
+    let missingItem = "Band Size";
+    let bandSize = 5
+    let musicianCount = 4
+
+    if (musicianCount < bandSize) {
+      return <font color="red">{musicianCount}</font>;
+    } else {
+      return <font color="green">{bandSize}</font>;
+    }
+  }
+
+  const eventPrimaryContact = (eventData) => {
+    let missingItem = "Primary Contact";
+    let primaryContact = "Jane Doe"
+    let primaryContactPhone = "123-456-7890"
+
+    if (primaryContact) {
+      return <font >{primaryContact}</font>;
+    } else {
+      return <font color="red">{missingItem}</font>;
+    }
+  }
+
+  const eventType = (eventData) => {
+    let missingItem = "Event Type/Program";
+    let type = "candlelight" // others could be more generic: wedding, concert, private, etc.
+    let program = "Ella Fitzgerald"
+
+    if (type === "candlelight") {
+      return <font >{program}</font>;
+    } else if ( type === undefined ) {
+      return <font color="red">Not Selected</font>;
+    }
+  }
 
   //   eventData.localItem = eventData.balance_amount;
   //   return Object.values(eventTernary(eventData, missingItem));
@@ -94,8 +128,6 @@ function EventList(props) {
   //   return Object.values(eventTernary(eventData, missingItem));
   // };
 
-  
-
   // const eventPrimaryContactTooltip = (eventData) => {
   //   if (!!eventData.primary_contact) {
   //     return eventData.primary_contact
@@ -104,15 +136,24 @@ function EventList(props) {
   //   }
   // };
 
-
-
- 
-
   const missingData = (eventData) => {
     // filter out event items that are undefined, and list those items. undefinded items are missing,
     // once the list is generated, use this info to send event an email requesting that info.
 
     let items = [];
+
+    // check for:
+    // event_date
+    // city
+    // state
+    // band_size === musician_count
+    // hire_order_recevied
+    // invoice_sent
+    // invoice_paid
+    // musician_invoices_received?
+    // musician_invoices_sent?
+  
+
 
     // if (eventPhone(eventData).props === undefined) {
     //   items.push("Phone");
@@ -255,6 +296,14 @@ function EventList(props) {
               </TableCell>
 
               <TableCell 
+                key={"event_type"} 
+                id={"event_type"} 
+                align="center" 
+                width="10%">
+                Type/Program
+              </TableCell>
+
+              <TableCell 
                 key={"event_payment_status"} 
                 id={"event_payment_status"} 
                 align="center" 
@@ -327,6 +376,14 @@ function EventList(props) {
 
                 <TableCell
                   align="center"
+                  id={"event_" + event.id + "_type"}
+                  key={"event_" + event.id + "_type"}
+                >
+                  {eventType(event)}
+                </TableCell>
+
+                <TableCell
+                  align="center"
                   id={"event_" + event.id + "_payment_status"}
                   key={"event_" + event.id + "_payment_status"}
                 >
@@ -337,21 +394,21 @@ function EventList(props) {
 
                 <TableCell
                   align="center"
-                  id={"event_" + event.id + "_payment_status"}
-                  key={"event_" + event.id + "_payment_status"}
+                  id={"event_" + event.id + "_band_size"}
+                  key={"event_" + event.id + "_band_size"}
                 >
                   {/* <Tooltip title={eventBioTooltip(event)}> */}
-                    <span>Add eventBandSize(event)</span>
+                    <span>{eventBandSize(event)}</span>
                   {/* </Tooltip> */}
                 </TableCell>
 
                 <TableCell
                   align="center"
-                  id={"event_" + event.id + "_payment_status"}
-                  key={"event_" + event.id + "_payment_status"}
+                  id={"event_" + event.id + "_primary_contact"}
+                  key={"event_" + event.id + "_primary_contact"}
                 >
                   {/* <Tooltip title={eventBioTooltip(event)}> */}
-                    <span>Add eventPrimaryContact(event)</span>
+                    <span>{eventPrimaryContact(event)}</span>
                   {/* </Tooltip> */}
                 </TableCell>
 
