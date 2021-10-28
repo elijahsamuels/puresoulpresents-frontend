@@ -38,7 +38,7 @@ function EventDetails(props) {
 
   const methods = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: "all",
     defaultValues: useMemo(() => {
       return props.event;
     }, [props])

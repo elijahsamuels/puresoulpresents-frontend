@@ -38,8 +38,7 @@ function UserDetails(props) {
 
   const methods = useForm({
     resolver: yupResolver(schema),
-    mode: "onBlur",
-    mode: "onSubmit",
+    mode: "all",
     defaultValues: useMemo(() => {
       return props.users.user;
     }, [props.users.user])
