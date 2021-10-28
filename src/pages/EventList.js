@@ -77,9 +77,9 @@ function EventList(props) {
     let missingItem = "Payment";
 
     if (eventData.total_amount > eventData.deposit_amount) {
-      return "monies due!"
+      return <font color="red">Monies due!</font>;
     } else {
-      return "paid!"
+      return <font color="green">All paid!</font>;
     }
   }
 
