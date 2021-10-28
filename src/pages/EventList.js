@@ -42,15 +42,15 @@ function EventList(props) {
         };
   };
 
-  const editeventButton = (eventData) => {
+  const editEventButton = (eventData) => {
     // eventData.localItem = eventData.id;
-    let editeventLink = "events/" + eventData.id;
+    let editEventLink = "events/" + eventData.id;
     return (
       <Button
         variant="contained"
         size="small"
         disableElevation
-        href={editeventLink}
+        href={editEventLink}
         // onClick={() => {
         //   handleClick(eventData.id);
         // }}
@@ -96,13 +96,13 @@ function EventList(props) {
 
   
 
-  const eventBioTooltip = (eventData) => {
-    if (!!eventData.bio) {
-      return eventData.bio;
-    } else {
-      return "Bio is missing";
-    }
-  };
+  // const eventPrimaryContactTooltip = (eventData) => {
+  //   if (!!eventData.primary_contact) {
+  //     return eventData.primary_contact
+  //   } else {
+  //     return "Contact info is missing"
+  //   }
+  // };
 
 
 
@@ -262,12 +262,31 @@ function EventList(props) {
                 Payment Status
               </TableCell>
 
+              <TableCell 
+                key={"event_band_size"} 
+                id={"event_band_size"} 
+                align="center" 
+                width="10%">
+                Band Size
+              </TableCell>
+
+              <TableCell 
+                key={"event_primary_contact"} 
+                id={"event_primary_contact"} 
+                align="center" 
+                width="10%">
+                {/* <Tooltip title={eventPrimaryContactTooltip(event)}> */}
+                {/* <Tooltip title={"Fix this later"}> */}
+                  Primary Contact
+                {/* </Tooltip> */}
+              </TableCell>
+
             </TableRow>
           </TableHead>
 
           <TableBody key={"table_body"} id={"table_body"}>
-            {console.log("props: ", props.events.events)}
-            {props.events.events.map((event) => (
+            {console.log("props: ", props.events)}
+            {props.events.map((event) => (
 
               <TableRow
                 key={"event_" + event.id + "_row"}
@@ -287,7 +306,7 @@ function EventList(props) {
                   id={"edit_" + event.id + "_event"}
                   key={"edit_" + event.id + "_event"}
                 >
-                  {editeventButton(event)}
+                  {editEventButton(event)}
                 </TableCell>
 
                 <TableCell
@@ -316,6 +335,26 @@ function EventList(props) {
                   {/* </Tooltip> */}
                 </TableCell>
 
+                <TableCell
+                  align="center"
+                  id={"event_" + event.id + "_payment_status"}
+                  key={"event_" + event.id + "_payment_status"}
+                >
+                  {/* <Tooltip title={eventBioTooltip(event)}> */}
+                    <span>Add eventBandSize(event)</span>
+                  {/* </Tooltip> */}
+                </TableCell>
+
+                <TableCell
+                  align="center"
+                  id={"event_" + event.id + "_payment_status"}
+                  key={"event_" + event.id + "_payment_status"}
+                >
+                  {/* <Tooltip title={eventBioTooltip(event)}> */}
+                    <span>Add eventPrimaryContact(event)</span>
+                  {/* </Tooltip> */}
+                </TableCell>
+
 
 
 
@@ -334,7 +373,7 @@ const mapStateToProps = (state) => {
   // console.log("state: ",state);
   return {
     loading: state.loading,
-    events: state.events,
+    events: state.events.events,
     event: state.event,
   };
 };
