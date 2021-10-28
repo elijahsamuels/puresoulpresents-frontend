@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { schema } from "../components/eventComponents/EventSchema";
 // import EventName from "../components/eventComponents/EventName";
 import EventContact from "../components/eventComponents/EventContact";
-// import EventAddress from "../components/eventComponents/EventAddress";
+import EventLocation from "../components/eventComponents/EventLocation";
 // import EventBio from "../components/eventComponents/EventBio";
 // import EventTaxInfo from "../components/eventComponents/EventTaxInfo";
 // import EventPaymentInfo from "../components/eventComponents/EventPaymentInfo";
@@ -80,13 +80,6 @@ function EventDetails(props) {
         <div>Event Primary Contact Phone: {props.event.primary_contact_phone}</div>
         <div>Event Primary Contact Email: {props.event.primary_contact_email}</div> */}
 {/* 
-      <h3>
-        Location Component
-      </h3>
-        <div>Event Address: {props.event.address1}</div>
-        <div>Event City: {props.event.city}</div>
-        <div>Event State: {props.event.state}</div>
-        <div>Event Zip Code: {props.event.zip_code}</div>
 
       <h3>
         Times Component
@@ -120,6 +113,7 @@ function EventDetails(props) {
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
         <EventContact />
+        <EventLocation />
 
           <LoadingButton
             color="primary"
