@@ -6,7 +6,7 @@ import { schema } from "../components/eventComponents/EventSchema";
 import EventContact from "../components/eventComponents/EventContact";
 import EventLocation from "../components/eventComponents/EventLocation";
 import EventTimes from "../components/eventComponents/EventTimes";
-// import EventFinances from "../components/eventComponents/EventFinances";
+import EventFinances from "../components/eventComponents/EventFinances";
 
 import { fetchEventData, editEvent } from "../actions/eventActions";
 
@@ -81,6 +81,7 @@ function EventDetails(props) {
         <EventContact />
         <EventLocation />
         <EventTimes />
+        <EventFinances />
 
           <LoadingButton
             color="primary"
