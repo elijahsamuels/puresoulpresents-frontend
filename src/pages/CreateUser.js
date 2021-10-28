@@ -24,12 +24,7 @@ function CreateUser(props) {
   
   const methods = useForm({
     resolver: yupResolver(schema),
-    // defaultValues: {
-    //   first_name: "",
-    //   last_name: "",
-    //   phone: "",
-    //   email: "",
-    //   }
+    mode: "all",
     });
   
   const onHandleSubmit = (data) => {
