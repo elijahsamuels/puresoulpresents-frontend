@@ -27,6 +27,8 @@ const useStyles = makeStyles({
 
 function UserList(props) {
   const classes = useStyles();
+  // const userRole = "fever" // props.user.role
+  const userRole = "admin" // props.user.role
 
   // console.log("props: ", props.users.users);
   // console.log("props.fetchUsersList: ", props.fetchUsersList());
@@ -302,6 +304,7 @@ function UserList(props) {
     </div>
   ) : (
     // If the state is not loading
+
     <div className="userList">
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
@@ -320,6 +323,7 @@ function UserList(props) {
         >
           <TableHead key={"table_head"} id={"table_head"}>
             <TableRow key={"tableRow"} id={"tableRow"}>
+
               <TableCell
                 key={"allgood"}
                 id={"allgood"}
@@ -328,14 +332,19 @@ function UserList(props) {
               >
                 All Good?
               </TableCell>
-              <TableCell
-                key={"edit_user"}
-                id={"edit_user"}
-                align="center"
-                width="10%"
-              >
-                Edit
-              </TableCell>
+
+              {/* TODO: this ternary logic should be refactored to be reusable. */}
+              {userRole === "admin" ? 
+                <TableCell
+                  key={"edit_user"}
+                  id={"edit_user"}
+                  align="center"
+                  width="10%"
+                >
+                  Edit
+                </TableCell>
+               : "" }
+
               <TableCell
                 key={"firstname"}
                 id={"firstname"}
@@ -387,6 +396,8 @@ function UserList(props) {
                   {missingData(user)}
                   <br />
                 </TableCell>
+                {userRole === "admin" ? 
+
                 <TableCell
                   align="center"
                   id={"edit_" + user.id + "_user"}
@@ -394,6 +405,8 @@ function UserList(props) {
                 >
                   {editUserButton(user)}
                 </TableCell>
+                : ""}
+
                 <TableCell
                   align="center"
                   id={"user_" + user.id + "_name"}
