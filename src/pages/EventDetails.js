@@ -5,11 +5,8 @@ import { schema } from "../components/eventComponents/EventSchema";
 // import EventName from "../components/eventComponents/EventName";
 import EventContact from "../components/eventComponents/EventContact";
 import EventLocation from "../components/eventComponents/EventLocation";
-// import EventBio from "../components/eventComponents/EventBio";
-// import EventTaxInfo from "../components/eventComponents/EventTaxInfo";
-// import EventPaymentInfo from "../components/eventComponents/EventPaymentInfo";
-// import StaffInfo from "../components/eventComponents/StaffInfo";
-// import EventPhoto from "../components/eventComponents/EventPhoto";
+import EventTimes from "../components/eventComponents/EventTimes";
+// import EventFinances from "../components/eventComponents/EventFinances";
 
 import { fetchEventData, editEvent } from "../actions/eventActions";
 
@@ -71,38 +68,7 @@ function EventDetails(props) {
         <div>Event Date: {props.event.event_date}</div>
 
 
-
-      {/* <h3>
-        Contact Component
-      </h3>
-        <div>Event Primary Contact First Name: {props.event.primary_contact_first_name}</div>
-        <div>Event Primary Contact Last Name: {props.event.primary_contact_last_name}</div>
-        <div>Event Primary Contact Phone: {props.event.primary_contact_phone}</div>
-        <div>Event Primary Contact Email: {props.event.primary_contact_email}</div> */}
 {/* 
-
-      <h3>
-        Times Component
-      </h3>
-        <div>Event Load in Time: {props.event.load_in_time}</div>
-        <div>Event Soundcheck Time: {props.event.soundcheck_time}</div>
-        <div>Event Doors Open Time: {props.event.doors_open_time}</div>
-        <div>Event Start Time: {props.event.start_time}</div>
-        <div>Event End Time: {props.event.end_time}</div>
-        <div>Event End Time: {props.event.soundcheck_complete_time}</div>
-
-      <h3>
-        Finances Component
-      </h3>
-        <div>Event Total Amount: {props.event.total_amount}</div>
-        <div>Event Deposit Amount: {props.event.deposit_amount}</div>
-        <div>Event Balance Amount: {props.event.balance_amount}</div>
-        <div>Event Invoice Sent: {props.event.invoice_sent}</div>
-        <div>Event Invoice Paid: {props.event.invoice_paid}</div>
-        <div>Event Invoice File: {props.event.invoice_file}</div>
-        <div>Event Hire Order Recevied: {props.event.hire_order_recevied}</div>
-        <div>Event Hire Order File: {props.event.hire_order_file}</div>
-        <div>Event Musician Invoices Sent: {props.event.musician_invoices_sent}</div>
 
       <h3>
         Musicians Component
@@ -114,6 +80,7 @@ function EventDetails(props) {
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
         <EventContact />
         <EventLocation />
+        <EventTimes />
 
           <LoadingButton
             color="primary"
