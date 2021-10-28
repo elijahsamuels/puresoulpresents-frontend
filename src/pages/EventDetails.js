@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 
 import { schema } from "../components/eventComponents/EventSchema";
 // import EventName from "../components/eventComponents/EventName";
-// import EventContact from "../components/eventComponents/EventContact";
+import EventContact from "../components/eventComponents/EventContact";
 // import EventAddress from "../components/eventComponents/EventAddress";
 // import EventBio from "../components/eventComponents/EventBio";
 // import EventTaxInfo from "../components/eventComponents/EventTaxInfo";
@@ -40,10 +40,10 @@ function EventDetails(props) {
     resolver: yupResolver(schema),
     mode: "all",
     defaultValues: useMemo(() => {
-      return props;
-    }, [props])
+      return props.event;
+    }, [props.event])
   });
-  console.log("EventDetails/props: ", props)
+  // console.log("EventDetails/props: ", props)
   
   useEffect(() => {
     setEventData(props.fetchEventData(eventid));
@@ -55,8 +55,8 @@ function EventDetails(props) {
     
   const onHandleSubmit = (data) => {
     // Do something with the data
-    // console.log("handleSubmit/Form data: ", data);
-    props.editEvent(data);
+    console.log("handleSubmit/Form data: ", data);
+    // props.editEvent(data);
   }
   
   return !!props.event ? (
@@ -70,14 +70,16 @@ function EventDetails(props) {
         <div>Event Program: {props.event.program}</div>
         <div>Event Date: {props.event.event_date}</div>
 
-      <h3>
+
+
+      {/* <h3>
         Contact Component
       </h3>
         <div>Event Primary Contact First Name: {props.event.primary_contact_first_name}</div>
         <div>Event Primary Contact Last Name: {props.event.primary_contact_last_name}</div>
         <div>Event Primary Contact Phone: {props.event.primary_contact_phone}</div>
-        <div>Event Primary Contact Email: {props.event.primary_contact_email}</div>
-
+        <div>Event Primary Contact Email: {props.event.primary_contact_email}</div> */}
+{/* 
       <h3>
         Location Component
       </h3>
@@ -112,11 +114,12 @@ function EventDetails(props) {
       <h3>
         Musicians Component
       </h3>
-        <div>Event Band Size: {props.event.band_size}</div>
+        <div>Event Band Size: {props.event.band_size}</div> */}
 
 
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
+        <EventContact />
 
           <LoadingButton
             color="primary"
@@ -144,7 +147,7 @@ function EventDetails(props) {
 const mapStateToProps = (state) => {
   return {
     loading: state.loading,
-    users: state.users,
+    // users: state.users,
     event: state.events.event,
   };
 };

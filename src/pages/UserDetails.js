@@ -54,7 +54,7 @@ function UserDetails(props) {
 
   const onHandleSubmit = (data) => {
     // Do something with the data
-    console.log("handleSubmit/Form data: ", data);
+    // console.log("handleSubmit/Form data: ", data);
     props.editUser(data);
   }
 
