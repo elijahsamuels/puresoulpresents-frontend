@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { fetchEventData, editEvent } from "../../actions/eventActions";
 import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
 
 function EventMusicians (props) {
 // console.log("EventContact/props.event: ", props.event)
@@ -14,22 +17,45 @@ function EventMusicians (props) {
     <div className="eventMusicians">
 
       <h3>
-        Contact Component
+        Musicians Component
       </h3>
 
       <Controller name="band_size" control={control} render={({ field }) => (
-        <TextField 
-        {...field}
-        type="text"
-        label="Band Size" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        error={!!errors.band_size}
-        helperText={errors.band_size ? errors.band_size.message : ""}
-        />
-      )}/>
+        <span>
+          <InputLabel id="band_size">Rating</InputLabel>
+          <Select
+          {...field}
+          label="Band Size"
+          id="band_size"
+          variant="outlined"
+          size="small"
+          margin="dense"
+          sx={{ minWidth: 120 }}
+          >
+          <MenuItem value="" disabled><em>Band Size</em></MenuItem>
+          <MenuItem value="1">1</MenuItem>
+          <MenuItem value="2">2</MenuItem>
+          <MenuItem value="3">3</MenuItem>
+          <MenuItem value="4">4</MenuItem>
+          <MenuItem value="5">5</MenuItem>
+          <MenuItem value="6">6</MenuItem>
+          <MenuItem value="7">7</MenuItem>
+          <MenuItem value="8">8</MenuItem>
+          <MenuItem value="9">9</MenuItem>
+          <MenuItem value="10">10</MenuItem>
+          <MenuItem value="11">11</MenuItem>
+          <MenuItem value="12">12</MenuItem>
+          <MenuItem value="13">13</MenuItem>
+          <MenuItem value="14">14</MenuItem>
+          <MenuItem value="15">15</MenuItem>
+        </Select>
+        </span>
+        )}/>
 
+
+      {/* Need to convert to select option */}
+
+      {/*
       <Controller name="musician01" control={control} render={({ field }) => (
         <TextField 
         {...field}
@@ -224,7 +250,7 @@ function EventMusicians (props) {
         helperText={errors.musician15 ? errors.musician15.message : ""}
         />
       )}/>
-
+*/}
 
     </div>
   );
