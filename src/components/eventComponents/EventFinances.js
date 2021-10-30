@@ -17,16 +17,7 @@ function EventTimes (props) {
       <h3>
         Finances Component
       </h3>
-        {/* <div>Event Total Amount: {props.event.total_amount}</div> */}
-        {/* <div>Event Deposit Amount: {props.event.deposit_amount}</div> */}
-        {/* <div>Event Balance Amount: {props.event.balance_amount}</div> */}
-        {/* <div>Event Invoice Sent: {props.event.invoice_sent}</div> */}
-        {/* <div>Event Invoice Paid: {props.event.invoice_paid}</div> */}
-        {/* <div>Event Invoice File: {props.event.invoice_file}</div> */}
-        {/* <div>Event Hire Order Recevied: {props.event.hire_order_recevied}</div> */}
-        {/* <div>Event Hire Order File: {props.event.hire_order_file}</div> */}
-        <div>Event Musician Invoices Sent: {props.event.musician_invoices_sent}</div>
-
+      
       <Controller name="total_amount" control={control} render={({ field }) => (
         <TextField 
         {...field}
@@ -143,7 +134,7 @@ function EventTimes (props) {
         helperText={errors.musician_invoices_sent ? errors.musician_invoices_sent.message : ""}
         />
       )}/>
-      
+
     </div>
   );
 };
