@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 function EventLocation (props) {
 // console.log("EventLocation/props.event: ", props.event)
@@ -19,7 +20,7 @@ function EventLocation (props) {
       <h3>
         Location Component
       </h3>
-
+      
       <Controller name="venue_name" control={control} render={({ field }) => (
         <TextField 
         {...field}
@@ -48,19 +49,19 @@ function EventLocation (props) {
 
       <Controller name="status" control={control} render={({ field }) => (
         <span>
-          <InputLabel shrink id="status">Status</InputLabel>
+          <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 200 }}>
+          <InputLabel id="status">Status</InputLabel>
           <Select
             {...field}
             // onChange={e => setStatus(e.target.value)}
             // value={status} // this works to change the value of the select (and number of musicians), but changes between controlled to uncontrolled. Boo!
             // renderValue={() => status}
             label="Status"
-            labelId="status_label"
             id="status"
             variant="outlined"
             size="small"
             margin="dense"
-            sx={{ m: 0.5, minWidth: 200 }}
+            // sx={{ ml: 0.5, mt: 1, minWidth: 200 }}
           >
           <MenuItem value="0" disabled><em>Status</em></MenuItem>
           <MenuItem value="Inquiry">1. Inquiry</MenuItem>
@@ -74,29 +75,32 @@ function EventLocation (props) {
           <MenuItem value="Postponed">9. Postponed</MenuItem>
           <MenuItem value="Cancelled">10. Cancelled</MenuItem>
         </Select>
+        </FormControl>
         </span>
         )}/>
 
       <Controller name="indoor" control={control} render={({ field }) => (
         <span>
+          <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 150 }}>
           <InputLabel shrink id="indoor">Indoor/Outdoor</InputLabel>
           <Select
             {...field}
             // onChange={e => setindoor(e.target.value)}
             // value={indoor} // this works to change the value of the select (and number of musicians), but changes between controlled to uncontrolled. Boo!
             // renderValue={() => indoor}
-            label="indoor"
-            labelId="indoor_label"
+            label="Indoor/Outdoor"
+            // labelId="indoor_label"
             id="indoor"
             variant="outlined"
             size="small"
             margin="dense"
-            sx={{ m: 0.5, minWidth: 200 }}
+            // sx={{ m: 0.5, minWidth: 200 }}
           >
           <MenuItem value="0" disabled><em>Indoor/Outdoor</em></MenuItem>
           <MenuItem value="true">1. Indoor</MenuItem>
           <MenuItem value="false">2. Outdoor</MenuItem>
         </Select>
+        </FormControl>
         </span>
         )}/>
 
