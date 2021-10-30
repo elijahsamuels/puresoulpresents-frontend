@@ -7,8 +7,11 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 
+
+
 function EventMusicians (props) {
-// console.log("EventContact/props.event: ", props.event)
+  console.log("props.event", props.event)
+  // console.log("EventContact/props.event: ", props.event)
   const { control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
   });
@@ -16,34 +19,32 @@ function EventMusicians (props) {
   const [bandSize, setBandSize] = useState();
   
   useEffect(() => {
-    setBandSize(props.event.band_size);
-  }, [props.event.band_size]);
+    // console.log("props.event", props.event)
+  }, [bandSize]);
 
   
   const musicianCountGenerator = () => {
     
     let musicianCountFromBandSizeArray = [];
-    for (let i = 1; i < props.event.band_size+1; i++) {
-            musicianCountFromBandSizeArray.push(
-            
-            <div>
-            <Controller name={`musician_0${i}`} control={control} render={({ field }) => (
-              <TextField 
-                {...field}
-                type="text"
-                label={`Musician 0${i}`}
-                variant="outlined" 
-                size="small"
-                margin="dense"
-                // error={!!errors.musician0.concat(i)}
-                // helperText={errors.musician0.concat(i) ? errors.musician0.concat(i).message : ""}
+    console.log("bandSize", bandSize)
+    for (let i = 1; i < (+bandSize+1); i++) {
+      musicianCountFromBandSizeArray.push(
+      <div>
+        <Controller name={`musician_0${i}`} control={control} render={({ field }) => (
+          <TextField 
+            {...field}
+            type="text"
+            label={`Musician 0${i}`}
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            error={!!errors[`musician0${i}`]}
+            helperText={errors[`musician0${i}`] ? errors[`musician0${i}`].message : ""}
             />
           )}/>
-          </div>
+      </div>
       );
-      // console.log("musicianCountFromBandSizeArray: ", "musician_0".concat(i));
     }
-    // console.log("musicianCountFromBandSizeArray: ", musicianCountFromBandSizeArray)
     return musicianCountFromBandSizeArray;
   }
 
@@ -56,9 +57,10 @@ function EventMusicians (props) {
 
       <Controller name="band_size" control={control} render={({ field }) => (
         <span>
-          <InputLabel id="band_size">Rating</InputLabel>
+          <InputLabel id="band_size">Band Size</InputLabel>
           <Select
           {...field}
+          onChange={e => setBandSize(e.target.value)}
           label="Band Size"
           id="band_size"
           variant="outlined"
