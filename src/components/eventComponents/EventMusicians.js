@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
 
 function EventMusicians (props) {
   console.log("typeof (props.event.band_size)", typeof (props.event.band_size))
@@ -98,20 +99,21 @@ function EventMusicians (props) {
 
       <Controller name="band_size" control={control} render={({ field }) => (
         <span>
+          <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 50 }}>
           <InputLabel id="band_size">Size</InputLabel>
           <Select
             {...field}
             onChange={e => setBandSize(e.target.value)}
             // value={bandSize} // this works to change the value of the select (and number of musicians), but changes between controlled to uncontrolled. Boo!
             renderValue={() => bandSize}
-            label="Band Size"
-            labelId="band_size_label"
+            label="Size"
             id="band_size"
             variant="outlined"
             size="small"
             margin="dense"
-            sx={{ m: 0.5, minWidth: 50 }}
+            // sx={{ m: 0.5, minWidth: 50 }}
           >
+
           <MenuItem value="0" disabled><em>Band Size</em></MenuItem>
           {/* should refactor the MenuItems to be generated instead of manually written */}
           <MenuItem value={1}>1</MenuItem>
@@ -130,7 +132,8 @@ function EventMusicians (props) {
           <MenuItem value={14}>14</MenuItem>
           <MenuItem value={15}>15</MenuItem>
         </Select>
-        
+        </FormControl>
+
         {/* <Controller name={'band_cost'} control={control} render={({ field }) => ( */}
           {/* // console.log(`bandCostSummedFromMusicianPayRates`, field), */}
           <TextField 
