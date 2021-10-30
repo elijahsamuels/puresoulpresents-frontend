@@ -6,11 +6,6 @@ export const schema = yup.object().shape({
     .optional("Please provide a valid address")
     .notRequired()
     .nullable(),
-  address2: yup
-    .string()
-    .optional()
-    .notRequired()
-    .nullable(),
   city: yup
     .string()
     .required("City is required"),
@@ -25,4 +20,25 @@ export const schema = yup.object().shape({
     .matches(/^[0-9]+$/, "Must be only digits")
     .min(5, "Must be exactly 5 digits")
     .max(5, "Must be exactly 5 digits"),
+  venue_name: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  venue_capacity: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  status: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+  inddor: yup
+    .string()
+    .optional()
+    .notRequired()
+    .nullable(),
+
 });

@@ -50,7 +50,6 @@ function StaffInfo(props) {
           <Select
           {...field}
           label="Rating"
-          // labelId="user_staff_rating_label"
           id="user_staff_rating"
           variant="outlined"
           size="small"

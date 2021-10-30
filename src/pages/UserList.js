@@ -172,9 +172,9 @@ function UserList(props) {
 
     if (userData.photo) {
       // userData.localItem = userData.photo;
-      return <img src={`${userData.photo}`} alt="User Photo" height="100" width="100" />
+      return <img src={`${userData.photo}`} alt="User" height="100" width="100" />
     } else {
-      return <img src={userSamplePhoto} alt="Default Image" height="100" width="100" />;
+      return <img src={userSamplePhoto} alt="Default" height="100" width="100" />;
     }
   };
 
