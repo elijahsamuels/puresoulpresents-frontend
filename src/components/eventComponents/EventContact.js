@@ -43,7 +43,7 @@ function EventContact (props) {
         />
       )}/>
 
-      <Controller name="email" control={control} render={({ field }) => (
+      <Controller name="primary_contact_email" control={control} render={({ field }) => (
         <TextField 
         {...field}
         type="text"
@@ -51,12 +51,12 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
-        error={!!errors.email}
-        helperText={errors.email ? errors.email.message : ""}
+        error={!!errors.primary_contact_email}
+        helperText={errors.primary_contact_email ? errors.primary_contact_email.message : ""}
         />
       )}/>
 
-      <Controller name="phone" control={control} render={({ field }) => (
+      <Controller name="primary_contact_phone" control={control} render={({ field }) => (
         <TextField 
         {...field}
         type="text"
@@ -64,8 +64,8 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
-        error={!!errors.phone}
-        helperText={errors.phone ? errors.phone.message : ""}
+        error={!!errors.primary_contact_phone}
+        helperText={errors.primary_contact_phone ? errors.primary_contact_phone.message : ""}
         />
       )}/>
 
