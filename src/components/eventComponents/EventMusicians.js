@@ -13,6 +13,40 @@ function EventMusicians (props) {
     defaultValues: props.event,
   });
 
+  const [bandSize, setBandSize] = useState();
+  
+  useEffect(() => {
+    setBandSize(props.event.band_size);
+  }, [props.event.band_size]);
+
+  
+  const musicianCountGenerator = () => {
+    
+    let musicianCountFromBandSizeArray = [];
+    for (let i = 1; i < props.event.band_size+1; i++) {
+            musicianCountFromBandSizeArray.push(
+            
+            <div>
+            <Controller name={`musician_0${i}`} control={control} render={({ field }) => (
+              <TextField 
+                {...field}
+                type="text"
+                label={`Musician 0${i}`}
+                variant="outlined" 
+                size="small"
+                margin="dense"
+                // error={!!errors.musician0.concat(i)}
+                // helperText={errors.musician0.concat(i) ? errors.musician0.concat(i).message : ""}
+            />
+          )}/>
+          </div>
+      );
+      // console.log("musicianCountFromBandSizeArray: ", "musician_0".concat(i));
+    }
+    // console.log("musicianCountFromBandSizeArray: ", musicianCountFromBandSizeArray)
+    return musicianCountFromBandSizeArray;
+  }
+
   return (
     <div className="eventMusicians">
 
@@ -52,8 +86,7 @@ function EventMusicians (props) {
         </span>
         )}/>
 
-
-      {/* Need to convert to select option */}
+        {musicianCountGenerator()}
 
       {/*
       <Controller name="musician01" control={control} render={({ field }) => (
