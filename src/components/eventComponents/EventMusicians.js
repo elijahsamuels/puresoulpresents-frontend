@@ -16,8 +16,19 @@ function EventMusicians (props) {
     defaultValues: props.event,
   });
 
+  const [bandCostSummed, setBandCostSummed] = useState([]);
+
+  const sendPayRateToBeSummed = (payRate) => {
+    return setBandCostSummed(bandCostSummed + payRate);
+    console.log("bandCostSummed: ", bandCostSummed, "payRate: ", payRate)
+  }
+
+  // useEffect(() => {
+  //   setBandCostSummed();
+  // }, [bandCostSummed]);
+
   const [bandSize, setBandSize] = useState(props.event.band_size);
-  const musicianPayRate = 300
+  const musicianPayRate = 300 // temp value
 
   // useEffect(() => {
   //   // console.log("props.event", props.event)
@@ -25,8 +36,8 @@ function EventMusicians (props) {
   // }, [bandSize]);
 
   const musicianCountGenerator = () => {
-    console.log("bandSize", bandSize)
-    console.log("watch('band_size')", watch("band_size"))
+    // console.log("bandSize", bandSize)
+    // console.log("watch('band_size')", watch("band_size"))
     
     let musicianCountFromBandSizeArray = [];
     for (let i = 1; i < (parseInt(bandSize)+1); i++) {
@@ -53,6 +64,8 @@ function EventMusicians (props) {
               type="number"
               label={`Pay (USD)`}
               placeholder={`Pay (USD)`}
+              // onChange={(e) => {sendPayRateToBeSummed(e.target.value)}}
+              // defaultValue={musicianPayRate}
               value={musicianPayRate}
               variant="outlined" 
               size="small"
@@ -67,10 +80,13 @@ function EventMusicians (props) {
     return musicianCountFromBandSizeArray;
   }
 
-  const bandTotalCost = () => {
-    let bandCost = 20100
-
-    return `$${bandCost}`
+  const bandTotalCostSummedFromMusicianPayRates = () => {
+    let bandCostSummedFromMusicianPayRates = 0
+    // for (let i = 1; i < bandSize; i++) {
+    for (let i = 1; i < (parseInt(bandSize)+1); i++) {
+      bandCostSummedFromMusicianPayRates += parseInt(watch(`musician_${i}_pay_rate`))
+    }
+    return `$${bandCostSummedFromMusicianPayRates}`
   }
 
   return (
@@ -82,13 +98,14 @@ function EventMusicians (props) {
 
       <Controller name="band_size" control={control} render={({ field }) => (
         <span>
-          <InputLabel id="band_size">Band Size</InputLabel>
+          <InputLabel id="band_size">Size</InputLabel>
           <Select
             {...field}
             onChange={e => setBandSize(e.target.value)}
             // value={bandSize} // this works to change the value of the select (and number of musicians), but changes between controlled to uncontrolled. Boo!
             renderValue={() => bandSize}
             label="Band Size"
+            labelId="band_size_label"
             id="band_size"
             variant="outlined"
             size="small"
@@ -113,8 +130,9 @@ function EventMusicians (props) {
           <MenuItem value={14}>14</MenuItem>
           <MenuItem value={15}>15</MenuItem>
         </Select>
-        <Controller name={'band_cost'} control={control} render={({ field }) => (
-          // console.log(`bandCost`, field),
+        
+        {/* <Controller name={'band_cost'} control={control} render={({ field }) => ( */}
+          {/* // console.log(`bandCostSummedFromMusicianPayRates`, field), */}
           <TextField 
             {...field}
             // type="text"
@@ -126,15 +144,15 @@ function EventMusicians (props) {
             // sx={{ m: 0.5, width: '12ch' }}
             InputProps={{
               readOnly: true,
-              value: bandTotalCost(),
+              value: bandTotalCostSummedFromMusicianPayRates(),
             }}
-            // error={!!errors[`bandCost`]}
-            // // helperText={errors[`bandCost`] ? errors[`bandCost`].message : ""}
+            // error={!!errors[`bandCostSummedFromMusicianPayRates`]}
+            // // helperText={errors[`bandCostSummedFromMusicianPayRates`] ? errors[`bandCostSummedFromMusicianPayRates`].message : ""}
             />
-          )}/>
+          {/* // )}/> */}
+          {/*  */}
 
-
-        {/* {bandTotalCost()} */}
+        {/* {bandTotalCostSummedFromMusicianPayRates()} */}
 
         </span>
         )}/>
