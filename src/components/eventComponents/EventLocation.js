@@ -17,6 +17,58 @@ function EventLocation (props) {
         Location Component
       </h3>
 
+      <Controller name="venue_name" control={control} render={({ field }) => (
+        <TextField 
+        {...field}
+        type="text"
+        label="Venue Name" 
+        variant="outlined" 
+        size="small"
+        margin="dense"
+        error={!!errors.venue_name}
+        helperText={errors.venue_name ? errors.venue_name.message : ""}
+        />
+      )}/>
+
+      <Controller name="venue_capacity" control={control} render={({ field }) => (
+        <TextField 
+        {...field}
+        type="text"
+        label="Venue Capacity"
+        variant="outlined" 
+        size="small"
+        margin="dense"
+        error={!!errors.venue_capacity}
+        helperText={errors.venue_capacity ? errors.venue_capacity.message : ""}
+        />
+      )}/>
+
+      <Controller name="status" control={control} render={({ field }) => (
+        <TextField 
+        {...field}
+        type="text"
+        label="Status" 
+        variant="outlined" 
+        size="small"
+        margin="dense"
+        error={!!errors.status}
+        helperText={errors.status ? errors.status.message : ""}
+        />
+      )}/>
+
+      <Controller name="indoor" control={control} render={({ field }) => (
+        <TextField 
+        {...field}
+        type="text"
+        label="Indoor/Outdoor" 
+        variant="outlined" 
+        size="small"
+        margin="dense"
+        error={!!errors.indoor}
+        helperText={errors.indoor ? errors.indoor.message : ""}
+        />
+      )}/>
+
       <Controller name="address1" control={control} render={({ field }) => (
         <TextField 
         {...field}
