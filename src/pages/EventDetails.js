@@ -2,11 +2,12 @@ import { connect } from "react-redux";
 import React, { useState, useEffect, useMemo } from "react";
 
 import { schema } from "../components/eventComponents/EventSchema";
-// import EventName from "../components/eventComponents/EventName";
+import EventMusicians from "../components/eventComponents/EventMusicians";
 import EventContact from "../components/eventComponents/EventContact";
 import EventLocation from "../components/eventComponents/EventLocation";
 import EventTimes from "../components/eventComponents/EventTimes";
 import EventFinances from "../components/eventComponents/EventFinances";
+import EventNotes from "../components/eventComponents/EventNotes";
 
 import { fetchEventData, editEvent } from "../actions/eventActions";
 
@@ -82,6 +83,8 @@ function EventDetails(props) {
         <EventLocation />
         <EventTimes />
         <EventFinances />
+        <EventNotes />
+        <EventMusicians />
 
           <LoadingButton
             color="primary"
