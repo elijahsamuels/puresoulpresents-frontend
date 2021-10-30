@@ -69,6 +69,32 @@ function EventTimes (props) {
         />
       )}/>
 
+      <Controller name="set_1_start_time" control={control} render={({ field }) => (
+        <TextField 
+        {...field}
+        type="text"
+        label="Set 1" 
+        variant="outlined" 
+        size="small"
+        margin="dense"
+        error={!!errors.set_1_start_time}
+        helperText={errors.set_1_start_time ? errors.set_1_start_time.message : ""}
+        />
+      )}/>
+
+      <Controller name="set_2_start_time" control={control} render={({ field }) => (
+        <TextField 
+        {...field}
+        type="text"
+        label="Set 2" 
+        variant="outlined" 
+        size="small"
+        margin="dense"
+        error={!!errors.set_2_start_time}
+        helperText={errors.set_2_start_time ? errors.set_2_start_time.message : ""}
+        />
+      )}/>
+
       <Controller name="end_time" control={control} render={({ field }) => (
         <TextField 
         {...field}
