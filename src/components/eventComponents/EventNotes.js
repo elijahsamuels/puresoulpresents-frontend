@@ -10,6 +10,19 @@ function EventNotes (props) {
     defaultValues: props.event,
   });
 
+  const lastUpdatedDateTime = () => {
+    let producer = props.event.last_updated_by
+    let dateTime = props.event.updated_at
+    let lastUpdated = new Date(dateTime)
+    return <div>Last updated at {lastUpdated.toString()}  { !!producer ? `by ${producer}` : ""} </div>
+  }
+
+  const dateTimeEventCreated = () => {
+    let dateTime = props.event.created_at
+    let eventCreated = new Date(dateTime)
+    return <span>Created at {eventCreated.toString()} </span>
+  }
+
   return (
     <div className="eventNotes">
 
@@ -69,9 +82,9 @@ function EventNotes (props) {
         />
       )}/>
 
-      <div>Created at: {props.event.created_at}</div>
-      <div>Updated at: {props.event.updated_at}</div>
-      <div>Last updated by: {props.event.last_updated_by}</div>
+
+      <div>{dateTimeEventCreated()}</div>
+      <div>{lastUpdatedDateTime()}</div>
 
     </div>
   );
