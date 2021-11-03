@@ -60,10 +60,10 @@ function EventTimes (props) {
       <Controller name="invoice_sent" control={control} render={({ field }) => (
         <Checkbox 
         {...field}
-        // type="text"
-        label="Invoice Sent" 
+        label="Invoice Sent"
+        disableRipple="true"
         // variant="outlined" 
-        // size="small"
+        size="small"
         // margin="dense"
         // error={!!errors.invoice_sent}
         // helperText={errors.invoice_sent ? errors.invoice_sent.message : ""}
@@ -73,11 +73,11 @@ function EventTimes (props) {
       <Controller name="invoice_paid" control={control} render={({ field }) => (
         <Checkbox 
         {...field}
-        type="text"
-        label="Invoice Paid" 
-        variant="outlined" 
+        label="Invoice Paid"
+        variant="outlined"
         size="small"
-        margin="dense"
+        // margin="dense"
+        disableRipple="true"
         error={!!errors.invoice_paid}
         helperText={errors.invoice_paid ? errors.invoice_paid.message : ""}
         />
@@ -122,7 +122,7 @@ function EventTimes (props) {
         />
       )}/>
 
-      <Controller name="musician_invoices_sent" control={control} render={({ field }) => (
+      {/* <Controller name="musician_invoices_sent" control={control} render={({ field }) => (
         <TextField 
         {...field}
         type="text"
@@ -133,7 +133,7 @@ function EventTimes (props) {
         error={!!errors.musician_invoices_sent}
         helperText={errors.musician_invoices_sent ? errors.musician_invoices_sent.message : ""}
         />
-      )}/>
+      )}/> */}
 
     </div>
   );
