@@ -68,24 +68,21 @@ function EventDetails(props) {
         <div>Event Program: {props.event.program}</div>
         <div>Event Date: {props.event.event_date}</div>
 
-
 {/* 
-
       <h3>
         Musicians Component
       </h3>
         <div>Event Band Size: {props.event.band_size}</div> */}
 
-
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-        <EventContact />
         <EventLocation />
+        <EventContact />
+        <EventMusicians />
         <EventTimes />
         <EventFinances />
-        <EventNotes />
-        <EventMusicians />
-
+        {/* <EventNotes /> */}
+        <br />
           <LoadingButton
             color="primary"
             loadingPosition="start"
@@ -95,6 +92,7 @@ function EventDetails(props) {
           >
             Save
           </LoadingButton>
+          <br />
         </form>
           <div>{dateTimeEventCreated()}</div>
           <div>{lastUpdatedDateTime()}</div>
