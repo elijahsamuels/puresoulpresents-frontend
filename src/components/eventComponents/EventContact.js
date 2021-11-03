@@ -38,6 +38,7 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5 }} 
         error={!!errors.primary_contact_last_name}
         helperText={errors.primary_contact_last_name ? errors.primary_contact_last_name.message : ""}
         />
@@ -51,6 +52,7 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5 }} 
         error={!!errors.primary_contact_email}
         helperText={errors.primary_contact_email ? errors.primary_contact_email.message : ""}
         />
@@ -63,6 +65,7 @@ function EventContact (props) {
         label="Phone" 
         variant="outlined" 
         size="small"
+        sx={{ ml: 0.5 }} 
         margin="dense"
         error={!!errors.primary_contact_phone}
         helperText={errors.primary_contact_phone ? errors.primary_contact_phone.message : ""}

@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 function StaffInfo(props) {
 
@@ -39,22 +40,23 @@ function StaffInfo(props) {
             variant="outlined" 
             size="small"
             margin="dense"
+            sx={{ ml: 0.5 }}
             error={!!errors.nick_name}
             helperText={errors.nick_name ? errors.nick_name.message : ""}
             />
         )}/>
 
       <Controller name="user_staff_rating" control={control} render={({ field }) => (
-        <span>
+          <FormControl sx={{ ml: 0.5, mt: 1 }}>
           <InputLabel id="user_staff_rating">Rating</InputLabel>
           <Select
-          {...field}
-          label="Rating"
-          id="user_staff_rating"
-          variant="outlined"
-          size="small"
-          margin="dense"
-          sx={{ minWidth: 120 }}
+            {...field}
+            label="Rating"
+            id="user_staff_rating"
+            variant="outlined"
+            size="small"
+            margin="dense"
+            sx={{ minWidth: 120 }}
           >
           <MenuItem value="" disabled><em>Select Rating</em></MenuItem>
           <MenuItem value="1">1. Great</MenuItem>
@@ -68,7 +70,7 @@ function StaffInfo(props) {
           <MenuItem value="9">9. Hidden - Doesn't want gigs</MenuItem>
           <MenuItem value="0">0. Hidden - Blacklisted</MenuItem>
         </Select>
-        </span>
+        </FormControl>
         )}/>
     </div>
   );

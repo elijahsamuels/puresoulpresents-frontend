@@ -42,6 +42,7 @@ function EventLocation (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5 }} 
         error={!!errors.venue_capacity}
         helperText={errors.venue_capacity ? errors.venue_capacity.message : ""}
         />
@@ -82,79 +83,86 @@ function EventLocation (props) {
       <Controller name="indoor" control={control} render={({ field }) => (
         <span>
           <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 150 }}>
-          <InputLabel shrink id="indoor">Indoor/Outdoor</InputLabel>
-          <Select
-            {...field}
-            // onChange={e => setindoor(e.target.value)}
-            // value={indoor} // this works to change the value of the select (and number of musicians), but changes between controlled to uncontrolled. Boo!
-            // renderValue={() => indoor}
-            label="Indoor/Outdoor"
-            // labelId="indoor_label"
-            id="indoor"
-            variant="outlined"
-            size="small"
-            margin="dense"
-            // sx={{ m: 0.5, minWidth: 200 }}
-          >
-          <MenuItem value="0" disabled><em>Indoor/Outdoor</em></MenuItem>
-          <MenuItem value="true">1. Indoor</MenuItem>
-          <MenuItem value="false">2. Outdoor</MenuItem>
-        </Select>
-        </FormControl>
+            <InputLabel shrink id="indoor">Indoor/Outdoor</InputLabel>
+              <Select
+                {...field}
+                // onChange={e => setindoor(e.target.value)}
+                // value={indoor} // this works to change the value of the select (and number of musicians), but changes between controlled to uncontrolled. Boo!
+                // renderValue={() => indoor}
+                label="Indoor/Outdoor"
+                id="indoor"
+                variant="outlined"
+                size="small"
+                margin="dense"
+                // sx={{ m: 0.5, minWidth: 200 }}
+              >
+              <MenuItem value="0" disabled><em>Indoor/Outdoor</em></MenuItem>
+              <MenuItem value="true">1. Indoor</MenuItem>
+              <MenuItem value="false">2. Outdoor</MenuItem>
+            </Select>
+          </FormControl>
         </span>
+      )}/>
+
+      <div>
+        
+        <Controller name="address1" control={control} render={({ field }) => (
+          <TextField 
+          {...field}
+          type="text"
+          label="Street Address" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          error={!!errors.address1}
+          helperText={errors.address1 ? errors.address1.message : ""}
+          />
         )}/>
 
-      <Controller name="address1" control={control} render={({ field }) => (
-        <TextField 
-        {...field}
-        type="text"
-        label="Street Address" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        error={!!errors.address1}
-        helperText={errors.address1 ? errors.address1.message : ""}
-        />
-      )}/>
+        <Controller name="city" control={control} render={({ field }) => (
+          <TextField 
+          {...field}
+          type="text"
+          label="City" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5 }} 
+          error={!!errors.city}
+          helperText={errors.city ? errors.city.message : ""}
+          />
+        )}/>
 
-      <Controller name="city" control={control} render={({ field }) => (
-        <TextField 
-        {...field}
-        type="text"
-        label="City" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        error={!!errors.city}
-        helperText={errors.city ? errors.city.message : ""}
-        />
-      )}/>
+        {/* Convert to a select field */}
+        <Controller name="state" control={control} render={({ field }) => (
+          <TextField 
+          {...field}
+          type="text"
+          label="State" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5 }} 
+          error={!!errors.state}
+          helperText={errors.state ? errors.state.message : ""}
+          />
+        )}/>
 
-      <Controller name="state" control={control} render={({ field }) => (
-        <TextField 
-        {...field}
-        type="text"
-        label="State" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        error={!!errors.state}
-        helperText={errors.state ? errors.state.message : ""}
-        />
-      )}/>
+        <Controller name="zip_code" control={control} render={({ field }) => (
+          <TextField 
+          {...field}
+          type="text"
+          label="Zip Code" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5 }} 
+          error={!!errors.zip_code}
+          helperText={errors.zip_code ? errors.zip_code.message : ""}
+          />
+        )}/>
 
-      <Controller name="zip_code" control={control} render={({ field }) => (
-        <TextField 
-        {...field}
-        type="text"
-        label="Zip Code" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        error={!!errors.zip_code}
-        helperText={errors.zip_code ? errors.zip_code.message : ""}
-        />
-      )}/>
+      </div>
 
     </div>
   );
