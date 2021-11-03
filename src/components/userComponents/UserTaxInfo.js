@@ -22,33 +22,37 @@ function UserTaxInfo(props) {
         </h6>
       </div>
 
+    <div>
       <Controller name="tax_first_or_business_name" control={control} render={({ field }) => (
-          <TextField 
-            {...field} 
-            label="1. Name (as shown on your income tax form). Name is required. Do not leave blank."
-            variant="outlined"
-            placeholder="Name (as shown on your income tax form)"
-            size="small"
-            margin="dense"
-            error={!!errors.tax_first_or_business_name}
-            helperText={errors.tax_first_or_business_name ? errors.tax_first_or_business_name.message : ""}
-            />
+        <TextField 
+          {...field} 
+          label="1. Name (as shown on your income tax form). Name is required. Do not leave blank."
+          variant="outlined"
+          placeholder="Name (as shown on your income tax form)"
+          size="small"
+          margin="dense"
+          error={!!errors.tax_first_or_business_name}
+          helperText={errors.tax_first_or_business_name ? errors.tax_first_or_business_name.message : ""}
+          />
         )}/>
         
       <Controller name="tax_last_name" control={control} render={({ field }) => (
-          <TextField 
-            {...field} 
-            label="2. Legal Last Name"
-            variant="outlined"
-            placeholder="Legal last name"
-            size="small"
-            margin="dense"
-            error={!!errors.tax_last_name}
-            helperText={errors.tax_last_name ? errors.tax_last_name.message : ""}
-            />
+        <TextField 
+          {...field} 
+          label="2. Legal Last Name"
+          variant="outlined"
+          placeholder="Legal last name"
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5}}
+          error={!!errors.tax_last_name}
+          helperText={errors.tax_last_name ? errors.tax_last_name.message : ""}
+          />
         )}/>
+      </div>
 
-      <Controller name="tax_address1" control={control} render={({ field }) => (
+      <div>
+        <Controller name="tax_address1" control={control} render={({ field }) => (
           <TextField 
             {...field} 
             label="5. Address line 1"
@@ -60,9 +64,9 @@ function UserTaxInfo(props) {
             error={!!errors.tax_address1}
             helperText={errors.tax_address1 ? errors.tax_address1.message : ""}
             />
-        )}/>
+          )}/>
 
-      <Controller name="tax_address2" control={control} render={({ field }) => (
+        <Controller name="tax_address2" control={control} render={({ field }) => (
           <TextField 
             {...field} 
             label="5. Address line 2"
@@ -71,23 +75,26 @@ function UserTaxInfo(props) {
             type="text"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
             error={!!errors.tax_address2}
             helperText={errors.tax_address2 ? errors.tax_address2.message : ""}
             />
-        )}/>
+          )}/>
+      </div>
 
+      <div>
       <Controller name="tax_city" control={control} render={({ field }) => (
-          <TextField 
-            {...field} 
-            label="6. City"
-            variant="outlined"
-            placeholder="San Diego"
-            type="text"
-            size="small"
-            margin="dense"
-            error={!!errors.tax_city}
-            helperText={errors.tax_city ? errors.tax_city.message : ""}
-            />
+        <TextField 
+          {...field} 
+          label="6. City"
+          variant="outlined"
+          placeholder="San Diego"
+          type="text"
+          size="small"
+          margin="dense"
+          error={!!errors.tax_city}
+          helperText={errors.tax_city ? errors.tax_city.message : ""}
+          />
         )}/>
 
         <Controller name="tax_state" control={control} render={({ field }) => (
@@ -99,6 +106,7 @@ function UserTaxInfo(props) {
             type="text"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
             error={!!errors.tax_state}
             helperText={errors.tax_state ? errors.tax_state.message : ""}
             />
@@ -113,11 +121,13 @@ function UserTaxInfo(props) {
             type="text"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
             error={!!errors.tax_zip}
             helperText={errors.tax_zip ? errors.tax_zip.message : ""}
             />
         )}/>
-
+      </div>
+      <div>
         <Controller name="taxID" control={control} render={({ field }) => (
           <TextField 
             {...field} 
@@ -131,6 +141,7 @@ function UserTaxInfo(props) {
             helperText={errors.taxID ? errors.taxID.message : ""}
             />
         )}/>
+      </div>
 
       <div>
         <ol>

@@ -32,6 +32,7 @@ function UserContact (props) {
             variant="outlined" 
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
             error={!!errors.phone}
             helperText={errors.phone ? errors.phone.message : ""}
           />

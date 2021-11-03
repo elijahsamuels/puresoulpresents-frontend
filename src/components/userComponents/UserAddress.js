@@ -16,85 +16,76 @@ function UserAddress (props) {
     <div className="userContact">
       <h3>Address</h3>
 
-      <Controller name="address1" control={control} render={({ field }) => (
-        <TextField 
-          {...field}
-          type="text"
-          label="Street Address" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          error={!!errors.address1}
-          helperText={errors.address1 ? errors.address1.message : ""}
-        />
-      )}/>
-      <Controller name="address2" control={control} render={({ field }) => (
+      <div>
+        <Controller name="address1" control={control} render={({ field }) => (
           <TextField 
             {...field}
             type="text"
-            label="Apt #" 
+            label="Street Address" 
             variant="outlined" 
             size="small"
             margin="dense"
-            error={!!errors.address2}
-            helperText={errors.address2 ? errors.address2.message : ""}
+            error={!!errors.address1}
+            helperText={errors.address1 ? errors.address1.message : ""}
           />
         )}/>
-        <Controller name="city" control={control} render={({ field }) => (
-          <TextField 
-            {...field}
-            type="text"
-            label="City" 
-            variant="outlined" 
-            size="small"
-            margin="dense"
-            error={!!errors.city}
-            helperText={errors.city ? errors.city.message : ""}
-          />
-        )}/>
-        <Controller name="state" control={control} render={({ field }) => (
-          <TextField 
-            {...field}
-            type="text"
-            label="State"
-            variant="outlined"
-            size="small"
-            margin="dense"
-            error={!!errors.state}
-            helperText={errors.state ? errors.state.message : ""}
-          />
-        )}/>
-        <Controller name="zip_code" control={control} render={({ field }) => (
-          <TextField 
-            {...field}
-            type="text"
-            label="Zip Code"
-            variant="outlined"
-            size="small"
-            margin="dense"
-            error={!!errors.zip_code}
-            helperText={errors.zip_code ? errors.zip_code.message : ""}
-          />
-        )}/>
+        <Controller name="address2" control={control} render={({ field }) => (
+            <TextField 
+              {...field}
+              type="text"
+              label="Apt #" 
+              variant="outlined" 
+              size="small"
+              margin="dense"
+              sx={{ ml: 0.5}}
+              error={!!errors.address2}
+              helperText={errors.address2 ? errors.address2.message : ""}
+            />
+          )}/>
+        </div>
+        <div>
+          <Controller name="city" control={control} render={({ field }) => (
+            <TextField 
+              {...field}
+              type="text"
+              label="City" 
+              variant="outlined" 
+              size="small"
+              margin="dense"
+              sx={{ ml: 0.5}}
+              error={!!errors.city}
+              helperText={errors.city ? errors.city.message : ""}
+            />
+          )}/>
+          <Controller name="state" control={control} render={({ field }) => (
+            <TextField 
+              {...field}
+              type="text"
+              label="State"
+              variant="outlined"
+              size="small"
+              margin="dense"
+              sx={{ ml: 0.5}}
+              error={!!errors.state}
+              helperText={errors.state ? errors.state.message : ""}
+            />
+          )}/>
+          <Controller name="zip_code" control={control} render={({ field }) => (
+            <TextField 
+              {...field}
+              type="text"
+              label="Zip Code"
+              variant="outlined"
+              size="small"
+              margin="dense"
+              sx={{ ml: 0.5}}
+              error={!!errors.zip_code}
+              helperText={errors.zip_code ? errors.zip_code.message : ""}
+            />
+            
+            )}/>
+          </div>
 
-        {/* SAVING THIS SELECT OPTION TO REPLACE THE TEXTFIELD FOR STATE */}
-        {/* <Controller control={control} render={({ field }) => (
-          <Select 
-            {...field}
-            label="State" 
-            variant="outlined" 
-            size="small"
-            autoWidth
-            error={!!errors.state}
-            helperText={errors.state ? errors.state.message : ""}
-          >
-            <MenuItem value="State" disabled><em>State</em></MenuItem>
-            <MenuItem value={"CA"}>CA</MenuItem>
-            <MenuItem value={"CO"}>CO</MenuItem>
-            <MenuItem value={"FL"}>FL</MenuItem>
-            <MenuItem value={"TN"}>TN</MenuItem>
-          </Select> 
-        )}/> */}
     </div>
   );
 };

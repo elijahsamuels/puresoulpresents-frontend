@@ -34,6 +34,7 @@ function UserPaymentInfo(props) {
             type="password"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
             error={!!errors.ach_number}
             helperText={errors.ach_number ? errors.ach_number.message : ""}
             />
@@ -47,6 +48,7 @@ function UserPaymentInfo(props) {
             type="password"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
             error={!!errors.ach_routing_number}
             helperText={errors.ach_routing_number ? errors.ach_routing_number.message : ""}
             />
