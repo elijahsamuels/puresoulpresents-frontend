@@ -13,10 +13,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
-import TextsmsIcon from "@mui/icons-material/Textsms";
-import PhoneIcon from "@mui/icons-material/Phone";
-import EmailIcon from "@mui/icons-material/Email";
-import Tooltip from "@mui/material/Tooltip";
+// import TextsmsIcon from "@mui/icons-material/Textsms";
+// import PhoneIcon from "@mui/icons-material/Phone";
+// import EmailIcon from "@mui/icons-material/Email";
+// import Tooltip from "@mui/material/Tooltip";
 
 const useStyles = makeStyles({
   // table: {
@@ -73,7 +73,7 @@ function EventList(props) {
   };
 
   const eventPaymentStatus = (eventData) => {
-    let missingItem = "Payment";
+    // let missingItem = "Payment";
 
     if (eventData.total_amount > eventData.deposit_amount) {
       return <font color="red">Monies due!</font>;
@@ -83,7 +83,7 @@ function EventList(props) {
   }
 
   const eventBandSize = (eventData) => {
-    let missingItem = "Band Size";
+    // let missingItem = "Band Size";
     let bandSize = 5
     let musicianCount = 4
 
@@ -97,7 +97,7 @@ function EventList(props) {
   const eventPrimaryContact = (eventData) => {
     let missingItem = "Primary Contact";
     let primaryContact = "Jane Doe"
-    let primaryContactPhone = "123-456-7890"
+    // let primaryContactPhone = "123-456-7890"
 
     if (primaryContact) {
       return <font >{primaryContact}</font>;
@@ -107,7 +107,7 @@ function EventList(props) {
   }
 
   const eventType = (eventData) => {
-    let missingItem = "Event Type/Program";
+    // let missingItem = "Event Type/Program";
     let type = "candlelight" // others could be more generic: wedding, concert, private, etc.
     let program = "Ella Fitzgerald"
 
