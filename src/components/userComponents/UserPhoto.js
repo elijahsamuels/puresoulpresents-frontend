@@ -25,9 +25,12 @@ function UserPhoto(props) {
 	return (
 		<div className="userPhoto">
 			<h3>User Photo: {props.users.user.first_name}</h3>
-			<img src={returnUserPhotoOrDefault()} alt="UserPhoto" width="200" />
+      <div name="userPhoto">
+        <img src={returnUserPhotoOrDefault()} alt="UserPhoto" width="200" />
+      </div>
 
-			<Controller name="photo" control={control} render={({ field }) => (
+      <div name="userPhotoLink">
+        <Controller name="photo" control={control} render={({ field }) => (
           <TextField 
             {...field} 
             label="Photo URL"
@@ -38,6 +41,7 @@ function UserPhoto(props) {
             helperText={errors.photo ? errors.photo.message : ""}
             />
         )}/>
+      </div>
 		</div>
 	);
 }
