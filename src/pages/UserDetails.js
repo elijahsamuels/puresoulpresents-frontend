@@ -15,6 +15,8 @@ import { fetchUserData, editUser } from "../actions/userActions";
 import CircularProgress from "@mui/material/CircularProgress";
 import SaveIcon from '@mui/icons-material/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
+import Tooltip from '@mui/material/Tooltip';
+
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
@@ -52,6 +54,35 @@ function UserDetails(props) {
     methods.reset(props.users.user);
   }, [props.users.user]);
 
+const colorChangeLoadingButton = () => {
+  if (Object.values(methods.formState.touchedFields)[0] !== true ) {
+    // disable the save button. Prevents unnecessary API calls
+    return <LoadingButton
+      color="primary"
+      disableRipple={true}
+      loadingPosition="start"
+      startIcon={<SaveIcon />}
+      variant="contained"
+      // type="submit"
+      >
+       <Tooltip title="Nothing changed to save.">
+        <span>Save</span>
+      </Tooltip>
+      </LoadingButton>
+  } else {
+    return <LoadingButton
+      color="error"
+      disableRipple={true}
+      loadingPosition="start"
+      startIcon={<SaveIcon />}
+      variant="contained"
+      type="submit"
+      >
+      Save
+      </LoadingButton>
+    }
+  }
+
   const onHandleSubmit = (data) => {
     // Do something with the data
     // console.log("handleSubmit/Form data: ", data);
@@ -76,15 +107,16 @@ function UserDetails(props) {
           <StaffInfo />
           <UserTaxInfo />
           <br />
-          <LoadingButton
-            color="primary"
+          {colorChangeLoadingButton()}
+          {/* <LoadingButton
+            color="error"
             loadingPosition="start"
             startIcon={<SaveIcon />}
             variant="contained"
             type="submit"
           >
             Save
-          </LoadingButton>
+          </LoadingButton> */}
         </form>
           <div>{dateTimeUserCreated()}</div>
           <div>{lastUpdatedDateTime()}</div>
