@@ -14,7 +14,7 @@ export const schema = yup.object().shape({
   phone: yup
     .string()
     .required("Phone number is required")
-    .matches(/^[0-9]+$/, "Must be only digits")
+    .matches(/^[0-9]+$/, "Must be only digits. Do not use ()-.")
     .min(10, "Must be exactly 10 digits")
     .max(10, "Must be exactly 10 digits"),
   address1: yup
