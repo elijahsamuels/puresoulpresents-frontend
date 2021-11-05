@@ -25,6 +25,7 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.primary_contact_first_name}
         helperText={errors.primary_contact_first_name ? errors.primary_contact_first_name.message : ""}
         />

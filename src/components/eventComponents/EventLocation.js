@@ -29,6 +29,7 @@ function EventLocation (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.venue_name}
         helperText={errors.venue_name ? errors.venue_name.message : ""}
         />
@@ -114,6 +115,7 @@ function EventLocation (props) {
           variant="outlined" 
           size="small"
           margin="dense"
+          sx={{ ml: 0.5}}
           error={!!errors.address1}
           helperText={errors.address1 ? errors.address1.message : ""}
           />

@@ -26,6 +26,7 @@ function EventTimes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.total_amount}
         helperText={errors.total_amount ? errors.total_amount.message : ""}
         />
@@ -39,6 +40,7 @@ function EventTimes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.deposit_amount}
         helperText={errors.deposit_amount ? errors.deposit_amount.message : ""}
         />
@@ -52,6 +54,7 @@ function EventTimes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.balance_amount}
         helperText={errors.balance_amount ? errors.balance_amount.message : ""}
         />
@@ -61,27 +64,27 @@ function EventTimes (props) {
         <Checkbox 
         {...field}
         label="Invoice Sent"
-        disableRipple="true"
-        // variant="outlined" 
+        disableRipple={true}
+        variant="outlined" 
         size="small"
-        // margin="dense"
-        // error={!!errors.invoice_sent}
-        // helperText={errors.invoice_sent ? errors.invoice_sent.message : ""}
+        margin="dense"
+        error={!!errors.invoice_sent}
+        helperText={errors.invoice_sent ? errors.invoice_sent.message : ""}
         />
       )}/>
 
-      <Controller name="invoice_paid" control={control} render={({ field }) => (
+      {/* <Controller name="invoice_paid" control={control} render={({ field }) => (
         <Checkbox 
         {...field}
         label="Invoice Paid"
         variant="outlined"
         size="small"
         // margin="dense"
-        disableRipple="true"
+        disableRipple={true}
         error={!!errors.invoice_paid}
         helperText={errors.invoice_paid ? errors.invoice_paid.message : ""}
         />
-      )}/>
+      )}/> */}
 
       <Controller name="invoice_file" control={control} render={({ field }) => (
         <TextField 
@@ -91,12 +94,13 @@ function EventTimes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.invoice_file}
         helperText={errors.invoice_file ? errors.invoice_file.message : ""}
         />
       )}/>
 
-      <Controller name="hire_order_recevied" control={control} render={({ field }) => (
+      {/* <Controller name="hire_order_recevied" control={control} render={({ field }) => (
         <Checkbox 
         {...field}
         // type="text"
@@ -107,7 +111,7 @@ function EventTimes (props) {
         error={!!errors.hire_order_recevied}
         helperText={errors.hire_order_recevied ? errors.hire_order_recevied.message : ""}
         />
-      )}/>
+      )}/> */}
 
       <Controller name="hire_order_file" control={control} render={({ field }) => (
         <TextField 
@@ -117,6 +121,7 @@ function EventTimes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.hire_order_file}
         helperText={errors.hire_order_file ? errors.hire_order_file.message : ""}
         />
