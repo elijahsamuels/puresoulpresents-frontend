@@ -38,6 +38,7 @@ function EventNotes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.program}
         helperText={errors.program ? errors.program.message : ""}
         />
@@ -51,6 +52,7 @@ function EventNotes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.set_list}
         helperText={errors.set_list ? errors.set_list.message : ""}
         />
@@ -64,6 +66,7 @@ function EventNotes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.staff_notes}
         helperText={errors.staff_notes ? errors.staff_notes.message : ""}
         />
@@ -77,6 +80,7 @@ function EventNotes (props) {
         variant="outlined" 
         size="small"
         margin="dense"
+        sx={{ ml: 0.5}}
         error={!!errors.client_notes}
         helperText={errors.client_notes ? errors.client_notes.message : ""}
         />

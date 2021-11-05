@@ -5,10 +5,11 @@ import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 
 function EventTimes (props) {
-// console.log("EventTimes/props.event: ", props.event)
+console.log("EventTimes/props.event: ", props.event)
   const { control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
   });
+  // {console.log("props.event: ", props.event)}
 
   return (
     <div className="eventTimes">
@@ -19,13 +20,16 @@ function EventTimes (props) {
 
       <div>
         <Controller name="load_in_time" control={control} render={({ field }) => (
+          // console.log("load_in_time/field: ", field),
           <TextField 
           {...field}
+          value={field.value}
           type="text"
           label="Load in Time" 
           variant="outlined" 
           size="small"
           margin="dense"
+          sx={{ ml: 0.5}}
           error={!!errors.load_in_time}
           helperText={errors.load_in_time ? errors.load_in_time.message : ""}
           />
@@ -83,6 +87,7 @@ function EventTimes (props) {
           variant="outlined" 
           size="small"
           margin="dense"
+          sx={{ ml: 0.5}}
           error={!!errors.start_time}
           helperText={errors.start_time ? errors.start_time.message : ""}
           />
