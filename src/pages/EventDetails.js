@@ -43,6 +43,23 @@ function EventDetails(props) {
   });
   // console.log("EventDetails/props: ", props)
   
+  // useEffect(() => {
+  //   let mounted = true
+  //   if (!props.loading) {
+  //     console.log("EventDetails/mounted: ", mounted)
+  //     setEventData(props.fetchEventData(eventid))
+  //     mounted = false
+  //     console.log("EventDetails/mounted: ", mounted)
+  //   }
+
+  //   return () => {
+  //     console.log("EventDetails/mounted: ", mounted)
+  //     mounted = false
+  //     setEventData().removeEventListener()
+  //     console.log("EventDetails/mounted: ", mounted)
+  //   }
+  // }, []);
+
   useEffect(() => {
     setEventData(props.fetchEventData(eventid));
   }, []);
@@ -50,11 +67,11 @@ function EventDetails(props) {
   useEffect(() => {
     methods.reset(props.event);
   }, [props.event]);
-    
+
   const onHandleSubmit = (data) => {
     // Do something with the data
     console.log("handleSubmit/Form data: ", data);
-    // props.editEvent(data);
+    props.editEvent(data);
   }
   
   return !!props.event ? (
@@ -77,10 +94,10 @@ function EventDetails(props) {
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
         <EventLocation />
-        <EventContact />
+        {/* <EventContact /> */}
         <EventMusicians />
-        <EventTimes />
-        <EventFinances />
+        {/* <EventTimes /> */}
+        {/* <EventFinances /> */}
         {/* <EventNotes /> */}
         <br />
           <LoadingButton
