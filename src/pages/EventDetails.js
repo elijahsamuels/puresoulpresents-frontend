@@ -67,10 +67,12 @@ function EventDetails(props) {
 
   useEffect(() => {
     methods.reset(props.event);
+    // {console.log({...methods.formState.isDirty === false} ? "DIRTY!" : "CLEAN!")}
+
   }, [props.event]);
 
   const colorChangeLoadingButton = () => {
-    if (Object.values(methods.formState.touchedFields)[0] !== true ) {
+    if (methods.formState.isDirty === false) {
       // disable the save button. Prevents unnecessary API calls
       return <LoadingButton
         color="primary"
@@ -121,7 +123,9 @@ function EventDetails(props) {
       </h3>
         <div>Event Band Size: {props.event.band_size}</div> */}
 
-      <FormProvider {...methods }>
+      <FormProvider {...methods } >
+      {console.log({...methods})}
+      {/* {console.log(Object.values({...methods.control.formState.dirtyFields}))} */}
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
         <EventLocation />
         {/* <EventContact /> */}

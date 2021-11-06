@@ -55,8 +55,9 @@ function UserDetails(props) {
   }, [props.users.user]);
 
 const colorChangeLoadingButton = () => {
-  if (Object.values(methods.formState.touchedFields)[0] !== true ) {
-    // disable the save button. Prevents unnecessary API calls
+  // if (Object.values(methods.formState.touchedFields)[0] !== true ) {
+    if (methods.formState.isDirty === false) {
+      // disable the save button. Prevents unnecessary API calls
     return <LoadingButton
       color="primary"
       disableRipple={true}
