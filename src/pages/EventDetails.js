@@ -14,6 +14,7 @@ import { fetchEventData, editEvent } from "../actions/eventActions";
 import CircularProgress from "@mui/material/CircularProgress";
 import SaveIcon from '@mui/icons-material/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
+import Tooltip from '@mui/material/Tooltip';
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
@@ -68,6 +69,35 @@ function EventDetails(props) {
     methods.reset(props.event);
   }, [props.event]);
 
+  const colorChangeLoadingButton = () => {
+    if (Object.values(methods.formState.touchedFields)[0] !== true ) {
+      // disable the save button. Prevents unnecessary API calls
+      return <LoadingButton
+        color="primary"
+        disableRipple={true}
+        loadingPosition="start"
+        startIcon={<SaveIcon />}
+        variant="contained"
+        // type="submit"
+        >
+         <Tooltip title="Nothing changed to save.">
+          <span>Save</span>
+        </Tooltip>
+        </LoadingButton>
+    } else {
+      return <LoadingButton
+        color="error"
+        disableRipple={true}
+        loadingPosition="start"
+        startIcon={<SaveIcon />}
+        variant="contained"
+        type="submit"
+        >
+        Save
+        </LoadingButton>
+      }
+    }
+
   const onHandleSubmit = (data) => {
     // Do something with the data
     console.log("handleSubmit/Form data: ", data);
@@ -100,7 +130,9 @@ function EventDetails(props) {
         {/* <EventFinances /> */}
         {/* <EventNotes /> */}
         <br />
-          <LoadingButton
+        {colorChangeLoadingButton()}
+
+          {/* <LoadingButton
             color="primary"
             loadingPosition="start"
             startIcon={<SaveIcon />}
@@ -108,7 +140,7 @@ function EventDetails(props) {
             type="submit"
           >
             Save
-          </LoadingButton>
+          </LoadingButton> */}
           <br />
         </form>
           <div>{dateTimeEventCreated()}</div>
