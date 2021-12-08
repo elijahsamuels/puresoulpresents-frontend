@@ -3,16 +3,16 @@ import { connect } from "react-redux";
 import { fetchEventData, editEvent } from "../../actions/eventActions";
 import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 function EventMusicians (props) {
-  // console.log("typeof (props.event.band_size)", typeof (props.event.band_size))
-  // console.log("EventContact/props.event: ", props.event)
   
   const { watch, control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
@@ -22,17 +22,40 @@ function EventMusicians (props) {
   const [bandCostSummed, setBandCostSummed] = useState(0);
   const [musicianPayRate, setMusicianPayRate] = useState(basePayRate ? basePayRate : 0);
   const [bandSize, setBandSize] = useState(props.event.band_size);
+  const [payRate, setPayRate] = useState(0);
+  const [invoiceReceived, setInvoiceReceived] = useState(null);
+
+  const handlePayChange = (event) => {
+    console.log({
+      musician_ID: event.target.name,
+      musician_pay_rate: parseInt(event.target.value)
+    })
+    // setPayRate({
+    //   // ...payRate,
+    //   [event.target.name]: parseInt(event.target.value)
+    // })
+  }
+
+  const onChange = (event) => {
+    // setInvoiceReceived({ 
+    //   [event.target.name]: event.target.value
+    // }),
+    console.log(event.target.value)
+  }
 
   // useEffect(() => {
-  //   return () => {
-  //     console.log(props.event.band_size);
-  //   };
-  // }, [setBandSize]);
+  //   setPayRate({ total: calculateTotal(numbers) });
+  // }, []);
 
-
-
-
-
+  // const calculateTotal = (numbers) => {
+  //   return Object.entries(numbers).reduce((finalValue, [key, value]) => {
+  //     if (value === "") {
+  //       // if entered value is empty string "", omits it
+  //       return finalValue;
+  //     }
+  //     return finalValue + value;
+  //   }, 0);
+  // }
 
   // going to leave this unfinished. Need to add values to the database first, and THEN read them
   const sendPayRateToBeSummed = (payRate) => {
@@ -41,14 +64,8 @@ function EventMusicians (props) {
     summedCost.push(payRate)
     summedCost.reduce((a,b) => a+b)
     setBandCostSummed(summedCost)
-    // console.log(setBandCostSummed(summedCost.reduce((a,b) => a+b)));
     // return setBandCostSummed(summedCost.reduce((a,b) => a+b));
   }
-
-  // useEffect(() => {
-  //   setBandCostSummed();
-  // }, [bandCostSummed]);
-
 
   const musicianCountGenerator = () => {
     
@@ -56,71 +73,163 @@ function EventMusicians (props) {
     for (let i = 1; i < (parseInt(bandSize)+1 || props.event.band_size+1); i++) {
       musicianCountFromBandSizeArray.push(
         <div key={`musician_${i}_details`}>
-          <Controller name={`musician_${i}`} control={control} render={({ field }) => (
-            <TextField 
-              {...field}
-              type="text"
-              key={`musician_${i}_text`}
-              label={`Musician ${i}`}
-              variant="outlined" 
-              size="small"
-              margin="dense"
-              sx={{ ml: 0.5}}
-              error={!!errors[`musician_${i}`]}
-              helperText={errors[`musician_${i}`] ? errors[`musician_${i}`].message : ""}
+          <Controller
+            name={`musician_${i}`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="text"
+                key={`musician_${i}`}
+                label={`Musician ${i}`}
+                variant="outlined"
+                size="small"
+                margin="dense"
+                sx={{ ml: 0.5 }}
+                // onChange={null}
+                error={!!errors[`musician_${i}`]}
+                helperText={
+                  errors[`musician_${i}`] ? errors[`musician_${i}`].message : ""
+                }
               />
-            )}/>
+            )}
+          />
 
-          <Controller name={`musician_${i}_pay_rate`} control={control} startAdornment={<InputAdornment position="start">$</InputAdornment>} render={({ field }) => (
-            // console.log(`Musician ${i} Pay Rate/field`, field),
-            <TextField 
-              {...field}
-              type="number"
-              key={`musician_${i}_pay_rate_text`}
-              label="Pay (USD)"
-              placeholder="Pay (USD)"
-              InputProps={{
-                startAdornment: <InputAdornment position="start">$</InputAdornment>,
-              }}
-              onChange={(e) => {sendPayRateToBeSummed(e.target.value)}}
-              defaultValue={musicianPayRate || 0 } // default value IF nothing is provided from database
-              // value={musicianPayRate}
-              variant="outlined" 
-              size="small"
-              margin="dense"
-              sx={{ ml: 0.5 }} 
-              error={!!errors[`musician_${i}_pay_rate`]}
-              helperText={errors[`musician_${i}_pay_rate`] ? errors[`musician_${i}_pay_rate`].message : ""}
+          <Controller
+            name={`musician_${i}_pay_rate`}
+            control={control}
+            render={({ field }) => (
+              // console.log(`Musician ${i} Pay Rate/field`, field),
+              <TextField
+                {...field}
+                type="number"
+                label="Pay (USD)"
+                placeholder="Pay"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                    ),
+                  }}
+                  onChange={handlePayChange}
+                // onChange={(event) => handlePayChange(event.target.value)}
+                // onChange={(e) => {sendPayRateToBeSummed(e.target.value)}}
+                // defaultValue={musicianPayRate || 0 } // default value IF nothing is provided from database
+                // value={musicianPayRate}
+                variant="outlined"
+                size="small"
+                margin="dense"
+                sx={{ ml: 0.5, width: 125 }}
+                error={!!errors[`musician_${i}_pay_rate`]}
+                helperText={
+                  errors[`musician_${i}_pay_rate`]
+                    ? errors[`musician_${i}_pay_rate`].message
+                    : ""
+                }
               />
-            )}/>
+            )}
+          />
+{/* 
+          <Controller 
+            name={`musician_${i}_invoice_received`} 
+            control={control} 
+            render={({ field }) => (
+              <FormControlLabel 
+              label="Invoice Received?"
+              control={
+                <Checkbox
+                {...field}
+                onChange={null}
+                disableRipple
+                size="small"
+                sx={{ ml: 0.5 }}
+                />
+              }
+              />
+              )}/> */}
 
-          <Controller name={`musician_${i}_invoice_received`} control={control} render={({ field }) => (
-            <TextField 
-            {...field}
-            type="text"
-            label="Invoice Received?" 
-            variant="outlined" 
-            size="small"
-            margin="dense"
-            sx={{ ml: 0.5 }} 
-            error={!!errors[`musician_${i}_invoice_received`]}
-            helperText={errors[`musician_${i}_invoice_received`] ? errors[`musician_${i}_invoice_received`].message : ""}
-            />
-          )}/>
+          {/* <Controller
+            name={`musician_${i}_invoice_received`}
+            control={control}
+            render={({ field }, props) => (
+              <Checkbox
+                // onChange={(e) => props.onChange(e.target.checked)}
+                {...field}
+                onChange={null}
+                checked={field.value}
+                // checked={invoiceReceived}
+              />
+            )}
+          /> */}
 
-          <Controller name={`musician_${i}_invoice_paid`} control={control} render={({ field }) => (
-            <TextField 
-            {...field}
-            type="text"
-            label="Paid?" 
-            variant="outlined" 
-            size="small"
-            margin="dense"
-            sx={{ ml: 0.5 }} 
-            error={!!errors[`musician_${i}_invoice_paid`]}
-            helperText={errors[`musician_${i}_invoice_paid`] ? errors[`musician_${i}_invoice_paid`].message : ""}
-            />
-          )}/>
+          {/* 
+          <Controller
+            name={`musician_${i}_invoice_received`}
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                label="Invoice Received?"
+                {...field}
+                control={
+                  <Checkbox
+                  // onBlur={onBlur}
+                  // onChange={null}
+                  disableRipple
+                  onChange={(event) => onChange(event.target.checked)}  
+                  checked={invoiceReceived}
+                  // checked={field.value}
+                  // inputRef={field.ref}
+                />
+            
+                }
+              />
+            )}
+          /> */}
+
+          <Controller
+            name={`musician_${i}_invoice_received`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                // onChange={null}
+                type="text"
+                label="Invoice Received?"
+                variant="outlined"
+                size="small"
+                margin="dense"
+                sx={{ ml: 0.5 }}
+                error={!!errors[`musician_${i}_invoice_received`]}
+                helperText={
+                  errors[`musician_${i}_invoice_received`]
+                    ? errors[`musician_${i}_invoice_received`].message
+                    : ""
+                }
+              />
+            )}
+          />
+
+          <Controller
+            name={`musician_${i}_invoice_paid`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                // onChange={null}
+                type="text"
+                label="Paid?"
+                variant="outlined"
+                size="small"
+                margin="dense"
+                sx={{ ml: 0.5 }}
+                error={!!errors[`musician_${i}_invoice_paid`]}
+                helperText={
+                  errors[`musician_${i}_invoice_paid`]
+                    ? errors[`musician_${i}_invoice_paid`].message
+                    : ""
+                }
+              />
+            )}
+          />
         </div>
       );
     }
@@ -141,6 +250,7 @@ function EventMusicians (props) {
       <h3>
         Musicians Component
       </h3>
+      Band Cost: {parseInt(Object.values(payRate))}
 
       <Controller 
         name="band_size" 
@@ -193,7 +303,6 @@ function EventMusicians (props) {
           {/* </FormControl> */}
 
           {/* <Controller name={'band_cost'} control={control} render={({ field }) => ( */}
-            {/* // console.log(`bandCostSummedFromMusicianPayRates`, field), */}
             <TextField 
               {...field}
               // type="text"
