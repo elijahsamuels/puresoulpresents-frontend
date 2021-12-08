@@ -84,13 +84,13 @@ function EventList(props) {
 
   const eventBandSize = (eventData) => {
     // let missingItem = "Band Size";
-    let bandSize = 5
+    // let bandSize = 5
     let musicianCount = 4
 
-    if (musicianCount < bandSize) {
+    if (musicianCount > eventData.band_size) {
       return <font color="red">{musicianCount}</font>;
     } else {
-      return <font color="green">{bandSize}</font>;
+      return <font color="green">{eventData.band_size}</font>;
     }
   }
 
@@ -108,12 +108,12 @@ function EventList(props) {
 
   const eventType = (eventData) => {
     // let missingItem = "Event Type/Program";
-    let type = "candlelight" // others could be more generic: wedding, concert, private, etc.
-    let program = "Ella Fitzgerald"
+    // let event_type = "candlelight" // others could be more generic: wedding, concert, private, etc.
+    // let program = "Ella Fitzgerald"
 
-    if (type === "candlelight") {
-      return <font >{program}</font>;
-    } else if ( type === undefined ) {
+    if (eventData.event_type) {
+      return <font >{eventData.event_type} - <em>{eventData.program}</em></font>;
+    } else  {
       return <font color="red">Not Selected</font>;
     }
   }
@@ -334,7 +334,7 @@ function EventList(props) {
           </TableHead>
 
           <TableBody key={"table_body"} id={"table_body"}>
-            {console.log("props: ", props.events)}
+            {/* {console.log("props: ", props.events)} */}
             {props.events.map((event) => (
 
               <TableRow
@@ -346,7 +346,7 @@ function EventList(props) {
                   id={"event_" + event.id + "_missingData"}
                   align="left"
                 >
-                  {missingData(event)}
+                    {missingData(event)}
                   <br />
                 </TableCell>
 
@@ -412,10 +412,6 @@ function EventList(props) {
                   {/* </Tooltip> */}
                 </TableCell>
 
-
-
-
-
               </TableRow>
 
             ))}
@@ -427,7 +423,7 @@ function EventList(props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state: ",state);
+  console.log("state.events.events: ",state.events.events);
   return {
     loading: state.loading,
     events: state.events.events,
