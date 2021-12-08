@@ -102,7 +102,7 @@ function EventDetails(props) {
 
   const onHandleSubmit = (data) => {
     // Do something with the data
-    console.log("handleSubmit/Form data: ", data);
+    // console.log("handleSubmit/Form data: ", data);
     props.editEvent(data);
   }
   
@@ -113,7 +113,7 @@ function EventDetails(props) {
       <h3>
         Overall Component
       </h3>
-        <div>Event Type: {props.event.type}</div>
+        <div>Event Type: {props.event.event_type}</div>
         <div>Event Program: {props.event.program}</div>
         <div>Event Date: {props.event.event_date}</div>
 
@@ -124,7 +124,7 @@ function EventDetails(props) {
         <div>Event Band Size: {props.event.band_size}</div> */}
 
       <FormProvider {...methods } >
-      {console.log({...methods})}
+      {/* {console.log({...methods})} */}
       {/* {console.log(Object.values({...methods.control.formState.dirtyFields}))} */}
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
         <EventLocation />
@@ -161,6 +161,7 @@ function EventDetails(props) {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.events.event)
   return {
     loading: state.loading,
     // users: state.users,
