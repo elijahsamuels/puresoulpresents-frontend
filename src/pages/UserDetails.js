@@ -16,6 +16,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import SaveIcon from '@mui/icons-material/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
 
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -55,7 +58,6 @@ function UserDetails(props) {
   }, [props.users.user]);
 
 const colorChangeLoadingButton = () => {
-  // if (Object.values(methods.formState.touchedFields)[0] !== true ) {
     if (methods.formState.isDirty === false) {
       // disable the save button. Prevents unnecessary API calls
     return <LoadingButton
@@ -90,6 +92,11 @@ const colorChangeLoadingButton = () => {
     props.editUser(data);
   }
 
+  const Input = styled('input')({
+    display: 'none',
+  });
+
+  
   return !!props.users.user ? (
     // If data is loaded
     <div className="userDetails">
@@ -100,6 +107,16 @@ const colorChangeLoadingButton = () => {
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
           <UserPhoto />
+
+          <label htmlFor="contained-button-file">
+            <Input accept="image/*" id="contained-button-file" multiple type="file" />
+            <Button variant="contained" component="span">
+              Upload
+            </Button>
+          </label>
+
+
+
           <UserName />
           <UserContact />
           <UserAddress />
