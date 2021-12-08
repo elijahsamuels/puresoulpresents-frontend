@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import userSamplePhoto from "../../images/userSamplePhoto.png";
 import { fetchUserData, editUser } from "../../actions/userActions";
 import { Controller, useFormContext } from "react-hook-form";
+import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 
 function UserPhoto(props) {
@@ -13,7 +15,7 @@ function UserPhoto(props) {
   });
   
   const returnUserPhotoOrDefault = () => {
-    // console.log("props.users.user:", props.users.user)
+    console.log("props.users.user:", props.users.user)
     if (!!props.users.user.photo) {
       return props.users.user.photo
     } else {
@@ -21,6 +23,10 @@ function UserPhoto(props) {
     }
   }
 
+  const Input = styled('input')({
+    display: 'none',
+  });
+  
 
 	return (
 		<div className="userPhoto">
