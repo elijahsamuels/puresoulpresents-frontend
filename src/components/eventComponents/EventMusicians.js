@@ -43,6 +43,15 @@ function EventMusicians (props) {
     console.log(event.target.value)
   }
 
+  function bandSizeFunction(e) {
+    console.log(e)
+    // return (e.target.value)
+  }
+
+
+  useEffect(() => {
+    setBandSize(bandSizeFunction())
+  }, [bandSizeFunction()])
   // useEffect(() => {
   //   setPayRate({ total: calculateTotal(numbers) });
   // }, []);
@@ -261,7 +270,10 @@ function EventMusicians (props) {
                 label="Size"
                 id="band_size"
                 select
-                onChange={(e) => {field.onChange(e), setBandSize(e.target.value)}} // This is working to update the page and save to the database. It's still throwing a "unmount/memory leak in your application" error.
+                // onChange={(e) => {setBandSize(e)}} 
+                // onChange={(e) => {field.onChange(e)}} 
+
+                onChange={(e) => (field.onChange(e), setBandSize(e.target.value))} // This is working to update the page and save to the database. It's still throwing a "unmount/memory leak in your application" error.
                 variant="outlined"
                 size="small"
                 margin="dense"
