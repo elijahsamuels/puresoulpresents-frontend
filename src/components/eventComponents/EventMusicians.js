@@ -80,20 +80,21 @@ function EventMusicians (props) {
               <TextField
                 {...field}
                 type="text"
-                key={`musician_${i}`}
+                // key={`musician_${i}`}
                 label={`Musician ${i}`}
                 variant="outlined"
                 size="small"
+                value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
                 margin="dense"
                 sx={{ ml: 0.5 }}
                 // onChange={null}
                 error={!!errors[`musician_${i}`]}
-                helperText={
-                  errors[`musician_${i}`] ? errors[`musician_${i}`].message : ""
-                }
+                helperText={ errors[`musician_${i}`] ? errors[`musician_${i}`].message : "" }
               />
             )}
           />
+        {/* {    console.log("props.event.users: ", props.event.users[0].first_name) }
+        {props.event.users[0].first_name + " " + props.event.users[0].last_name} */}
 
           <Controller
             name={`musician_${i}_pay_rate`}
@@ -120,11 +121,7 @@ function EventMusicians (props) {
                 margin="dense"
                 sx={{ ml: 0.5, width: 125 }}
                 error={!!errors[`musician_${i}_pay_rate`]}
-                helperText={
-                  errors[`musician_${i}_pay_rate`]
-                    ? errors[`musician_${i}_pay_rate`].message
-                    : ""
-                }
+                helperText={ errors[`musician_${i}_pay_rate`] ? errors[`musician_${i}_pay_rate`].message : "" }
               />
             )}
           />
@@ -325,6 +322,33 @@ function EventMusicians (props) {
           {/* {bandTotalCostSummedFromMusicianPayRates()} */}
           </div>
         )}/>
+
+
+
+        {/* working on making this a musician selection. later copy this into the musicianCountGenerator */}
+      <Controller 
+        name="musician_selector" 
+        control={control} 
+        render={({ field }) => (
+        <span>
+          <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 200 }}>
+            <InputLabel shrink id="musician_selector">Musician Selector</InputLabel>
+              <Select
+                {...field}
+                label="Musician Selector"
+                id="musician_selector"
+                variant="outlined"
+                size="small"
+                margin="dense"
+              >
+              <MenuItem value="0" disabled><em>Musician Selector</em></MenuItem>
+              <MenuItem value="true">1. Indoor</MenuItem>
+              <MenuItem value="false">2. Outdoor</MenuItem>
+            </Select>
+          </FormControl>
+        </span>
+      )}/>
+
         {musicianCountGenerator()}
     </div>
   );
@@ -333,7 +357,7 @@ function EventMusicians (props) {
 const mapStateToProps = (state) => {
   return {
     loading: state.loading,
-    users: state.users,
+    // users: state.users,
     event: state.events.event,
   };
 };
