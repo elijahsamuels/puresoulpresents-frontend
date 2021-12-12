@@ -35,6 +35,12 @@ function EventDetails(props) {
     return <span>Created at {eventCreated.toString()} </span>
   }
 
+  const dateTimeCurrent = () => {
+    let dateTime = Date.now()
+    let currentDateTime = new Date(dateTime)
+    return <span>Currently: {currentDateTime.toString()} </span>
+  }
+
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "all",
@@ -68,8 +74,16 @@ function EventDetails(props) {
   useEffect(() => {
     methods.reset(props.event);
     // {console.log({...methods.formState.isDirty === false} ? "DIRTY!" : "CLEAN!")}
-
   }, [props.event]);
+  
+  // console.log("props.event.users: ", props.event.users)
+
+  // useEffect(() => {
+  //   // methods.reset(props.users);
+  //   const users = props.users;
+
+  //   // console.log("users: ", users)
+  // }, [props.users]);
 
   const colorChangeLoadingButton = () => {
     if (methods.formState.isDirty === false) {
@@ -106,16 +120,22 @@ function EventDetails(props) {
     props.editEvent(data);
   }
   
-  return !!props.event ? (
+  return !!props.event && !!props.event.users ? (
     // If data is loaded
     <div className="eventDetails">
       
       <h3>
         Overall Component
+        <div>
+          {/* {props.event.event_type ? props.event.event_type : <font color="red">Missing Type</font>} */}
+        {/* {props.event.program ? props.event.program : <font color="red">Missing Program</font>} */}
+        {new Date(props.event.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'})}</div>
+
       </h3>
-        <div>Event Type: {props.event.event_type}</div>
-        <div>Event Program: {props.event.program}</div>
-        <div>Event Date: {props.event.event_date}</div>
+        <div>Event Type: {props.event.event_type ? props.event.event_type : <font color="red">Missing Type</font>}</div>
+        <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div>
+        <div>Event Date: {new Date(props.event.event_date).toLocaleString('en-US', { weekday: 'long', day: 'numeric', year: 'numeric', month: 'long'})}</div>
+        {/* <div>Users: {props.users[1].first_name}</div> */}
 
 {/* 
       <h3>
@@ -149,6 +169,7 @@ function EventDetails(props) {
         </form>
           <div>{dateTimeEventCreated()}</div>
           <div>{lastUpdatedDateTime()}</div>
+          <div>{dateTimeCurrent()}</div>
       </FormProvider>
     </div>
   ) : (
@@ -161,10 +182,11 @@ function EventDetails(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.events.event)
+  // console.log(state.events.event)
+  // console.log(state.events.event.users)
   return {
     loading: state.loading,
-    // users: state.users,
+    // users: state.events.event.users,
     event: state.events.event,
   };
 };
