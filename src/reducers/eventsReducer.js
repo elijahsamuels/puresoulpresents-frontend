@@ -17,6 +17,7 @@ const initialState = {
     created_at: "",
     updated_at: "",
     program: "",
+    event_type: "",
     primary_contact_first_name: "",
     primary_contact_last_name: "",
     primary_contact_phone: "",
