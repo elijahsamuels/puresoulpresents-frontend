@@ -27,9 +27,6 @@ const useStyles = makeStyles({
 function EventList(props) {
   const classes = useStyles();
 
-  // console.log("props.events.events: ", props.events.events);
-  // console.log("props.fetcheventsList: ", props.fetcheventsList());
-
   const eventTernary = (eventData, missingItem) => {
     return eventData.localItem
       ? { true: eventData.localItem }
@@ -43,7 +40,6 @@ function EventList(props) {
   };
 
   const editEventButton = (eventData) => {
-    // eventData.localItem = eventData.id;
     let editEventLink = "events/" + eventData.id;
     return (
       <Button
@@ -62,19 +58,18 @@ function EventList(props) {
 
   const eventDate = (eventData) => {
     let missingItem = "Date";
-    eventData.localItem = eventData.event_date;
+    eventData.localItem = new Date(eventData.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'});
     return Object.values(eventTernary(eventData, missingItem));
   };
 
   const eventLocation = (eventData) => {
     let missingItem = "Location";
-    eventData.localItem = eventData.city + ", " + eventData.state;
+    eventData.localItem = `${eventData.city}, ${eventData.state}`;
     return Object.values(eventTernary(eventData, missingItem));
   };
 
   const eventPaymentStatus = (eventData) => {
     // let missingItem = "Payment";
-
     if (eventData.total_amount > eventData.deposit_amount) {
       return <font color="red">Monies due!</font>;
     } else {
@@ -83,20 +78,22 @@ function EventList(props) {
   }
 
   const eventBandSize = (eventData) => {
-    // let missingItem = "Band Size";
-    // let bandSize = 5
-    let musicianCount = 4
+    let missingItem = "Missing Musicians";
+    let musicianCount = eventData.users.length
+    // return Object.values(eventTernary(eventData, missingItem));
 
-    if (musicianCount > eventData.band_size) {
-      return <font color="red">{musicianCount}</font>;
+    if (musicianCount < eventData.band_size) {
+      
+      return <font color="red">{musicianCount}<br />(Need {eventData.band_size})</font>;
     } else {
-      return <font color="green">{eventData.band_size}</font>;
+      return <font color="green">{eventData.band_size}<br />Complete</font>;
     }
   }
 
   const eventPrimaryContact = (eventData) => {
     let missingItem = "Primary Contact";
-    let primaryContact = "Jane Doe"
+    // let primaryContact = "Jane Doe"
+    let primaryContact = `${eventData.primary_contact_first_name} ${eventData.primary_contact_last_name}`
     // let primaryContactPhone = "123-456-7890"
 
     if (primaryContact) {
@@ -106,16 +103,34 @@ function EventList(props) {
     }
   }
 
-  const eventType = (eventData) => {
-    // let missingItem = "Event Type/Program";
-    // let event_type = "candlelight" // others could be more generic: wedding, concert, private, etc.
-    // let program = "Ella Fitzgerald"
+  // <font >{eventData.event_type} - <em>{eventData.program}</em></font>;
 
-    if (eventData.event_type) {
-      return <font >{eventData.event_type} - <em>{eventData.program}</em></font>;
-    } else  {
-      return <font color="red">Not Selected</font>;
-    }
+  const eventType = (eventData) => {
+    // let missingItem = "Event Type";
+    // eventData.program = eventData.program ? ` / ${eventData.program}` : ""
+    // eventData.localItem = `${eventData.event_type}${eventData.program}`;
+    // return Object.values(eventTernary(eventData, missingItem));
+
+    return <font >{eventData.event_type ? eventData.event_type : <font color="red">Missing Type</font>}<br /><em>{eventData.program ? eventData.program : <font color="red">Missing Program</font>}</em></font>;
+
+    // if (eventData.event_type) {
+    //   return <font >{eventData.event_type ? eventData.event_type : ""} / <em>{eventData.program ? eventData.program : ""}</em></font>;
+    // } else  {
+    //   return <font color="red">Not Selected</font>;
+    // }
+
+  }
+
+  const eventProgram = (eventData) => {
+    let missingItem = "Event Program";
+    eventData.localItem = eventData.event_program;
+    return Object.values(eventTernary(eventData, missingItem));
+
+    // if (eventData.event_type) {
+    //   return <font >{eventData.program}</font>;
+    // } else  {
+    //   return <font color="red">Not Selected</font>;
+    // }
   }
 
   //   eventData.localItem = eventData.balance_amount;
@@ -141,19 +156,6 @@ function EventList(props) {
     // once the list is generated, use this info to send event an email requesting that info.
 
     let items = [];
-
-    // check for:
-    // event_date
-    // city
-    // state
-    // band_size === musician_count
-    // hire_order_recevied
-    // invoice_sent
-    // invoice_paid
-    // musician_invoices_received?
-    // musician_invoices_sent?
-  
-
 
     // if (eventPhone(eventData).props === undefined) {
     //   items.push("Phone");
@@ -300,7 +302,7 @@ function EventList(props) {
                 id={"event_type"} 
                 align="center" 
                 width="10%">
-                Type/Program
+                Type
               </TableCell>
 
               <TableCell 
