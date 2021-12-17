@@ -13,6 +13,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
+import TextField from '@mui/material/TextField';
+
 // import TextsmsIcon from "@mui/icons-material/Textsms";
 // import PhoneIcon from "@mui/icons-material/Phone";
 // import EmailIcon from "@mui/icons-material/Email";
@@ -271,12 +273,13 @@ function EventList(props) {
                 width="10%">
                 Event Date
                 <div>
-                  <input 
-                    type="text" 
+                  <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
                     placeholder="Date filter..." 
-                    className="form-control" 
                     onChange={(e) => {setSearchDate(e.target.value)}}
-                    />
+                  />
                 </div>
               </TableCell>
 
@@ -286,13 +289,22 @@ function EventList(props) {
                 align="center" 
                 width="10%">
                 Location
-                <div>
+                {/* <div>
                   <input 
                     type="text" 
                     placeholder="Location filter..." 
                     className="form-control" 
                     onChange={(e) => {setSearchLocationText(e.target.value)}}
                     />
+                </div> */}
+                <div>
+                  <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Location filter..." 
+                    onChange={(e) => {setSearchLocationText(e.target.value)}}
+                  />
                 </div>
               </TableCell>
 
@@ -302,13 +314,22 @@ function EventList(props) {
                 align="center" 
                 width="10%">
                 Type
-                <div>
+                {/* <div>
                   <input 
                     type="text" 
                     placeholder="Event Type filter..." 
                     className="form-control" 
                     onChange={(e) => {setSearchEventType(e.target.value)}}
                     />
+                </div> */}
+                <div>
+                  <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Event Type filter..." 
+                    onChange={(e) => {setSearchEventType(e.target.value)}}
+                  />
                 </div>
               </TableCell>
 
@@ -336,14 +357,24 @@ function EventList(props) {
                 {/* <Tooltip title={eventPrimaryContactTooltip(event)}> */}
                 {/* <Tooltip title={"Fix this later"}> */}
                   Primary Contact
-                  <div>
+                  {/* <div>
                     <input 
                       type="text" 
                       placeholder="Contact filter..." 
                       className="form-control" 
                       onChange={(e) => {setSearchContactText(e.target.value)}}
                       />
-                  </div>
+                  </div> */}
+                  <div>
+                  <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Contact filter..." 
+                    onChange={(e) => {setSearchContactText(e.target.value)}}
+                  />
+                </div>
+
                 {/* </Tooltip> */}
               </TableCell>
 
