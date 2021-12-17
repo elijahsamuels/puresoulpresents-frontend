@@ -32,6 +32,7 @@ function UserList(props) {
   const userRole = "admin" // props.user.role
 
   const [searchCity, setSearchCity] = useState("")
+  const [searchInstrument, setSearchInstrument] = useState("")
 
 
   // console.log("props: ", props.users.users);
@@ -376,6 +377,14 @@ function UserList(props) {
               </TableCell>
               <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
                 Instrument
+                <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Instrument filter..." 
+                    onChange={(e) => {setSearchInstrument(e.target.value)}}
+                    disabled
+                  />
               </TableCell>
               <TableCell key={"city"} id={"city"} align="center" width="10%">
                 City
@@ -386,7 +395,6 @@ function UserList(props) {
                     placeholder="City filter..." 
                     onChange={(e) => {setSearchCity(e.target.value)}}
                   />
-
               </TableCell>
               <TableCell key={"bio"} bio={"bio"} align="center" height="10">
                 Bio
@@ -408,6 +416,18 @@ function UserList(props) {
                 return val;
               } else if (val.city.toLowerCase().includes(searchCity.toLowerCase()) ||
               val.state.toLowerCase().includes(searchCity.toLowerCase())){
+                return val;
+              } else if (val.city === "") {
+                return val;
+              }
+            })
+            // Instrument Filter
+            .filter(val => {
+              if (searchInstrument === "") {
+                return val;
+              } else if (val.instrument.toLowerCase().includes(searchInstrument.toLowerCase())){
+                return val;
+              } else if (val.instrument === "") {
                 return val;
               }
             })
