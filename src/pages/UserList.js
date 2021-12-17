@@ -35,6 +35,7 @@ function UserList(props) {
   const [searchInstrument, setSearchInstrument] = useState("")
   const [searchPhone, setSearchPhone] = useState("")
   const [searchEmail, setSearchEmail] = useState("")
+  const [searchName, setSearchName] = useState("")
 
 
   // console.log("props: ", props.users.users);
@@ -366,6 +367,14 @@ function UserList(props) {
 
               <TableCell key={"firstname"} id={"firstname"} align="center" width="10%">
                 Name
+                <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Name filter..." 
+                    onChange={(e) => {setSearchName(e.target.value)}}
+                    autoComplete="disabled"
+                  />
               </TableCell>
 
               <TableCell key={"user_staff_rating"} id={"user_staff_rating"} align="center" width="10%">
@@ -379,6 +388,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Phone filter..." 
                     onChange={(e) => {setSearchPhone(e.target.value)}}
+                    autoComplete="disabled"
                   />
               </TableCell>
               <TableCell key={"email"} id={"email"} align="center" width="10%">
@@ -389,6 +399,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Email filter..." 
                     onChange={(e) => {setSearchEmail(e.target.value)}}
+                    autoComplete="disabled"
                   />
               </TableCell>
               <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
@@ -399,6 +410,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Instrument filter..." 
                     onChange={(e) => {setSearchInstrument(e.target.value)}}
+                    autoComplete="disabled"
                     disabled
                   />
               </TableCell>
@@ -410,6 +422,7 @@ function UserList(props) {
                     size="small"
                     placeholder="City filter..." 
                     onChange={(e) => {setSearchCity(e.target.value)}}
+                    autoComplete="disabled"
                   />
               </TableCell>
               <TableCell key={"bio"} bio={"bio"} align="center" height="10">
@@ -464,6 +477,14 @@ function UserList(props) {
               } else if (val.email.toLowerCase().includes(searchEmail.toLowerCase())){
                 return val;
               } else if (val.email === "") {
+                return val;
+              }
+            })
+            // Name Filter
+            .filter(val => {
+              if (searchName === "") {
+                return val;
+              } else if (val.first_name.toLowerCase().includes(searchName.toLowerCase()) || val.last_name.toLowerCase().includes(searchName.toLowerCase())){
                 return val;
               }
             })
