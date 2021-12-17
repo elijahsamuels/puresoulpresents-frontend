@@ -390,7 +390,7 @@ function UserList(props) {
           </TableHead>
             
           <TableBody key={"table_body"} id={"table_body"}>
-            {props.users.users.map((user) => (
+            {props.users.users.sort((a,b) => a.toString().localeCompare(b)).map((user) => (
               <TableRow
                 key={"user_" + user.id + "_row"}
                 id={"user_" + user.id + "_row"}
