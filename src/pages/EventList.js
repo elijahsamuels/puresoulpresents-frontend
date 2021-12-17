@@ -354,6 +354,7 @@ function EventList(props) {
             {/* {console.log("props: ", props.events)} */}
             {console.log(props.events.event_date)}
             {props.events
+              // Location Filter
               .filter(val => {
                 if (searchLocationText === "") {
                   return val;
@@ -362,6 +363,7 @@ function EventList(props) {
                   return val;
                 }
               })
+              // Primary Contact Name Filter
               .filter(val => {
                 if (searchContactText === "") {
                   return val;
@@ -370,16 +372,21 @@ function EventList(props) {
                   return val;
                 }
               })
+              // Event Type/Program Filter
               .filter(val => {
                 if (searchEventType === "") {
                   return val;
                 } else if (val.event_type.toLowerCase().includes(searchEventType.toLowerCase()) ||
                 val.program.toLowerCase().includes(searchEventType.toLowerCase())) {
                   return val;
+                } else if (val.event_type === "") {
+                  return val;
                 }
               })
+              // Date Filter
               .filter(val => {
                 if (searchDate === "") {
+                  console.log(val.event_type === "")
                   return val;
                 } else if (new Date(val.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'}).toLowerCase().includes(searchDate.toLowerCase())) {
                   return val;
