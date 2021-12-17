@@ -70,6 +70,19 @@ function UserList(props) {
     return Object.values(userTernary(userData, missingItem));
   };
 
+  const userStaffRating = (userData) => {
+
+
+    if (userData.user_staff_rating === "1"){
+      return <font color="green"> {userData.user_staff_rating} </font>
+    } else if (userData.user_staff_rating > 1){
+      return <font color="red"> {userData.user_staff_rating} </font>
+    }
+    // let missingItem = "Staff Rating";
+    // userData.localItem = userData.first_name + " " + userData.last_name;
+    // return Object.values(userTernary(userData, missingItem));
+  };
+
   const userPhone = (userData) => {
     let missingItem = "Phone";
     userData.localItem = userData.phone;
@@ -172,9 +185,9 @@ function UserList(props) {
 
     if (userData.photo) {
       // userData.localItem = userData.photo;
-      return <img src={`${userData.photo}`} alt="User" height="100" width="100" />
+      return <img src={`${userData.photo}`} alt="User" height="50" width="50" />
     } else {
-      return <img src={userSamplePhoto} alt="Default" height="100" width="100" />;
+      return <img src={userSamplePhoto} alt="Default" height="50" width="50" />;
     }
   };
 
@@ -345,13 +358,12 @@ function UserList(props) {
                 </TableCell>
                : "" }
 
-              <TableCell
-                key={"firstname"}
-                id={"firstname"}
-                align="center"
-                width="10%"
-              >
+              <TableCell key={"firstname"} id={"firstname"} align="center" width="10%">
                 Name
+              </TableCell>
+
+              <TableCell key={"user_staff_rating"} id={"user_staff_rating"} align="center" width="10%">
+                  Staff Rating
               </TableCell>
               <TableCell key={"phone"} id={"phone"} align="center" width="10%">
                 Phone
@@ -359,12 +371,7 @@ function UserList(props) {
               <TableCell key={"email"} id={"email"} align="center" width="10%">
                 Email
               </TableCell>
-              <TableCell
-                key={"instrument"}
-                id={"instrument"}
-                align="center"
-                width="10%"
-              >
+              <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
                 Instrument
               </TableCell>
               <TableCell key={"city"} id={"city"} align="center" width="10%">
@@ -413,6 +420,13 @@ function UserList(props) {
                   key={"user_" + user.id + "_name"}
                 >
                   {userName(user)}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  id={"user_" + user.id + "_staff_rating"}
+                  key={"user_" + user.id + "_staff_rating"}
+                >
+                  {userStaffRating(user)}
                 </TableCell>
                 <TableCell
                   align="center"
@@ -480,7 +494,7 @@ function UserList(props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state: ",state);
+  console.log("state.users: ",state.users);
   return {
     loading: state.loading,
     users: state.users,

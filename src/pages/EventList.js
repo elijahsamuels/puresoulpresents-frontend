@@ -18,7 +18,7 @@ import TextField from '@mui/material/TextField';
 // import TextsmsIcon from "@mui/icons-material/Textsms";
 // import PhoneIcon from "@mui/icons-material/Phone";
 // import EmailIcon from "@mui/icons-material/Email";
-// import Tooltip from "@mui/material/Tooltip";
+import Tooltip from "@mui/material/Tooltip";
 
 const useStyles = makeStyles({
   // table: {
@@ -66,7 +66,7 @@ function EventList(props) {
 
   const eventDate = (eventData) => {
     let missingItem = "Date";
-    console.log("eventData.event_date:", eventData.event_date)
+    // console.log("eventData.event_date:", eventData.event_date)
     eventData.localItem = new Date(eventData.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'});
     return Object.values(eventTernary(eventData, missingItem));
   };
@@ -93,7 +93,7 @@ function EventList(props) {
 
     if (musicianCount < eventData.band_size) {
       
-      return <font color="red">{musicianCount}<br />(Need {eventData.band_size})</font>;
+      return <font color="red">{musicianCount}<br />(Need {eventData.band_size - musicianCount})</font>;
     } else {
       return <font color="green">{eventData.band_size}<br />Complete</font>;
     }
@@ -134,6 +134,19 @@ function EventList(props) {
     // } else  {
     //   return <font color="red">Not Selected</font>;
     // }
+  }
+
+  const eventMusicians = (eventData) => {
+    let musicians = [];
+
+    for (let i = 1; i < parseInt(eventData.band_size)+1; i++) {
+      // console.log(eventData.musician_[i])
+      // musicians.push(eventData.musician_+i)
+    }
+    // eventData.users.length
+    // eventData.band_size
+
+    return musicians
   }
 
   const missingData = (eventData) => {
@@ -289,14 +302,6 @@ function EventList(props) {
                 align="center" 
                 width="10%">
                 Location
-                {/* <div>
-                  <input 
-                    type="text" 
-                    placeholder="Location filter..." 
-                    className="form-control" 
-                    onChange={(e) => {setSearchLocationText(e.target.value)}}
-                    />
-                </div> */}
                 <div>
                   <TextField
                     label="Filter"
@@ -313,15 +318,7 @@ function EventList(props) {
                 id={"event_type"} 
                 align="center" 
                 width="10%">
-                Type
-                {/* <div>
-                  <input 
-                    type="text" 
-                    placeholder="Event Type filter..." 
-                    className="form-control" 
-                    onChange={(e) => {setSearchEventType(e.target.value)}}
-                    />
-                </div> */}
+                Type              
                 <div>
                   <TextField
                     label="Filter"
@@ -349,22 +346,14 @@ function EventList(props) {
                 Band Size
               </TableCell>
 
+              {/* <Tooltip title={"Fix this later"} placement="top"> */}
               <TableCell 
                 key={"event_primary_contact"} 
                 id={"event_primary_contact"} 
                 align="center" 
                 width="10%">
                 {/* <Tooltip title={eventPrimaryContactTooltip(event)}> */}
-                {/* <Tooltip title={"Fix this later"}> */}
                   Primary Contact
-                  {/* <div>
-                    <input 
-                      type="text" 
-                      placeholder="Contact filter..." 
-                      className="form-control" 
-                      onChange={(e) => {setSearchContactText(e.target.value)}}
-                      />
-                  </div> */}
                   <div>
                   <TextField
                     label="Filter"
@@ -374,16 +363,12 @@ function EventList(props) {
                     onChange={(e) => {setSearchContactText(e.target.value)}}
                   />
                 </div>
-
-                {/* </Tooltip> */}
               </TableCell>
-
+              {/* </Tooltip> */}
             </TableRow>
           </TableHead>
 
           <TableBody key={"table_body"} id={"table_body"}>
-            {/* {console.log("props: ", props.events)} */}
-            {console.log(props.events.event_date)}
             {props.events
               // Location Filter
               .filter(val => {
@@ -417,7 +402,6 @@ function EventList(props) {
               // Date Filter
               .filter(val => {
                 if (searchDate === "") {
-                  console.log(val.event_type === "")
                   return val;
                 } else if (new Date(val.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'}).toLowerCase().includes(searchDate.toLowerCase())) {
                   return val;
@@ -485,9 +469,9 @@ function EventList(props) {
                   id={"event_" + event.id + "_band_size"}
                   key={"event_" + event.id + "_band_size"}
                 >
-                  {/* <Tooltip title={eventBioTooltip(event)}> */}
+                  <Tooltip title={eventMusicians(event)}>
                     <span>{eventBandSize(event)}</span>
-                  {/* </Tooltip> */}
+                  </Tooltip>
                 </TableCell>
 
                 <TableCell
@@ -511,7 +495,7 @@ function EventList(props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state.events.events: ",state.events.events);
+  console.log("state.events.events: ",state.events.events);
   return {
     loading: state.loading,
     events: state.events.events,
