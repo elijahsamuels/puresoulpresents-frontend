@@ -378,6 +378,7 @@ function EventList(props) {
                 val.state.toLowerCase().includes(searchLocationText.toLowerCase())){
                   return val;
                 }
+                return false;
               })
               // Primary Contact Name Filter
               .filter(val => {
@@ -387,6 +388,7 @@ function EventList(props) {
                 val.primary_contact_last_name.toLowerCase().includes(searchContactText.toLowerCase())) {
                   return val;
                 }
+                return false;
               })
               // Event Type/Program Filter
               .filter(val => {
@@ -398,6 +400,7 @@ function EventList(props) {
                 } else if (val.event_type === "") {
                   return val;
                 }
+                return false;
               })
               // Date Filter
               .filter(val => {
@@ -406,6 +409,7 @@ function EventList(props) {
                 } else if (new Date(val.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'}).toLowerCase().includes(searchDate.toLowerCase())) {
                   return val;
                 }
+                return false;
               })
               .map((event) => (
 
