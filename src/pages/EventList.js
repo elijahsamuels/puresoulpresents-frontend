@@ -27,6 +27,10 @@ const useStyles = makeStyles({
 function EventList(props) {
   const classes = useStyles();
 
+  const [searchLocationText, setSearchLocationText] = useState("")
+  const [searchContactText, setSearchContactText] = useState("")
+
+
   const eventTernary = (eventData, missingItem) => {
     return eventData.localItem
       ? { true: eventData.localItem }
@@ -251,6 +255,19 @@ function EventList(props) {
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
 
+      {/* <input 
+        type="text" 
+        placeholder="Location filter..." 
+        className="form-control" 
+        onChange={(eventData) => {setSearchLocationText(eventData.target.value)}}
+        /> */}
+      {/* <input 
+        type="text" 
+        placeholder="Contact filter..." 
+        className="form-control" 
+        onChange={(eventData) => {setSearchContactText(eventData.target.value)}}
+        /> */}
+
       <TableContainer
         key={"tableContainer"}
         id={"tableContainer"}
@@ -294,7 +311,13 @@ function EventList(props) {
                 id={"event_location"} 
                 align="center" 
                 width="10%">
-                Location
+                Location 
+                <input 
+                  type="text" 
+                  placeholder="Location filter..." 
+                  className="form-control" 
+                  onChange={(eventData) => {setSearchLocationText(eventData.target.value)}}
+                  />
               </TableCell>
 
               <TableCell 
@@ -329,6 +352,12 @@ function EventList(props) {
                 {/* <Tooltip title={eventPrimaryContactTooltip(event)}> */}
                 {/* <Tooltip title={"Fix this later"}> */}
                   Primary Contact
+                  <input 
+                    type="text" 
+                    placeholder="Contact filter..." 
+                    className="form-control" 
+                    onChange={(eventData) => {setSearchContactText(eventData.target.value)}}
+                    />
                 {/* </Tooltip> */}
               </TableCell>
 
@@ -337,7 +366,24 @@ function EventList(props) {
 
           <TableBody key={"table_body"} id={"table_body"}>
             {/* {console.log("props: ", props.events)} */}
-            {props.events.map((event) => (
+            {props.events
+              .filter(val => {
+                if (searchLocationText === "") {
+                  return val;
+                } else if (val.city.toLowerCase().includes(searchLocationText.toLowerCase()) ||
+                val.state.toLowerCase().includes(searchLocationText.toLowerCase())){
+                  return val;
+                }
+              })
+              .filter(val => {
+                if (searchContactText === "") {
+                  return val;
+                } else if (val.primary_contact_first_name.toLowerCase().includes(searchContactText.toLowerCase()) ||
+                val.primary_contact_last_name.toLowerCase().includes(searchContactText.toLowerCase())) {
+                  return val;
+                }
+              })
+              .map((event) => (
 
               <TableRow
                 key={"event_" + event.id + "_row"}
