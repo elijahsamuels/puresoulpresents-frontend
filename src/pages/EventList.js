@@ -64,6 +64,7 @@ function EventList(props) {
 
   const eventDate = (eventData) => {
     let missingItem = "Date";
+    console.log("eventData.event_date:", eventData.event_date)
     eventData.localItem = new Date(eventData.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'});
     return Object.values(eventTernary(eventData, missingItem));
   };
@@ -79,7 +80,7 @@ function EventList(props) {
     if (eventData.total_amount > eventData.deposit_amount) {
       return <font color="red">Monies due!</font>;
     } else {
-      return <font color="green">All paid!</font>;
+      return <font color="green">All paid! <div>${eventData.total_amount}</div></font>;
     }
   }
 
@@ -119,12 +120,6 @@ function EventList(props) {
 
     return <font >{eventData.event_type ? eventData.event_type : <font color="red">Missing Type</font>}<br /><em>{eventData.program ? eventData.program : <font color="red">Missing Program</font>}</em></font>;
 
-    // if (eventData.event_type) {
-    //   return <font >{eventData.event_type ? eventData.event_type : ""} / <em>{eventData.program ? eventData.program : ""}</em></font>;
-    // } else  {
-    //   return <font color="red">Not Selected</font>;
-    // }
-
   }
 
   const eventProgram = (eventData) => {
@@ -138,24 +133,6 @@ function EventList(props) {
     //   return <font color="red">Not Selected</font>;
     // }
   }
-
-  //   eventData.localItem = eventData.balance_amount;
-  //   return Object.values(eventTernary(eventData, missingItem));
-  // };
-
-  // const eventLocation = (eventData) => {
-  //   let missingItem = "City";
-  //   eventData.localItem = eventData.city;
-  //   return Object.values(eventTernary(eventData, missingItem));
-  // };
-
-  // const eventPrimaryContactTooltip = (eventData) => {
-  //   if (!!eventData.primary_contact) {
-  //     return eventData.primary_contact
-  //   } else {
-  //     return "Contact info is missing"
-  //   }
-  // };
 
   const missingData = (eventData) => {
     // filter out event items that are undefined, and list those items. undefinded items are missing,
@@ -249,12 +226,12 @@ function EventList(props) {
     // If the state is still loading
     <div className="loading">
       UGH! WE'RE LOADING!
-      <CircularProgress color="error" />
+      <CircularProgress size={100} color="error" />
     </div>
   ) : (
     // If the state is not loading
     <div className="eventList">
-      <h1 align="center">PureSoul Presents Musician List</h1>
+      <h1 align="center">PureSoul Presents Events List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
 
       <TableContainer
@@ -298,7 +275,7 @@ function EventList(props) {
                     type="text" 
                     placeholder="Date filter..." 
                     className="form-control" 
-                    onChange={(eventData) => {setSearchDate(eventData.target.value)}}
+                    onChange={(e) => {setSearchDate(e.target.value)}}
                     />
                 </div>
               </TableCell>
@@ -314,7 +291,7 @@ function EventList(props) {
                     type="text" 
                     placeholder="Location filter..." 
                     className="form-control" 
-                    onChange={(eventData) => {setSearchLocationText(eventData.target.value)}}
+                    onChange={(e) => {setSearchLocationText(e.target.value)}}
                     />
                 </div>
               </TableCell>
@@ -330,7 +307,7 @@ function EventList(props) {
                     type="text" 
                     placeholder="Event Type filter..." 
                     className="form-control" 
-                    onChange={(eventData) => {setSearchEventType(eventData.target.value)}}
+                    onChange={(e) => {setSearchEventType(e.target.value)}}
                     />
                 </div>
               </TableCell>
@@ -364,7 +341,7 @@ function EventList(props) {
                       type="text" 
                       placeholder="Contact filter..." 
                       className="form-control" 
-                      onChange={(eventData) => {setSearchContactText(eventData.target.value)}}
+                      onChange={(e) => {setSearchContactText(e.target.value)}}
                       />
                   </div>
                 {/* </Tooltip> */}
@@ -375,6 +352,7 @@ function EventList(props) {
 
           <TableBody key={"table_body"} id={"table_body"}>
             {/* {console.log("props: ", props.events)} */}
+            {console.log(props.events.event_date)}
             {props.events
               .filter(val => {
                 if (searchLocationText === "") {
@@ -403,7 +381,7 @@ function EventList(props) {
               .filter(val => {
                 if (searchDate === "") {
                   return val;
-                } else if (val.event_date.includes(searchDate)) {
+                } else if (new Date(val.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'}).toLowerCase().includes(searchDate.toLowerCase())) {
                   return val;
                 }
               })
@@ -495,7 +473,7 @@ function EventList(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state.events.events: ",state.events.events);
+  // console.log("state.events.events: ",state.events.events);
   return {
     loading: state.loading,
     events: state.events.events,
