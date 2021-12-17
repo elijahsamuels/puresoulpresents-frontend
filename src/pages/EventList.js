@@ -30,6 +30,7 @@ function EventList(props) {
   const [searchLocationText, setSearchLocationText] = useState("")
   const [searchContactText, setSearchContactText] = useState("")
   const [searchEventType, setSearchEventType] = useState("")
+  const [searchDate, setSearchDate] = useState("")
 
 
   const eventTernary = (eventData, missingItem) => {
@@ -292,6 +293,14 @@ function EventList(props) {
                 align="center"
                 width="10%">
                 Event Date
+                <div>
+                  <input 
+                    type="text" 
+                    placeholder="Date filter..." 
+                    className="form-control" 
+                    onChange={(eventData) => {setSearchDate(eventData.target.value)}}
+                    />
+                </div>
               </TableCell>
 
               <TableCell 
@@ -388,6 +397,13 @@ function EventList(props) {
                   return val;
                 } else if (val.event_type.toLowerCase().includes(searchEventType.toLowerCase()) ||
                 val.program.toLowerCase().includes(searchEventType.toLowerCase())) {
+                  return val;
+                }
+              })
+              .filter(val => {
+                if (searchDate === "") {
+                  return val;
+                } else if (val.event_date.includes(searchDate)) {
                   return val;
                 }
               })
