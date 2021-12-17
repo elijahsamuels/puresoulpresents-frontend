@@ -36,6 +36,7 @@ function UserList(props) {
   const [searchPhone, setSearchPhone] = useState("")
   const [searchEmail, setSearchEmail] = useState("")
   const [searchName, setSearchName] = useState("")
+  const [searchRating, setSearchRating] = useState("")
 
 
   // console.log("props: ", props.users.users);
@@ -379,6 +380,14 @@ function UserList(props) {
 
               <TableCell key={"user_staff_rating"} id={"user_staff_rating"} align="center" width="10%">
                   Staff Rating
+                  <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Rating filter..." 
+                    onChange={(e) => {setSearchRating(e.target.value)}}
+                    autoComplete="disabled"
+                  />
               </TableCell>
               <TableCell key={"phone"} id={"phone"} align="center" width="10%">
                 Phone
@@ -449,6 +458,7 @@ function UserList(props) {
               } else if (val.city === "") {
                 return val;
               }
+              return false;
             })
             // Instrument Filter
             .filter(val => {
@@ -459,6 +469,7 @@ function UserList(props) {
               } else if (val.instrument === "") {
                 return val;
               }
+              return false;
             })
             // Phone Filter
             .filter(val => {
@@ -469,6 +480,7 @@ function UserList(props) {
               } else if (val.phone === "") {
                 return val;
               }
+              return false;
             })
             // Email Filter
             .filter(val => {
@@ -479,6 +491,7 @@ function UserList(props) {
               } else if (val.email === "") {
                 return val;
               }
+              return false;
             })
             // Name Filter
             .filter(val => {
@@ -487,6 +500,16 @@ function UserList(props) {
               } else if (val.first_name.toLowerCase().includes(searchName.toLowerCase()) || val.last_name.toLowerCase().includes(searchName.toLowerCase())){
                 return val;
               }
+              return false;
+            })
+            // Rating Filter
+            .filter(val => {
+              if (searchRating === "") {
+                return val;
+              } else if (val.user_staff_rating.toLowerCase().includes(searchRating.toLowerCase())){
+                return val;
+              }
+              return false;
             })
             .map((user) => (
               <TableRow
