@@ -18,6 +18,7 @@ import TextsmsIcon from '@mui/icons-material/Textsms';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import Tooltip from '@mui/material/Tooltip';
+import TextField from '@mui/material/TextField';
 
 const useStyles = makeStyles({
   // table: {
@@ -29,6 +30,9 @@ function UserList(props) {
   const classes = useStyles();
   // const userRole = "fever" // props.user.role
   const userRole = "admin" // props.user.role
+
+  const [searchCity, setSearchCity] = useState("")
+
 
   // console.log("props: ", props.users.users);
   // console.log("props.fetchUsersList: ", props.fetchUsersList());
@@ -71,7 +75,6 @@ function UserList(props) {
   };
 
   const userStaffRating = (userData) => {
-
 
     if (userData.user_staff_rating === "1"){
       return <font color="green"> {userData.user_staff_rating} </font>
@@ -321,7 +324,7 @@ function UserList(props) {
     <div className="userList">
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
-
+      
       <TableContainer
         key={"tableContainer"}
         id={"tableContainer"}
@@ -376,6 +379,14 @@ function UserList(props) {
               </TableCell>
               <TableCell key={"city"} id={"city"} align="center" width="10%">
                 City
+                <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="City filter..." 
+                    onChange={(e) => {setSearchCity(e.target.value)}}
+                  />
+
               </TableCell>
               <TableCell key={"bio"} bio={"bio"} align="center" height="10">
                 Bio
@@ -390,7 +401,17 @@ function UserList(props) {
           </TableHead>
             
           <TableBody key={"table_body"} id={"table_body"}>
-            {props.users.users.sort((a,b) => a.toString().localeCompare(b)).map((user) => (
+            {props.users.users.sort((a,b) => a.toString().localeCompare(b))
+            // City Filter
+            .filter(val => {
+              if (searchCity === "") {
+                return val;
+              } else if (val.city.toLowerCase().includes(searchCity.toLowerCase()) ||
+              val.state.toLowerCase().includes(searchCity.toLowerCase())){
+                return val;
+              }
+            })
+            .map((user) => (
               <TableRow
                 key={"user_" + user.id + "_row"}
                 id={"user_" + user.id + "_row"}
