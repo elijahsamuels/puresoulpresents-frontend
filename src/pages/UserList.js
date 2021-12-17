@@ -34,6 +34,7 @@ function UserList(props) {
   const [searchCity, setSearchCity] = useState("")
   const [searchInstrument, setSearchInstrument] = useState("")
   const [searchPhone, setSearchPhone] = useState("")
+  const [searchEmail, setSearchEmail] = useState("")
 
 
   // console.log("props: ", props.users.users);
@@ -382,6 +383,13 @@ function UserList(props) {
               </TableCell>
               <TableCell key={"email"} id={"email"} align="center" width="10%">
                 Email
+                <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Email filter..." 
+                    onChange={(e) => {setSearchEmail(e.target.value)}}
+                  />
               </TableCell>
               <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
                 Instrument
@@ -446,6 +454,16 @@ function UserList(props) {
               } else if (val.phone.toLowerCase().includes(searchPhone.toLowerCase())){
                 return val;
               } else if (val.phone === "") {
+                return val;
+              }
+            })
+            // Email Filter
+            .filter(val => {
+              if (searchEmail === "") {
+                return val;
+              } else if (val.email.toLowerCase().includes(searchEmail.toLowerCase())){
+                return val;
+              } else if (val.email === "") {
                 return val;
               }
             })
