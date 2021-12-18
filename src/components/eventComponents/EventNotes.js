@@ -44,6 +44,21 @@ function EventNotes (props) {
         />
       )}/>
 
+      <Controller name="event_type" control={control} render={({ field }) => (
+        <TextField 
+        {...field}
+        type="text"
+        label="Event Type" 
+        variant="outlined" 
+        size="small"
+        margin="dense"
+        sx={{ ml: 0.5}}
+        value={field.value || ''}
+        error={!!errors.event_type}
+        helperText={errors.event_type ? errors.event_type.message : ""}
+        />
+      )}/>
+
       <Controller name="set_list" control={control} render={({ field }) => (
         <TextField 
         {...field}
@@ -90,8 +105,8 @@ function EventNotes (props) {
       )}/>
 
 
-      <div>{dateTimeEventCreated()}</div>
-      <div>{lastUpdatedDateTime()}</div>
+      {/* <div>{dateTimeEventCreated()}</div>
+      <div>{lastUpdatedDateTime()}</div> */}
 
     </div>
   );
