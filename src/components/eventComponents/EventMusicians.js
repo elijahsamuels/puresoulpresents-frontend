@@ -26,10 +26,10 @@ function EventMusicians (props) {
   const [invoiceReceived, setInvoiceReceived] = useState(null);
 
   const handlePayChange = (event) => {
-    console.log({
-      musician_ID: event.target.name,
-      musician_pay_rate: parseInt(event.target.value)
-    })
+    // console.log({
+    //   musician_ID: event.target.name,
+    //   musician_pay_rate: parseInt(event.target.value)
+    // })
     // setPayRate({
     //   // ...payRate,
     //   [event.target.name]: parseInt(event.target.value)
@@ -40,11 +40,11 @@ function EventMusicians (props) {
     // setInvoiceReceived({ 
     //   [event.target.name]: event.target.value
     // }),
-    console.log(event.target.value)
+    // console.log(event.target.value)
   }
 
   function bandSizeFunction(e) {
-    console.log(e)
+    // console.log(e)
     // return (e.target.value)
   }
 
@@ -75,7 +75,7 @@ function EventMusicians (props) {
     setBandCostSummed(summedCost)
     // return setBandCostSummed(summedCost.reduce((a,b) => a+b));
   }
-  console.log(props.event.users)
+  // console.log(props.event.users)
   // console.log(`${props.event.users[0].first_name} ${props.event.users[0].last_name}, ID: ${props.event.users[0].id}`)
   const musicianCountGenerator = () => {
     
@@ -101,7 +101,7 @@ function EventMusicians (props) {
                 // value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
                 // value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
 
-                {...console.log("field.value: ",field.value)}
+                // {...console.log("field.value: ",field.value)}
                 value={field.value || ''}
                 margin="dense"
                 sx={{ ml: 0.5 }}

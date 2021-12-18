@@ -15,7 +15,7 @@ function UserPhoto(props) {
   });
   
   const returnUserPhotoOrDefault = () => {
-    console.log("props.users.user:", props.users.user)
+    // console.log("props.users.user:", props.users.user)
     if (!!props.users.user.photo) {
       return props.users.user.photo
     } else {
@@ -48,6 +48,13 @@ function UserPhoto(props) {
             />
         )}/>
       </div>
+      <label htmlFor="contained-button-file">
+        <Input accept="image/*" id="contained-button-file" multiple type="file" />
+        <Button variant="contained" component="span">
+          Upload
+        </Button>
+      </label>
+
 		</div>
 	);
 }

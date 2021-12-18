@@ -31,6 +31,8 @@ function UserTaxInfo(props) {
           placeholder="Name (as shown on your income tax form)"
           size="small"
           margin="dense"
+          sx={{ ml: 0.5 }}
+          value={field.value || ''}
           error={!!errors.tax_first_or_business_name}
           helperText={errors.tax_first_or_business_name ? errors.tax_first_or_business_name.message : ""}
           />
@@ -45,6 +47,7 @@ function UserTaxInfo(props) {
           size="small"
           margin="dense"
           sx={{ ml: 0.5}}
+          value={field.value || ''}
           error={!!errors.tax_last_name}
           helperText={errors.tax_last_name ? errors.tax_last_name.message : ""}
           />
@@ -61,6 +64,8 @@ function UserTaxInfo(props) {
             type="text"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.tax_address1}
             helperText={errors.tax_address1 ? errors.tax_address1.message : ""}
             />
@@ -76,6 +81,7 @@ function UserTaxInfo(props) {
             size="small"
             margin="dense"
             sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.tax_address2}
             helperText={errors.tax_address2 ? errors.tax_address2.message : ""}
             />
@@ -92,6 +98,8 @@ function UserTaxInfo(props) {
           type="text"
           size="small"
           margin="dense"
+          sx={{ ml: 0.5}}
+          value={field.value || ''}
           error={!!errors.tax_city}
           helperText={errors.tax_city ? errors.tax_city.message : ""}
           />
@@ -107,6 +115,7 @@ function UserTaxInfo(props) {
             size="small"
             margin="dense"
             sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.tax_state}
             helperText={errors.tax_state ? errors.tax_state.message : ""}
             />
@@ -122,6 +131,7 @@ function UserTaxInfo(props) {
             size="small"
             margin="dense"
             sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.tax_zip}
             helperText={errors.tax_zip ? errors.tax_zip.message : ""}
             />
@@ -137,6 +147,8 @@ function UserTaxInfo(props) {
             type="text"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.taxID}
             helperText={errors.taxID ? errors.taxID.message : ""}
             />

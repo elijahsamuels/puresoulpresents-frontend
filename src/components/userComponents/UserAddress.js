@@ -24,6 +24,8 @@ function UserAddress (props) {
             label="Street Address" 
             variant="outlined" 
             size="small"
+            sx={{ ml: 0.5}}
+            value={field.value || ''}
             margin="dense"
             error={!!errors.address1}
             helperText={errors.address1 ? errors.address1.message : ""}
@@ -38,11 +40,13 @@ function UserAddress (props) {
               size="small"
               margin="dense"
               sx={{ ml: 0.5}}
+              value={field.value || ''}
               error={!!errors.address2}
               helperText={errors.address2 ? errors.address2.message : ""}
             />
           )}/>
         </div>
+        
         <div>
           <Controller name="city" control={control} render={({ field }) => (
             <TextField 
@@ -53,6 +57,7 @@ function UserAddress (props) {
               size="small"
               margin="dense"
               sx={{ ml: 0.5}}
+              value={field.value || ''}
               error={!!errors.city}
               helperText={errors.city ? errors.city.message : ""}
             />
@@ -66,6 +71,7 @@ function UserAddress (props) {
               size="small"
               margin="dense"
               sx={{ ml: 0.5}}
+              value={field.value || ''}
               error={!!errors.state}
               helperText={errors.state ? errors.state.message : ""}
             />
@@ -79,6 +85,7 @@ function UserAddress (props) {
               size="small"
               margin="dense"
               sx={{ ml: 0.5}}
+              value={field.value || ''}
               error={!!errors.zip_code}
               helperText={errors.zip_code ? errors.zip_code.message : ""}
             />

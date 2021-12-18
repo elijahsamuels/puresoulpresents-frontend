@@ -14,30 +14,33 @@ function UserContact (props) {
     <div className="userContactDetails">
 
       <Controller name="email" control={control} render={({ field }) => (
-          <TextField 
-            {...field}
-            type="email"
-            label="Email" 
-            variant="outlined" 
-            size="small"
-            margin="dense"
-            error={!!errors.email}
-            helperText={errors.email ? errors.email.message : ""}
-          />
-        )}/>
-        <Controller name="phone" control={control} render={({ field }) => (
-          <TextField 
-            {...field}
-            label="Phone" 
-            variant="outlined" 
-            size="small"
-            margin="dense"
-            sx={{ ml: 0.5}}
-            error={!!errors.phone}
-            helperText={errors.phone ? errors.phone.message : ""}
-          />
-        )}/>
-
+        <TextField 
+          {...field}
+          type="email"
+          label="Email" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5}}
+          value={field.value || ''}
+          error={!!errors.email}
+          helperText={errors.email ? errors.email.message : ""}
+        />
+      )}/>
+      
+      <Controller name="phone" control={control} render={({ field }) => (
+        <TextField 
+          {...field}
+          label="Phone" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5}}
+          value={field.value || ''}
+          error={!!errors.phone}
+          helperText={errors.phone ? errors.phone.message : ""}
+        />
+      )}/>
     </div>
   );
 };

@@ -22,6 +22,8 @@ function UserBio(props) {
             margin="dense"
             minRows="4"
             maxRows="20"
+            sx={{ ml: 0.5}}
+            value={field.value || ''}
             style ={{width: '590px'}}
             error={!!errors.bio}
             helperText={errors.bio ? errors.bio.message : ""}

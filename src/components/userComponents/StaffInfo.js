@@ -28,6 +28,8 @@ function StaffInfo(props) {
             margin="dense"
             minRows="4"
             maxRows="20"
+            sx={{ ml: 0.5 }}
+            value={field.value || ''}
             error={!!errors.staff_notes}
             helperText={errors.staff_notes ? errors.staff_notes.message : ""}
             />
@@ -41,6 +43,7 @@ function StaffInfo(props) {
             size="small"
             margin="dense"
             sx={{ ml: 0.5 }}
+            value={field.value || ''}
             error={!!errors.nick_name}
             helperText={errors.nick_name ? errors.nick_name.message : ""}
             />

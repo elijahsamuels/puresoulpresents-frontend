@@ -21,6 +21,8 @@ function UserPaymentInfo(props) {
             placeholder="Name on your account"
             size="small"
             margin="dense"
+            sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.account_name}
             helperText={errors.account_name ? errors.account_name.message : ""}
             />
@@ -35,6 +37,7 @@ function UserPaymentInfo(props) {
             size="small"
             margin="dense"
             sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.ach_number}
             helperText={errors.ach_number ? errors.ach_number.message : ""}
             />
@@ -49,6 +52,7 @@ function UserPaymentInfo(props) {
             size="small"
             margin="dense"
             sx={{ ml: 0.5}}
+            value={field.value || ''}
             error={!!errors.ach_routing_number}
             helperText={errors.ach_routing_number ? errors.ach_routing_number.message : ""}
             />

@@ -11,8 +11,6 @@ function EventTimes (props) {
     defaultValues: props.event,
   });
 
-  console.log(props.event)
-
   return (
     <div className="eventTimes">
 

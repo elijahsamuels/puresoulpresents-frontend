@@ -5,7 +5,6 @@ import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 
 function EventTimes (props) {
-console.log("EventTimes/props.event: ", props.event)
   const { control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
   });
