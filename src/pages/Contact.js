@@ -12,14 +12,11 @@ function Contact() {
     );
 }
 
-
-
 const mapStateToProps = (state) => {
   return {
       loading: state.loading,
       users: state.users,
   };
 };
-
 
 export default connect(mapStateToProps, {fetchUsersList})( Contact);

@@ -38,7 +38,6 @@ function UserList(props) {
   const [searchName, setSearchName] = useState("")
   const [searchRating, setSearchRating] = useState("")
 
-
   // console.log("props: ", props.users.users);
   // console.log("props.fetchUsersList: ", props.fetchUsersList());
 
@@ -329,7 +328,6 @@ function UserList(props) {
     <div className="userList">
       <h1 align="center">PureSoul Presents Musician List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
-      
       <TableContainer
         key={"tableContainer"}
         id={"tableContainer"}
@@ -512,6 +510,7 @@ function UserList(props) {
               return false;
             })
             .map((user) => (
+              
               <TableRow
                 key={"user_" + user.id + "_row"}
                 id={"user_" + user.id + "_row"}
@@ -615,7 +614,7 @@ function UserList(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state.users: ",state.users);
+  // console.log("state.users: ",state.users);
   return {
     loading: state.loading,
     users: state.users,

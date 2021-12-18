@@ -24,9 +24,10 @@ function EventDetails(props) {
   const [eventData, setEventData] = useState(null);
 
   const lastUpdatedDateTime = () => {
+    let producer = props.event.last_updated_by
     let dateTime = props.event.updated_at
     let lastUpdated = new Date(dateTime)
-    return <div>Last updated at {lastUpdated.toString()} </div>
+    return <div>Last updated at {lastUpdated.toString()}  { !!producer ? `by ${producer}` : ""} </div>
   }
 
   const dateTimeEventCreated = () => {
@@ -48,7 +49,6 @@ function EventDetails(props) {
       return props.event;
     }, [props.event])
   });
-  // console.log("EventDetails/props: ", props)
   
   // useEffect(() => {
   //   let mounted = true
@@ -73,18 +73,8 @@ function EventDetails(props) {
 
   useEffect(() => {
     methods.reset(props.event);
-    // {console.log({...methods.formState.isDirty === false} ? "DIRTY!" : "CLEAN!")}
   }, [props.event]);
   
-  // console.log("props.event.users: ", props.event.users)
-
-  // useEffect(() => {
-  //   // methods.reset(props.users);
-  //   const users = props.users;
-
-  //   // console.log("users: ", users)
-  // }, [props.users]);
-
   const colorChangeLoadingButton = () => {
     if (methods.formState.isDirty === false) {
       // disable the save button. Prevents unnecessary API calls
@@ -115,8 +105,6 @@ function EventDetails(props) {
     }
 
   const onHandleSubmit = (data) => {
-    // Do something with the data
-    // console.log("handleSubmit/Form data: ", data);
     props.editEvent(data);
   }
   
@@ -135,7 +123,6 @@ function EventDetails(props) {
         <div>Event Type: {props.event.event_type ? props.event.event_type : <font color="red">Missing Type</font>}</div>
         <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div>
         <div>Event Date: {new Date(props.event.event_date).toLocaleString('en-US', { weekday: 'long', day: 'numeric', year: 'numeric', month: 'long'})}</div>
-        {/* <div>Users: {props.users[1].first_name}</div> */}
 
 {/* 
       <h3>
@@ -144,27 +131,15 @@ function EventDetails(props) {
         <div>Event Band Size: {props.event.band_size}</div> */}
 
       <FormProvider {...methods } >
-      {/* {console.log({...methods})} */}
-      {/* {console.log(Object.values({...methods.control.formState.dirtyFields}))} */}
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-        <EventLocation />
-        {/* <EventContact /> */}
-        <EventMusicians />
-        {/* <EventTimes /> */}
-        {/* <EventFinances /> */}
-        {/* <EventNotes /> */}
-        <br />
-        {colorChangeLoadingButton()}
-
-          {/* <LoadingButton
-            color="primary"
-            loadingPosition="start"
-            startIcon={<SaveIcon />}
-            variant="contained"
-            type="submit"
-          >
-            Save
-          </LoadingButton> */}
+          <EventLocation />
+          <EventContact />
+          <EventMusicians />
+          <EventTimes />
+          <EventFinances />
+          <EventNotes />
+          <br />
+          {colorChangeLoadingButton()}
           <br />
         </form>
           <div>{dateTimeEventCreated()}</div>
@@ -175,15 +150,12 @@ function EventDetails(props) {
   ) : (
     // If the data is still loading
     <div className="loading">
-      UGH! WE'RE LOADING!
       <CircularProgress color="error" />
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state.events.event)
-  // console.log(state.events.event.users)
   return {
     loading: state.loading,
     // users: state.events.event.users,
