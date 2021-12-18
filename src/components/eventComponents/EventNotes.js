@@ -5,7 +5,6 @@ import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 
 function EventNotes (props) {
-// console.log("EventLocation/props.event: ", props.event)
   const { control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
   });
@@ -39,6 +38,7 @@ function EventNotes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.program}
         helperText={errors.program ? errors.program.message : ""}
         />
@@ -53,6 +53,7 @@ function EventNotes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.set_list}
         helperText={errors.set_list ? errors.set_list.message : ""}
         />
@@ -67,6 +68,7 @@ function EventNotes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.staff_notes}
         helperText={errors.staff_notes ? errors.staff_notes.message : ""}
         />
@@ -81,6 +83,7 @@ function EventNotes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.client_notes}
         helperText={errors.client_notes ? errors.client_notes.message : ""}
         />
