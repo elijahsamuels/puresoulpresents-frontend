@@ -9,7 +9,6 @@ console.log("EventTimes/props.event: ", props.event)
   const { control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
   });
-  // {console.log("props.event: ", props.event)}
 
   return (
     <div className="eventTimes">
@@ -20,60 +19,62 @@ console.log("EventTimes/props.event: ", props.event)
 
       <div>
         <Controller name="load_in_time" control={control} render={({ field }) => (
-          // console.log("load_in_time/field: ", field),
           <TextField 
-          {...field}
-          value={field.value}
-          type="text"
-          label="Load in Time" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5}}
-          error={!!errors.load_in_time}
-          helperText={errors.load_in_time ? errors.load_in_time.message : ""}
+            {...field}
+            value={field.value}
+            type="text"
+            label="Load in Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5}}
+            error={!!errors.load_in_time}
+            helperText={errors.load_in_time ? errors.load_in_time.message : ""}
           />
         )}/>
 
         <Controller name="soundcheck_time" control={control} render={({ field }) => (
           <TextField 
-          {...field}
-          type="text"
-          label="Soundcheck Time" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5 }} 
-          error={!!errors.soundcheck_time}
-          helperText={errors.soundcheck_time ? errors.soundcheck_time.message : ""}
+            {...field}
+            type="text"
+            label="Soundcheck Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5 }}
+            value={field.value || ''}
+            error={!!errors.soundcheck_time}
+            helperText={errors.soundcheck_time ? errors.soundcheck_time.message : ""}
           />
         )}/>
 
         <Controller name="soundcheck_complete_time" control={control} render={({ field }) => (
           <TextField 
-          {...field}
-          type="text"
-          label="Soundcheck Complete Time" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5 }} 
-          error={!!errors.soundcheck_complete_time}
-          helperText={errors.soundcheck_complete_time ? errors.soundcheck_complete_time.message : ""}
+            {...field}
+            type="text"
+            label="Soundcheck Complete Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5 }}
+            value={field.value || ''}
+            error={!!errors.soundcheck_complete_time}
+            helperText={errors.soundcheck_complete_time ? errors.soundcheck_complete_time.message : ""}
           />
         )}/>
 
         <Controller name="doors_open_time" control={control} render={({ field }) => (
           <TextField 
-          {...field}
-          type="text"
-          label="Doors Open Time" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5 }} 
-          error={!!errors.doors_open_time}
-          helperText={errors.doors_open_time ? errors.doors_open_time.message : ""}
+            {...field}
+            type="text"
+            label="Doors Open Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5 }}
+            value={field.value || ''}
+            error={!!errors.doors_open_time}
+            helperText={errors.doors_open_time ? errors.doors_open_time.message : ""}
           />
         )}/>
       </div>
@@ -81,57 +82,61 @@ console.log("EventTimes/props.event: ", props.event)
       <div>
         <Controller name="start_time" control={control} render={({ field }) => (
           <TextField 
-          {...field}
-          type="text"
-          label="Start Time" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5}}
-          error={!!errors.start_time}
-          helperText={errors.start_time ? errors.start_time.message : ""}
+            {...field}
+            type="text"
+            label="Start Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5}}
+            value={field.value || ''}
+            error={!!errors.start_time}
+            helperText={errors.start_time ? errors.start_time.message : ""}
           />
         )}/>
 
         <Controller name="set_1_start_time" control={control} render={({ field }) => (
           <TextField 
-          {...field}
-          type="text"
-          label="Set 1" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5 }} 
-          error={!!errors.set_1_start_time}
-          helperText={errors.set_1_start_time ? errors.set_1_start_time.message : ""}
+            {...field}
+            type="text"
+            label="Set 1 Start Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5 }}
+            value={field.value || ''}
+            error={!!errors.set_1_start_time}
+            helperText={errors.set_1_start_time ? errors.set_1_start_time.message : ""}
           />
         )}/>
 
         <Controller name="set_2_start_time" control={control} render={({ field }) => (
           <TextField 
-          {...field}
-          type="text"
-          label="Set 2" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5 }} 
-          error={!!errors.set_2_start_time}
-          helperText={errors.set_2_start_time ? errors.set_2_start_time.message : ""}
+            {...field}
+            type="text"
+            label="Set 2 Start Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5 }}
+            value={field.value || ''}
+            error={!!errors.set_2_start_time}
+            helperText={errors.set_2_start_time ? errors.set_2_start_time.message : ""}
           />
         )}/>
 
         <Controller name="end_time" control={control} render={({ field }) => (
           <TextField 
-          {...field}
-          type="text"
-          label="End Time" 
-          variant="outlined" 
-          size="small"
-          margin="dense"
-          sx={{ ml: 0.5 }} 
-          error={!!errors.end_time}
-          helperText={errors.end_time ? errors.end_time.message : ""}
+            {...field}
+            type="text"
+            label="End Time" 
+            variant="outlined" 
+            size="small"
+            margin="dense"
+            sx={{ ml: 0.5 }}
+            value={field.value || ''}
+            error={!!errors.end_time}
+            helperText={errors.end_time ? errors.end_time.message : ""}
           />
         )}/>
       </div>
