@@ -32,7 +32,8 @@ function EventLocation (props) {
           variant="outlined" 
           size="small"
           margin="dense"
-          sx={{ ml: 0.5}}
+          sx={{ ml: 0.5 }}
+          value={field.value || ''}
           error={!!errors.venue_name}
           helperText={errors.venue_name ? errors.venue_name.message : ""}
           />
@@ -49,7 +50,8 @@ function EventLocation (props) {
           variant="outlined" 
           size="small"
           margin="dense"
-          sx={{ ml: 0.5 }} 
+          sx={{ ml: 0.5 }}
+          value={field.value || ''}
           error={!!errors.venue_capacity}
           helperText={errors.venue_capacity ? errors.venue_capacity.message : ""}
           />
@@ -125,6 +127,7 @@ function EventLocation (props) {
           size="small"
           margin="dense"
           sx={{ ml: 0.5}}
+          value={field.value || ''}
           error={!!errors.address1}
           helperText={errors.address1 ? errors.address1.message : ""}
           />
@@ -138,7 +141,8 @@ function EventLocation (props) {
           variant="outlined" 
           size="small"
           margin="dense"
-          sx={{ ml: 0.5 }} 
+          sx={{ ml: 0.5 }}
+          value={field.value || ''}
           error={!!errors.city}
           helperText={errors.city ? errors.city.message : ""}
           />
@@ -153,7 +157,8 @@ function EventLocation (props) {
           variant="outlined" 
           size="small"
           margin="dense"
-          sx={{ ml: 0.5 }} 
+          sx={{ ml: 0.5 }}
+          value={field.value || ''}
           error={!!errors.state}
           helperText={errors.state ? errors.state.message : ""}
           />
@@ -167,7 +172,8 @@ function EventLocation (props) {
           variant="outlined" 
           size="small"
           margin="dense"
-          sx={{ ml: 0.5 }} 
+          sx={{ ml: 0.5 }}
+          value={field.value || ''}
           error={!!errors.zip_code}
           helperText={errors.zip_code ? errors.zip_code.message : ""}
           />
