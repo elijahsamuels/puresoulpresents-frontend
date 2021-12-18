@@ -11,6 +11,8 @@ function EventTimes (props) {
     defaultValues: props.event,
   });
 
+  console.log(props.event)
+
   return (
     <div className="eventTimes">
 
@@ -27,6 +29,7 @@ function EventTimes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.total_amount}
         helperText={errors.total_amount ? errors.total_amount.message : ""}
         />
@@ -41,6 +44,7 @@ function EventTimes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.deposit_amount}
         helperText={errors.deposit_amount ? errors.deposit_amount.message : ""}
         />
@@ -55,23 +59,19 @@ function EventTimes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.balance_amount}
         helperText={errors.balance_amount ? errors.balance_amount.message : ""}
         />
       )}/>
 
-      <Controller name="invoice_sent" control={control} render={({ field }) => (
-        <Checkbox 
-        {...field}
-        label="Invoice Sent"
-        disableRipple={true}
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        error={!!errors.invoice_sent}
-        helperText={errors.invoice_sent ? errors.invoice_sent.message : ""}
-        />
-      )}/>
+      <Controller 
+        name="invoice_sent" 
+        // control={ <Checkbox />}
+        control={control} 
+        render={({ field }) =>
+        <Checkbox />
+      }/>
 
       {/* <Controller name="invoice_paid" control={control} render={({ field }) => (
         <Checkbox 
@@ -95,6 +95,7 @@ function EventTimes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.invoice_file}
         helperText={errors.invoice_file ? errors.invoice_file.message : ""}
         />
@@ -122,6 +123,7 @@ function EventTimes (props) {
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
+        value={field.value || ''}
         error={!!errors.hire_order_file}
         helperText={errors.hire_order_file ? errors.hire_order_file.message : ""}
         />
