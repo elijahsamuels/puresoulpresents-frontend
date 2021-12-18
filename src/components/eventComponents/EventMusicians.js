@@ -75,13 +75,15 @@ function EventMusicians (props) {
     setBandCostSummed(summedCost)
     // return setBandCostSummed(summedCost.reduce((a,b) => a+b));
   }
-
+  console.log(props.event.users)
+  // console.log(`${props.event.users[0].first_name} ${props.event.users[0].last_name}, ID: ${props.event.users[0].id}`)
   const musicianCountGenerator = () => {
     
     let musicianCountFromBandSizeArray = [];
     for (let i = 1; i < (parseInt(bandSize)+1 || props.event.band_size+1); i++) {
       musicianCountFromBandSizeArray.push(
         <div key={`musician_${i}_details`}>
+
           <Controller
             name={`musician_${i}`}
             control={control}
@@ -89,11 +91,18 @@ function EventMusicians (props) {
               <TextField
                 {...field}
                 type="text"
+                name={`musician_${i}`}
+                // { ...console.log(`${props.event.users[i].first_name} ${props.event.users[0].last_name}, ID: ${props.event.users[i].id}`) }
                 // key={`musician_${i}`}
                 label={`Musician ${i}`}
                 variant="outlined"
                 size="small"
-                value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
+                
+                // value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
+                // value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
+
+                {...console.log("field.value: ",field.value)}
+                value={field.value || ''}
                 margin="dense"
                 sx={{ ml: 0.5 }}
                 // onChange={null}
@@ -129,6 +138,7 @@ function EventMusicians (props) {
                 size="small"
                 margin="dense"
                 sx={{ ml: 0.5, width: 125 }}
+                value={field.value || ''}
                 error={!!errors[`musician_${i}_pay_rate`]}
                 helperText={ errors[`musician_${i}_pay_rate`] ? errors[`musician_${i}_pay_rate`].message : "" }
               />
@@ -204,6 +214,7 @@ function EventMusicians (props) {
                 size="small"
                 margin="dense"
                 sx={{ ml: 0.5 }}
+                value={field.value || ''}
                 error={!!errors[`musician_${i}_invoice_received`]}
                 helperText={
                   errors[`musician_${i}_invoice_received`]
@@ -227,6 +238,7 @@ function EventMusicians (props) {
                 size="small"
                 margin="dense"
                 sx={{ ml: 0.5 }}
+                value={field.value || ''}
                 error={!!errors[`musician_${i}_invoice_paid`]}
                 helperText={
                   errors[`musician_${i}_invoice_paid`]
