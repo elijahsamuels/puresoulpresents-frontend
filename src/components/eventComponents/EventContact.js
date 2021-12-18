@@ -9,12 +9,11 @@ function EventContact (props) {
   const { control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
   });
-
   return (
     <div className="eventContactDetails">
 
       <h3>
-        Contact Component
+        Primary Event Contact
       </h3>
 
       <Controller name="primary_contact_first_name" control={control} render={({ field }) => (
@@ -25,7 +24,8 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
-        sx={{ ml: 0.5}}
+        sx={{ ml: 0.5 }}
+        value={field.value || ''}
         error={!!errors.primary_contact_first_name}
         helperText={errors.primary_contact_first_name ? errors.primary_contact_first_name.message : ""}
         />
@@ -39,7 +39,8 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
-        sx={{ ml: 0.5 }} 
+        sx={{ ml: 0.5 }}
+        value={field.value || ''}
         error={!!errors.primary_contact_last_name}
         helperText={errors.primary_contact_last_name ? errors.primary_contact_last_name.message : ""}
         />
@@ -53,7 +54,8 @@ function EventContact (props) {
         variant="outlined" 
         size="small"
         margin="dense"
-        sx={{ ml: 0.5 }} 
+        sx={{ ml: 0.5 }}
+        value={field.value || ''}
         error={!!errors.primary_contact_email}
         helperText={errors.primary_contact_email ? errors.primary_contact_email.message : ""}
         />
@@ -66,7 +68,8 @@ function EventContact (props) {
         label="Phone" 
         variant="outlined" 
         size="small"
-        sx={{ ml: 0.5 }} 
+        sx={{ ml: 0.5 }}
+        value={field.value || ''}
         margin="dense"
         error={!!errors.primary_contact_phone}
         helperText={errors.primary_contact_phone ? errors.primary_contact_phone.message : ""}
@@ -78,6 +81,7 @@ function EventContact (props) {
 };
 
 const mapStateToProps = (state) => {
+
   return {
     loading: state.loading,
     users: state.users,
