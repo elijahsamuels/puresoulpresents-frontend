@@ -499,7 +499,7 @@ function EventList(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state.events.events: ",state.events.events);
+  // console.log("state.events.events: ",state.events.events);
   return {
     loading: state.loading,
     events: state.events.events,

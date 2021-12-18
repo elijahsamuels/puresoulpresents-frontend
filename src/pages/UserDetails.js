@@ -107,34 +107,15 @@ const colorChangeLoadingButton = () => {
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
           <UserPhoto />
-
-          <label htmlFor="contained-button-file">
-            <Input accept="image/*" id="contained-button-file" multiple type="file" />
-            <Button variant="contained" component="span">
-              Upload
-            </Button>
-          </label>
-
-
-
           <UserName />
           <UserContact />
           <UserAddress />
           <UserBio />
           <UserPaymentInfo />
           <StaffInfo />
-          <UserTaxInfo />
+          <UserTaxInfo /> 
           <br />
           {colorChangeLoadingButton()}
-          {/* <LoadingButton
-            color="error"
-            loadingPosition="start"
-            startIcon={<SaveIcon />}
-            variant="contained"
-            type="submit"
-          >
-            Save
-          </LoadingButton> */}
         </form>
           <div>{dateTimeUserCreated()}</div>
           <div>{lastUpdatedDateTime()}</div>
