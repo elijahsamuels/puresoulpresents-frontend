@@ -397,7 +397,7 @@ function EventList(props) {
                 } else if (val.event_type.toLowerCase().includes(searchEventType.toLowerCase()) ||
                 val.program.toLowerCase().includes(searchEventType.toLowerCase())) {
                   return val;
-                } else if (val.event_type === "" && searchEventType.toLowerCase().includes(..."missing")) {
+                } else if ((val.event_type === "" || val.program === "") && searchEventType.toLowerCase().includes(..."missing")) {
                   return val;
                 }
                 return false;
