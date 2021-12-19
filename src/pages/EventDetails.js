@@ -42,6 +42,15 @@ function EventDetails(props) {
     return <span>Currently: {currentDateTime.toString()} </span>
   }
 
+  const showProgramIfConcert = () => {
+    if (props.event.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate')) {
+      return <></>
+    } else {
+      return <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div>
+    }
+  }
+
+
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "all",
@@ -121,7 +130,8 @@ function EventDetails(props) {
 
       </h3>
         <div>Event Type: {props.event.event_type ? props.event.event_type : <font color="red">Missing Type</font>}</div>
-        <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div>
+        {showProgramIfConcert()}
+        {/* <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div> */}
         <div>Event Date: {new Date(props.event.event_date).toLocaleString('en-US', { weekday: 'long', day: 'numeric', year: 'numeric', month: 'long'})}</div>
 
 {/* 
