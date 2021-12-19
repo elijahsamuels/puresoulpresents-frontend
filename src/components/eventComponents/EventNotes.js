@@ -9,27 +9,26 @@ function EventNotes (props) {
     defaultValues: props.event,
   });
 
-  const lastUpdatedDateTime = () => {
-    let producer = props.event.last_updated_by
-    let dateTime = props.event.updated_at
-    let lastUpdated = new Date(dateTime)
-    return <div>Last updated at {lastUpdated.toString()}  { !!producer ? `by ${producer}` : ""} </div>
-  }
+  // const lastUpdatedDateTime = () => {
+  //   let producer = props.event.last_updated_by
+  //   let dateTime = props.event.updated_at
+  //   let lastUpdated = new Date(dateTime)
+  //   return <div>Last updated at {lastUpdated.toString()}  { !!producer ? `by ${producer}` : ""} </div>
+  // }
 
-  const dateTimeEventCreated = () => {
-    let dateTime = props.event.created_at
-    let eventCreated = new Date(dateTime)
-    return <span>Created at {eventCreated.toString()} </span>
-  }
+  // const dateTimeEventCreated = () => {
+  //   let dateTime = props.event.created_at
+  //   let eventCreated = new Date(dateTime)
+  //   return <span>Created at {eventCreated.toString()} </span>
+  // }
 
-  return (
-    <div className="eventNotes">
+  // check event_type to see if program is displayed
 
-      <h3>
-        Notes Component
-      </h3>
-
-      <Controller name="program" control={control} render={({ field }) => (
+  const showProgramIfConcert = () => {
+    if (props.event.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate')) {
+      return <></>
+    } else {
+      return <Controller name="program" control={control} render={({ field }) => (
         <TextField 
         {...field}
         type="text"
@@ -43,6 +42,17 @@ function EventNotes (props) {
         helperText={errors.program ? errors.program.message : ""}
         />
       )}/>
+    }
+  }
+
+  return (
+    <div className="eventNotes">
+
+      <h3>
+        Notes Component
+      </h3>
+
+    {showProgramIfConcert()}
 
       <Controller name="event_type" control={control} render={({ field }) => (
         <TextField 
