@@ -28,18 +28,15 @@ const useStyles = makeStyles({
 
 function EventList(props) {
   const classes = useStyles();
-
   const [searchLocationText, setSearchLocationText] = useState("")
   const [searchContactText, setSearchContactText] = useState("")
   const [searchEventType, setSearchEventType] = useState("")
   const [searchDate, setSearchDate] = useState("")
 
-
   const eventTernary = (eventData, missingItem) => {
     return eventData.localItem
       ? { true: eventData.localItem }
-      : {
-          false: (
+      : { false: (
             <font color="red" key={"items_missing_for_event_" + eventData.id}>
               Missing {missingItem}
             </font>
@@ -112,28 +109,29 @@ function EventList(props) {
     }
   }
 
-  // <font >{eventData.event_type} - <em>{eventData.program}</em></font>;
+// if the event_type is wedding, list the event type but not program
+// else list the event type AND the program, if specified or "missing"
 
-  const eventType = (eventData) => {
-    // let missingItem = "Event Type";
-    // eventData.program = eventData.program ? ` / ${eventData.program}` : ""
-    // eventData.localItem = `${eventData.event_type}${eventData.program}`;
-    // return Object.values(eventTernary(eventData, missingItem));
+const eventType = (eventData) => {
+    let missingItem = "Event Type";
+    eventData.localItem = eventData.event_program;
 
-    return <font >{eventData.event_type ? eventData.event_type : <font color="red">Missing Type</font>}<br /><em>{eventData.program ? eventData.program : <font color="red">Missing Program</font>}</em></font>;
-
+    if (eventData.event_type){
+      if (eventData.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate') ) {
+        return <div>{eventData.event_type}</div>
+      } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'conert')) {
+        return <div>{eventData.event_type}<br /><em>{eventProgram(eventData)}</em></div> 
+      }
+    } else {
+      return Object.values(eventTernary(eventData, missingItem));
+    }
+    return false
   }
 
   const eventProgram = (eventData) => {
     let missingItem = "Event Program";
-    eventData.localItem = eventData.event_program;
+    eventData.localItem = eventData.program;
     return Object.values(eventTernary(eventData, missingItem));
-
-    // if (eventData.event_type) {
-    //   return <font >{eventData.program}</font>;
-    // } else  {
-    //   return <font color="red">Not Selected</font>;
-    // }
   }
 
   const eventMusicians = (eventData) => {
