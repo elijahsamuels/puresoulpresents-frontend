@@ -13,12 +13,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import userSamplePhoto from "../images/userSamplePhoto.png";
-import CircularProgress from "@mui/material/CircularProgress";
 import TextsmsIcon from '@mui/icons-material/Textsms';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
+import LoadingCircularProgress from '../components/staticComponents/LoadingCicularProgress.js';
 
 const useStyles = makeStyles({
   // table: {
@@ -37,10 +37,6 @@ function UserList(props) {
   const [searchEmail, setSearchEmail] = useState("")
   const [searchName, setSearchName] = useState("")
   const [searchRating, setSearchRating] = useState("")
-
-  // console.log("props: ", props.users.users);
-  // console.log("props.fetchUsersList: ", props.fetchUsersList());
-
 
   const userTernary = (userData, missingItem) => {
     return userData.localItem
@@ -310,18 +306,15 @@ function UserList(props) {
   // const emailUserAboutMissingData = (userData) => {
   //     missingData(userData)
 
-  const [localUsers, setLocalUsers] = useState(null);
+  const [localUsers, setLocalUsers] = useState(props.users.users);
 
   useEffect(() => {
     setLocalUsers(props.fetchUsersList());
+  // }, [localUsers, props]);
   }, []);
 
   return !!props.loading ? (
-    // If the state is still loading
-    <div className="loading">
-      UGH! WE'RE LOADING!
-      <CircularProgress color="error" />
-    </div>
+    <LoadingCircularProgress />
   ) : (
     // If the state is not loading
 
@@ -445,7 +438,8 @@ function UserList(props) {
           </TableHead>
             
           <TableBody key={"table_body"} id={"table_body"}>
-            {props.users.users.sort((a,b) => a.toString().localeCompare(b))
+            {/* {(localUsers || props.users.users).sort((a,b) => a.toString().localeCompare(b)) */}
+             {props.users.users.sort((a,b) => a.toString().localeCompare(b))
             // City Filter
             .filter(val => {
               if (searchCity === "") {
