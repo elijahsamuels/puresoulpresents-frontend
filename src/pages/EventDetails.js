@@ -8,10 +8,11 @@ import EventLocation from "../components/eventComponents/EventLocation";
 import EventTimes from "../components/eventComponents/EventTimes";
 import EventFinances from "../components/eventComponents/EventFinances";
 import EventNotes from "../components/eventComponents/EventNotes";
+import EventDate from "../components/eventComponents/EventDate";
+import LoadingCircularProgress from '../components/staticComponents/LoadingCicularProgress.js';
 
 import { fetchEventData, editEvent } from "../actions/eventActions";
 
-import CircularProgress from "@mui/material/CircularProgress";
 import SaveIcon from '@mui/icons-material/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -82,7 +83,7 @@ function EventDetails(props) {
 
   useEffect(() => {
     methods.reset(props.event);
-  }, [props.event]);
+  }, []);
   
   const colorChangeLoadingButton = () => {
     if (methods.formState.isDirty === false) {
@@ -108,7 +109,10 @@ function EventDetails(props) {
         variant="contained"
         type="submit"
         >
-        Save
+        <Tooltip title="You need to save!">
+          <span>Save</span>
+        </Tooltip>
+
         </LoadingButton>
       }
     }
@@ -142,12 +146,13 @@ function EventDetails(props) {
 
       <FormProvider {...methods } >
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          <EventLocation />
-          <EventContact />
-          <EventMusicians />
-          <EventTimes />
-          <EventFinances />
-          <EventNotes />
+          <EventDate />
+          {/* <EventLocation /> */}
+          {/* <EventContact /> */}
+          {/* <EventMusicians /> */}
+          {/* <EventTimes /> */}
+          {/* <EventFinances /> */}
+          {/* <EventNotes /> */}
           <br />
           {colorChangeLoadingButton()}
           <br />
@@ -158,10 +163,7 @@ function EventDetails(props) {
       </FormProvider>
     </div>
   ) : (
-    // If the data is still loading
-    <div className="loading">
-      <CircularProgress color="error" />
-    </div>
+    <LoadingCircularProgress />
   );
 }
 
