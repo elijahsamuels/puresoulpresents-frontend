@@ -12,8 +12,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import CircularProgress from "@mui/material/CircularProgress";
 import TextField from '@mui/material/TextField';
+import LoadingCircularProgress from '../components/staticComponents/loadingCicularProgress.js';
 
 // import TextsmsIcon from "@mui/icons-material/Textsms";
 // import PhoneIcon from "@mui/icons-material/Phone";
@@ -236,11 +236,7 @@ const eventType = (eventData) => {
   }, []);
 
   return !!props.loading ? (
-    // If the state is still loading
-    <div className="loading">
-      UGH! WE'RE LOADING!
-      <CircularProgress size={100} color="error" />
-    </div>
+    <LoadingCircularProgress />
   ) : (
     // If the state is not loading
     <div className="eventList">
