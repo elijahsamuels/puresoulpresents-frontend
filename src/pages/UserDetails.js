@@ -12,12 +12,12 @@ import StaffInfo from "../components/userComponents/StaffInfo";
 import UserPhoto from "../components/userComponents/UserPhoto";
 import { fetchUserData, editUser } from "../actions/userActions";
 
-import CircularProgress from "@mui/material/CircularProgress";
+import LoadingCircularProgress from '../components/staticComponents/LoadingCicularProgress.js';
 import SaveIcon from '@mui/icons-material/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+// import { styled } from '@mui/material/styles';
+// import Button from '@mui/material/Button';
 
 
 import { useForm, FormProvider } from "react-hook-form";
@@ -55,7 +55,8 @@ function UserDetails(props) {
 
   useEffect(() => {
     methods.reset(props.users.user);
-  }, [props.users.user]);
+  // }, [props.users.user]);
+  }, [methods, props.users.user]);
 
 const colorChangeLoadingButton = () => {
     if (methods.formState.isDirty === false) {
@@ -92,9 +93,9 @@ const colorChangeLoadingButton = () => {
     props.editUser(data);
   }
 
-  const Input = styled('input')({
-    display: 'none',
-  });
+  // const Input = styled('input')({
+  //   display: 'none',
+  // });
 
   
   return !!props.users.user ? (
@@ -122,11 +123,7 @@ const colorChangeLoadingButton = () => {
       </FormProvider>
     </div>
   ) : (
-    // If the data is still loading
-    <div className="loading">
-      UGH! WE'RE LOADING!
-      <CircularProgress color="error" />
-    </div>
+    <LoadingCircularProgress />
   );
 }
 
