@@ -12,7 +12,7 @@ import StaffInfo from "../components/userComponents/StaffInfo";
 import UserPhoto from "../components/userComponents/UserPhoto";
 import { fetchUserData, editUser } from "../actions/userActions";
 
-import LoadingCircularProgress from '../components/staticComponents/LoadingCicularProgress.js';
+import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
 import SaveIcon from '@mui/icons-material/Save';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Tooltip from '@mui/material/Tooltip';
