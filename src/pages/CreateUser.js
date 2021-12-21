@@ -21,7 +21,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 function CreateUser(props) {
 
-  
   const methods = useForm({
     resolver: yupResolver(schema),
     mode: "all",
@@ -34,7 +33,7 @@ function CreateUser(props) {
   };
 
   return (
-    <div className="createNewUser">
+    <div className="CreateNewUser">
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
           <UserPhoto />
