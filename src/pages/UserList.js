@@ -18,7 +18,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
-import LoadingCircularProgress from '../components/staticComponents/LoadingCicularProgress.js';
+import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
 
 const useStyles = makeStyles({
   // table: {
@@ -125,6 +125,12 @@ function UserList(props) {
   const userCity = (userData) => {
     let missingItem = "City";
     userData.localItem = userData.city;
+    return Object.values(userTernary(userData, missingItem));
+  };
+
+  const userState = (userData) => {
+    let missingItem = "State";
+    userData.localItem = userData.state;
     return Object.values(userTernary(userData, missingItem));
   };
 
@@ -440,7 +446,7 @@ function UserList(props) {
           <TableBody key={"table_body"} id={"table_body"}>
             {/* {(localUsers || props.users.users).sort((a,b) => a.toString().localeCompare(b)) */}
              {props.users.users.sort((a,b) => a.toString().localeCompare(b))
-            // City Filter
+            // City/State Filter
             .filter(val => {
               if (searchCity === "") {
                 return val;
@@ -568,7 +574,7 @@ function UserList(props) {
                   id={"user_" + user.id + "_city"}
                   key={"user_" + user.id + "_city"}
                 >
-                  {userCity(user)}
+                  {userCity(user)}, {userState(user)}
                 </TableCell>
                 <TableCell
                   align="center"
