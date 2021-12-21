@@ -9,7 +9,7 @@ import EventTimes from "../components/eventComponents/EventTimes";
 import EventFinances from "../components/eventComponents/EventFinances";
 import EventNotes from "../components/eventComponents/EventNotes";
 import EventDate from "../components/eventComponents/EventDate";
-import LoadingCircularProgress from '../components/staticComponents/LoadingCicularProgress.js';
+import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
 
 import { fetchEventData, editEvent } from "../actions/eventActions";
 
@@ -44,13 +44,21 @@ function EventDetails(props) {
   }
 
   const showProgramIfConcert = () => {
-    if (props.event.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate')) {
-      return <></>
-    } else {
+
+    function EventProgramReturn() {
       return <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div>
     }
-  }
 
+    if (props.event.event_type == null ) {
+      EventProgramReturn()
+    } else {
+      if (props.event.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate')) {
+        return <></>
+      } else {
+        EventProgramReturn()
+      }
+    }
+  }
 
   const methods = useForm({
     resolver: yupResolver(schema),
