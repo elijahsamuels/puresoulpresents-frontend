@@ -16,17 +16,20 @@ import TextField from '@mui/material/TextField';
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
 import Box from '@mui/material/Box';
 
-// import TextsmsIcon from "@mui/icons-material/Textsms";
-// import PhoneIcon from "@mui/icons-material/Phone";
-// import EmailIcon from "@mui/icons-material/Email";
 import Tooltip from "@mui/material/Tooltip";
 import { green } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
+import { orange } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 
-
+const green50 = green[50]
 const green100 = green[100]
 const green200 = green[200]
 const green300 = green[300]
 const green400 = green[400]
+const blue50 = blue[50]
+const orange50 = orange[50]
+const red50 = red[50]
 
 const useStyles = makeStyles({
   // table: {
@@ -96,13 +99,14 @@ function EventList(props) {
 
     switch (eventData.status) {
       case "Inquiry": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{eventData.status}</Box>;
+      // return <font color="green">{eventData.status}</font>;
+        return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, borderRadius: 2  }}>{eventData.status}</Box>;
 
       case "Quote": 
-      return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, bgcolor: green200, borderRadius: 2  }}>{eventData.status} Sent</Box>;
+        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{eventData.status} Sent</Box>;
       
       case "Negotiations": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green300}`, bgcolor: green300, borderRadius: 2  }}>{eventData.status}</Box>;
+        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{eventData.status}</Box>;
       
       case "Confirmed": 
         return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2  }}>{eventData.status}</Box>;
@@ -111,14 +115,16 @@ function EventList(props) {
         return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
         
       case "Completed": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
+        return <Box sx={{ p: 0.8, border: `2px solid ${blue50}`, bgcolor: blue50, borderRadius: 2  }}>{eventData.status}</Box>;
         
       case "TBD": return <font color="orange">{eventData.status}</font>;
       case "TBD": return <font color="orange">{eventData.status}</font>;
       
-      case "Postponed": return <font color="orange">{eventData.status}</font>;
+      case "Postponed": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${orange50}`, bgcolor: orange50, borderRadius: 2  }}>{eventData.status}</Box>;
       
-      case "Cancelled": return <font color="red">{eventData.status}</font>;
+      case "Cancelled": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${red50}`, bgcolor: red50, borderRadius: 2  }}>{eventData.status}</Box>;
 
       default: return <font color="red">Unknown</font>;
   
@@ -455,10 +461,10 @@ const eventType = (eventData) => {
               .filter(val => {
                 if (searchEventType === "") {
                   return val;
-                } else if (val.event_type.toLowerCase().includes(searchEventType.toLowerCase()) ||
-                val.program.toLowerCase().includes(searchEventType.toLowerCase())) {
+                } else if (val.event_type?.toLowerCase().includes(searchEventType.toLowerCase()) ||
+                  val.program?.toLowerCase().includes(searchEventType.toLowerCase())) {
                   return val;
-                } else if ((val.event_type === "" || val.program === "") && searchEventType.toLowerCase().includes(..."missing")) {
+                } else if ((val.event_type === ("" || null) || val.program === "") && searchEventType.toLowerCase().includes(..."missing")) {
                   return val;
                 }
                 return false;
