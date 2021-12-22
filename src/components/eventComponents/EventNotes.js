@@ -25,7 +25,7 @@ function EventNotes (props) {
   // check event_type to see if program is displayed
 
   const showProgramIfConcert = () => {
-    if (props.event.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate')) {
+    if (props.event.event_type?.toLowerCase().includes('wedding' || 'private' || 'corporate')) {
       return <></>
     } else {
       return <Controller name="program" control={control} render={({ field }) => (
