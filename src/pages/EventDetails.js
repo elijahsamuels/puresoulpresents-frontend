@@ -21,6 +21,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
 
 function EventDetails(props) {
+
+  console.log(props.event)
   const eventid = props.match.params.id;
   const [eventData, setEventData] = useState(null);
 
@@ -91,7 +93,7 @@ function EventDetails(props) {
 
   useEffect(() => {
     methods.reset(props.event);
-  }, []);
+  }, [props.event]);
   
   const colorChangeLoadingButton = () => {
     if (methods.formState.isDirty === false) {
@@ -154,9 +156,9 @@ function EventDetails(props) {
 
       <FormProvider {...methods } >
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          <EventDate />
-          {/* <EventLocation /> */}
-          {/* <EventContact /> */}
+          {/* <EventDate /> */}
+          <EventLocation />
+          <EventContact />
           {/* <EventMusicians /> */}
           {/* <EventTimes /> */}
           {/* <EventFinances /> */}
