@@ -7,7 +7,7 @@ import emailjs from "emailjs-com";
 const Mailer = () => {
   const sendEmail = (event) => {
     event.preventDefault();
-    console.log()
+    // console.log()
     emailjs
       .sendForm(
         "service_clkp08f",
@@ -29,22 +29,22 @@ const Mailer = () => {
     <div className="Mailer">
       <h1>Contact</h1>
       <form>
-        <label for="name">Name</label>
+        <label htmlFor="name">Name</label>
         <br />
         <input type="text" name="name" autoComplete="off" />
         <br />
 
-        <label for="user_email">Email</label>
+        <label htmlFor="user_email">Email</label>
         <br />
         <input type="text" name="user_email" autoComplete="off" />
         <br />
 
-        <label for="user_phone">Phone</label>
+        <label htmlFor="user_phone">Phone</label>
         <br />
         <input type="text" name="user_phone" autoComplete="off" />
         <br />
 
-        <label for="event_type">Event Type:</label>
+        <label htmlFor="event_type">Event Type:</label>
         <br />
         <select name="event_type" id="event_type" form="event_type_form" autoComplete="off">
           <option value="candlelight">Candlelight Concert</option>

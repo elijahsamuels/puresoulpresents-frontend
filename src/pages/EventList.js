@@ -437,6 +437,7 @@ const eventType = (eventData) => {
 
           <TableBody key={"table_body"} id={"table_body"}>
             {props.events
+              .sort((a,b) => a.primary_contact_first_name - b.primary_contact_first_name)
               // Location Filter
               .filter(val => {
                 if (searchLocationText === "") {
@@ -463,8 +464,10 @@ const eventType = (eventData) => {
                   return val;
                 } else if (val.event_type?.toLowerCase().includes(searchEventType.toLowerCase()) ||
                   val.program?.toLowerCase().includes(searchEventType.toLowerCase())) {
+              // console.log("step 2: ", !!val.event_type?.length)
                   return val;
-                } else if ((val.event_type === ("" || null) || val.program === "") && searchEventType.toLowerCase().includes(..."missing")) {
+                } else if ((val.event_type === ("" || null)) && searchEventType.toLowerCase().includes(..."missing")) {
+              // console.log("step 3: ", !!val.event_type)
                   return val;
                 }
                 return false;
@@ -585,7 +588,7 @@ const eventType = (eventData) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state.events.events: ",state.events.events);
+  // console.log("state.events.events: ",state.events.events);
   return {
     loading: state.loading,
     events: state.events.events,
