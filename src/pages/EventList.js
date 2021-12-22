@@ -40,6 +40,7 @@ function EventList(props) {
   const [searchContactText, setSearchContactText] = useState("")
   const [searchEventType, setSearchEventType] = useState("")
   const [searchDate, setSearchDate] = useState("")
+  const [searchInquiryStatus, setSearchInquiryStatus] = useState("")
 
   const eventTernary = (eventData, missingItem) => {
     return eventData.localItem
@@ -379,6 +380,16 @@ const eventType = (eventData) => {
                 align="center" 
                 width="1%">
                 Inquiry Status
+                <div>
+                  <TextField
+                    label="Filter"
+                    id="outlined-size-small"
+                    size="small"
+                    placeholder="Inquiry filter..." 
+                    onChange={(e) => {setSearchInquiryStatus(e.target.value)}}
+                  />
+                </div>
+
               </TableCell>
 
               <TableCell 
@@ -450,6 +461,15 @@ const eventType = (eventData) => {
                 if (searchDate === "") {
                   return val;
                 } else if (new Date(val.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'}).toLowerCase().includes(searchDate.toLowerCase())) {
+                  return val;
+                }
+                return false;
+              })
+              // Inquiry Status Filter
+              .filter(val => {
+                if (searchInquiryStatus === "") {
+                  return val;
+                } else if (val.status.toLowerCase().includes(searchInquiryStatus.toLowerCase())) {
                   return val;
                 }
                 return false;
