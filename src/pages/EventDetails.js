@@ -143,7 +143,7 @@ function EventDetails(props) {
         {new Date(props.event.event_date).toLocaleString('en-US', { weekday: 'short', day: 'numeric', year: 'numeric', month: 'short'})}</div>
 
       </h3>
-        <div>Event Type: {props.event.event_type ? props.event.event_type : <font color="red">Missing Type</font>}</div>
+        <div>Event Type: {!!props.event.event_type ? props.event.event_type : <font color="red">Missing Type</font>}</div>
         {showProgramIfConcert()}
         {/* <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div> */}
         <div>Event Date: {new Date(props.event.event_date).toLocaleString('en-US', { weekday: 'long', day: 'numeric', year: 'numeric', month: 'long'})}</div>
@@ -156,13 +156,13 @@ function EventDetails(props) {
 
       <FormProvider {...methods } >
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          {/* <EventDate /> */}
+          <EventDate />
           <EventLocation />
           <EventContact />
           {/* <EventMusicians /> */}
-          {/* <EventTimes /> */}
-          {/* <EventFinances /> */}
-          {/* <EventNotes /> */}
+          <EventTimes />
+          <EventFinances />
+          <EventNotes />
           <br />
           {colorChangeLoadingButton()}
           <br />
