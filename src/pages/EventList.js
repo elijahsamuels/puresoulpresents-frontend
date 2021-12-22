@@ -14,11 +14,19 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TextField from '@mui/material/TextField';
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
+import Box from '@mui/material/Box';
 
 // import TextsmsIcon from "@mui/icons-material/Textsms";
 // import PhoneIcon from "@mui/icons-material/Phone";
 // import EmailIcon from "@mui/icons-material/Email";
 import Tooltip from "@mui/material/Tooltip";
+import { green } from '@mui/material/colors';
+
+
+const green100 = green[100]
+const green200 = green[200]
+const green300 = green[300]
+const green400 = green[400]
 
 const useStyles = makeStyles({
   // table: {
@@ -80,6 +88,39 @@ function EventList(props) {
       return <font color="red">Monies due!</font>;
     } else {
       return <font color="green">All paid! <div>${eventData.total_amount}</div></font>;
+    }
+  }
+
+  const eventInquiryStatus = (eventData) => {
+
+    switch (eventData.status) {
+      case "Inquiry": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{eventData.status}</Box>;
+
+      case "Quote": 
+      return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, bgcolor: green200, borderRadius: 2  }}>{eventData.status} Sent</Box>;
+      
+      case "Negotiations": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${green300}`, bgcolor: green300, borderRadius: 2  }}>{eventData.status}</Box>;
+      
+      case "Confirmed": 
+        return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2  }}>{eventData.status}</Box>;
+  
+      case "Green Light": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
+        
+      case "Completed": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
+        
+      case "TBD": return <font color="orange">{eventData.status}</font>;
+      case "TBD": return <font color="orange">{eventData.status}</font>;
+      
+      case "Postponed": return <font color="orange">{eventData.status}</font>;
+      
+      case "Cancelled": return <font color="red">{eventData.status}</font>;
+
+      default: return <font color="red">Unknown</font>;
+  
     }
   }
 
@@ -261,7 +302,7 @@ const eventType = (eventData) => {
                 key={"allgood"}
                 id={"allgood"}
                 align="left"
-                width="10%">
+                width="1%">
                 All Good?
               </TableCell>
 
@@ -269,7 +310,7 @@ const eventType = (eventData) => {
                 key={"edit_event"}
                 id={"edit_event"}
                 align="center"
-                width="10%">
+                width="1%">
                 Edit
               </TableCell>
 
@@ -277,7 +318,7 @@ const eventType = (eventData) => {
                 key={"event_date"}
                 id={"event_date"}
                 align="center"
-                width="10%">
+                width="4%">
                 Event Date
                 <div>
                   <TextField
@@ -294,7 +335,7 @@ const eventType = (eventData) => {
                 key={"event_location"} 
                 id={"event_location"} 
                 align="center" 
-                width="10%">
+                width="5%">
                 Location
                 <div>
                   <TextField
@@ -311,7 +352,7 @@ const eventType = (eventData) => {
                 key={"event_type"} 
                 id={"event_type"} 
                 align="center" 
-                width="10%">
+                width="5%">
                 Type              
                 <div>
                   <TextField
@@ -328,15 +369,23 @@ const eventType = (eventData) => {
                 key={"event_payment_status"} 
                 id={"event_payment_status"} 
                 align="center" 
-                width="10%">
+                width="1%">
                 Payment Status
+              </TableCell>
+
+              <TableCell 
+                key={"event_inquiry_status"} 
+                id={"event_inquiry_status"} 
+                align="center" 
+                width="1%">
+                Inquiry Status
               </TableCell>
 
               <TableCell 
                 key={"event_band_size"} 
                 id={"event_band_size"} 
                 align="center" 
-                width="10%">
+                width="1%">
                 Band Size
               </TableCell>
 
@@ -345,7 +394,7 @@ const eventType = (eventData) => {
                 key={"event_primary_contact"} 
                 id={"event_primary_contact"} 
                 align="center" 
-                width="10%">
+                width="5%">
                 {/* <Tooltip title={eventPrimaryContactTooltip(event)}> */}
                   Primary Contact
                   <div>
@@ -459,6 +508,16 @@ const eventType = (eventData) => {
                 >
                   {/* <Tooltip title={eventBioTooltip(event)}> */}
                     <span>{eventPaymentStatus(event)}</span>
+                  {/* </Tooltip> */}
+                </TableCell>
+
+                <TableCell
+                  align="center"
+                  id={"event_" + event.id + "_inquiry_status"}
+                  key={"event_" + event.id + "_inquiry_status"}
+                >
+                  {/* <Tooltip title={eventBioTooltip(event)}> */}
+                    <span>{eventInquiryStatus(event)}</span>
                   {/* </Tooltip> */}
                 </TableCell>
 
