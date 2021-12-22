@@ -445,7 +445,8 @@ function UserList(props) {
             
           <TableBody key={"table_body"} id={"table_body"}>
             {/* {(localUsers || props.users.users).sort((a,b) => a.toString().localeCompare(b)) */}
-             {props.users.users.sort((a,b) => a.toString().localeCompare(b))
+             {props.users.users
+             .sort((a,b) => a.first_name.toString().localeCompare(b.first_name))
             // City/State Filter
             .filter(val => {
               if (searchCity === "") {
@@ -500,12 +501,16 @@ function UserList(props) {
               }
               return false;
             })
-            // Rating Filter
+            // Staff Rating Filter
             .filter(val => {
               if (searchRating === "") {
                 return val;
-              } else if (val.user_staff_rating.toLowerCase().includes(searchRating.toLowerCase())){
+              } else if (val.user_staff_rating.includes(searchRating)){
                 return val;
+              // } else if (val.user_staff_rating === null ) {
+              //   return val;
+            // } else if ((val.user_staff_rating === ("" || null))) {
+            //   return val;
               }
               return false;
             })
@@ -614,7 +619,7 @@ function UserList(props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state.users: ",state.users);
+  console.log("state.users: ",state.users);
   return {
     loading: state.loading,
     users: state.users,
