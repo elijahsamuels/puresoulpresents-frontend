@@ -320,7 +320,12 @@ const eventType = (eventData) => {
                 id={"event_date"}
                 align="center"
                 width="4%">
-                Event Date
+                  <Tooltip 
+                    placement="top" 
+                    title={"Search by abbreviated day of the week or number for date, month or year."}>
+                    <div>Event Date</div>
+                  </Tooltip>
+
                 <div>
                   <TextField
                     label="Filter"
@@ -337,7 +342,9 @@ const eventType = (eventData) => {
                 id={"event_location"} 
                 align="center" 
                 width="5%">
-                Location
+                  <Tooltip placement="top" title={"Search city with upper or lowercase. Search state by using upper case state abbreviation (CA, FL, TX, etc.)"}>
+                    <div>Location</div>
+                  </Tooltip>
                 <div>
                   <TextField
                     label="Filter"
@@ -556,9 +563,9 @@ const eventType = (eventData) => {
                   id={"event_" + event.id + "_primary_contact"}
                   key={"event_" + event.id + "_primary_contact"}
                 >
-                  {/* <Tooltip title={eventBioTooltip(event)}> */}
+                  <Tooltip title={<span><font color="white">{event.primary_contact_phone || "Missing phone"}</font></span>}>
                     <span>{eventPrimaryContact(event)}</span>
-                  {/* </Tooltip> */}
+                  </Tooltip>
                 </TableCell>
 
               </TableRow>
@@ -572,7 +579,7 @@ const eventType = (eventData) => {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state.events.events: ",state.events.events);
+  console.log("state.events.events: ",state.events.events);
   return {
     loading: state.loading,
     events: state.events.events,
