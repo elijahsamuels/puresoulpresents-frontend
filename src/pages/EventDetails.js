@@ -22,7 +22,7 @@ import * as yup from 'yup';
 
 function EventDetails(props) {
 
-  console.log(props.event)
+  // console.log(props.event)
   const eventid = props.match.params.id;
   const [eventData, setEventData] = useState(null);
 
@@ -46,7 +46,7 @@ function EventDetails(props) {
   }
 
   const showProgramIfConcert = () => {
-
+    
     function EventProgramReturn() {
       return <div>Event Program: {props.event.program ? props.event.program : <font color="red">Missing Program</font>}</div>
     }
@@ -104,7 +104,7 @@ function EventDetails(props) {
         loadingPosition="start"
         startIcon={<SaveIcon />}
         variant="contained"
-        // type="submit"
+        type="submit"
         >
          <Tooltip title="Nothing changed to save.">
           <span>Save</span>
@@ -128,6 +128,7 @@ function EventDetails(props) {
     }
 
   const onHandleSubmit = (data) => {
+    console.log(data);
     props.editEvent(data);
   }
   

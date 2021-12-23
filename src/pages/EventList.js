@@ -21,6 +21,7 @@ import { green } from '@mui/material/colors';
 import { blue } from '@mui/material/colors';
 import { orange } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
+import { yellow } from '@mui/material/colors';
 
 const green50 = green[50]
 const green100 = green[100]
@@ -30,6 +31,7 @@ const green400 = green[400]
 const blue50 = blue[50]
 const orange50 = orange[50]
 const red50 = red[50]
+const yellow50 = yellow[50]
 
 const useStyles = makeStyles({
   // table: {
@@ -100,16 +102,22 @@ function EventList(props) {
     switch (eventData.status) {
       case "Inquiry": 
       // return <font color="green">{eventData.status}</font>;
-        return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, borderRadius: 2  }}>{eventData.status}</Box>;
+        return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2 }}>{eventData.status}</Box>;
 
       case "Quote": 
         return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{eventData.status} Sent</Box>;
       
-      case "Negotiations": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "Tentative Booking": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${green50}`, bgcolor: green50, borderRadius: 2  }}>{eventData.status}</Box>;
+      
+      case "Tentative Expired": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${yellow50}`, bgcolor: yellow50, borderRadius: 2  }}>{eventData.status}</Box>;
+      
+      case "Awaiting Deposit": 
+        return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, bgcolor: green200, borderRadius: 2  }}>{eventData.status}</Box>;
       
       case "Confirmed": 
-        return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2  }}>{eventData.status}</Box>;
+        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
   
       case "Green Light": 
         return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
@@ -117,7 +125,6 @@ function EventList(props) {
       case "Completed": 
         return <Box sx={{ p: 0.8, border: `2px solid ${blue50}`, bgcolor: blue50, borderRadius: 2  }}>{eventData.status}</Box>;
         
-      case "TBD": return <font color="orange">{eventData.status}</font>;
       case "TBD": return <font color="orange">{eventData.status}</font>;
       
       case "Postponed": 
@@ -160,14 +167,15 @@ function EventList(props) {
 // if the event_type is wedding, list the event type but not program
 // else list the event type AND the program, if specified or "missing"
 
-const eventType = (eventData) => {
+  const eventType = (eventData) => {
     let missingItem = "Event Type";
     eventData.localItem = eventData.event_program;
 
     if (eventData.event_type){
       if (eventData.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate') ) {
-        return <div>{eventData.event_type}</div>
-      } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'conert')) {
+      // if (!eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') ) {
+        return <div>{eventData.event_type} <br /> Client Names Placeholder</div>
+      } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert')) {
         return <div>{eventData.event_type}<br /><em>{eventProgram(eventData)}</em></div> 
       }
     } else {
@@ -339,6 +347,8 @@ const eventType = (eventData) => {
                     size="small"
                     placeholder="Date filter..." 
                     onChange={(e) => {setSearchDate(e.target.value)}}
+                    autoComplete='off'
+
                   />
                 </div>
               </TableCell>
@@ -358,6 +368,8 @@ const eventType = (eventData) => {
                     size="small"
                     placeholder="Location filter..." 
                     onChange={(e) => {setSearchLocationText(e.target.value)}}
+                    autoComplete='off'
+
                   />
                 </div>
               </TableCell>
@@ -375,6 +387,8 @@ const eventType = (eventData) => {
                     size="small"
                     placeholder="Event Type filter..." 
                     onChange={(e) => {setSearchEventType(e.target.value)}}
+                    autoComplete='off'
+
                   />
                 </div>
               </TableCell>
@@ -400,6 +414,8 @@ const eventType = (eventData) => {
                     size="small"
                     placeholder="Inquiry filter..." 
                     onChange={(e) => {setSearchInquiryStatus(e.target.value)}}
+                    autoComplete='off'
+
                   />
                 </div>
 
@@ -428,6 +444,8 @@ const eventType = (eventData) => {
                     size="small"
                     placeholder="Contact filter..." 
                     onChange={(e) => {setSearchContactText(e.target.value)}}
+                    autoComplete='off'
+
                   />
                 </div>
               </TableCell>
