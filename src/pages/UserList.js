@@ -371,7 +371,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Name filter..." 
                     onChange={(e) => {setSearchName(e.target.value)}}
-                    autoComplete="disabled"
+                    autoComplete="off"
                   />
               </TableCell>
 
@@ -383,7 +383,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Rating filter..." 
                     onChange={(e) => {setSearchRating(e.target.value)}}
-                    autoComplete="disabled"
+                    autoComplete="off"
                   />
               </TableCell>
               <TableCell key={"phone"} id={"phone"} align="center" width="10%">
@@ -394,7 +394,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Phone filter..." 
                     onChange={(e) => {setSearchPhone(e.target.value)}}
-                    autoComplete="disabled"
+                    autoComplete="off"
                   />
               </TableCell>
               <TableCell key={"email"} id={"email"} align="center" width="10%">
@@ -405,7 +405,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Email filter..." 
                     onChange={(e) => {setSearchEmail(e.target.value)}}
-                    autoComplete="disabled"
+                    autoComplete="off"
                   />
               </TableCell>
               <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
@@ -416,7 +416,7 @@ function UserList(props) {
                     size="small"
                     placeholder="Instrument filter..." 
                     onChange={(e) => {setSearchInstrument(e.target.value)}}
-                    autoComplete="disabled"
+                    autoComplete="off"
                     disabled
                   />
               </TableCell>
@@ -428,7 +428,7 @@ function UserList(props) {
                     size="small"
                     placeholder="City filter..." 
                     onChange={(e) => {setSearchCity(e.target.value)}}
-                    autoComplete="disabled"
+                    autoComplete="off"
                   />
               </TableCell>
               <TableCell key={"bio"} bio={"bio"} align="center" height="10">
