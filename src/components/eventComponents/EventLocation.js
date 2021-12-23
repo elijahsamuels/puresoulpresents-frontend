@@ -78,12 +78,13 @@ function EventLocation (props) {
             >
               <MenuItem value="0" disabled><em>Status</em></MenuItem>
               <MenuItem value="Inquiry">1. Inquiry</MenuItem>
-              <MenuItem value="Quote">2. Quote Sent</MenuItem>
-              <MenuItem value="Negotiations">3. Negotiations</MenuItem>
-              <MenuItem value="Confirmed">4. Confirmed</MenuItem>
-              <MenuItem value="Green Light">5. Green Light</MenuItem>
-              <MenuItem value="Completed">6. Completed</MenuItem>
-              <MenuItem value="TBD" disabled>7. TBD</MenuItem>
+              {/* <MenuItem value="Negotiations">3. Negotiations</MenuItem> */}
+              <MenuItem value="Tentative Booking">2. Tentative Booking</MenuItem>
+              <MenuItem value="Tentative Expired">3. Tentative Expired</MenuItem>
+              <MenuItem value="Awaiting Deposit" >4. Awaiting Deposit</MenuItem>
+              <MenuItem value="Confirmed">5. Confirmed</MenuItem>
+              <MenuItem value="Green Light">6. Green Light</MenuItem>
+              <MenuItem value="Completed">7. Completed</MenuItem>
               <MenuItem value="TBD" disabled>8. TBD</MenuItem>
               <MenuItem value="Postponed">9. Postponed</MenuItem>
               <MenuItem value="Cancelled">10. Cancelled</MenuItem>
