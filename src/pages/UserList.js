@@ -20,6 +20,7 @@ import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 import { green } from '@mui/material/colors';
 // import { blue } from '@mui/material/colors';
@@ -87,7 +88,7 @@ function UserList(props) {
         //   handleClick(userData.id);
         // }}
       >
-        Edit
+        <SettingsIcon fontSize={"small"}/>
       </Button>
     );
   };
