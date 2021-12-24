@@ -8,7 +8,7 @@ import UserAddress from "../components/userComponents/UserAddress";
 import UserBio from "../components/userComponents/UserBio";
 import UserTaxInfo from "../components/userComponents/UserTaxInfo";
 import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
-import StaffInfo from "../components/userComponents/StaffInfo";
+import UserStaffInfo from "../components/userComponents/UserStaffInfo";
 import UserPhoto from "../components/userComponents/UserPhoto";
 import { fetchUserData, editUser } from "../actions/userActions";
 
@@ -113,7 +113,7 @@ const colorChangeLoadingButton = () => {
           <UserAddress />
           <UserBio />
           <UserPaymentInfo />
-          <StaffInfo />
+          <UserStaffInfo />
           <UserTaxInfo /> 
           <br />
           {colorChangeLoadingButton()}
