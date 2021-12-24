@@ -2,21 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchUserData, editUser } from "../../actions/userActions";
 import { Controller, useFormContext } from "react-hook-form";
-
+import UserStaffRating from "./UserStaffRating";
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
-function StaffInfo(props) {
+function UserStaffInfo(props) {
 
   const { control, formState: { errors }} = useFormContext({
     defaultValues: props.users.user
     });
 
   return (
-    <div className="staffInfo">
+    <div className="user-staff-info">
       <h3>PureSoul Staff Notes</h3>
 
       <Controller name="staff_notes" control={control} render={({ field }) => (
@@ -24,8 +24,8 @@ function StaffInfo(props) {
             {...field} 
             label="Staff Notes"
             variant="outlined" 
-            multiline={true}
             margin="dense"
+            multiline={true}
             minRows="4"
             maxRows="20"
             sx={{ ml: 0.5 }}
@@ -35,7 +35,7 @@ function StaffInfo(props) {
             />
         )}/>
 
-      <Controller name="nick_name" control={control} render={({ field }) => (
+      {/* <Controller name="nick_name" control={control} render={({ field }) => (
           <TextField 
             {...field} 
             label="Nick Name"
@@ -47,9 +47,12 @@ function StaffInfo(props) {
             error={!!errors.nick_name}
             helperText={errors.nick_name ? errors.nick_name.message : ""}
             />
-        )}/>
+        )}/> */}
 
-      <Controller name="user_staff_rating" control={control} render={({ field }) => (
+        <UserStaffRating />
+
+
+      {/* <Controller name="user_staff_rating" control={control} render={({ field }) => (
           <FormControl sx={{ ml: 0.5, mt: 1 }}>
           <InputLabel id="user_staff_rating">Rating</InputLabel>
           <Select
@@ -74,7 +77,7 @@ function StaffInfo(props) {
           <MenuItem value="0">0. Hidden - Blacklisted</MenuItem>
         </Select>
         </FormControl>
-        )}/>
+        )}/> */}
     </div>
   );
 }
@@ -87,4 +90,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUserData, editUser })(StaffInfo);
+export default connect(mapStateToProps, { fetchUserData, editUser })(UserStaffInfo);
