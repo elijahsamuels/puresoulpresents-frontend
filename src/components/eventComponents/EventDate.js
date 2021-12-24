@@ -49,13 +49,13 @@ function EventDate (props) {
   const [eventDate, setEventDate] = useState(props.event.event_date);
   // const [eventDate, setEventDate] = useState(new Date('2014-05-18T21:11:54'));
   // const [eventDate, setEventDate] = useState(Date(props.event.event_date));
-  console.log(eventDate)
-  console.log(props.event.event_date)
+  // console.log(eventDate)
+  // console.log(props.event.event_date)
   // const [eventDate, setEventDate] = useState(inputDateConverterYYYYMMDD(props.event.event_date));
 
   const handleChange = (newValue) => {
-    console.log("newValue.target.value:", newValue.target.value)
-    console.log("newValue:", newValue)
+    // console.log("newValue.target.value:", newValue.target.value)
+    // console.log("newValue:", newValue)
     setEventDate(newValue);
   };
 
@@ -76,7 +76,7 @@ function EventDate (props) {
           render={({ field }) => (
             <>
               <DatePicker
-                {...console.log(eventDate)}
+                // {...console.log(eventDate)}
                 value={outputDateConverterYYYYMMDD(eventDate) || ""}
                 onChange={(date) => {
                   field.onChange(date?.isValid ? date : "");

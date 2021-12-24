@@ -34,11 +34,11 @@ function EventNotes (props) {
       return <></>
     } else {
       return <Controller name="program" control={control} render={({ field }) => (
-        <TextField 
+        <TextField
         {...field}
         type="text"
-        label="Program" 
-        variant="outlined" 
+        label="Program"
+        variant="outlined"
         size="small"
         margin="dense"
         sx={{ ml: 0.5}}
@@ -64,10 +64,13 @@ function EventNotes (props) {
         <TextField 
           {...field}
           type="text"
-          label="Set List" 
-          variant="outlined" 
-          size="small"
+          label="Set List"
+          variant="outlined"
           margin="dense"
+          multiline={true}
+          minRows="4"
+          maxRows="20"
+          size="small"
           sx={{ ml: 0.5}}
           value={field.value || ''}
           error={!!errors.set_list}
@@ -79,10 +82,13 @@ function EventNotes (props) {
         <TextField 
           {...field}
           type="text"
-          label="Staff Notes" 
-          variant="outlined" 
-          size="small"
+          label="Staff Notes"
+          variant="outlined"
           margin="dense"
+          multiline={true}
+          minRows="4"
+          maxRows="20"
+          size="small"
           sx={{ ml: 0.5}}
           value={field.value || ''}
           error={!!errors.staff_notes}
@@ -96,8 +102,11 @@ function EventNotes (props) {
           type="text"
           label="Client Notes" 
           variant="outlined" 
-          size="small"
           margin="dense"
+          multiline={true}
+          minRows="4"
+          maxRows="20"
+          size="small"
           sx={{ ml: 0.5}}
           value={field.value || ''}
           error={!!errors.client_notes}

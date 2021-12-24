@@ -157,12 +157,12 @@ function EventDetails(props) {
 
       <FormProvider {...methods } >
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          <EventDate />
-          <EventLocation />
-          <EventContact />
+          {/* <EventDate /> */}
+          {/* <EventLocation /> */}
+          {/* <EventContact /> */}
           {/* <EventMusicians /> */}
-          <EventTimes />
-          <EventFinances />
+          {/* <EventTimes /> */}
+          {/* <EventFinances /> */}
           <EventNotes />
           <br />
           {colorChangeLoadingButton()}

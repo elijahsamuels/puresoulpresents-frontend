@@ -18,8 +18,8 @@ function UserBio(props) {
             {...field} 
             label="Bio"
             variant="outlined" 
-            multiline={true}
             margin="dense"
+            multiline={true}
             minRows="4"
             maxRows="20"
             sx={{ ml: 0.5}}
