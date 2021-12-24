@@ -29,7 +29,7 @@ function EventTypes () {
     let selectOptions = []
 
     for (let i = 0; i < Object.values(obj).length; i++){
-      selectOptions.push(<MenuItem value={Object.values(obj)[i]}>{Object.keys(obj)[i]}. {Object.values(obj)[i]}</MenuItem>)
+      selectOptions.push(<MenuItem key={Object.keys(obj)[i]} value={Object.values(obj)[i]}>{Object.keys(obj)[i]}. {Object.values(obj)[i]}</MenuItem>)
     }
     return selectOptions
   }
@@ -50,7 +50,7 @@ function EventTypes () {
             size="small"
             margin="dense"
           >
-            <MenuItem value="0" disabled><em>Event Type</em></MenuItem>
+            <MenuItem key='0' value="0" disabled><em>Event Type</em></MenuItem>
             {eventTypesFunction(eventTypesObject)}
           </Select>
         </FormControl>
