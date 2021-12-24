@@ -18,7 +18,31 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
+
+import { green } from '@mui/material/colors';
+// import { blue } from '@mui/material/colors';
+import { orange } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
+import { yellow } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
+
+const green50 = green[50]
+const green100 = green[100]
+const green200 = green[200]
+const green300 = green[300]
+const green400 = green[400]
+const green500 = green[500]
+const orange50 = orange[100]
+const yellow50 = yellow[100]
+const red100 = red[100]
+const red400 = red[400]
+const grey200 = grey[200]
+const grey500 = grey[500]
+const grey900 = grey[900] // Black
+
+
 
 const useStyles = makeStyles({
   // table: {
@@ -76,11 +100,52 @@ function UserList(props) {
 
   const userStaffRating = (userData) => {
 
-    if (userData.user_staff_rating === "1"){
-      return <font color="green"> {userData.user_staff_rating} </font>
-    } else if (userData.user_staff_rating > 1){
-      return <font color="red"> {userData.user_staff_rating} </font>
+    switch (userData.user_staff_rating) {
+
+      case "1": // Great
+        return <Box sx={{ p: 0.8, border: `2px solid ${green500}`, bgcolor: green500, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+
+      case "2": // Good
+        return <Box sx={{ p: 0.8, border: `2px solid ${green300}`, bgcolor: green300, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+
+      case "3": // Ok
+        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+
+      case "4": // Trainable
+        return <Box sx={{ p: 0.8, border: `2px solid ${yellow50}`, bgcolor: yellow50, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+
+      case "5": // Questionable
+        return <Box sx={{ p: 0.8, border: `2px solid ${orange50}`, bgcolor: orange50, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+
+      case "6": // Difficult
+        return <Box sx={{ p: 0.8, border: `2px solid ${red100}`, bgcolor: red100, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+        
+      case "7": // Bad
+        return <Box sx={{ p: 0.8, border: `2px solid ${red400}`, bgcolor: red400, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+        
+      case "8": // TBD
+        return <Box sx={{ p: 0.8, border: `2px solid ${green500}`, bgcolor: green500, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+        
+      case "9": // Hidden - Doesn't want gigs
+        return <Box sx={{ p: 0.8, border: `2px solid ${grey200}`, bgcolor: grey200, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+        
+      case "0": // Hidden - Blacklisted
+        return <Box sx={{ p: 0.8, border: `2px solid ${grey900}`, bgcolor: grey500, borderRadius: 2  }}>{userData.user_staff_rating}</Box>;
+                    
+      case null: // this is just error catching. Shouldn't receieve this value 
+        return <Box sx={{ p: 0.8, border: `2px solid ${grey200}`, bgcolor: grey200, borderRadius: 2  }}>Unknown</Box>;
+
+      default: return <font color="red">Error</font>;
+  
     }
+
+
+
+    // if (userData.user_staff_rating === "1"){
+    //   return <font color="green"> {userData.user_staff_rating} </font>
+    // } else if (userData.user_staff_rating > 1){
+    //   return <font color="red"> {userData.user_staff_rating} </font>
+    // }
     // let missingItem = "Staff Rating";
     // userData.localItem = userData.first_name + " " + userData.last_name;
     // return Object.values(userTernary(userData, missingItem));
@@ -348,7 +413,7 @@ function UserList(props) {
                 align="left"
                 width="10%"
               >
-                All Good?
+                <div>All Good?</div>
               </TableCell>
 
               {/* TODO: this ternary logic should be refactored to be reusable. */}
@@ -364,7 +429,7 @@ function UserList(props) {
                : "" }
 
               <TableCell key={"firstname"} id={"firstname"} align="center" width="10%">
-                Name
+                <div>Name</div>
                 <TextField
                     label="Filter"
                     id="outlined-size-small"
@@ -376,7 +441,7 @@ function UserList(props) {
               </TableCell>
 
               <TableCell key={"user_staff_rating"} id={"user_staff_rating"} align="center" width="10%">
-                  Staff Rating
+                  <div>Staff Rating</div>
                   <TextField
                     label="Filter"
                     id="outlined-size-small"
@@ -398,7 +463,7 @@ function UserList(props) {
                   />
               </TableCell>
               <TableCell key={"email"} id={"email"} align="center" width="10%">
-                Email
+                <div>Email</div>
                 <TextField
                     label="Filter"
                     id="outlined-size-small"
@@ -409,7 +474,7 @@ function UserList(props) {
                   />
               </TableCell>
               <TableCell key={"instrument"} id={"instrument"} align="center" width="10%">
-                Instrument
+                <div>Instrument</div>
                 <TextField
                     label="Filter"
                     id="outlined-size-small"
@@ -421,7 +486,7 @@ function UserList(props) {
                   />
               </TableCell>
               <TableCell key={"city"} id={"city"} align="center" width="10%">
-                City
+                <div>City</div>
                 <TextField
                     label="Filter"
                     id="outlined-size-small"
@@ -432,13 +497,13 @@ function UserList(props) {
                   />
               </TableCell>
               <TableCell key={"bio"} bio={"bio"} align="center" height="10">
-                Bio
+                <div>Bio</div>
               </TableCell>
               <TableCell key={"w9"} id={"w9"} align="center" width="5%">
-                W9
+                <div>W9</div>
               </TableCell>
               <TableCell key={"headshot"} id={"headshot"} align="center">
-                <span>Headshot</span>
+                <div>Headshot</div>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -503,14 +568,12 @@ function UserList(props) {
             })
             // Staff Rating Filter
             .filter(val => {
-              if (searchRating === "") {
-                return val;
-              } else if (val.user_staff_rating.includes(searchRating)){
-                return val;
-              // } else if (val.user_staff_rating === null ) {
-              //   return val;
-            // } else if ((val.user_staff_rating === ("" || null))) {
-            //   return val;
+              if (searchRating.trim() === "") {
+                  return val;
+              } else if (val.user_staff_rating?.includes(searchRating.trim())){
+                  return val;
+              } else if ((val.user_staff_rating === ("" || null)) && searchRating.toLowerCase().includes(..."unknown")) {
+                  return val;
               }
               return false;
             })
