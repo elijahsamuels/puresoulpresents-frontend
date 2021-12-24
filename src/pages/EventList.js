@@ -170,9 +170,8 @@ function EventList(props) {
   const eventType = (eventData) => {
     let missingItem = "Event Type";
     eventData.localItem = eventData.event_program;
-
     if (eventData.event_type){
-      if (eventData.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate') ) {
+      if (eventData.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate'|| 'showcase'|| 'other'|| 'tbd') ) {
       // if (!eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') ) {
         return <div>{eventData.event_type} <br /> Client Names Placeholder</div>
       } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert')) {
@@ -337,7 +336,7 @@ function EventList(props) {
                   <Tooltip 
                     placement="top" 
                     title={"Search by abbreviated day of the week or number for date, month or year."}>
-                    <div>Event Date</div>
+                    <div>Date</div>
                   </Tooltip>
 
                 <div>
@@ -379,7 +378,7 @@ function EventList(props) {
                 id={"event_type"} 
                 align="center" 
                 width="5%">
-                Type              
+                <div>Type/Program</div>            
                 <div>
                   <TextField
                     label="Filter"
@@ -398,7 +397,7 @@ function EventList(props) {
                 id={"event_payment_status"} 
                 align="center" 
                 width="1%">
-                Payment Status
+                <div>Payment Status</div>
               </TableCell>
 
               <TableCell 
@@ -406,7 +405,7 @@ function EventList(props) {
                 id={"event_inquiry_status"} 
                 align="center" 
                 width="1%">
-                Inquiry Status
+                <div>Inquiry Status</div>
                 <div>
                   <TextField
                     label="Filter"
@@ -426,7 +425,7 @@ function EventList(props) {
                 id={"event_band_size"} 
                 align="center" 
                 width="1%">
-                Band Size
+                <div>Band Size</div>
               </TableCell>
 
               {/* <Tooltip title={"Fix this later"} placement="top"> */}
@@ -436,17 +435,16 @@ function EventList(props) {
                 align="center" 
                 width="5%">
                 {/* <Tooltip title={eventPrimaryContactTooltip(event)}> */}
-                  Primary Contact
+                  <div>Primary Contact</div>
                   <div>
-                  <TextField
-                    label="Filter"
-                    id="outlined-size-small"
-                    size="small"
-                    placeholder="Contact filter..." 
-                    onChange={(e) => {setSearchContactText(e.target.value)}}
-                    autoComplete='off'
-
-                  />
+                    <TextField
+                      label="Filter"
+                      id="outlined-size-small"
+                      size="small"
+                      placeholder="Contact filter..." 
+                      onChange={(e) => {setSearchContactText(e.target.value)}}
+                      autoComplete='off'
+                    />
                 </div>
               </TableCell>
               {/* </Tooltip> */}
@@ -482,10 +480,8 @@ function EventList(props) {
                   return val;
                 } else if (val.event_type?.toLowerCase().includes(searchEventType.toLowerCase()) ||
                   val.program?.toLowerCase().includes(searchEventType.toLowerCase())) {
-              // console.log("step 2: ", !!val.event_type?.length)
                   return val;
                 } else if ((val.event_type === ("" || null)) && searchEventType.toLowerCase().includes(..."missing")) {
-              // console.log("step 3: ", !!val.event_type)
                   return val;
                 }
                 return false;
