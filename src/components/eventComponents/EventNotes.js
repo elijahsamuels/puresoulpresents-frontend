@@ -3,6 +3,11 @@ import { connect } from "react-redux";
 import { fetchEventData, editEvent } from "../../actions/eventActions";
 import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import EventTypes from "./EventTypes.js"
 
 function EventNotes (props) {
   const { control, formState: { errors }} = useFormContext({
@@ -53,69 +58,52 @@ function EventNotes (props) {
       </h3>
 
     {showProgramIfConcert()}
+    <EventTypes />
 
-      <Controller 
-        name="event_type" 
-        control={control} 
-        render={({ field }) => (
-          <TextField 
+      <Controller name="set_list" control={control} render={({ field }) => (
+        <TextField 
           {...field}
           type="text"
-          label="Event Type" 
+          label="Set List" 
           variant="outlined" 
           size="small"
           margin="dense"
           sx={{ ml: 0.5}}
           value={field.value || ''}
-          error={!!errors.event_type}
-          helperText={errors.event_type ? errors.event_type.message : ""}
-        />
-      )}/>
-
-      <Controller name="set_list" control={control} render={({ field }) => (
-        <TextField 
-        {...field}
-        type="text"
-        label="Set List" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        sx={{ ml: 0.5}}
-        value={field.value || ''}
-        error={!!errors.set_list}
-        helperText={errors.set_list ? errors.set_list.message : ""}
-        />
-      )}/>
+          error={!!errors.set_list}
+          helperText={errors.set_list ? errors.set_list.message : ""}
+          />
+        )}/>
 
       <Controller name="staff_notes" control={control} render={({ field }) => (
         <TextField 
-        {...field}
-        type="text"
-        label="Staff Notes" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        sx={{ ml: 0.5}}
-        value={field.value || ''}
-        error={!!errors.staff_notes}
-        helperText={errors.staff_notes ? errors.staff_notes.message : ""}
-        />
-      )}/>
+          {...field}
+          type="text"
+          label="Staff Notes" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5}}
+          value={field.value || ''}
+          error={!!errors.staff_notes}
+          helperText={errors.staff_notes ? errors.staff_notes.message : ""}
+          />
+        )}/>
 
       <Controller name="client_notes" control={control} render={({ field }) => (
         <TextField 
-        {...field}
-        type="text"
-        label="Client Notes" 
-        variant="outlined" 
-        size="small"
-        margin="dense"
-        sx={{ ml: 0.5}}
-        value={field.value || ''}
-        error={!!errors.client_notes}
-        helperText={errors.client_notes ? errors.client_notes.message : ""}
-        />
-      )}/>
+          {...field}
+          type="text"
+          label="Client Notes" 
+          variant="outlined" 
+          size="small"
+          margin="dense"
+          sx={{ ml: 0.5}}
+          value={field.value || ''}
+          error={!!errors.client_notes}
+          helperText={errors.client_notes ? errors.client_notes.message : ""}
+          />
+        )}/>
 
 
       {/* <div>{dateTimeEventCreated()}</div>
