@@ -15,6 +15,9 @@ import Paper from "@material-ui/core/Paper";
 import TextField from '@mui/material/TextField';
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
 import Box from '@mui/material/Box';
+// import { DataGrid } from '@mui/x-data-grid';
+
+import SettingsIcon from '@mui/icons-material/Settings';
 
 import Tooltip from "@mui/material/Tooltip";
 import { green } from '@mui/material/colors';
@@ -46,6 +49,17 @@ function EventList(props) {
   const [searchEventType, setSearchEventType] = useState("")
   const [searchDate, setSearchDate] = useState("")
   const [searchInquiryStatus, setSearchInquiryStatus] = useState("")
+  
+  const [eventCount, setEventCount] = useState(0)
+
+
+  // const eventCounter = (theEvent) => {
+  //   let count = 0
+  //   for (let i = 0; !!theEvent; i++){
+  //     count + 1
+  //     i++
+  //   }
+  // }
 
   const eventTernary = (eventData, missingItem) => {
     return eventData.localItem
@@ -70,7 +84,8 @@ function EventList(props) {
         //   handleClick(eventData.id);
         // }}
       >
-        Edit
+        <SettingsIcon fontSize={"small"}/>
+        {/* {"  ID: "}{eventData.id} */}
       </Button>
     );
   };
@@ -167,14 +182,15 @@ function EventList(props) {
 // if the event_type is wedding, list the event type but not program
 // else list the event type AND the program, if specified or "missing"
 
+// if ((eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') === "candlelight concert") && program)
+
   const eventType = (eventData) => {
     let missingItem = "Event Type";
     eventData.localItem = eventData.event_program;
     if (eventData.event_type){
       if (eventData.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate'|| 'showcase'|| 'other'|| 'tbd') ) {
-      // if (!eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') ) {
         return <div>{eventData.event_type} <br /> Client Names Placeholder</div>
-      } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert')) {
+      } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') ) {
         return <div>{eventData.event_type}<br /><em>{eventProgram(eventData)}</em></div> 
       }
     } else {
@@ -297,7 +313,6 @@ function EventList(props) {
     <div className="eventList">
       <h1 align="center">PureSoul Presents Events List</h1>
       {/* <button onClick={handleClick}>Next</button> */}
-
       <TableContainer
         key={"tableContainer"}
         id={"tableContainer"}
@@ -476,12 +491,13 @@ function EventList(props) {
               })
               // Event Type/Program Filter
               .filter(val => {
+                console.log(val)
                 if (searchEventType === "") {
                   return val;
                 } else if (val.event_type?.toLowerCase().includes(searchEventType.toLowerCase()) ||
                   val.program?.toLowerCase().includes(searchEventType.toLowerCase())) {
                   return val;
-                } else if ((val.event_type === ("" || null)) && searchEventType.toLowerCase().includes(..."missing")) {
+                } else if ((val.event_type?.includes("" || null)) || (val.program?.includes("" || null)) && searchEventType.toLowerCase().includes(..."missing")) {
                   return val;
                 }
                 return false;
@@ -505,7 +521,7 @@ function EventList(props) {
                 return false;
               })
               .map((event) => (
-
+                
               <TableRow
                 key={"event_" + event.id + "_row"}
                 id={"event_" + event.id + "_row"}
@@ -524,6 +540,7 @@ function EventList(props) {
                   id={"edit_" + event.id + "_event"}
                   key={"edit_" + event.id + "_event"}
                 >
+                  {/* <div>ID: {event.id}</div> */}
                   {editEventButton(event)}
                 </TableCell>
 
