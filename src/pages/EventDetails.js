@@ -157,12 +157,12 @@ function EventDetails(props) {
 
       <FormProvider {...methods } >
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          {/* <EventDate /> */}
-          {/* <EventLocation /> */}
-          {/* <EventContact /> */}
-          {/* <EventMusicians /> */}
-          {/* <EventTimes /> */}
-          {/* <EventFinances /> */}
+          <EventDate />
+          <EventLocation />
+          <EventContact />
+          <EventMusicians />
+          <EventTimes />
+          <EventFinances />
           <EventNotes />
           <br />
           {colorChangeLoadingButton()}
@@ -174,6 +174,7 @@ function EventDetails(props) {
       </FormProvider>
     </div>
   ) : (
+    {...console.log(props)},
     <LoadingCircularProgress />
   );
 }
