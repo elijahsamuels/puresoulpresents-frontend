@@ -8,6 +8,8 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
+// export {eventTypesSelectFunction}
+
 function EventTypes () {
   // const { control, formState: { errors }} = useFormContext({
   //   defaultValues: props.event,
@@ -25,11 +27,24 @@ function EventTypes () {
     9: "TBD"
   }
 
-  const eventTypesFunction = (obj) => {
+// const eventTypesReturnFunction = (eventTypeKey) => {
+// if (eventTypesObject.keys(eventTypeKey)) {
+//   return eventTypesObject.values()
+// }
+//   return false
+// }
+
+  const eventTypesSelectFunction = (eventObject) => {
+  // export function eventTypesSelectFunction(eventObject) {
     let selectOptions = []
 
-    for (let i = 0; i < Object.values(obj).length; i++){
-      selectOptions.push(<MenuItem key={Object.keys(obj)[i]} value={Object.values(obj)[i]}>{Object.keys(obj)[i]}. {Object.values(obj)[i]}</MenuItem>)
+    for (let i = 0; i < Object.values(eventObject).length; i++){
+      selectOptions.push(
+      <MenuItem 
+        key={Object.keys(eventObject)[i]} 
+        value={Object.keys(eventObject)[i]}>
+          {Object.keys(eventObject)[i]}. {Object.values(eventObject)[i]}
+      </MenuItem>)
     }
     return selectOptions
   }
@@ -51,7 +66,7 @@ function EventTypes () {
             margin="dense"
           >
             <MenuItem key='0' value="0" disabled><em>Event Type</em></MenuItem>
-            {eventTypesFunction(eventTypesObject)}
+            {eventTypesSelectFunction(eventTypesObject)}
           </Select>
         </FormControl>
       )}
