@@ -584,6 +584,7 @@ function UserList(props) {
                 key={"user_" + user.id + "_row"}
                 id={"user_" + user.id + "_row"}
               >
+                {console.log(user)}
                 <TableCell
                   key={"user_" + user.id + "_missingData"}
                   id={"user_" + user.id + "_missingData"}

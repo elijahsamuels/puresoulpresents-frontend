@@ -15,9 +15,11 @@ import Paper from "@material-ui/core/Paper";
 import TextField from '@mui/material/TextField';
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
 import Box from '@mui/material/Box';
+import eventTypesFunction from "../components/eventComponents/EventTypes"
 // import { DataGrid } from '@mui/x-data-grid';
 
 import SettingsIcon from '@mui/icons-material/Settings';
+
 
 import Tooltip from "@mui/material/Tooltip";
 import { green } from '@mui/material/colors';
@@ -51,7 +53,6 @@ function EventList(props) {
   const [searchInquiryStatus, setSearchInquiryStatus] = useState("")
   
   const [eventCount, setEventCount] = useState(0)
-
 
   // const eventCounter = (theEvent) => {
   //   let count = 0
@@ -115,38 +116,41 @@ function EventList(props) {
   const eventInquiryStatus = (eventData) => {
 
     switch (eventData.status) {
-      case "Inquiry": 
+      case "1": // Inquiry
       // return <font color="green">{eventData.status}</font>;
-        return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2 }}>{eventData.status}</Box>;
+        // return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2 }}>{eventData.status}</Box>;
+        {console.log(eventData.status)}
+        return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2 }}>Inquiry</Box>;
 
-      case "Quote": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>{eventData.status} Sent</Box>;
+      case "2": // Quote
+        return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>Quote</Box>;
       
-      case "Tentative Booking": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green50}`, bgcolor: green50, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "3": // Tentative Booking
+        return <Box sx={{ p: 0.8, border: `2px solid ${green50}`, bgcolor: green50, borderRadius: 2  }}>Tentative Booking</Box>;
       
-      case "Tentative Expired": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${yellow50}`, bgcolor: yellow50, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "4": // Tentative Expired
+        return <Box sx={{ p: 0.8, border: `2px solid ${yellow50}`, bgcolor: yellow50, borderRadius: 2  }}>Tentative Expired</Box>;
       
-      case "Awaiting Deposit": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, bgcolor: green200, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "5": // Awaiting Deposit
+        return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, bgcolor: green200, borderRadius: 2  }}>Awaiting Deposit</Box>;
       
-      case "Confirmed": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "6": // Confirmed
+        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>Confirmed</Box>;
   
-      case "Green Light": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "7": // Green Light
+        return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>Green Light</Box>;
         
-      case "Completed": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${blue50}`, bgcolor: blue50, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "8": // Completed
+        return <Box sx={{ p: 0.8, border: `2px solid ${blue50}`, bgcolor: blue50, borderRadius: 2  }}>Completed</Box>;
         
-      case "TBD": return <font color="orange">{eventData.status}</font>;
+      case "9": // TBD
+        return <Box sx={{ p: 0.8, border: `2px solid ${orange50}`, borderRadius: 2  }}>TBD</Box>;
       
-      case "Postponed": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${orange50}`, bgcolor: orange50, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "10": // Postponed
+        return <Box sx={{ p: 0.8, border: `2px solid ${orange50}`, bgcolor: orange50, borderRadius: 2  }}>Postponed</Box>;
       
-      case "Cancelled": 
-        return <Box sx={{ p: 0.8, border: `2px solid ${red50}`, bgcolor: red50, borderRadius: 2  }}>{eventData.status}</Box>;
+      case "11": // Cancelled
+        return <Box sx={{ p: 0.8, border: `2px solid ${red50}`, bgcolor: red50, borderRadius: 2  }}>Cancelled</Box>;
 
       default: return <font color="red">Unknown</font>;
   
@@ -155,12 +159,17 @@ function EventList(props) {
 
   const eventBandSize = (eventData) => {
     let missingItem = "Missing Musicians";
-    let musicianCount = eventData.users.length
+    let musicianCount = eventData.users?.length || 0
     // return Object.values(eventTernary(eventData, missingItem));
+    console.log(eventData.band_size)
+
+    // if (musicianCount === undefined) 
+    // return
 
     if (musicianCount < eventData.band_size) {
-      
       return <font color="red">{musicianCount}<br />(Need {eventData.band_size - musicianCount})</font>;
+    } else if (eventData.band_size == null) {
+      return <font color="red">Band size missing</font>;
     } else {
       return <font color="green">{eventData.band_size}<br />Complete</font>;
     }
