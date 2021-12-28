@@ -66,9 +66,6 @@ function EventLocation (props) {
             <InputLabel id="status">Status</InputLabel>
             <Select
               {...field}
-              // onChange={e => setStatus(e.target.value)}
-              // value={status} // this works to change the value of the select (and number of musicians), but changes between controlled to uncontrolled. Boo!
-              // renderValue={() => status}
               label="Status"
               id="status"
               variant="outlined"
