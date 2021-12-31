@@ -8,25 +8,10 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import UserRatingObject from '../../dictionaries/UserRatingObject';
 
 function UserStaffRating() {
-
-  // const { control, formState: { errors }} = useFormContext({
-  //   defaultValues: props.users.user
-  //   });
-
-    const userRatingObject = {
-      1: "Great",
-      2: "Good",
-      3: "Ok",
-      4: "Trainable",
-      5: "Questionable",
-      6: "Difficult",
-      7: "Bad",
-      8: "Hidden - Doesn't want gigs",
-      9: "Hidden - Blacklisted"
-    }
-
+    
     const userRatingFunction = (userObject) => {
       let selectOptions = []
   
@@ -59,7 +44,7 @@ function UserStaffRating() {
               sx={{ minWidth: 120 }}
             >
             <MenuItem key='0' value="0" disabled><em>Select Rating</em></MenuItem>
-              {userRatingFunction(userRatingObject)}
+              {userRatingFunction(UserRatingObject)}
 
           </Select>
         </FormControl>
@@ -68,13 +53,4 @@ function UserStaffRating() {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     loading: state.loading,
-//     users: state.users,
-//     user: state.user,
-//   };
-// };
-
 export default UserStaffRating;
-// export default connect(mapStateToProps, { fetchUserData, editUser })(UserStaffRating);
