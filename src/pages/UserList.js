@@ -21,6 +21,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
 import SettingsIcon from '@mui/icons-material/Settings';
+import InstrumentNameReturn from "../components/staticComponents/InstrumentNameReturn"
 
 import { green } from '@mui/material/colors';
 // import { blue } from '@mui/material/colors';
@@ -42,8 +43,6 @@ const red400 = red[400]
 const grey200 = grey[200]
 const grey500 = grey[500]
 const grey900 = grey[900] // Black
-
-
 
 const useStyles = makeStyles({
   // table: {
@@ -184,7 +183,7 @@ function UserList(props) {
 
   const userInstrument = (userData) => {
     let missingItem = "Instrument";
-    userData.localItem = userData.instrument;
+    userData.localItem = InstrumentNameReturn(userData.user_instrument_primary?.instrument_id);
     return Object.values(userTernary(userData, missingItem));
   };
 
@@ -483,7 +482,7 @@ function UserList(props) {
                     placeholder="Instrument filter..." 
                     onChange={(e) => {setSearchInstrument(e.target.value)}}
                     autoComplete="off"
-                    disabled
+                    // disabled
                   />
               </TableCell>
               <TableCell key={"city"} id={"city"} align="center" width="10%">
@@ -515,7 +514,7 @@ function UserList(props) {
              .sort((a,b) => a.first_name.toString().localeCompare(b.first_name))
             // City/State Filter
             .filter(val => {
-              if (searchCity === "") {
+              if (searchCity.trim() === "") {
                 return val;
               } else if (val.city.toLowerCase().includes(searchCity.toLowerCase()) ||
               val.state.toLowerCase().includes(searchCity.toLowerCase())){
@@ -526,19 +525,23 @@ function UserList(props) {
               return false;
             })
             // Instrument Filter
+
+            // InstrumentNameReturn(userData.user_instrument_primary?.instrument_id)
             .filter(val => {
-              if (searchInstrument === "") {
+              if (searchInstrument.trim() === "") {
+                // console.log("inst val: ", InstrumentNameReturn(val.user_instrument_primary?.instrument_id))
+                console.log("inst val: ", InstrumentNameReturn(val.user_instrument_primary?.instrument_id))
                 return val;
-              } else if (val.instrument.toLowerCase().includes(searchInstrument.toLowerCase())){
+              } else if (val.user_instrument_primary?.instrument_id.toLowerCase().includes(searchInstrument.toLowerCase())){
                 return val;
-              } else if (val.instrument === "") {
+              } else if (val.user_instrument_primary?.instrument_id === null) {
                 return val;
               }
               return false;
             })
             // Phone Filter
             .filter(val => {
-              if (searchPhone === "") {
+              if (searchPhone.trim() === "") {
                 return val;
               } else if (val.phone.toLowerCase().includes(searchPhone.toLowerCase())){
                 return val;
@@ -549,7 +552,7 @@ function UserList(props) {
             })
             // Email Filter
             .filter(val => {
-              if (searchEmail === "") {
+              if (searchEmail.trim() === "") {
                 return val;
               } else if (val.email.toLowerCase().includes(searchEmail.toLowerCase())){
                 return val;
@@ -560,7 +563,7 @@ function UserList(props) {
             })
             // Name Filter
             .filter(val => {
-              if (searchName === "") {
+              if (searchName.trim() === "") {
                 return val;
               } else if (val.first_name.toLowerCase().includes(searchName.toLowerCase()) || val.last_name.toLowerCase().includes(searchName.toLowerCase())){
                 return val;
@@ -584,7 +587,7 @@ function UserList(props) {
                 key={"user_" + user.id + "_row"}
                 id={"user_" + user.id + "_row"}
               >
-                {console.log(user)}
+                {/* {console.log(user)} */}
                 <TableCell
                   key={"user_" + user.id + "_missingData"}
                   id={"user_" + user.id + "_missingData"}
@@ -684,7 +687,7 @@ function UserList(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log("state.users: ",state.users);
+  // console.log("state.users: ",state.users);
   return {
     loading: state.loading,
     users: state.users,
