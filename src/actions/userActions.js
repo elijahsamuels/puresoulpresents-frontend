@@ -1,6 +1,6 @@
 // export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
 
-// Fetch all user data
+// Fetch all users data
 export const fetchUsersList = () => {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
@@ -92,6 +92,19 @@ export function createNewUser (user) {
     });
   }
 }
+
+// Fetch a single user events data with async/await
+export const fetchUserEventsData = (userid) => {
+  return async (dispatch) => {
+    dispatch({ type: "LOADING", payload: true });
+    const response = await fetch(`http://localhost:3000/users/${userid}`)
+    const data = await response.json()
+    // console.log("userActions/fetchUserData data", data)
+    dispatch({ type: "GET_USER_EVENTS", user_events: data.events })
+    // .catch((error) => console.log(error));
+  }
+};
+
 
 
 // Fetch a single user data
