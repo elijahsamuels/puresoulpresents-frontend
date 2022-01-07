@@ -1,42 +1,63 @@
 import React from "react";
-import { connect } from "react-redux";
-import { fetchUserData, editUser } from "../../actions/userActions";
-import { Controller, useFormContext } from "react-hook-form";
-import TextField from '@mui/material/TextField';
+import { Controller } from "react-hook-form";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import InstrumentDictionary from '../../dictionaries/InstrumentDictionary';
 
-function UserInstrument(props) {
+// import { connect } from "react-redux";
+// import { fetchUserData, editUser } from "../../actions/userActions";
+// import { useFormContext } from "react-hook-form";
+// import TextField from '@mui/material/TextField';
 
-  const {control, formState: { errors }} = useFormContext({
-    defaultValues: props.users.user
-  });
+function UserInstrument() {
+  // const {control, formState: { errors }} = useFormContext({
+  //   defaultValues: props.users.user
+  // });
+
+  const userInstrumentFunction = (dictionary) => {
+    let selectOptions = []
+
+    for (let i = 0; i < Object.values(dictionary).length; i++){
+      selectOptions.push( 
+      <MenuItem 
+        key={Object.keys(dictionary)[i]} 
+        value={parseInt(Object.keys(dictionary)[i])}>
+          {Object.keys(dictionary)[i]}. {Object.values(dictionary)[i]}
+      </MenuItem>)
+    }
+    return selectOptions
+  }
 
   return (
-    <div className="user-instrument">
+    <span className="instrument">
         
-        <Controller name="user_instrument_primary" control={control} render={({ field }) => (
-          <TextField 
-            {...field} 
-            label="User Instrument Primary"
-            variant="outlined" 
-            size="small"
-            margin="dense"
-            sx={{ ml: 0.5}}
-            value={field.value?.instrument_id || ''}
-            error={!!errors.user_instrument_primary}
-            helperText={errors.user_instrument_primary ? errors.user_instrument_primary.message : ""}
-            />
-        )}/>
+      <Controller 
+        {...console.log()}
+        name="instrument" 
+        // control={control} 
+        render={({ field }) => (
+          <FormControl sx={{ ml: 0.5, mt: 1 }}>
+            <InputLabel id="instrument">Primary Instrument</InputLabel>
+            <Select
+              {...field}
+              label="instrument"
+              id="instrument"
+              variant="outlined"
+              size="small"
+              value={field.value || ""}
+              margin="dense"
+              sx={{ minWidth: 150 }}
+            >
+            <MenuItem key='0' value="0" disabled><em>Select Instrument</em></MenuItem>
+              {userInstrumentFunction(InstrumentDictionary)}
+          </Select>
+        </FormControl>
 
-    </div>
+      )}/>
+    </span>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loading: state.loading,
-    users: state.users,
-    user: state.user,
-  };
-};
-
-export default connect(mapStateToProps, { fetchUserData, editUser })(UserInstrument);
+export default UserInstrument;
