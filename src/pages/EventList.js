@@ -17,7 +17,7 @@ import LoadingCircularProgress from '../components/staticComponents/LoadingCircu
 import Box from '@mui/material/Box';
 import eventTypesFunction from "../components/eventComponents/EventTypes"
 // import { DataGrid } from '@mui/x-data-grid';
-
+import EventDictionary from "../../src/dictionaries/EventDictionary";
 import SettingsIcon from '@mui/icons-material/Settings';
 
 
@@ -116,40 +116,50 @@ function EventList(props) {
   const eventInquiryStatus = (eventData) => {
 
     switch (eventData.status) {
-      case "1": // Inquiry
+      case "Inquiry": // Inquiry
+      // case "1": // Inquiry
       // return <font color="green">{eventData.status}</font>;
         // return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2 }}>{eventData.status}</Box>;
-        {console.log(eventData.status)}
         return <Box sx={{ p: 0.8, border: '2px dashed green', borderRadius: 2 }}>Inquiry</Box>;
 
-      case "2": // Quote
+        // case "2": // Quote
+      case "Quote": // Quote
         return <Box sx={{ p: 0.8, border: `2px solid ${green100}`, bgcolor: green100, borderRadius: 2  }}>Quote</Box>;
       
-      case "3": // Tentative Booking
+      // case "3": // Tentative Booking
+      case "Tentative Booking": // Tentative Booking
         return <Box sx={{ p: 0.8, border: `2px solid ${green50}`, bgcolor: green50, borderRadius: 2  }}>Tentative Booking</Box>;
       
-      case "4": // Tentative Expired
+      // case "4": // Tentative Expired
+      case "Tentative Expired": // Tentative Expired
         return <Box sx={{ p: 0.8, border: `2px solid ${yellow50}`, bgcolor: yellow50, borderRadius: 2  }}>Tentative Expired</Box>;
       
-      case "5": // Awaiting Deposit
+      // case "5": // Awaiting Deposit
+      case "Awaiting Deposit": // Awaiting Deposit
         return <Box sx={{ p: 0.8, border: `2px solid ${green200}`, bgcolor: green200, borderRadius: 2  }}>Awaiting Deposit</Box>;
       
-      case "6": // Confirmed
+      // case "6": // Confirmed
+      case "Confirmed": // Confirmed
         return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>Confirmed</Box>;
   
-      case "7": // Green Light
+      // case "7": // Green Light
+      case "Green Light": // Green Light
         return <Box sx={{ p: 0.8, border: `2px solid ${green400}`, bgcolor: green400, borderRadius: 2  }}>Green Light</Box>;
         
-      case "8": // Completed
+      // case "8": // Completed
+      case "Completed": // Completed
         return <Box sx={{ p: 0.8, border: `2px solid ${blue50}`, bgcolor: blue50, borderRadius: 2  }}>Completed</Box>;
         
-      case "9": // TBD
+      // case "9": // TBD
+      case "TBD": // TBD
         return <Box sx={{ p: 0.8, border: `2px solid ${orange50}`, borderRadius: 2  }}>TBD</Box>;
       
-      case "10": // Postponed
+      // case "10": // Postponed
+      case "Postponed": // Postponed
         return <Box sx={{ p: 0.8, border: `2px solid ${orange50}`, bgcolor: orange50, borderRadius: 2  }}>Postponed</Box>;
       
-      case "11": // Cancelled
+      // case "11": // Cancelled
+      case "Cancelled": // Cancelled
         return <Box sx={{ p: 0.8, border: `2px solid ${red50}`, bgcolor: red50, borderRadius: 2  }}>Cancelled</Box>;
 
       default: return <font color="red">Unknown</font>;
@@ -161,7 +171,7 @@ function EventList(props) {
     let missingItem = "Missing Musicians";
     let musicianCount = eventData.users?.length || 0
     // return Object.values(eventTernary(eventData, missingItem));
-    console.log(eventData.band_size)
+    // console.log(eventData.band_size)
 
     // if (musicianCount === undefined) 
     // return
@@ -193,20 +203,69 @@ function EventList(props) {
 
 // if ((eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') === "candlelight concert") && program)
 
-  const eventType = (eventData) => {
-    let missingItem = "Event Type";
-    eventData.localItem = eventData.event_program;
-    if (eventData.event_type){
-      if (eventData.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate'|| 'showcase'|| 'other'|| 'tbd') ) {
-        return <div>{eventData.event_type} <br /> Client Names Placeholder</div>
-      } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') ) {
-        return <div>{eventData.event_type}<br /><em>{eventProgram(eventData)}</em></div> 
-      }
-    } else {
-      return Object.values(eventTernary(eventData, missingItem));
+  // const eventType = (eventData) => {
+  //   let missingItem = "Event Type";
+  //   eventData.localItem = eventData.event_program;
+  //   if (eventData.event_type){
+  //     if (eventData.event_type.toLowerCase().includes('wedding' || 'private' || 'corporate'|| 'showcase'|| 'other'|| 'tbd') ) {
+  //       return <div>{eventData.event_type} <br />Client Names Placeholder</div>
+  //     } else if (eventData.event_type.toLowerCase().includes(...'candlelight', ...'concert') ) {
+  //       return <div>{eventData.event_type}<br /><em>{eventProgram(eventData)}</em></div> 
+  //     }
+  //   } else {
+  //     return Object.values(eventTernary(eventData, missingItem));
+  //   }
+  //   return false
+  // }
+  
+  const eventTypeKeyToValue = (eventDataEventType) => {
+    
+
+    // console.log(Object.keys(EventDictionary).map(key => EventDictionary[key])),
+    // Object.entries(EventDictionary).map(([key, value]) => return)
+
+    return Object.keys(EventDictionary).map(key => EventDictionary[key])
+    
     }
-    return false
+
+  const eventType = (eventData) => {
+    
+    switch (eventData.event_type) {
+    
+      case "1": // Wedding
+      return "Inquiry"
+      
+      case "2": // Corporate
+      return "Corporate"
+      
+      case "3": // Candlelight Concert
+      return "Candlelight Concert"
+      
+      case "4": // Concert
+      return "Concert"
+      
+      case "5": // Showcase
+      return "Showcase"
+      
+      case "6": // Other
+      return "Other"
+      
+      case "7": // TBD
+      return "TBD"
+      
+      case "8": // TBD
+      return "TBD"
+      
+      case "9": // TBD
+      return "TBD"
+      
+      default: 
+      return <font color="red">Unknown</font>;
+
+    }
   }
+      
+    
 
   const eventProgram = (eventData) => {
     let missingItem = "Event Program";
@@ -478,6 +537,7 @@ function EventList(props) {
           <TableBody key={"table_body"} id={"table_body"}>
             {props.events
               .sort((a,b) => a.primary_contact_first_name - b.primary_contact_first_name)
+              
               // Location Filter
               .filter(val => {
                 if (searchLocationText === "") {
@@ -488,6 +548,7 @@ function EventList(props) {
                 }
                 return false;
               })
+
               // Primary Contact Name Filter
               .filter(val => {
                 if (searchContactText === "") {
@@ -498,19 +559,20 @@ function EventList(props) {
                 }
                 return false;
               })
+
               // Event Type/Program Filter
               .filter(val => {
-                console.log(val)
                 if (searchEventType === "") {
+                  console.log(eventType(val))
                   return val;
-                } else if (val.event_type?.toLowerCase().includes(searchEventType.toLowerCase()) ||
-                  val.program?.toLowerCase().includes(searchEventType.toLowerCase())) {
-                  return val;
-                } else if ((val.event_type?.includes("" || null)) || (val.program?.includes("" || null)) && searchEventType.toLowerCase().includes(..."missing")) {
-                  return val;
+                } else if (eventType(val).toLowerCase().includes(searchEventType.toLowerCase())) {
+                  console.log(eventType(val))
+                  return val
                 }
-                return false;
+
+                return false
               })
+
               // Date Filter
               .filter(val => {
                 if (searchDate === "") {
@@ -520,6 +582,7 @@ function EventList(props) {
                 }
                 return false;
               })
+
               // Inquiry Status Filter
               .filter(val => {
                 if (searchInquiryStatus === "") {
@@ -575,6 +638,8 @@ function EventList(props) {
                   key={"event_" + event.id + "_type"}
                 >
                   {eventType(event)}
+                  {console.log("event.event_type:", event.event_type)}
+                  {/* {eventType(event), console.log("event.event_type", event.event_type)} */}
                 </TableCell>
 
                 <TableCell
