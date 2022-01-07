@@ -1,8 +1,8 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-// import { connect } from "react-redux";
-// import { fetchUserData, editUser } from "../../actions/userActions";
-// import { useFormContext } from "react-hook-form";
+  // import { connect } from "react-redux";
+  // import { fetchUserData, editUser } from "../../actions/userActions";
+  // import { useFormContext } from "react-hook-form";
 
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -12,15 +12,16 @@ import UserRatingObject from '../../dictionaries/UserRatingObject';
 
 function UserStaffRating() {
     
-    const userRatingFunction = (userObject) => {
+    const userRatingFunction = (dictionary) => {
       let selectOptions = []
-  
-      for (let i = 0; i < Object.values(userObject).length; i++){
+      // console.log("userRatingFunction/dictionary: ", dictionary)
+
+      for (let i = 0; i < Object.values(dictionary).length; i++){
         selectOptions.push( 
         <MenuItem 
-          key={Object.keys(userObject)[i]} 
-          value={Object.keys(userObject)[i]}>
-            {Object.keys(userObject)[i]}. {Object.values(userObject)[i]}
+          key={Object.keys(dictionary)[i]} 
+          value={Object.keys(dictionary)[i]}>
+            {Object.keys(dictionary)[i]}. {Object.values(dictionary)[i]}
         </MenuItem>)
       }
       return selectOptions
