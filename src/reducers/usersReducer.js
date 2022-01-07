@@ -64,6 +64,10 @@ const usersReducer = (state = initialState, action) => {
     case "GET_USER":
       return { ...state, loading: false, user: action.user };
 
+    case "GET_USER_EVENTS":
+      // console.log("action.user_events:", action.user_events)
+      return { ...state, loading: false, user_events: action.user_events };
+
     case "EDIT_USER":
       return { ...state, loading: false, user: action.user };
 
