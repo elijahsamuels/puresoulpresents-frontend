@@ -6,6 +6,7 @@ import EventDetails from "./pages/EventDetails";
 import EventList from "./pages/EventList";
 import UserDetails from "./pages/UserDetails";
 import UserList from "./pages/UserList";
+import UserGigList from "./pages/UserGigList";
 import CreateUser from "./pages/CreateUser";
 import Contact from "./pages/Contact";
 import Index from "./pages/Index";
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/eventlist" component={EventList} />
           <Route exact path="/createevent" component={CreateEvent} />
           <Route exact path="/users/:id/" component={UserDetails} />
+          <Route exact path="/users/:id/events" component={UserGigList} />
           <Route exact path="/userlist" component={UserList} />
           <Route exact path="/createuser" component={CreateUser} />
           <Route exact path="/contact" component={Contact} />
