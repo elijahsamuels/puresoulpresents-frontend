@@ -65,13 +65,11 @@ function UserList(props) {
   const userTernary = (userData, missingItem) => {
     return userData.localItem
       ? { true: userData.localItem }
-      : {
-          false: (
+      : { false: (
             <font color="red" key={"items_missing_for_user_" + userData.id}>
               Missing {missingItem}
             </font>
-          ),
-        };
+        )};
   };
 
   const editUserButton = (userData) => {
@@ -183,7 +181,7 @@ function UserList(props) {
 
   const userInstrument = (userData) => {
     let missingItem = "Instrument";
-    userData.localItem = InstrumentNameReturn(userData.user_instrument_primary?.instrument_id);
+    userData.localItem = InstrumentNameReturn(userData.instrument);
     return Object.values(userTernary(userData, missingItem));
   };
 
@@ -511,7 +509,7 @@ function UserList(props) {
           <TableBody key={"table_body"} id={"table_body"}>
             {/* {(localUsers || props.users.users).sort((a,b) => a.toString().localeCompare(b)) */}
              {props.users.users
-             .sort((a,b) => a.first_name.toString().localeCompare(b.first_name))
+            //  .sort((a,b) => a.first_name.toString().localeCompare(b.first_name))
             // City/State Filter
             .filter(val => {
               if (searchCity.trim() === "") {
@@ -525,19 +523,35 @@ function UserList(props) {
               return false;
             })
             // Instrument Filter
+                // console.log("inst val: ", InstrumentNameReturn(val.user_instrument_primary?.instrument_id)?.toLowerCase())
 
-            // InstrumentNameReturn(userData.user_instrument_primary?.instrument_id)
             .filter(val => {
+              // if val is empty
               if (searchInstrument.trim() === "") {
-                // console.log("inst val: ", InstrumentNameReturn(val.user_instrument_primary?.instrument_id))
-                console.log("inst val: ", InstrumentNameReturn(val.user_instrument_primary?.instrument_id))
-                return val;
-              } else if (val.user_instrument_primary?.instrument_id.toLowerCase().includes(searchInstrument.toLowerCase())){
-                return val;
-              } else if (val.user_instrument_primary?.instrument_id === null) {
                 return val;
               }
-              return false;
+              if (InstrumentNameReturn(val.instrument)?.toLowerCase().includes(searchInstrument.toLowerCase())) {
+                return val;
+              }
+              // if (val.user_instrument_primary?.instrument_id === undefined) {
+              //   return val;
+              // }
+
+
+              // if (searchInstrument.trim() === "") {
+              //   return val;
+              //   // if val incluedes the instrument name
+              // } else if ((!val.user_instrument_primary?.instrument_id === false) && (InstrumentNameReturn(val.user_instrument_primary?.instrument_id)?.toLowerCase().includes(searchInstrument.toLowerCase()))){
+              //   console.log("value should be present")
+              //   return val;
+              //   // if val is missing (undefined)
+              // } else if (!val.user_instrument_primary?.instrument_id) {
+              //   // console.log("test: ", !val.user_instrument_primary?.instrument_id)
+              //   console.log("value should be missing")
+              // // } else if (InstrumentNameReturn(val.user_instrument_primary.instrument_id) === undefined) {
+              //   return val;
+              // }
+              // return false;
             })
             // Phone Filter
             .filter(val => {
@@ -687,7 +701,7 @@ function UserList(props) {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("state.users: ",state.users);
+  console.log("state.users: ",state.users);
   return {
     loading: state.loading,
     users: state.users,
