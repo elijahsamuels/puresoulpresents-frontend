@@ -62,7 +62,7 @@ function EventInquiryStatus () {
     name="status" 
     control={control} 
     render={({ field }) => (
-    <span>
+    <React.Fragment>
       <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 200 }}>
         <InputLabel id="status">Status</InputLabel>
         <Select
@@ -88,7 +88,7 @@ function EventInquiryStatus () {
           <MenuItem value="Cancelled">10. Cancelled</MenuItem>
         </Select>
       </FormControl>
-    </span>
+    </React.Fragment>
     )}/>
     
     );
