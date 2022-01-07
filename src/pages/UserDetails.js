@@ -10,6 +10,7 @@ import UserTaxInfo from "../components/userComponents/UserTaxInfo";
 import UserPaymentInfo from "../components/userComponents/UserPaymentInfo";
 import UserStaffInfo from "../components/userComponents/UserStaffInfo";
 import UserPhoto from "../components/userComponents/UserPhoto";
+import UserInstrument from "../components/userComponents/UserInstrument";
 import { fetchUserData, editUser } from "../actions/userActions";
 
 import LoadingCircularProgress from '../components/staticComponents/LoadingCircularProgress.js';
@@ -19,7 +20,6 @@ import Tooltip from '@mui/material/Tooltip';
 // import { styled } from '@mui/material/styles';
 // import Button from '@mui/material/Button';
 
-
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup';
@@ -28,6 +28,8 @@ function UserDetails(props) {
   const userFullName = `${props.users.user.first_name} ${props.users.user.last_name}`;
   const userid = props.match.params.id;
   const [userData, setUserData] = useState(null);
+
+  console.log(props.users.user)
 
   const lastUpdatedDateTime = () => {
     let dateTime = props.users.user.updated_at
@@ -58,34 +60,34 @@ function UserDetails(props) {
   // }, [props.users.user]);
   }, [methods, props.users.user]);
 
-const colorChangeLoadingButton = () => {
-    if (methods.formState.isDirty === false) {
-      // disable the save button. Prevents unnecessary API calls
-    return <LoadingButton
-      color="primary"
-      disableRipple={true}
-      loadingPosition="start"
-      startIcon={<SaveIcon />}
-      variant="contained"
-      // type="submit"
-      >
-       <Tooltip title="Nothing changed to save.">
-        <span>Save</span>
-      </Tooltip>
-      </LoadingButton>
-  } else {
-    return <LoadingButton
-      color="error"
-      disableRipple={true}
-      loadingPosition="start"
-      startIcon={<SaveIcon />}
-      variant="contained"
-      type="submit"
-      >
-      Save
-      </LoadingButton>
+  const colorChangeLoadingButton = () => {
+      if (methods.formState.isDirty === false) {
+        // disable the save button. Prevents unnecessary API calls
+      return <LoadingButton
+        color="primary"
+        disableRipple={true}
+        loadingPosition="start"
+        startIcon={<SaveIcon />}
+        variant="contained"
+        // type="submit"
+        >
+        <Tooltip title="Nothing changed to save.">
+          <span>Save</span>
+        </Tooltip>
+        </LoadingButton>
+    } else {
+      return <LoadingButton
+        color="error"
+        disableRipple={true}
+        loadingPosition="start"
+        startIcon={<SaveIcon />}
+        variant="contained"
+        type="submit"
+        >
+        Save
+        </LoadingButton>
+      }
     }
-  }
 
   const onHandleSubmit = (data) => {
     // Do something with the data
@@ -97,24 +99,29 @@ const colorChangeLoadingButton = () => {
   //   display: 'none',
   // });
 
-  
   return !!props.users.user ? (
     // If data is loaded
     <div className="userDetails">
       <h1>
         Details for {userFullName}
       </h1>
-
+      <div>
+        <a href={`/users/${props.users.user.id}/events`}>Gig List</a>
+      </div>
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
-          <UserPhoto />
+
+          {/* <UserPhoto /> */}
           <UserName />
-          <UserContact />
-          <UserAddress />
-          <UserBio />
-          <UserPaymentInfo />
+          {/* <UserContact /> */}
+          {/* <UserAddress /> */}
+          {/* <UserBio /> */}
+          {/* <UserPaymentInfo /> */}
           <UserStaffInfo />
-          <UserTaxInfo /> 
+          {/* <UserTaxInfo />  */}
+          <UserInstrument /> 
+
+
           <br />
           {colorChangeLoadingButton()}
         </form>
