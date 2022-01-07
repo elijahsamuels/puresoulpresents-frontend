@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import EventDictionary from "../../dictionaries/EventDictionary";
 
 // export {eventTypesSelectFunction}
 
@@ -15,17 +16,19 @@ function EventTypes () {
   //   defaultValues: props.event,
   // });
 
-  const eventTypesObject = {
-    1: "Wedding",
-    2: "Corporate",
-    3: "Candlelight Concert",
-    4: "Concert",
-    5: "Showcase",
-    6: "Other",
-    7: "TBD",
-    8: "TBD",
-    9: "TBD"
-  }
+  let eventTypesObject = EventDictionary
+
+  // const eventTypesObject = {
+  //   1: "Wedding",
+  //   2: "Corporate",
+  //   3: "Candlelight Concert",
+  //   4: "Concert",
+  //   5: "Showcase",
+  //   6: "Other",
+  //   7: "TBD",
+  //   8: "TBD",
+  //   9: "TBD"
+  // }
 
 // const eventTypesReturnFunction = (eventTypeKey) => {
 // if (eventTypesObject.keys(eventTypeKey)) {
@@ -37,7 +40,6 @@ function EventTypes () {
   const eventTypesSelectFunction = (eventObject) => {
   // export function eventTypesSelectFunction(eventObject) {
     let selectOptions = []
-
     for (let i = 0; i < Object.values(eventObject).length; i++){
       selectOptions.push(
       <MenuItem 
