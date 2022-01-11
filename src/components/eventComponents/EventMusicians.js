@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchEventData, editEvent } from "../../actions/eventActions";
+import { fetchUsersList } from "../../actions/userActions";
 import { Controller, useFormContext } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
@@ -13,7 +14,11 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 function EventMusicians (props) {
-  
+
+  useEffect(() => {
+    props.fetchUsersList();
+  }, []);
+
   const { watch, control, formState: { errors }} = useFormContext({
     defaultValues: props.event,
   });
@@ -23,7 +28,9 @@ function EventMusicians (props) {
   const [musicianPayRate, setMusicianPayRate] = useState(basePayRate ? basePayRate : 0);
   const [bandSize, setBandSize] = useState(props.event.band_size);
   const [payRate, setPayRate] = useState(0);
-  const [invoiceReceived, setInvoiceReceived] = useState(null);
+  const event_musicians = props.event_musicians
+  console.log("All available event_musicians:", event_musicians)
+  console.log("props.event.users:", props.event.users)
 
   const handlePayChange = (event) => {
     // console.log({
@@ -37,15 +44,22 @@ function EventMusicians (props) {
   }
 
   const onChange = (event) => {
-    // setInvoiceReceived({ 
-    //   [event.target.name]: event.target.value
-    // }),
-    // console.log(event.target.value)
   }
 
   function bandSizeFunction(e) {
     // console.log(e)
     // return (e.target.value)
+  }
+
+  const returnEventMusicians = (musiciansArray) => {
+    let musicianList = []
+
+    for (let i = 0; i < musiciansArray.length; i++) {
+      musicianList.push(
+        <MenuItem key={i} value={musiciansArray[i].id}>{musiciansArray[i].first_name} {musiciansArray[i].last_name}</MenuItem>
+      )
+    }
+    return musicianList
   }
 
 
@@ -84,35 +98,37 @@ function EventMusicians (props) {
       musicianCountFromBandSizeArray.push(
         <div key={`musician_${i}_details`}>
 
+          {/* MUSICIAN SELECT FIELD */}
           <Controller
+            // name="musician_selector"
             name={`musician_${i}`}
             control={control}
             render={({ field }) => (
-              <TextField
-                {...field}
-                type="text"
-                name={`musician_${i}`}
-                // { ...console.log(`${props.event.users[i].first_name} ${props.event.users[0].last_name}, ID: ${props.event.users[i].id}`) }
-                // key={`musician_${i}`}
-                label={`Musician ${i}`}
-                variant="outlined"
-                size="small"
-                
-                // value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
-                // value={props.event.users[i] ? (`${props.event.users[i].first_name} ${props.event.users[i].last_name}`) : ""}
-
-                // {...console.log("field.value: ",field.value)}
-                value={field.value || ''}
-                margin="dense"
-                sx={{ ml: 0.5 }}
-                // onChange={null}
-                error={!!errors[`musician_${i}`]}
-                helperText={ errors[`musician_${i}`] ? errors[`musician_${i}`].message : "" }
-              />
+              <span>
+                <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 200 }}>
+                  <InputLabel shrink id="musician_selector">
+                    Musician {i}
+                  </InputLabel>
+                  <Select
+                    {...field}
+                    label="Musician Selector"
+                    id="musician_selector"
+                    variant="outlined"
+                    size="small"
+                    margin="dense"
+                  >
+                    <MenuItem value="0" disabled>
+                      <em>Musician Selector</em>
+                    </MenuItem>
+                    {returnEventMusicians(event_musicians)}
+                  </Select>
+                </FormControl>
+              </span>
             )}
           />
-        {/* {    console.log("props.event.users: ", props.event.users[0].first_name) }
-        {props.event.users[0].first_name + " " + props.event.users[0].last_name} */}
+
+
+        {console.log("props.event.users: ", props.event.users[0].first_name) }
 
           <Controller
             name={`musician_${i}_pay_rate`}
@@ -127,9 +143,9 @@ function EventMusicians (props) {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
-                    ),
-                  }}
-                  onChange={handlePayChange}
+                  ),
+                }}
+                onChange={handlePayChange}
                 // onChange={(event) => handlePayChange(event.target.value)}
                 // onChange={(e) => {sendPayRateToBeSummed(e.target.value)}}
                 // defaultValue={musicianPayRate || 0 } // default value IF nothing is provided from database
@@ -138,13 +154,17 @@ function EventMusicians (props) {
                 size="small"
                 margin="dense"
                 sx={{ ml: 0.5, width: 125 }}
-                value={field.value || ''}
+                value={field.value || ""}
                 error={!!errors[`musician_${i}_pay_rate`]}
-                helperText={ errors[`musician_${i}_pay_rate`] ? errors[`musician_${i}_pay_rate`].message : "" }
+                helperText={
+                  errors[`musician_${i}_pay_rate`]
+                    ? errors[`musician_${i}_pay_rate`].message
+                    : ""
+                }
               />
             )}
           />
-{/* 
+          {/* 
           <Controller 
             name={`musician_${i}_invoice_received`} 
             control={control} 
@@ -201,11 +221,8 @@ function EventMusicians (props) {
             )}
           /> */}
 
-          <Controller
-            name={`musician_${i}_invoice_received`}
-            control={control}
-            render={({ field }) => (
-              <TextField
+          {/* 
+            <TextField
                 {...field}
                 // onChange={null}
                 type="text"
@@ -221,9 +238,21 @@ function EventMusicians (props) {
                     ? errors[`musician_${i}_invoice_received`].message
                     : ""
                 }
-              />
+              /> */}
+
+          {/* 
+          <Controller
+            name={`musician_${i}_invoice_received`}
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel control={
+              <Checkbox 
+                size="small"
+                checked={field.value || ""} 
+                />} 
+              label="Invoice Received" />
             )}
-          />
+          /> */}
 
           <Controller
             name={`musician_${i}_invoice_paid`}
@@ -231,14 +260,13 @@ function EventMusicians (props) {
             render={({ field }) => (
               <TextField
                 {...field}
-                // onChange={null}
                 type="text"
                 label="Paid?"
                 variant="outlined"
                 size="small"
                 margin="dense"
                 sx={{ ml: 0.5 }}
-                value={field.value || ''}
+                value={field.value || ""}
                 error={!!errors[`musician_${i}_invoice_paid`]}
                 helperText={
                   errors[`musician_${i}_invoice_paid`]
@@ -268,7 +296,8 @@ function EventMusicians (props) {
       <h3>
         Musicians Component
       </h3>
-      Band Cost: {parseInt(Object.values(payRate))}
+      Band Cost: <font color="red">TBD</font>
+      {/* {parseInt(Object.values(payRate))} */}
 
       <Controller 
         name="band_size" 
@@ -282,8 +311,6 @@ function EventMusicians (props) {
                 label="Size"
                 id="band_size"
                 select
-                // onChange={(e) => {setBandSize(e)}} 
-                // onChange={(e) => {field.onChange(e)}} 
 
                 onChange={(e) => (field.onChange(e), setBandSize(e.target.value))} // This is working to update the page and save to the database. It's still throwing a "unmount/memory leak in your application" error.
                 variant="outlined"
@@ -350,28 +377,6 @@ function EventMusicians (props) {
 
 
         {/* working on making this a musician selection. later copy this into the musicianCountGenerator */}
-      <Controller 
-        name="musician_selector" 
-        control={control} 
-        render={({ field }) => (
-        <span>
-          <FormControl sx={{ ml: 0.5, mt: 1, minWidth: 200 }}>
-            <InputLabel shrink id="musician_selector">Musician Selector</InputLabel>
-              <Select
-                {...field}
-                label="Musician Selector"
-                id="musician_selector"
-                variant="outlined"
-                size="small"
-                margin="dense"
-              >
-              <MenuItem value="0" disabled><em>Musician Selector</em></MenuItem>
-              <MenuItem value="true">1. Indoor</MenuItem>
-              <MenuItem value="false">2. Outdoor</MenuItem>
-            </Select>
-          </FormControl>
-        </span>
-      )}/>
 
         {musicianCountGenerator()}
     </div>
@@ -379,11 +384,12 @@ function EventMusicians (props) {
 };
 
 const mapStateToProps = (state) => {
+  // console.log(state);
   return {
     loading: state.loading,
-    // users: state.users,
     event: state.events.event,
+    event_musicians: state.users.users,
   };
 };
 
-export default connect(mapStateToProps, { fetchEventData, editEvent })(EventMusicians);
+export default connect(mapStateToProps, { fetchEventData, editEvent, fetchUsersList })(EventMusicians);
