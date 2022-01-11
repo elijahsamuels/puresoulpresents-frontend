@@ -709,4 +709,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUsersList, fetchUserData })(UserList);
+export default connect(mapStateToProps, { fetchUsersList })(UserList);
