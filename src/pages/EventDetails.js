@@ -174,7 +174,7 @@ function EventDetails(props) {
       </FormProvider>
     </div>
   ) : (
-    {...console.log(props)},
+    // {...console.log(props)},
     <LoadingCircularProgress />
   );
 }
