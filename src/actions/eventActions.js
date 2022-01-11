@@ -1,9 +1,11 @@
+let devURL  = 'http://localhost:3000/'
+let prodURL = 'http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/'
+
 // Fetch all event data
 export const fetchEventsList = () => {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    // fetch("http://localhost:3000/events")
-    fetch("http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/events")
+    fetch(`${prodURL}events`)
     .then((response) => response.json())
     .then((data) => dispatch({ type: "SET_EVENTS", events: data }))
     .catch((error) => console.log(error));
@@ -16,7 +18,7 @@ export const fetchEventData = (eventID) => {
     dispatch({ type: "LOADING", payload: true });
     // const response = await console.log("eventActions/fetchEventData data", eventID);
     // const response = await fetch(`http://localhost:3000/events/${eventID}`)
-    const response = await fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/events/${eventID}`)
+    const response = await fetch(`${prodURL}${eventID}`)
     const data = await response.json()
     dispatch({ type: "GET_EVENT", event: data })
     // .catch((error) => console.log(error));
@@ -27,7 +29,7 @@ export function editEvent(event) {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
     // fetch(`http://localhost:3000/events/${event.id}`, {
-    fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/events/${event.id}`, {
+    fetch(`${prodURL}${event.id}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -60,7 +62,7 @@ export function editEvent(event) {
 export function createNewEvent (event) {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/events`, {
+    fetch(`${prodURL}events`, {
     // fetch(`http://localhost:3000/events`, {
       method: "POST",
       headers: {
