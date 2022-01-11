@@ -111,14 +111,14 @@ function UserDetails(props) {
       <FormProvider {...methods }>
         <form onSubmit={methods.handleSubmit(onHandleSubmit)}>
 
-          {/* <UserPhoto /> */}
+          <UserPhoto />
           <UserName />
-          {/* <UserContact /> */}
-          {/* <UserAddress /> */}
-          {/* <UserBio /> */}
-          {/* <UserPaymentInfo /> */}
+          <UserContact />
+          <UserAddress />
+          <UserBio />
+          <UserPaymentInfo />
           <UserStaffInfo />
-          {/* <UserTaxInfo />  */}
+          <UserTaxInfo /> 
           <UserInstrument /> 
 
 
