@@ -4,7 +4,8 @@
 export const fetchUsersList = () => {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch("http://localhost:3000/users")
+    fetch("http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users")
+    // fetch("http://localhost:3000/users")
     // .then((response) => console.log("from actions: ", response.json()))
     .then((response) => response.json())
     // .then((data) => console.log("from actions: ", data))
@@ -17,7 +18,8 @@ export const fetchUsersList = () => {
 export const fetchUserData = (userID) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    const response = await fetch(`http://localhost:3000/users/${userID}`)
+    const response = await fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users/${userID}`)
+    // const response = await fetch(`http://localhost:3000/users/${userID}`)
     const data = await response.json()
     // console.log("userActions/fetchUserData data", data)
     dispatch({ type: "GET_USER", user: data })
@@ -29,7 +31,8 @@ export function editUser(user) {
   // console.log("userActions/editUser/user: ", user)
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch(`http://localhost:3000/users/${user.id}`, {
+    fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users/${user.id}`, {
+    // fetch(`http://localhost:3000/users/${user.id}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -63,7 +66,8 @@ export function createNewUser (user) {
   console.log("userActions/createNewUser/user: ", user)
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch(`http://localhost:3000/users`, {
+    fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users`, {
+    // fetch(`http://localhost:3000/users`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -97,7 +101,8 @@ export function createNewUser (user) {
 export const fetchUserEventsData = (userid) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    const response = await fetch(`http://localhost:3000/users/${userid}`)
+    const response = await fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users/${userid}`)
+    // const response = await fetch(`http://localhost:3000/users/${userid}`)
     const data = await response.json()
     // console.log("userActions/fetchUserData data", data)
     dispatch({ type: "GET_USER_EVENTS", user_events: data.events })
