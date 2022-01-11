@@ -1,5 +1,7 @@
 ### Need to migrate away from AirTable. Too limiting.
 
+https://www.npmjs.com/package/ics
+https://www.npmjs.com/package/ical-generator
 
 ### Use Postgresql database
 #### Tables
