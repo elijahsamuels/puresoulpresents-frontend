@@ -1,10 +1,13 @@
+let devURL  = 'http://localhost:3000/'
+let prodURL = 'http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/'
+
 // export const obtainUser = (user) => ({ type: "SHOW_USER", payload: user });
 
 // Fetch all users data
 export const fetchUsersList = () => {
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch("http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users")
+    fetch(`${prodURL}users`)
     // fetch("http://localhost:3000/users")
     // .then((response) => console.log("from actions: ", response.json()))
     .then((response) => response.json())
@@ -18,7 +21,7 @@ export const fetchUsersList = () => {
 export const fetchUserData = (userID) => {
   return async (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    const response = await fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users/${userID}`)
+    const response = await fetch(`${prodURL}users/${userID}`)
     // const response = await fetch(`http://localhost:3000/users/${userID}`)
     const data = await response.json()
     // console.log("userActions/fetchUserData data", data)
@@ -31,7 +34,7 @@ export function editUser(user) {
   // console.log("userActions/editUser/user: ", user)
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users/${user.id}`, {
+    fetch(`${prodURL}users/${user.id}`, {
     // fetch(`http://localhost:3000/users/${user.id}`, {
       method: "PATCH",
       headers: {
@@ -66,7 +69,7 @@ export function createNewUser (user) {
   console.log("userActions/createNewUser/user: ", user)
   return (dispatch) => {
     dispatch({ type: "LOADING", payload: true });
-    fetch(`http://production.eba-dvi8bvt6.us-east-2.elasticbeanstalk.com/users`, {
+    fetch(`${prodURL}users`, {
     // fetch(`http://localhost:3000/users`, {
       method: "POST",
       headers: {
