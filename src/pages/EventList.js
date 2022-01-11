@@ -170,11 +170,6 @@ function EventList(props) {
   const eventBandSize = (eventData) => {
     let missingItem = "Missing Musicians";
     let musicianCount = eventData.users?.length || 0
-    // return Object.values(eventTernary(eventData, missingItem));
-    // console.log(eventData.band_size)
-
-    // if (musicianCount === undefined) 
-    // return
 
     if (musicianCount < eventData.band_size) {
       return <font color="red">{musicianCount}<br />(Need {eventData.band_size - musicianCount})</font>;
@@ -187,9 +182,7 @@ function EventList(props) {
 
   const eventPrimaryContact = (eventData) => {
     let missingItem = "Primary Contact";
-    // let primaryContact = "Jane Doe"
     let primaryContact = `${eventData.primary_contact_first_name} ${eventData.primary_contact_last_name}`
-    // let primaryContactPhone = "123-456-7890"
 
     if (primaryContact) {
       return <font >{primaryContact}</font>;
@@ -218,46 +211,40 @@ function EventList(props) {
   //   return false
   // }
   
-  const eventTypeKeyToValue = (eventDataEventType) => {
-    
-
-    // console.log(Object.keys(EventDictionary).map(key => EventDictionary[key])),
-    // Object.entries(EventDictionary).map(([key, value]) => return)
-
-    return Object.keys(EventDictionary).map(key => EventDictionary[key])
-    
-    }
+  const dictionaryKeyReturnsValue = ( dictionary, key ) => {
+    return Object.values(dictionary)[key-1]
+  }
 
   const eventType = (eventData) => {
     
     switch (eventData.event_type) {
     
       case "1": // Wedding
-      return "Inquiry"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       case "2": // Corporate
-      return "Corporate"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       case "3": // Candlelight Concert
-      return "Candlelight Concert"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)} - ${eventData.program}`
       
       case "4": // Concert
-      return "Concert"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       case "5": // Showcase
-      return "Showcase"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       case "6": // Other
-      return "Other"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       case "7": // TBD
-      return "TBD"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       case "8": // TBD
-      return "TBD"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       case "9": // TBD
-      return "TBD"
+      return `${dictionaryKeyReturnsValue(EventDictionary, eventData.event_type)}`
       
       default: 
       return <font color="red">Unknown</font>;
